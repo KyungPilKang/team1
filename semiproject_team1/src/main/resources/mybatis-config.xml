@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<mappers>
+		<mapper resource="mybatis/mappers/member.xml"/>
+		
+		<mapper resource="mybatis/mappers/message.xml"/>
+		
+		<mapper resource="mybatis/mappers/board.xml"/>
+		
+		<mapper resource="mybatis/mappers/article_ward.xml"/>
+		
+		<mapper resource="mybatis/mappers/article_like.xml"/>
+		
+		<mapper resource="mybatis/mappers/b_reply.xml"/>
+		
+		<mapper resource="mybatis/mappers/feedback.xml"/>
+		
+		<mapper resource="mybatis/mappers/fd_answer.xml"/>
+		
+		<mapper resource="mybatis/mappers/fd_reply.xml"/>
+		
+		<mapper resource="mybatis/mappers/duo.xml"/>
+	</mappers>
+</configuration>
