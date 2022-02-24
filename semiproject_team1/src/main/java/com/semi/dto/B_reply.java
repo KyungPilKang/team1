@@ -1,7 +1,8 @@
 package com.semi.dto;
 
 public class B_reply {
-	int b_reply_num;
+
+int b_reply_num;
 	String b_reply_content;
 	int b_reply_date;
 	int b_reply_likecount;
