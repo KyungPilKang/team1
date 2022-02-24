@@ -1,4 +1,4 @@
-package com.semi.vo.smtp;
+package com.semi.api.smtp;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;

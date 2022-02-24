@@ -1,4 +1,4 @@
-package com.semi.vo.naverapi;
+package com.semi.api.naverapi;
 
 public class Clova_CAPTCHA {
 
