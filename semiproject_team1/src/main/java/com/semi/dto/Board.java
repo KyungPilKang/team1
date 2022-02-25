@@ -1,6 +1,7 @@
 package com.semi.dto;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,7 +13,7 @@ public class Board {
 	String board_content;
 	String board_fileName; 
 	MultipartFile file;
-	int board_type; //키워드검색 조건 >> 제목:1, 작성자:2, 내용:3
+	String board_type; //키워드검색 조건 >> 제목:1, 작성자:2, 내용:3
 	String board_keyword; //사용자 입력 키워드
 	Date board_date;
 	int board_readcount; 
@@ -77,11 +78,13 @@ public class Board {
 		this.file = file;
 	}
 
-	public int getBoard_type() {
+	
+
+	public String getBoard_type() {
 		return board_type;
 	}
 
-	public void setBoard_type(int board_type) {
+	public void setBoard_type(String board_type) {
 		this.board_type = board_type;
 	}
 

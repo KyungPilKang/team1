@@ -1,5 +1,7 @@
 package com.semi.dto;
 
+import java.util.Date;
+
 public class B_reply {
 	int b_reply_num; //PK, AI
 	String b_reply_nickname;
@@ -8,7 +10,7 @@ public class B_reply {
 	int b_reply_ref;
 	int b_reply_lev; //대댓글까지만 가능
 	int b_reply_seq;
-	int b_reply_date;
+	Date b_reply_date;
 	int b_reply_likecount;
 	String b_reply_like_member; //좋아요 누른 회원 고유번호 관리
 	int b_reply_like_ok; //요청한 클라이언트가 좋아요 눌렀는지 판단하는 변수
@@ -72,11 +74,11 @@ public class B_reply {
 		this.b_reply_seq = b_reply_seq;
 	}
 
-	public int getB_reply_date() {
+	public Date getB_reply_date() {
 		return b_reply_date;
 	}
 
-	public void setB_reply_date(int b_reply_date) {
+	public void setB_reply_date(Date b_reply_date) {
 		this.b_reply_date = b_reply_date;
 	}
 
