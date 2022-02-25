@@ -19,7 +19,7 @@ public class Board {
 	int board_readcount; 
 	int board_likecount;
 	int board_replycount;
-	
+	// 브랜치에 push 되는지 테스트용 주석
 	public Board() {}
 
 	public int getBoard_num() {
