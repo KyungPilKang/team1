@@ -13,8 +13,8 @@ public class B_reply {
 	Date b_reply_date;
 	int b_reply_likecount;
 	String b_reply_like_member; //좋아요 누른 회원 고유번호 관리
-	int b_reply_like_ok; //요청한 클라이언트가 좋아요 눌렀는지 판단하는 변수
-	int b_reply_edit_controll; //jQuery 선택자 제어 변수
+	String b_reply_like_ok; //요청한 클라이언트가 좋아요 눌렀는지 판단하는 변수
+	String b_reply_edit_controll; //jQuery 선택자 제어 변수
 	
 	public B_reply() {}
 
@@ -98,20 +98,22 @@ public class B_reply {
 		this.b_reply_like_member = b_reply_like_member;
 	}
 
-	public int getB_reply_like_ok() {
+	public String getB_reply_like_ok() {
 		return b_reply_like_ok;
 	}
 
-	public void setB_reply_like_ok(int b_reply_like_ok) {
+	public void setB_reply_like_ok(String b_reply_like_ok) {
 		this.b_reply_like_ok = b_reply_like_ok;
 	}
 
-	public int getB_reply_edit_controll() {
+	public String getB_reply_edit_controll() {
 		return b_reply_edit_controll;
 	}
 
-	public void setB_reply_edit_controll(int b_reply_edit_controll) {
+	public void setB_reply_edit_controll(String b_reply_edit_controll) {
 		this.b_reply_edit_controll = b_reply_edit_controll;
 	}
+
+	
 	
 }
