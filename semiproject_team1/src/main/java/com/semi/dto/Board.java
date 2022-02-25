@@ -1,5 +1,8 @@
 package com.semi.dto;
+
+
 import java.util.Date;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class Board {
@@ -8,7 +11,7 @@ public class Board {
 	String board_cat; //게시판 카테고리
 	String board_subject;
 	String board_content;
-	String board_fileName;
+	String board_fileName; 
 	MultipartFile file;
 	String board_type; //키워드검색 조건 >> 제목:1, 작성자:2, 내용:3
 	String board_keyword; //사용자 입력 키워드
@@ -16,7 +19,7 @@ public class Board {
 	int board_readcount; 
 	int board_likecount;
 	int board_replycount;
-
+	// 브랜치에 push 되는지 테스트용 주석
 	public Board() {}
 
 	public int getBoard_num() {
