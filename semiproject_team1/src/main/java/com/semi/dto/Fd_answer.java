@@ -1,12 +1,14 @@
 package com.semi.dto;
 
+import java.util.Date;
+
 public class Fd_answer {
 
 	int fd_answer_num; //PK, AI
 	String fd_answer_nickname;
 	String fd_answer_title;
 	String fd_answer_content;
-	int fd_answer_date;
+	Date fd_answer_date;
 	int fd_answer_likecount;
 	String fd_answer_like_member;
 	int fd_answer_like_ok; //계정별 좋아요를 체크하는 플래그변수 > DB컬럼에서 관리하지않고 DTO멤버변수로 관리
@@ -24,10 +26,11 @@ public class Fd_answer {
 	public void setFd_answer_content(String fd_answer_content) {
 		this.fd_answer_content = fd_answer_content;
 	}
-	public int getFd_answer_date() {
+	
+	public Date getFd_answer_date() {
 		return fd_answer_date;
 	}
-	public void setFd_answer_date(int fd_answer_date) {
+	public void setFd_answer_date(Date fd_answer_date) {
 		this.fd_answer_date = fd_answer_date;
 	}
 	public int getFd_answer_likecount() {
