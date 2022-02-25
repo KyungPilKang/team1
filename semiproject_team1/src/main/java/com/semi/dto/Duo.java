@@ -1,5 +1,127 @@
 package com.semi.dto;
 
-public class Duo {
+import java.util.Date;
 
+public class Duo {
+	
+	String duo_num; //PK, AI
+	String duo_email_id; //쪽지함 데이터 요청 시 활용
+	String duo_nickname;
+	String duo_link_id;
+	String duo_position; //탑:1, 정글:2, 미드:3, 원딜:4, 서폿:5
+	String duo_subposition; //탑:1, 정글:2, 미드:3, 원딜:4, 서폿:5
+	String duo_lol_tier;
+	String duo_lol_status;
+	String duo_select_champion;
+	String duo_mic_ok;
+	String duo_allcham;
+	String duo_detail_modal; //모달창 제어 변수
+	Date duo_date; //등록한 날짜&수정된 날짜&갱신할 날짜 관리 >> 조회 결과 갱신순으로 뿌려주기
+	
+	public Duo() {}
+
+	public String getDuo_num() {
+		return duo_num;
+	}
+
+	public void setDuo_num(String duo_num) {
+		this.duo_num = duo_num;
+	}
+
+	public String getDuo_email_id() {
+		return duo_email_id;
+	}
+
+	public void setDuo_email_id(String duo_email_id) {
+		this.duo_email_id = duo_email_id;
+	}
+
+	public String getDuo_nickname() {
+		return duo_nickname;
+	}
+
+	public void setDuo_nickname(String duo_nickname) {
+		this.duo_nickname = duo_nickname;
+	}
+
+	public String getDuo_link_id() {
+		return duo_link_id;
+	}
+
+	public void setDuo_link_id(String duo_link_id) {
+		this.duo_link_id = duo_link_id;
+	}
+
+	public String getDuo_position() {
+		return duo_position;
+	}
+
+	public void setDuo_position(String duo_position) {
+		this.duo_position = duo_position;
+	}
+
+	public String getDuo_subposition() {
+		return duo_subposition;
+	}
+
+	public void setDuo_subposition(String duo_subposition) {
+		this.duo_subposition = duo_subposition;
+	}
+
+	public String getDuo_lol_tier() {
+		return duo_lol_tier;
+	}
+
+	public void setDuo_lol_tier(String duo_lol_tier) {
+		this.duo_lol_tier = duo_lol_tier;
+	}
+
+	public String getDuo_lol_status() {
+		return duo_lol_status;
+	}
+
+	public void setDuo_lol_status(String duo_lol_status) {
+		this.duo_lol_status = duo_lol_status;
+	}
+
+	public String getDuo_select_champion() {
+		return duo_select_champion;
+	}
+
+	public void setDuo_select_champion(String duo_select_champion) {
+		this.duo_select_champion = duo_select_champion;
+	}
+
+	public String getDuo_mic_ok() {
+		return duo_mic_ok;
+	}
+
+	public void setDuo_mic_ok(String duo_mic_ok) {
+		this.duo_mic_ok = duo_mic_ok;
+	}
+
+	public String getDuo_allcham() {
+		return duo_allcham;
+	}
+
+	public void setDuo_allcham(String duo_allcham) {
+		this.duo_allcham = duo_allcham;
+	}
+
+	public String getDuo_detail_modal() {
+		return duo_detail_modal;
+	}
+
+	public void setDuo_detail_modal(String duo_detail_modal) {
+		this.duo_detail_modal = duo_detail_modal;
+	}
+
+	public Date getDuo_date() {
+		return duo_date;
+	}
+
+	public void setDuo_date(Date duo_date) {
+		this.duo_date = duo_date;
+	}
+	
 }

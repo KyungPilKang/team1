@@ -2,7 +2,7 @@ package com.semi.dto;
 
 public class Member {
 
-	int mem_mno;
+	int mem_mno; //PK, AI
 	String mem_email_id;
 	String mem_nickname;
 	String mem_pw;
