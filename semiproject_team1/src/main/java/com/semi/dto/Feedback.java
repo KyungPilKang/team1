@@ -15,6 +15,7 @@ public class Feedback {
 	int feedback_readcount;
 	Date feedback_date;
 	MultipartFile file;
+	
 	public String getFeedback_cat() {
 		return feedback_cat;
 	}
