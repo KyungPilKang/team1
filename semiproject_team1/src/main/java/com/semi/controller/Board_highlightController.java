@@ -5,10 +5,7 @@ import com.semi.dto.PageInfo;
 import com.semi.service.Board_highlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
@@ -45,7 +42,7 @@ public class Board_highlightController {
                 board.getFile().transferTo(destFile);
             }
             board_highlightService.regBoard(board);
-            mv.setViewName("redirect:/boardForm_highlight");
+            mv.setViewName("redirect:/boardlist");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -54,7 +51,7 @@ public class Board_highlightController {
         return mv;
     }
 
-    @PostMapping(value = "/boardlist")
+    @RequestMapping(value = "/boardlist", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView boardlist(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
         PageInfo pageInfo = new PageInfo();
@@ -62,7 +59,7 @@ public class Board_highlightController {
             List<Board> articleList = board_highlightService.getBoardList(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
-            mv.setViewName("boardForm_highlight");
+            mv.setViewName("/boardForm_highlight");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
