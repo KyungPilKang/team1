@@ -93,23 +93,40 @@
             background: #ff6a00;
         }
 
-        .each_board_name{
+        .each_board_nickname{
             width: 50px;
             /*height:50px;*/
             background: #fcdc10;
         }
 
         .each_board_date{
-            width: 50px;
+            width: 150px;
             /*height:50px;*/
             background: #41fc18;
         }
 
-        .each_board_readcount{
+        .each_board_replycount{
             width: 50px;
             /*height:50px;*/
             background: #0739ff;
         }
+
+        .each_board_cat{
+            width: 50px;
+            /*height:50px;*/
+            background: #7c00ff;
+        }
+
+        .each_board_likecount{
+            width: 50px;
+            /*height:50px;*/
+            background: #fc8383;
+        }
+
+        #search_submit{
+            display: none;
+        }
+
     </style>
 
 
@@ -198,6 +215,10 @@
                                                         <input type="search" class="form-control"
                                                                placeholder="Search Here" title="Search here">
                                                     </form>
+                                                    <div class="board_file_cont">
+                                                        <label for="search_submit" style="cursor: pointer"> 돋보기 아이콘 </label>
+                                                        <input type="submit" id="search_submit" onclick="alert('임시작동확인')"/>
+                                                    </div>
                                                 </li>
                                             </div>
                                         </ul>
@@ -211,21 +232,24 @@
                             <div class="card board_body">
                                 <div class="card-body">
                                     <div class="board_body_inner">
-                                        <h2><a href="writeform">게시판글쓰기</a></h2>
+                                        <h2><a href="/boardwriteform">게시판글쓰기</a></h2>
                                         <c:choose>
                                             <c:when test="${articleList!=null && pageInfo.listCount>0 }">
                                                 <section id="listForm">
                                                     <c:forEach var="article" items="${articleList }">
                                                         <div class="each_post">
-                                                            <div class="each_board_num">${article.board_num }</div>
+                                                            <div class="each_board_likecount">${article.board_likecount }</div>
+<%--                                                            <div class="each_board_num">${article.board_num }</div>--%>
                                                             <div class="each_board_sub">
                                                                 <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">
                                                                         ${article.board_subject}
                                                                 </a>
                                                             </div>
-                                                            <div class="each_board_name">${article.board_name }</div>
+
+                                                            <div class="each_board_cat">${article.board_cat }</div>
                                                             <div class="each_board_date">${article.board_date }</div>
-                                                            <div class="each_board_readcount">${article.board_readcount }</div>
+                                                            <div class="each_board_nickname">${article.board_nickname }</div>
+                                                            <div class="each_board_replycount">${article.board_replycount }</div>
                                                         </div>
                                                     </c:forEach>
                                                 </section>
