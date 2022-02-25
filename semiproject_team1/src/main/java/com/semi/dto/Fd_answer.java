@@ -12,8 +12,8 @@ public class Fd_answer {
 	int fd_answer_likecount;
 	String fd_answer_like_member;
 	int fd_answer_like_ok; //계정별 좋아요를 체크하는 플래그변수 > DB컬럼에서 관리하지않고 DTO멤버변수로 관리
-	int fd_answer_edit_controll; //댓글별 수정버튼을 제어하는 변수
-	int fd_answer_fixed; //고정됨이면 1, 고정되지않으면 0
+	String fd_answer_edit_controll; //댓글별 수정버튼을 제어하는 변수
+	String fd_answer_fixed; //고정됨이면 1, 고정되지않으면 0
 	public int getFd_answer_num() {
 		return fd_answer_num;
 	}
@@ -51,16 +51,17 @@ public class Fd_answer {
 	public void setFd_answer_like_ok(int fd_answer_like_ok) {
 		this.fd_answer_like_ok = fd_answer_like_ok;
 	}
-	public int getFd_answer_edit_controll() {
+	
+	public String getFd_answer_edit_controll() {
 		return fd_answer_edit_controll;
 	}
-	public void setFd_answer_edit_controll(int fd_answer_edit_controll) {
+	public void setFd_answer_edit_controll(String fd_answer_edit_controll) {
 		this.fd_answer_edit_controll = fd_answer_edit_controll;
 	}
-	public int getFd_answer_fixed() {
+	public String getFd_answer_fixed() {
 		return fd_answer_fixed;
 	}
-	public void setFd_answer_fixed(int fd_answer_fixed) {
+	public void setFd_answer_fixed(String fd_answer_fixed) {
 		this.fd_answer_fixed = fd_answer_fixed;
 	}
 	public String getFd_answer_nickname() {
