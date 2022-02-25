@@ -2,7 +2,8 @@ package com.semi.dto;
 
 public class Fd_reply {
 
-	int fd_reply_num;
+	int fd_reply_num; //PK, AI
+	String fd_reply_nickname;
 	String fd_reply_content;
 	int fd_reply_date;
 	int fd_reply_likecount;

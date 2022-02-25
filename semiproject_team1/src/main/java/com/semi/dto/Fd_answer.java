@@ -2,7 +2,9 @@ package com.semi.dto;
 
 public class Fd_answer {
 
-	int fd_answer_num;
+	int fd_answer_num; //PK, AI
+	String fd_answer_nickname;
+	String fd_answer_title;
 	String fd_answer_content;
 	int fd_answer_date;
 	int fd_answer_likecount;
@@ -58,4 +60,17 @@ public class Fd_answer {
 	public void setFd_answer_fixed(int fd_answer_fixed) {
 		this.fd_answer_fixed = fd_answer_fixed;
 	}
+	public String getFd_answer_nickname() {
+		return fd_answer_nickname;
+	}
+	public void setFd_answer_nickname(String fd_answer_nickname) {
+		this.fd_answer_nickname = fd_answer_nickname;
+	}
+	public String getFd_answer_title() {
+		return fd_answer_title;
+	}
+	public void setFd_answer_title(String fd_answer_title) {
+		this.fd_answer_title = fd_answer_title;
+	}
+	
 }
