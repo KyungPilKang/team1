@@ -3,4 +3,51 @@
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.semi.dao.boardDAO">
+<<<<<<< HEAD
+=======
+
+	<insert id="insertBoard" parameterType="board">
+		<![CDATA[
+		insert into board *
+		values (#{board_num},#{board_nickname},#{board_cat},#{board_subject},#{board_content},#{board_fileName},
+		    now(),#{board_readcount},#{board_likecount},#{board_replycount})
+		]]>
+	</insert>
+
+	<select id="selectMaxBoardNum" resultType="integer">
+		<![CDATA[
+		select max(board_num) from board
+		]]>
+	</select>
+
+	<select id="selectBoardCount" resultType="int">
+		<![CDATA[
+		select count(*) from board
+		]]>
+	</select>
+
+	<select id="selectBoardList" resultType="board"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board order by board_date asc) tot,
+				  (select @rownum:=0) temp) sub
+		where rnum between #{startrow} and #{startrow}+9
+		]]>
+	</select>
+
+	<select id="selectBoard" resultType="board" parameterType="int">
+		<![CDATA[
+		select * from board where BOARD_NUM=#{boardNum}
+		]]>
+	</select>
+
+	<update id="updateReadCount" parameterType="int">
+		<![CDATA[
+		update board set board_readcount=board_readcount+1 where BOARD_NUM=#{boardNum}
+		]]>
+	</update>
+
+>>>>>>> parent of d4d2bfa (PJS/추가 : boardwriteForm.jsp 추가)
 </mapper>
