@@ -24,7 +24,7 @@ public class Board_highlightController {
 
     @Autowired
     HttpSession session;
-
+/* 테스트 */
 
     @GetMapping("/boardwriteform")
     public String boardwriteform() {
