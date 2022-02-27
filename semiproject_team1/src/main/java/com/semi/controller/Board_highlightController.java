@@ -28,6 +28,48 @@ public class Board_highlightController {
     HttpSession session;
 
 
+
+    @GetMapping(value="board_highlight_search")
+    public ModelAndView board_search(@ModelAttribute Board board,
+                                     @RequestParam(value = "page", defaultValue = "1") int page) {
+
+        System.out.println(board.getBoard_keyword());
+        System.out.println(board.getBoard_type());
+
+        ModelAndView mv = new ModelAndView();
+        PageInfo pageInfo = new PageInfo();
+        try {
+            String type = board.getBoard_type();
+            switch (type) {
+                case "1": {
+                    List<Board> articleList = board_highlightService.getBoardList_search_subject(page, pageInfo, board);
+                    mv.addObject("articleList", articleList);
+                    System.out.println(articleList);
+                    break;
+                }
+                case "2": {
+                    List<Board> articleList = board_highlightService.getBoardList_search_nickname(page, pageInfo, board);
+                    mv.addObject("articleList", articleList);
+                    break;
+                }
+                case "3": {
+                    List<Board> articleList = board_highlightService.getBoardList_search_content(page, pageInfo, board);
+                    mv.addObject("articleList", articleList);
+                    break;
+                }
+            };
+            mv.addObject("pageInfo", pageInfo);
+            mv.setViewName("/boardForm_highlight");
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
+    }
+
+
+
+
     @RequestMapping(value = "/boardlist_highlight", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView boardlist_highlight(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();

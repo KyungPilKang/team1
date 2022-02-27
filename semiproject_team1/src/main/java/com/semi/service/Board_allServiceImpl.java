@@ -49,7 +49,7 @@ public class Board_allServiceImpl implements Board_allService {
 
     @Override
     public List<Board> getBoardList_viewsSort(int page, PageInfo pageInfo) throws Exception {
-        int listCount = boardDAO.selectBoardCount_highlight();
+        int listCount = boardDAO.selectBoardCount_all();
         int maxPage = (int) Math.ceil((double) listCount / 10);
         int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
         int endPage = startPage + 10 - 1;
@@ -65,7 +65,7 @@ public class Board_allServiceImpl implements Board_allService {
 
     @Override
     public List<Board> getBoardList_replySort(int page, PageInfo pageInfo) throws Exception {
-        int listCount = boardDAO.selectBoardCount_highlight();
+        int listCount = boardDAO.selectBoardCount_all();
         int maxPage = (int) Math.ceil((double) listCount / 10);
         int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
         int endPage = startPage + 10 - 1;
@@ -81,7 +81,7 @@ public class Board_allServiceImpl implements Board_allService {
 
     @Override
     public List<Board> getBoardList_likeSort(int page, PageInfo pageInfo) throws Exception {
-        int listCount = boardDAO.selectBoardCount_highlight();
+        int listCount = boardDAO.selectBoardCount_all();
         int maxPage = (int) Math.ceil((double) listCount / 10);
         int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
         int endPage = startPage + 10 - 1;
@@ -93,6 +93,57 @@ public class Board_allServiceImpl implements Board_allService {
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
         return boardDAO.selectBoardList_all_likeSort(startrow);
+    }
+
+    @Override
+    public List<Board> getBoardList_search_subject(int page, PageInfo pageInfo, Board board) throws Exception {
+        int listCount = boardDAO.selectBoardCount_all_subject(board.getBoard_keyword());
+        int maxPage = (int) Math.ceil((double) listCount / 10);
+        int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
+        int endPage = startPage + 10 - 1;
+        if (endPage > maxPage) endPage = maxPage;
+        pageInfo.setStartPage(startPage);
+        pageInfo.setEndPage(endPage);
+        pageInfo.setMaxPage(maxPage);
+        pageInfo.setPage(page);
+        pageInfo.setListCount(listCount);
+        int startrow = (page - 1) * 10 + 1;
+        System.out.println("listCount : "+  listCount);
+        return boardDAO.selectBoardList_all_search_subject(startrow,board.getBoard_keyword());
+    }
+
+    @Override
+    public List<Board> getBoardList_search_nickname(int page, PageInfo pageInfo, Board board) throws Exception {
+        int listCount = boardDAO.selectBoardCount_all_nickname(board.getBoard_keyword());
+        int maxPage = (int) Math.ceil((double) listCount / 10);
+        int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
+        int endPage = startPage + 10 - 1;
+        if (endPage > maxPage) endPage = maxPage;
+        pageInfo.setStartPage(startPage);
+        pageInfo.setEndPage(endPage);
+        pageInfo.setMaxPage(maxPage);
+        pageInfo.setPage(page);
+        pageInfo.setListCount(listCount);
+        int startrow = (page - 1) * 10 + 1;
+        System.out.println("listCount : "+  listCount);
+        return boardDAO.selectBoardList_all_search_nickname(startrow,board.getBoard_keyword());
+    }
+
+    @Override
+    public List<Board> getBoardList_search_content(int page, PageInfo pageInfo, Board board) throws Exception {
+        int listCount = boardDAO.selectBoardCount_all_content(board.getBoard_keyword());
+        int maxPage = (int) Math.ceil((double) listCount / 10);
+        int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
+        int endPage = startPage + 10 - 1;
+        if (endPage > maxPage) endPage = maxPage;
+        pageInfo.setStartPage(startPage);
+        pageInfo.setEndPage(endPage);
+        pageInfo.setMaxPage(maxPage);
+        pageInfo.setPage(page);
+        pageInfo.setListCount(listCount);
+        int startrow = (page - 1) * 10 + 1;
+        System.out.println("listCount : "+  listCount);
+        return boardDAO.selectBoardList_all_search_content(startrow,board.getBoard_keyword());
     }
 
     @Override

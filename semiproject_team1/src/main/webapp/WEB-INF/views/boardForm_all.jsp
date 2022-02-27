@@ -56,74 +56,74 @@
         }
 
         .board_header {
-            margin-left:50px;
+            margin-left: 50px;
             width: 1000px;
         }
 
         .board_body {
-            margin-left:50px;
+            margin-left: 50px;
             width: 1000px;
         }
 
 
-        .board_body_inner{
+        .board_body_inner {
             background: #f58282;
 
         }
 
-        .each_post{
+        .each_post {
             background: #b4b4f3;
-            border : 1px solid black;
+            border: 1px solid black;
             /*width: 800px;*/
             height: 50px;
             display: flex;
         }
 
-        .each_board_num{
-            margin:10px;
+        .each_board_num {
+            margin: 10px;
             width: 50px;
             /*height:50px;*/
             background: red;
 
         }
 
-        .each_board_sub{
+        .each_board_sub {
             width: 550px;
             /*height:50px;*/
             background: #ff6a00;
         }
 
-        .each_board_nickname{
+        .each_board_nickname {
             width: 50px;
             /*height:50px;*/
             background: #fcdc10;
         }
 
-        .each_board_date{
+        .each_board_date {
             width: 150px;
             /*height:50px;*/
             background: #41fc18;
         }
 
-        .each_board_replycount{
+        .each_board_replycount {
             width: 50px;
             /*height:50px;*/
             background: #0739ff;
         }
 
-        .each_board_cat{
+        .each_board_cat {
             width: 50px;
             /*height:50px;*/
             background: #7c00ff;
         }
 
-        .each_board_likecount{
+        .each_board_likecount {
             width: 50px;
             /*height:50px;*/
             background: #fc8383;
         }
 
-        #search_submit{
+        #search_submit {
             display: none;
         }
 
@@ -213,24 +213,28 @@
                                                          alt=""><span>좋아요</span>
                                                 </a>
                                             </li>
-                                            <div class="board_search_container">
-                                                <select class="btn-sm btn-secondary board_search_select">
-                                                    <option value="1">제목</option>
-                                                    <option value="2">작성자</option>
-                                                    <option value="3">내용</option>
-                                                </select>
-                                                <li class="board_search_form">
-                                                    <form class="search-form" action="#">
-                                                        <i class="icon-search"></i>
+                                            <%-- 검색 --%>
+                                            <li class="board_search_form">
+                                                <div class="board_search_container">
+                                                    <form class="search-form" id="boardform" method="get">
+                                                        <select class="btn-sm btn-secondary board_search_select"
+                                                                name="board_type">
+                                                            <option value="1">제목</option>
+                                                            <option value="2">작성자</option>
+                                                            <option value="3">내용</option>
+                                                        </select>
                                                         <input type="search" class="form-control"
-                                                               placeholder="Search Here" title="Search here">
+                                                               placeholder="Search Here" title="Search here"
+                                                               name="board_keyword">
                                                     </form>
                                                     <div class="board_file_cont">
-                                                        <label for="search_submit" style="cursor: pointer"> 돋보기 아이콘 </label>
-                                                        <input type="submit" id="search_submit" onclick="alert('임시작동확인')"/>
+                                                        <label for="search_submit" style="cursor: pointer"> 돋보기
+                                                            아이콘 </label>
+                                                        <input type="submit" id="search_submit"
+                                                               onclick="fake_submit()"/>
                                                     </div>
-                                                </li>
-                                            </div>
+                                                </div>
+                                            </li>
                                         </ul>
                                     </div>
 
@@ -258,8 +262,10 @@
 
                                                             <div class="each_board_cat">카${article.board_cat }</div>
                                                             <div class="each_board_date">날짜${article.board_date }</div>
-                                                            <div class="each_board_nickname">닉네임${article.board_nickname }</div>
-                                                            <div class="each_board_replycount">리플수${article.board_replycount }</div>
+                                                            <div class="each_board_nickname">
+                                                                닉네임${article.board_nickname }</div>
+                                                            <div class="each_board_replycount">
+                                                                리플수${article.board_replycount }</div>
                                                         </div>
                                                     </c:forEach>
                                                 </section>
@@ -305,6 +311,23 @@
         </div>
     </div>
 </div>
+
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    function fake_submit() {
+        alert("검색 완료")
+        $("#boardform").attr("action", "./board_search").submit();
+    }
+</script>
+
+
+<%--<script>--%>
+<%--    const form = document.querySelector('#search_submit')--%>
+<%--    form.addEventListener('submit', (e)=>{--%>
+<%--        e.preventDefault();--%>
+<%--    });--%>
+<%--</script>--%>
 
 
 <%--<!-- plugins:js -->--%>

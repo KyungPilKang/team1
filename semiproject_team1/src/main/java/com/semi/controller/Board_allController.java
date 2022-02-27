@@ -51,6 +51,50 @@ public class Board_allController {
         return mv;
     }
 
+//    @PostMapping("/board_search")
+//    @RequestMapping(value = "/board_search", method = {RequestMethod.GET, RequestMethod.POST})
+    @GetMapping(value="board_search")
+    public ModelAndView board_search(@ModelAttribute Board board,
+        @RequestParam(value = "page", defaultValue = "1") int page) {
+
+        System.out.println(board.getBoard_keyword());
+        System.out.println(board.getBoard_type());
+
+        ModelAndView mv = new ModelAndView();
+        PageInfo pageInfo = new PageInfo();
+        try {
+            String type = board.getBoard_type();
+            switch (type) {
+                case "1": {
+                    List<Board> articleList = board_allService.getBoardList_search_subject(page, pageInfo, board);
+                    mv.addObject("articleList", articleList);
+                    System.out.println(articleList);
+                    break;
+                }
+                case "2": {
+                    List<Board> articleList = board_allService.getBoardList_search_nickname(page, pageInfo, board);
+                    mv.addObject("articleList", articleList);
+                    break;
+                }
+                case "3": {
+                    List<Board> articleList = board_allService.getBoardList_search_content(page, pageInfo, board);
+                    mv.addObject("articleList", articleList);
+                    break;
+                }
+            };
+//            List<Board> articleList = board_allService.getBoardList_search_subject(page, pageInfo, board);
+//            mv.addObject("articleList", articleList);
+//            System.out.println(articleList);
+            mv.addObject("pageInfo", pageInfo);
+//            mv.setViewName("redirect:/boardlist");
+            mv.setViewName("/boardForm_all");
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
+    }
+
     @RequestMapping(value = "/boardlist", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView boardlist(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
@@ -63,7 +107,6 @@ public class Board_allController {
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
-//            mv.setViewName("/err");
         }
         return mv;
     }

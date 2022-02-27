@@ -19,6 +19,8 @@
         ]]>
 	</select>
 
+
+	<!-- ================================= 시작 : selectBoardCount_all 관련 ================================= -->
     <select id="selectBoardCount_all" resultType="int">
 		<![CDATA[
         select count(*)
@@ -26,6 +28,30 @@
         ]]>
 	</select>
 
+	<select id="selectBoardCount_all_subject" resultType="int" parameterType="string">
+		<![CDATA[
+		select count(*)
+		from board where board_subject like CONCAT('%',#{board_keyword},'%')
+		]]>
+	</select>
+
+	<select id="selectBoardCount_all_nickname" resultType="int" parameterType="string">
+		<![CDATA[
+		select count(*)
+		from board where board_nickname like CONCAT('%',#{board_keyword},'%')
+		]]>
+	</select>
+
+	<select id="selectBoardCount_all_content" resultType="int" parameterType="string">
+		<![CDATA[
+		select count(*)
+		from board where board_content like CONCAT('%',#{board_keyword},'%')
+		]]>
+	</select>
+	<!-- ================================= 끝 : selectBoardCount_all 관련 ================================= -->
+
+
+	<!-- ================================= 시작 : selectBoardCount_highlight 관련 ================================= -->
     <select id="selectBoardCount_highlight" resultType="int">
 		<![CDATA[
         select count(*)
@@ -33,6 +59,28 @@
         where board_cat = 'highlight'
         ]]>
 	</select>
+
+	<select id="selectBoardCount_highlight_subject" resultType="int" parameterType="string">
+		<![CDATA[
+		select count(*)
+		from board where board_cat = 'highlight' and board_subject like CONCAT('%',#{board_keyword},'%')
+		]]>
+	</select>
+
+	<select id="selectBoardCount_highlight_nickname" resultType="int" parameterType="string">
+		<![CDATA[
+		select count(*)
+		from board where board_cat = 'highlight' and board_nickname like CONCAT('%',#{board_keyword},'%')
+		]]>
+	</select>
+
+	<select id="selectBoardCount_highlight_content" resultType="int" parameterType="string">
+		<![CDATA[
+		select count(*)
+		from board where board_cat = 'highlight' and board_content like CONCAT('%',#{board_keyword},'%')
+		]]>
+	</select>
+	<!-- ================================= 끝 : selectBoardCount_highlight 관련 ================================= -->
 
     <select id="selectBoardCount_tip" resultType="int">
 		<![CDATA[
@@ -50,7 +98,7 @@
         ]]>
 	</select>
 
-	<!-- 시작 : board_all 정렬 관련 -->
+	<!-- ================================= 시작 : selectBoardList_all 정렬 관련 ================================= -->
 	<!-- 최신 -->
     <select id="selectBoardList_all" resultType="board"
             parameterType="int">
@@ -95,12 +143,77 @@
 		where rnum between #{startrow} and #{startrow} + 9
 		]]>
 	</select>
-	<!-- 끝 : board_all 정렬 관련 -->
+	<!-- ================================= 끝 : selectBoardList_all 정렬 관련 ================================= -->
+
+
+	<!-- ================================= 시작 : selectBoardList_all 검색 관련 ================================= -->
+	<select id="selectBoardList_all_search_subject" resultType="board">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_subject like CONCAT('%',#{board_keyword},'%') order by board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+
+	<select id="selectBoardList_all_search_nickname" resultType="board">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_nickname like CONCAT('%',#{board_keyword},'%') order by board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+
+	<select id="selectBoardList_all_search_content" resultType="board">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_content like CONCAT('%',#{board_keyword},'%') order by board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- ================================= 끝 : selectBoardList_all 검색 관련 ================================= -->
+
+	<!-- ================================= 시작 : selectBoardList_highlight 검색 관련 ================================= -->
+	<select id="selectBoardList_highlight_search_subject" resultType="board">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat = 'highlight' and board_subject like CONCAT('%',#{board_keyword},'%') order by board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+
+	<select id="selectBoardList_highlight_search_nickname" resultType="board">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat = 'highlight' and board_nickname like CONCAT('%',#{board_keyword},'%') order by board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+
+	<select id="selectBoardList_highlight_search_content" resultType="board">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat = 'highlight' and board_content like CONCAT('%',#{board_keyword},'%') order by board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- ================================= 끝 : board_all 검색 관련 ================================= -->
 
 
 
 
-    <!-- 시작 : highlight 정렬 관련 -->
+	<!-- ================================= 시작 : selectBoardList_highlight 정렬 관련 ================================= -->
     <!-- 최신 -->
     <select id="selectBoardList_highlight" resultType="board"
             parameterType="int">
@@ -145,7 +258,7 @@
         where rnum between #{startrow} and #{startrow} + 9
         ]]>
 	</select>
-    <!-- 끝 : highlight 정렬 관련 -->
+    <!-- ================================= 끝 : selectBoardList_highlight 정렬 관련 ================================= -->
 
 
     <select id="selectBoardList_tip" resultType="board"

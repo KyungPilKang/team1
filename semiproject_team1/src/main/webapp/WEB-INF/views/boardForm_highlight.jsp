@@ -194,24 +194,29 @@
                                                          alt=""><span>좋아요</span>
                                                 </a>
                                             </li>
-                                            <div class="board_search_container">
-                                                <select class="btn-sm btn-secondary board_search_select">
-                                                    <option value="1">제목</option>
-                                                    <option value="2">작성자</option>
-                                                    <option value="3">내용</option>
-                                                </select>
-                                                <li class="board_search_form">
-                                                    <form class="search-form" action="#">
-                                                        <i class="icon-search"></i>
+
+                                            <%-- 검색 --%>
+                                            <li class="board_search_form">
+                                                <div class="board_search_container">
+                                                    <form class="search-form" id="boardform" method="get">
+                                                        <select class="btn-sm btn-secondary board_search_select"
+                                                                name="board_type">
+                                                            <option value="1">제목</option>
+                                                            <option value="2">작성자</option>
+                                                            <option value="3">내용</option>
+                                                        </select>
                                                         <input type="search" class="form-control"
-                                                               placeholder="Search Here" title="Search here">
+                                                               placeholder="Search Here" title="Search here"
+                                                               name="board_keyword">
                                                     </form>
                                                     <div class="board_file_cont">
-                                                        <label for="search_submit" style="cursor: pointer"> 돋보기 아이콘 </label>
-                                                        <input type="submit" id="search_submit" onclick="alert('임시작동확인')"/>
+                                                        <label for="search_submit" style="cursor: pointer"> 돋보기
+                                                            아이콘 </label>
+                                                        <input type="submit" id="search_submit"
+                                                               onclick="fake_submit()"/>
                                                     </div>
-                                                </li>
-                                            </div>
+                                                </div>
+                                            </li>
                                         </ul>
                                     </div>
 
@@ -286,6 +291,15 @@
         </div>
     </div>
 </div>
+
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    function fake_submit() {
+        alert("검색 완료")
+        $("#boardform").attr("action", "./board_highlight_search").submit();
+    }
+</script>
 
 </body>
 
