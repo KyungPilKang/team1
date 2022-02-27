@@ -9,11 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class Board_highlightServiceImpl implements Board_highlightService {
+public class Board_allServiceImpl implements Board_allService {
 
     @Autowired
     boardDAO boardDAO;
-    
+
+
 
     @Override
     public void regBoard(Board board) throws Exception {
@@ -32,7 +33,7 @@ public class Board_highlightServiceImpl implements Board_highlightService {
 
     @Override
     public List<Board> getBoardList(int page, PageInfo pageInfo) throws Exception {
-        int listCount = boardDAO.selectBoardCount_highlight();
+        int listCount = boardDAO.selectBoardCount_all();
         int maxPage = (int) Math.ceil((double) listCount / 10);
         int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
         int endPage = startPage + 10 - 1;
@@ -43,7 +44,7 @@ public class Board_highlightServiceImpl implements Board_highlightService {
         pageInfo.setPage(page);
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
-        return boardDAO.selectBoardList_highlight(startrow);
+        return boardDAO.selectBoardList_all(startrow);
     }
 
     @Override
@@ -59,7 +60,7 @@ public class Board_highlightServiceImpl implements Board_highlightService {
         pageInfo.setPage(page);
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
-        return boardDAO.selectBoardList_highlight_viewsSort(startrow);
+        return boardDAO.selectBoardList_all_viewsSort(startrow);
     }
 
     @Override
@@ -75,7 +76,7 @@ public class Board_highlightServiceImpl implements Board_highlightService {
         pageInfo.setPage(page);
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
-        return boardDAO.selectBoardList_highlight_replySort(startrow);
+        return boardDAO.selectBoardList_all_replySort(startrow);
     }
 
     @Override
@@ -91,7 +92,7 @@ public class Board_highlightServiceImpl implements Board_highlightService {
         pageInfo.setPage(page);
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
-        return boardDAO.selectBoardList_highlight_likeSort(startrow);
+        return boardDAO.selectBoardList_all_likeSort(startrow);
     }
 
     @Override

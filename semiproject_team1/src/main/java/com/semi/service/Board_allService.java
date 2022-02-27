@@ -5,7 +5,7 @@ import com.semi.dto.PageInfo;
 
 import java.util.List;
 
-public interface Board_highlightService {
+public interface Board_allService {
     void regBoard(Board board) throws Exception;
     List<Board> getBoardList(int page, PageInfo pageInfo) throws Exception;
     List<Board> getBoardList_viewsSort(int page, PageInfo pageInfo) throws Exception;

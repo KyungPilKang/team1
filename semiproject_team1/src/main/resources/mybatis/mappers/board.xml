@@ -19,14 +19,40 @@
         ]]>
 	</select>
 
-    <select id="selectBoardCount" resultType="int">
+    <select id="selectBoardCount_all" resultType="int">
 		<![CDATA[
         select count(*)
         from board
         ]]>
 	</select>
 
-    <select id="selectBoardList" resultType="board"
+    <select id="selectBoardCount_highlight" resultType="int">
+		<![CDATA[
+        select count(*)
+        from board
+        where board_cat = 'highlight'
+        ]]>
+	</select>
+
+    <select id="selectBoardCount_tip" resultType="int">
+		<![CDATA[
+        select count(*)
+        from board
+        where board_cat = 'tip'
+        ]]>
+	</select>
+
+    <select id="selectBoardCount_normal" resultType="int">
+		<![CDATA[
+        select count(*)
+        from board
+        where board_cat = 'normal'
+        ]]>
+	</select>
+
+	<!-- 시작 : board_all 정렬 관련 -->
+	<!-- 최신 -->
+    <select id="selectBoardList_all" resultType="board"
             parameterType="int">
 		<![CDATA[
         select *
@@ -36,6 +62,114 @@
         where rnum between #{startrow} and #{startrow} + 9
         ]]>
 	</select>
+	<!-- 조회수 -->
+	<select id="selectBoardList_all_viewsSort" resultType="board"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board order by board_readcount desc, board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- 댓글수 -->
+	<select id="selectBoardList_all_replySort" resultType="board"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board order by board_replycount desc, board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- 좋아요수 -->
+	<select id="selectBoardList_all_likeSort" resultType="board"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board order by board_likecount desc, board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- 끝 : board_all 정렬 관련 -->
+
+
+
+
+    <!-- 시작 : highlight 정렬 관련 -->
+    <!-- 최신 -->
+    <select id="selectBoardList_highlight" resultType="board"
+            parameterType="int">
+		<![CDATA[
+        select *
+        from (select @rownum:=@rownum+1 rnum, tot.*
+              from (select * from board where board_cat='highlight' order by board_date desc) tot,
+                  (select @rownum := 0) temp) sub
+        where rnum between #{startrow} and #{startrow} + 9
+        ]]>
+	</select>
+    <!-- 조회수 -->
+    <select id="selectBoardList_highlight_viewsSort" resultType="board"
+            parameterType="int">
+		<![CDATA[
+        select *
+        from (select @rownum:=@rownum+1 rnum, tot.*
+              from (select * from board where board_cat='highlight' order by board_readcount desc, board_date desc) tot,
+                  (select @rownum := 0) temp) sub
+        where rnum between #{startrow} and #{startrow} + 9
+        ]]>
+	</select>
+    <!-- 댓글수 -->
+    <select id="selectBoardList_highlight_replySort" resultType="board"
+            parameterType="int">
+		<![CDATA[
+        select *
+        from (select @rownum:=@rownum+1 rnum, tot.*
+              from (select * from board where board_cat='highlight' order by board_replycount desc, board_date desc) tot,
+                  (select @rownum := 0) temp) sub
+        where rnum between #{startrow} and #{startrow} + 9
+        ]]>
+	</select>
+    <!-- 좋아요수 -->
+    <select id="selectBoardList_highlight_likeSort" resultType="board"
+            parameterType="int">
+		<![CDATA[
+        select *
+        from (select @rownum:=@rownum+1 rnum, tot.*
+              from (select * from board where board_cat='highlight' order by board_likecount desc, board_date desc) tot,
+                  (select @rownum := 0) temp) sub
+        where rnum between #{startrow} and #{startrow} + 9
+        ]]>
+	</select>
+    <!-- 끝 : highlight 정렬 관련 -->
+
+
+    <select id="selectBoardList_tip" resultType="board"
+            parameterType="int">
+		<![CDATA[
+        select *
+        from (select @rownum:=@rownum+1 rnum, tot.*
+              from (select * from board where board_cat='tip' order by board_date desc) tot,
+                  (select @rownum := 0) temp) sub
+        where rnum between #{startrow} and #{startrow} + 9
+        ]]>
+	</select>
+
+    <select id="selectBoardList_normal" resultType="board"
+            parameterType="int">
+		<![CDATA[
+        select *
+        from (select @rownum:=@rownum+1 rnum, tot.*
+              from (select * from board where board_cat='normal' order by board_date desc) tot,
+                  (select @rownum := 0) temp) sub
+        where rnum between #{startrow} and #{startrow} + 9
+        ]]>
+	</select>
+
 
     <select id="selectBoard" resultType="board" parameterType="int">
 		<![CDATA[

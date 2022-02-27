@@ -6,18 +6,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Star Admin2 Dashboard</title>
+    <!-- plugins:css -->
     <link rel="stylesheet" href="../static/vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" href="../static/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
     <link rel="stylesheet" href="../static/vendors/codemirror/codemirror.css">
     <link rel="stylesheet" href="../static/vendors/codemirror/ambiance.css">
     <link rel="stylesheet" href="../static/vendors/pwstabs/jquery.pwstabs.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <%-- 아이콘 경로 설정해줘야함 --%>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/images/favicon.png"/>
 
 
+    <!-- 템플릿x, 개인적으로 적용한 css를 우선 페이지 내 적은 후 추후 분리예정 -->
     <style>
         .sub-link__list {
             display: flex;
@@ -31,6 +40,7 @@
         }
 
         .board_search_container {
+            /* background-color: red; */
             width: 300px;
             height: 36px;
         }
@@ -64,6 +74,7 @@
         .each_post{
             background: #b4b4f3;
             border : 1px solid black;
+            /*width: 800px;*/
             height: 50px;
             display: flex;
         }
@@ -71,37 +82,44 @@
         .each_board_num{
             margin:10px;
             width: 50px;
+            /*height:50px;*/
             background: red;
 
         }
 
         .each_board_sub{
             width: 550px;
+            /*height:50px;*/
             background: #ff6a00;
         }
 
         .each_board_nickname{
             width: 50px;
+            /*height:50px;*/
             background: #fcdc10;
         }
 
         .each_board_date{
             width: 150px;
+            /*height:50px;*/
             background: #41fc18;
         }
 
         .each_board_replycount{
             width: 50px;
+            /*height:50px;*/
             background: #0739ff;
         }
 
         .each_board_cat{
             width: 50px;
+            /*height:50px;*/
             background: #7c00ff;
         }
 
         .each_board_likecount{
             width: 50px;
+            /*height:50px;*/
             background: #fc8383;
         }
 
@@ -144,6 +162,7 @@
                                                     <a href="#">팁과 노하우</a>
                                                 </li>
                                             </ul>
+                                            <!-- 밑줄 -->
                                             <hr>
                                         </li>
                                         <li>
@@ -163,7 +182,7 @@
                         <div class="col-12 grid-margin" id="doc-intro">
                             <div class="card board_header">
                                 <div class="card-body">
-                                    <h3 class="mb-4">하이라이트</h3>
+                                    <h3 class="mb-4">전체</h3>
 
                                     <div><i class="mdi mdi-lead-pencil"></i> <a href="/boardwriteform">게시판글쓰기</a></div>
 
@@ -177,19 +196,19 @@
                                                 </a>
                                             </li>
                                             <li class="sub-link__item sub-link__item--active">
-                                                <a href="/board_highlight_viewssort">
+                                                <a href="/board_all_viewssort">
                                                     <img src="https://talk.op.gg/images/icon-hot-on@2x.png" width="24"
                                                          alt=""><span>조회수</span>
                                                 </a>
                                             </li>
                                             <li class="sub-link__item ">
-                                                <a href="/board_highlight_replysort">
+                                                <a href="/board_all_replysort">
                                                     <img src="https://talk.op.gg/images/icon-top@2x.png" width="24"
                                                          alt=""><span>댓글</span>
                                                 </a>
                                             </li>
                                             <li class="sub-link__item ">
-                                                <a href="board_highlight_likesort">
+                                                <a href="board_all_likesort">
                                                     <img src="https://talk.op.gg/images/icon-boost@2x.png" width="24"
                                                          alt=""><span>좋아요</span>
                                                 </a>
@@ -286,6 +305,26 @@
         </div>
     </div>
 </div>
+
+
+<%--<!-- plugins:js -->--%>
+<%--<script src="../template/vendors/js/vendor.bundle.base.js"></script>--%>
+<%--<!-- endinject -->--%>
+<%--<!-- Plugin js for this page-->--%>
+<%--<script src="../template/vendors/codemirror/codemirror.js"></script>--%>
+<%--<script src="../template/vendors/codemirror/javascript.js"></script>--%>
+<%--<script src="../template/vendors/codemirror/shell.js"></script>--%>
+<%--<script src="../template/vendors/pwstabs/jquery.pwstabs.min.js"></script>--%>
+<%--<!-- End Plugin js for this page-->--%>
+<%--<!-- inject:js -->--%>
+<%--<script src="../template/js/template.js"></script>--%>
+<%--<!-- endinject -->--%>
+<%--<!-- Custom js for this page-->--%>
+<%--<script src="../template/js/codeEditor.js"></script>--%>
+<%--<script src="../template/js/tabs.js"></script>--%>
+<%--<script src="../template/js/tooltips.js"></script>--%>
+<%--<script src="documentation.js"></script>--%>
+<%--<!-- End custom js for this page-->--%>
 
 </body>
 
