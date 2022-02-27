@@ -3,4 +3,87 @@
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.semi.dao.b_feedbackDAO">
+
+	<insert id="insertfeedback" parameterType="feedback">
+		<![CDATA[
+        insert into feedback
+        values (#{feedback_num}, #{feedback_nickname}, #{feedback_cat}, #{feedback_subject}, #{feedback_content}, #{feedback_replay_fileName},
+                #{feedback_video_fileName}, #{feedback_readcount}, #{feedback_likecount}, #{feedback_date}, #{feedback_vote_member}, #{feedback_vote_top},
+                #{feedback_vote_jungle}, #{feedback_vote_mid}, #{feedback_vote_ad}, #{feedback_vote_support})
+        ]]>
+	</insert>
+
+	<select id="selectMaxFeedbackNum" resultType="integer">
+		<![CDATA[
+        select max(feedback_num)
+        from feedback
+        ]]>
+	</select>
+
+	<select id="selectFeedbackCount" resultType="int">
+		<![CDATA[
+        select count(*)
+        from feedback
+        ]]>
+	</select>
+
+	<select id="selectFeedbackList_all" resultType="feedback"
+		parameterType="int">
+		<![CDATA[
+        select *
+        from (select @rownum:=@rownum+1 rnum, tot.*
+              from (select * from feedback order by feedback_date desc) tot,
+                  (select @rownum := 0) temp) sub
+        where rnum between #{startrow} and #{startrow} + 9
+        ]]>
+	</select>
+	<!-- 조회수 -->
+	<select id="selectFeedbackList_all_viewsSort" resultType="feedback"
+		parameterType="int">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from feedback order by feedback_readcount desc, feedback_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- 댓글수 -->
+	<select id="selectFeedbackList_answersort" resultType="feedback"
+		parameterType="int">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from fd_answer order by fd desc, fd_answer_num desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- 좋아요수 -->
+	<select id="selectFeedbackList_all_likeSort" resultType="feedback"
+		parameterType="int">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from feedback order by feedback_likecount desc, feedback_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+
+	<select id="selectFeedback" resultType="board" parameterType="int">
+		<![CDATA[
+        select *
+        from feedback
+        where feedback_num = #{feedbackNum}
+        ]]>
+	</select>
+
+	<update id="updateReadCount" parameterType="int">
+		<![CDATA[
+        update feedback
+        set feedback_readcount = feedback_readcount + 1
+        where feedback_num = #{feedbackNum}
+        ]]>
+	</update>
 </mapper>
