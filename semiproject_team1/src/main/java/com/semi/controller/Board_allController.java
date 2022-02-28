@@ -168,9 +168,6 @@ public class Board_allController {
         ModelAndView mv = new ModelAndView();
         PageInfo pageInfo = new PageInfo();
         try {
-
-            // 게시물 번호가 2번 또는 5번이라 가정하고,
-            // 우선 RequestParam으로 board_num(상세보기 한 게시물 번호)을 받아온다.
             // 세션에 회원 고유번호(mno)가 존재한다 가정
             session.setAttribute("mno", "14");
             Boolean like_ok = board_allService.like_check_mno(boardNum, (String) session.getAttribute("mno"));
@@ -178,6 +175,8 @@ public class Board_allController {
             mv.addObject("mno",session.getAttribute("mno"));
 
             Board board = board_allService.getBoard(boardNum);
+            board_allService.getBoard_likeCount(boardNum);
+
             mv.addObject("article", board);
             mv.addObject("page", page);
             mv.setViewName("/boardDetail");
@@ -219,13 +218,6 @@ public class Board_allController {
         }
         return mv;
     }
-
-
-
-
-
-
-
 
     @GetMapping("/test")
     public String test() {

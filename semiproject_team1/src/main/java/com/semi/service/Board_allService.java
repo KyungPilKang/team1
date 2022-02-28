@@ -19,4 +19,5 @@ public interface Board_allService {
 
     void like_ins_mno(int boardNum, String mno) throws Exception;
     void like_del_mno(int boardNum, String mno) throws Exception;
+    void getBoard_likeCount(int boardNum) throws Exception;
 }

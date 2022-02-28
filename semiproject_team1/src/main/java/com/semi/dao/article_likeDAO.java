@@ -17,4 +17,5 @@ public interface article_likeDAO {
     void delete_like_mno(@Param("boardNum") int boardNum, @Param("mno") String mno) throws Exception;
     void update_like_up(int boardNum) throws Exception;
     void update_like_down(int boardNum) throws Exception;
+    int board_like_count(int boardNum) throws Exception;
 }

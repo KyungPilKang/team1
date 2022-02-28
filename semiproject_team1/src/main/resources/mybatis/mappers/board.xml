@@ -300,4 +300,20 @@
         ]]>
 	</update>
 
+	<update id="updateBoardLike" parameterType="int">
+		<![CDATA[
+		update board
+		set board_likecount= #{board_likecount}
+		where board_num = #{boardNum}
+		]]>
+	</update>
+
+<!--	<select id="selectBoard_likeCount" resultType="int" parameterType="int">-->
+<!--		<![CDATA[-->
+<!--		select board_likecount-->
+<!--		from board-->
+<!--		where board_num = #{boardNum}-->
+<!--		]]>-->
+<!--	</select>-->
+
 </mapper>

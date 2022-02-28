@@ -44,7 +44,7 @@
         }
 
         .board_date_container {
-            width: 100px;
+            width: 300px;
             height: 40px;
             /*border: 1px solid black;*/
             float: left;
@@ -116,7 +116,7 @@
             color: black;
         }
 
-        .like_ward {
+        .like_and_ward {
             display: flex;
             position: absolute;
             left: 50%;
@@ -232,11 +232,11 @@
         <div class="board_subject_container">${article.board_subject }</div>
         <div class="board_container_bo">
             <div class="board_category_container"> 카테고리명</div>
-            <div class="board_date_container"> ${article.board_date}</div>
-            <div class="board_name_container"> ${article.board_nickname}</div>
-            <div class="board_readcount_container"> ${article.board_readcount}</div>
-            <div class="board_reply_container"> ${article.board_replycount}</div>
-            <div class="board_like_container"> ${article.board_likecount}</div>
+            <div class="board_date_container"> 날짜 : ${article.board_date}</div>
+            <div class="board_name_container"> 닉네임 : ${article.board_nickname}</div>
+            <div class="board_readcount_container"> 조회수 : ${article.board_readcount}</div>
+            <div class="board_reply_container"> 댓글수 : ${article.board_replycount}</div>
+            <div class="board_like_container"> 좋아요수 : ${article.board_likecount}</div>
         </div>
     </div>
 
@@ -247,12 +247,9 @@
     <section id="board_middle">
         <button id="btn_reply" class="btn_reply" onclick="reply_show()">댓글보기</button>
 
-        <div class="like_ward">
+        <div class="like_and_ward">
             <%--            <div class="btn_like">추천</div>--%>
             <div class="btn_like">
-
-
-                <%--------- 댓글 좋아요 테스트--------%>
                 <c:choose>
                     <c:when test="${okok==true}">
                         <div class="like_mini">
@@ -268,48 +265,12 @@
             </div>
             <div class="btn_ward">즐겨찾기</div>
         </div>
-
-        <%--        <div class="board_replys" id="board_replys">--%>
-        <%--            <c:choose>--%>
-        <%--                <c:when test="${articleList!=null && pageInfo.listCount>0 }">--%>
-        <%--                    <section id="listForm">--%>
-        <%--                        <table>--%>
-        <%--                            <c:forEach var="article" items="${articleList }">--%>
-        <%--                                <tr>--%>
-        <%--                                    <td>${article.board_num }</td>--%>
-        <%--                                    <td>--%>
-        <%--                                        <c:choose>--%>
-        <%--                                            <c:when test="${article.board_re_lev!=0}">--%>
-        <%--                                                <c:forEach var="i" begin="0" end="${article.board_re_lev*2}">--%>
-        <%--                                                    &nbsp;--%>
-        <%--                                                </c:forEach>--%>
-        <%--                                                ▶이건안씀--%>
-        <%--                                            </c:when>--%>
-        <%--                                            <c:otherwise>댓글</c:otherwise>--%>
-        <%--                                        </c:choose>--%>
-        <%--                                        <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">--%>
-        <%--                                                ${article.board_subject}--%>
-        <%--                                        </a>--%>
-        <%--                                    </td>--%>
-        <%--                                    <td>${article.board_nickname }</td>--%>
-        <%--                                    <td>${article.board_date }</td>--%>
-        <%--                                        &lt;%&ndash;                                    <td>${article.board_readcount }</td>&ndash;%&gt;--%>
-        <%--                                    <td><button class=""><a href="modifyform?board_num=${article.board_num}&page=${page}"> 수정 </a></button></td>--%>
-        <%--                                    <td><button class=""><a href="deleteform?board_num=${article.board_num}&page=${page}"> 삭제 </a></button></td>--%>
-        <%--                                </tr>--%>
-        <%--                            </c:forEach>--%>
-        <%--                        </table>--%>
-        <%--                    </section>--%>
-
-        <%--                </c:when>--%>
-
-        <%--            </c:choose>--%>
-        <%--        </div>--%>
-
     </section>
+
     <div class="reply_container" id="reply_container">
         <-- 위치 파악용 -->
     </div>
+
     <section id="commandList">
         <button class="btn_modify"><a href="modifyform?board_num=${article.board_num}&page=${page}"> 수정 </a></button>
         <button class="btn_list"><a href="./boardlist?page=${page}"> 글목록</a></button>
@@ -323,7 +284,7 @@
     </section>
 
 
-    <%-- 좋아요 버튼 --%>
+    <%-- 좋아요 버튼 자바스크립트 --%>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         function like_off() {
@@ -335,12 +296,10 @@
                 type: 'GET',
                 data: {
                     board_num:${article.board_num},
-                    <%--board:${article},--%>
                     mno:${mno}
                 },
                 url: "http://localhost:8090/like_off",
                 success: function (data) {
-                    console.log(data);
                 },
                 error: function (textStatus) {
                     alert("ERROR : " + textStatus);
@@ -365,7 +324,6 @@
                 },
                 url: "http://localhost:8090/like_on",
                 success: function (data) {
-                    console.log(data);
                 },
                 error: function (textStatus) {
                     alert("ERROR : " + textStatus);

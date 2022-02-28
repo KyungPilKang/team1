@@ -169,7 +169,7 @@ public class Board_allServiceImpl implements Board_allService {
 //        System.out.println("like_member : " + like_member);
         List<String> like_member = article_likeDAO.select_article_like(boardNum);
 //        List<String> arr = List.of(like_member.split(","));
-        System.out.println("arr : " + like_member);
+        System.out.println("추천한 유저의 고유번호 : " + like_member);
         if (like_member.contains(mno)) {
             like_ok = true;
         }
@@ -188,6 +188,14 @@ public class Board_allServiceImpl implements Board_allService {
         // article_like에서 mno를 제거하는 DAO
         article_likeDAO.delete_like_mno(boardNum,mno);
         article_likeDAO.update_like_down(boardNum);
+    }
+
+    @Override
+    public void getBoard_likeCount(int boardNum) throws Exception {
+        /* DB에 article_like의 mno가 not null이라 생성시 0을 무조건 넣어주므로 -1 해준다 */
+        int board_likecount = article_likeDAO.board_like_count(boardNum) - 1;
+        System.out.println("serviceImpl의 board_likecount : "+board_likecount);
+        boardDAO.updateBoardLike(boardNum,board_likecount);
     }
 
 
