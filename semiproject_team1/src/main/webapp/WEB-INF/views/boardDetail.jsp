@@ -181,22 +181,6 @@
             cursor: pointer;
         }
 
-
-        .heart {
-            background: red;
-            border: 1px solid black;
-            width: 40px;
-            height: 40px;
-        }
-
-        ._off {
-            /*background:red;*/
-            border: 1px solid black;
-            width: 40px;
-            height: 40px;
-            background: white;
-        }
-
         .reply_container {
             margin-top: 750px;
             width: 900px;
@@ -223,6 +207,21 @@
             margin-top: 150px;
             display: block;
         }
+
+        .heart{
+            height: 50px;
+            width: 50px;
+            border-radius: 20px;
+            background: red;
+        }
+
+        .heart_off{
+            height: 50px;
+            width: 50px;
+            border-radius: 20px;
+            border: 1px solid black;
+        }
+
     </style>
 </head>
 
@@ -251,12 +250,19 @@
         <div class="like_ward">
             <%--            <div class="btn_like">추천</div>--%>
             <div class="btn_like">
+
+
+                <%--------- 댓글 좋아요 테스트--------%>
                 <c:choose>
-                    <c:when test="${okok}">
-                        <div class="heart" id="heart" onclick="likey()"></div>
+                    <c:when test="${okok==true}">
+                        <div class="like_mini">
+                        <div class="heart" onclick="like_off()"> </div>
+                        </div>
                     </c:when>
                     <c:otherwise>
-                        <button class="btn_not">세션을 못가져왔습니다.</button>
+                        <div class="like_mini">
+                        <div class="heart_off" onclick="like_on()"></div>
+                        </div>
                     </c:otherwise>
                 </c:choose>
             </div>
@@ -318,10 +324,20 @@
 
 
     <%-- 좋아요 버튼 --%>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
-        function likey() {
+        function like_off() {
+            $(".heart").hide()
+            $(".like_mini").append("<div class='heart_off' onclick='like_on()''></div>");
             alert("좋아요를 취소하셨습니다.")
-            document.getElementById('heart').classList.add('_off');
+        }
+    </script>
+
+    <script>
+        function like_on(){
+            $(".heart_off").hide()
+            $(".like_mini").append("<div class='heart' onclick='like_off()''></div>");
+            alert("좋아요를 누르셨습니다.")
         }
     </script>
 

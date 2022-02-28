@@ -216,7 +216,7 @@
                                             <%-- 검색 --%>
                                             <li class="board_search_form">
                                                 <div class="board_search_container">
-                                                    <form class="search-form" id="boardform" method="get">
+                                                    <form class="search-form" id="boardform" method="get" action="/board_search">
                                                         <select class="btn-sm btn-secondary board_search_select"
                                                                 name="board_type">
                                                             <option value="1">제목</option>
@@ -226,13 +226,12 @@
                                                         <input type="search" class="form-control"
                                                                placeholder="Search Here" title="Search here"
                                                                name="board_keyword">
-                                                    </form>
                                                     <div class="board_file_cont">
                                                         <label for="search_submit" style="cursor: pointer"> 돋보기
                                                             아이콘 </label>
-                                                        <input type="submit" id="search_submit"
-                                                               onclick="fake_submit()"/>
+                                                        <input type="submit" id="search_submit"/>
                                                     </div>
+                                                    </form>
                                                 </div>
                                             </li>
                                         </ul>
@@ -313,13 +312,13 @@
 </div>
 
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script>
-    function fake_submit() {
-        alert("검색 완료")
-        $("#boardform").attr("action", "./board_search").submit();
-    }
-</script>
+<%--<script src="http://code.jquery.com/jquery-latest.min.js"></script>--%>
+<%--<script>--%>
+<%--    function fake_submit() {--%>
+<%--        alert(${pageInfo.listCount}+"건 검색 완료")--%>
+<%--        $("#boardform").attr("action", "./board_search").submit();--%>
+<%--    }--%>
+<%--</script>--%>
 
 
 <%--<script>--%>

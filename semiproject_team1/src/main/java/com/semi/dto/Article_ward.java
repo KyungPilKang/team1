@@ -2,18 +2,18 @@ package com.semi.dto;
 
 public class Article_ward {
 	
-	String index; //PK, AI
-	String mno;
-	String board_num;
+	String article_ward_num; //PK, AI
+	String mno; // 즐겨찾기 한 사용자의 고유번호
+	String board_num; // 즐겨찾기 된 게시물 번호
 	
 	public Article_ward() {}
 
-	public String getIndex() {
-		return index;
+	public String getArticle_ward_num() {
+		return article_ward_num;
 	}
 
-	public void setIndex(String index) {
-		this.index = index;
+	public void setArticle_ward_num(String article_ward_num) {
+		this.article_ward_num = article_ward_num;
 	}
 
 	public String getMno() {

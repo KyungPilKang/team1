@@ -3,4 +3,13 @@
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.semi.dao.article_wardDAO">
+
+	<insert id="insertWard" parameterType="int">
+		<![CDATA[
+		insert into article_ward
+			(mno,board_num)
+		values ('0',#{boardNum})
+		]]>
+	</insert>
+
 </mapper>

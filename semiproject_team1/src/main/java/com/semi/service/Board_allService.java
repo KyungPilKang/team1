@@ -15,4 +15,5 @@ public interface Board_allService {
     List<Board> getBoardList_search_nickname(int page, PageInfo pageInfo, Board board) throws Exception;
     List<Board> getBoardList_search_content(int page, PageInfo pageInfo, Board board) throws Exception;
     Board getBoard(int boardNum) throws Exception;
+    Boolean like_check_mno(int boardNum, String mno) throws Exception;
 }

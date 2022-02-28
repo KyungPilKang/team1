@@ -1,6 +1,9 @@
 package com.semi.service;
 
+import com.semi.dao.article_likeDAO;
+import com.semi.dao.article_wardDAO;
 import com.semi.dao.boardDAO;
+import com.semi.dto.Article_like;
 import com.semi.dto.Board;
 import com.semi.dto.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,21 +17,27 @@ public class Board_allServiceImpl implements Board_allService {
     @Autowired
     boardDAO boardDAO;
 
+    @Autowired
+    article_likeDAO article_likeDAO;
 
+    @Autowired
+    article_wardDAO article_wardDAO;
 
     @Override
     public void regBoard(Board board) throws Exception {
 // Auto increment라 board_num을 안가져가도 자동으로 1씩 증가하는걸 확인 (not null 인데도 가능)
-//        Integer boardNum = boardDAO.selectMaxBoardNum();
-//        if (boardNum == null) boardNum = 1;
-//        else boardNum += 1;
+        Integer boardNum = boardDAO.selectMaxBoardNum();
+        if (boardNum == null) boardNum = 1;
+        else boardNum += 1;
         //db에서 not null이라 임시로 닉네임 가져간다
         board.setBoard_nickname("mno");
-//        board.setBoard_num(boardNum);
+        board.setBoard_num(boardNum);
         board.setBoard_readcount(0);
         board.setBoard_likecount(0);
         board.setBoard_replycount(0);
         boardDAO.insertBoard(board);
+        article_likeDAO.insertLike(boardNum);
+        article_wardDAO.insertWard(boardNum);
     }
 
     @Override
@@ -108,8 +117,8 @@ public class Board_allServiceImpl implements Board_allService {
         pageInfo.setPage(page);
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
-        System.out.println("listCount : "+  listCount);
-        return boardDAO.selectBoardList_all_search_subject(startrow,board.getBoard_keyword());
+        System.out.println("listCount : " + listCount);
+        return boardDAO.selectBoardList_all_search_subject(startrow, board.getBoard_keyword());
     }
 
     @Override
@@ -125,8 +134,8 @@ public class Board_allServiceImpl implements Board_allService {
         pageInfo.setPage(page);
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
-        System.out.println("listCount : "+  listCount);
-        return boardDAO.selectBoardList_all_search_nickname(startrow,board.getBoard_keyword());
+        System.out.println("listCount : " + listCount);
+        return boardDAO.selectBoardList_all_search_nickname(startrow, board.getBoard_keyword());
     }
 
     @Override
@@ -142,14 +151,29 @@ public class Board_allServiceImpl implements Board_allService {
         pageInfo.setPage(page);
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
-        System.out.println("listCount : "+  listCount);
-        return boardDAO.selectBoardList_all_search_content(startrow,board.getBoard_keyword());
+        System.out.println("listCount : " + listCount);
+        return boardDAO.selectBoardList_all_search_content(startrow, board.getBoard_keyword());
     }
 
     @Override
     public Board getBoard(int boardNum) throws Exception {
         boardDAO.updateReadCount(boardNum);
         return boardDAO.selectBoard(boardNum);
+    }
+
+    @Override
+    public Boolean like_check_mno(int boardNum, String mno) throws Exception {
+        // 선택된 게시물에 존재하는 번호에 있는 mno들 중 가져온 mno가 존재하는지 체크
+        boolean like_ok = false;
+        String like_member = article_likeDAO.select_article_like(boardNum);
+        System.out.println("like_member : " + like_member);
+        List<String> arr = List.of(like_member.split(","));
+        System.out.println("arr : " + arr);
+        if (arr.contains(mno)) {
+            like_ok = true;
+        }
+        System.out.println(like_ok);
+        return like_ok;
     }
 
 

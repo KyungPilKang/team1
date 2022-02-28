@@ -169,20 +169,13 @@ public class Board_allController {
         PageInfo pageInfo = new PageInfo();
         try {
 
-            // 좋아요 시작
-            session.setAttribute("mno", "jay");
-            boolean reply_like_ok = false;
-            String reply_like_member = "1,2,3,4,5,6,7,8,9,jay";
-            List<String> arr = List.of(reply_like_member.split(","));
-            System.out.println(arr);
-            if (arr.contains(session.getAttribute("mno"))) {
-                reply_like_ok = true;
-                System.out.println("testOK");
-            }
-            mv.addObject("okok", reply_like_ok);
-            // 좋아요 끝
+            // 게시물 번호가 2번 또는 5번이라 가정하고,
+            // 우선 RequestParam으로 board_num(상세보기 한 게시물 번호)을 받아온다.
+            // 세션에 회원 고유번호(mno)가 존재한다 가정
+            session.setAttribute("mno", "14");
+            Boolean like_ok = board_allService.like_check_mno(boardNum, (String) session.getAttribute("mno"));
+            mv.addObject("okok", like_ok);
 
-            System.out.println(reply_like_ok);
             Board board = board_allService.getBoard(boardNum);
             mv.addObject("article", board);
             mv.addObject("page", page);
@@ -194,39 +187,27 @@ public class Board_allController {
         return mv;
     }
 
+
+
+
+
+
+
+
+
+
+
     @GetMapping("/test")
     public String test() {
         return "/infiniteScroll";
     }
 
-//    @GetMapping("/test")
-//    public ResponseEntity<Integer> test(@RequestParam(value = "page", defaultValue = "1") int page) {
-//        ResponseEntity<Integer> result = null;
-//        try {
-//            result = new ResponseEntity<Integer>(page, HttpStatus.OK);
-//        } catch (Exception e) {
-//            result = new ResponseEntity<Integer>(page, HttpStatus.BAD_REQUEST);
-//        }
-//        return result;
-//    }
 
-//    @RequestMapping(value = "/test", method = {RequestMethod.GET, RequestMethod.POST})
-//    public ModelAndView test(@RequestParam(value = "page", defaultValue = "1") int page) {
-//        ModelAndView mv = new ModelAndView();
-//        try {
-//            System.out.println(mv);
-//            System.out.println(page);
-////            mv.addObject("page",page++);
-//            System.out.println(page);
-//            mv.setViewName("/infiniteScroll");
-//            System.out.println(mv);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            mv.addObject("err", e.getMessage());
-//        }
-//        return mv;
+    /* 뷰 확인용 */
+//    @RequestMapping(value="/custom/{pageName}")
+//    public String getSinglePage(@PathVariable("pageName")String pageName){
+//        return "/custom/"+pageName;
 //    }
-
 
 
 }
