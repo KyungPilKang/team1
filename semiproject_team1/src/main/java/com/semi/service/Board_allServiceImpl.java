@@ -165,15 +165,29 @@ public class Board_allServiceImpl implements Board_allService {
     public Boolean like_check_mno(int boardNum, String mno) throws Exception {
         // 선택된 게시물에 존재하는 번호에 있는 mno들 중 가져온 mno가 존재하는지 체크
         boolean like_ok = false;
-        String like_member = article_likeDAO.select_article_like(boardNum);
-        System.out.println("like_member : " + like_member);
-        List<String> arr = List.of(like_member.split(","));
-        System.out.println("arr : " + arr);
-        if (arr.contains(mno)) {
+//        String like_member = article_likeDAO.select_article_like(boardNum);
+//        System.out.println("like_member : " + like_member);
+        List<String> like_member = article_likeDAO.select_article_like(boardNum);
+//        List<String> arr = List.of(like_member.split(","));
+        System.out.println("arr : " + like_member);
+        if (like_member.contains(mno)) {
             like_ok = true;
         }
         System.out.println(like_ok);
         return like_ok;
+    }
+
+    @Override
+    public void like_ins_mno(int boardNum, String mno) throws Exception {
+        article_likeDAO.insert_like_mno(boardNum,mno);
+        article_likeDAO.update_like_up(boardNum);
+    }
+
+    @Override
+    public void like_del_mno(int boardNum, String mno) throws Exception {
+        // article_like에서 mno를 제거하는 DAO
+        article_likeDAO.delete_like_mno(boardNum,mno);
+        article_likeDAO.update_like_down(boardNum);
     }
 
 

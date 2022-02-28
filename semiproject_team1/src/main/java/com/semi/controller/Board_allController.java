@@ -175,6 +175,7 @@ public class Board_allController {
             session.setAttribute("mno", "14");
             Boolean like_ok = board_allService.like_check_mno(boardNum, (String) session.getAttribute("mno"));
             mv.addObject("okok", like_ok);
+            mv.addObject("mno",session.getAttribute("mno"));
 
             Board board = board_allService.getBoard(boardNum);
             mv.addObject("article", board);
@@ -182,13 +183,42 @@ public class Board_allController {
             mv.setViewName("/boardDetail");
         } catch (Exception e) {
             e.printStackTrace();
-            mv.setViewName("/board/err");
+            mv.addObject("err", e.getMessage());
         }
         return mv;
     }
 
 
+    @GetMapping(value = "/like_on")
+    public ModelAndView like_on(@RequestParam(value = "board_num", required=false) int boardNum, @RequestParam(value = "mno") String mno) {
+        ModelAndView mv = new ModelAndView();
+        try {
+            //article_like에서 mno를 추가하는 서비스
+            System.out.println(boardNum);
+            board_allService.like_ins_mno(boardNum,mno);
+            mv.setViewName("/boardDetail");
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
 
+        }
+        return mv;
+    }
+
+    @GetMapping(value = "/like_off")
+    public ModelAndView like_off(@RequestParam(value = "board_num", required=false) int boardNum, @RequestParam(value = "mno") String mno) {
+        ModelAndView mv = new ModelAndView();
+        try {
+            System.out.println(boardNum);
+            //article_like에서 mno를 제거하는 서비스
+            board_allService.like_del_mno(boardNum,mno);
+            mv.setViewName("/boardDetail");
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
+    }
 
 
 

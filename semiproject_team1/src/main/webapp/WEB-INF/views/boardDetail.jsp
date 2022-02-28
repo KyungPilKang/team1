@@ -208,14 +208,14 @@
             display: block;
         }
 
-        .heart{
+        .heart {
             height: 50px;
             width: 50px;
             border-radius: 20px;
             background: red;
         }
 
-        .heart_off{
+        .heart_off {
             height: 50px;
             width: 50px;
             border-radius: 20px;
@@ -256,12 +256,12 @@
                 <c:choose>
                     <c:when test="${okok==true}">
                         <div class="like_mini">
-                        <div class="heart" onclick="like_off()"> </div>
+                            <div class="heart" onclick="like_off()"></div>
                         </div>
                     </c:when>
                     <c:otherwise>
                         <div class="like_mini">
-                        <div class="heart_off" onclick="like_on()"></div>
+                            <div class="heart_off" onclick="like_on()"></div>
                         </div>
                     </c:otherwise>
                 </c:choose>
@@ -269,42 +269,42 @@
             <div class="btn_ward">즐겨찾기</div>
         </div>
 
-<%--        <div class="board_replys" id="board_replys">--%>
-<%--            <c:choose>--%>
-<%--                <c:when test="${articleList!=null && pageInfo.listCount>0 }">--%>
-<%--                    <section id="listForm">--%>
-<%--                        <table>--%>
-<%--                            <c:forEach var="article" items="${articleList }">--%>
-<%--                                <tr>--%>
-<%--                                    <td>${article.board_num }</td>--%>
-<%--                                    <td>--%>
-<%--                                        <c:choose>--%>
-<%--                                            <c:when test="${article.board_re_lev!=0}">--%>
-<%--                                                <c:forEach var="i" begin="0" end="${article.board_re_lev*2}">--%>
-<%--                                                    &nbsp;--%>
-<%--                                                </c:forEach>--%>
-<%--                                                ▶이건안씀--%>
-<%--                                            </c:when>--%>
-<%--                                            <c:otherwise>댓글</c:otherwise>--%>
-<%--                                        </c:choose>--%>
-<%--                                        <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">--%>
-<%--                                                ${article.board_subject}--%>
-<%--                                        </a>--%>
-<%--                                    </td>--%>
-<%--                                    <td>${article.board_nickname }</td>--%>
-<%--                                    <td>${article.board_date }</td>--%>
-<%--                                        &lt;%&ndash;                                    <td>${article.board_readcount }</td>&ndash;%&gt;--%>
-<%--                                    <td><button class=""><a href="modifyform?board_num=${article.board_num}&page=${page}"> 수정 </a></button></td>--%>
-<%--                                    <td><button class=""><a href="deleteform?board_num=${article.board_num}&page=${page}"> 삭제 </a></button></td>--%>
-<%--                                </tr>--%>
-<%--                            </c:forEach>--%>
-<%--                        </table>--%>
-<%--                    </section>--%>
+        <%--        <div class="board_replys" id="board_replys">--%>
+        <%--            <c:choose>--%>
+        <%--                <c:when test="${articleList!=null && pageInfo.listCount>0 }">--%>
+        <%--                    <section id="listForm">--%>
+        <%--                        <table>--%>
+        <%--                            <c:forEach var="article" items="${articleList }">--%>
+        <%--                                <tr>--%>
+        <%--                                    <td>${article.board_num }</td>--%>
+        <%--                                    <td>--%>
+        <%--                                        <c:choose>--%>
+        <%--                                            <c:when test="${article.board_re_lev!=0}">--%>
+        <%--                                                <c:forEach var="i" begin="0" end="${article.board_re_lev*2}">--%>
+        <%--                                                    &nbsp;--%>
+        <%--                                                </c:forEach>--%>
+        <%--                                                ▶이건안씀--%>
+        <%--                                            </c:when>--%>
+        <%--                                            <c:otherwise>댓글</c:otherwise>--%>
+        <%--                                        </c:choose>--%>
+        <%--                                        <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">--%>
+        <%--                                                ${article.board_subject}--%>
+        <%--                                        </a>--%>
+        <%--                                    </td>--%>
+        <%--                                    <td>${article.board_nickname }</td>--%>
+        <%--                                    <td>${article.board_date }</td>--%>
+        <%--                                        &lt;%&ndash;                                    <td>${article.board_readcount }</td>&ndash;%&gt;--%>
+        <%--                                    <td><button class=""><a href="modifyform?board_num=${article.board_num}&page=${page}"> 수정 </a></button></td>--%>
+        <%--                                    <td><button class=""><a href="deleteform?board_num=${article.board_num}&page=${page}"> 삭제 </a></button></td>--%>
+        <%--                                </tr>--%>
+        <%--                            </c:forEach>--%>
+        <%--                        </table>--%>
+        <%--                    </section>--%>
 
-<%--                </c:when>--%>
+        <%--                </c:when>--%>
 
-<%--            </c:choose>--%>
-<%--        </div>--%>
+        <%--            </c:choose>--%>
+        <%--        </div>--%>
 
     </section>
     <div class="reply_container" id="reply_container">
@@ -327,15 +327,51 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         function like_off() {
+            console.log(${mno});
             $(".heart").hide()
+            /* ajax로 article_like에서 mno를 제거 */
+            $.ajax({
+                async: true,
+                type: 'GET',
+                data: {
+                    board_num:${article.board_num},
+                    <%--board:${article},--%>
+                    mno:${mno}
+                },
+                url: "http://localhost:8090/like_off",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (textStatus) {
+                    alert("ERROR : " + textStatus);
+                }
+            });
+            /* 빈 하트로 바꾸기 */
             $(".like_mini").append("<div class='heart_off' onclick='like_on()''></div>");
             alert("좋아요를 취소하셨습니다.")
         }
     </script>
 
     <script>
-        function like_on(){
+        function like_on() {
             $(".heart_off").hide()
+            /* ajax로 article_like에서 mno를 추가 */
+            $.ajax({
+                async: true,
+                type: 'GET',
+                data: {
+                    board_num:${article.board_num},
+                    mno:${mno}
+                },
+                url: "http://localhost:8090/like_on",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (textStatus) {
+                    alert("ERROR : " + textStatus);
+                }
+            });
+            /* 빨간 하트로 바꾸기 */
             $(".like_mini").append("<div class='heart' onclick='like_off()''></div>");
             alert("좋아요를 누르셨습니다.")
         }
