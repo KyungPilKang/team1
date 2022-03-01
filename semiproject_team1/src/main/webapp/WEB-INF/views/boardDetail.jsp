@@ -184,28 +184,12 @@
         .reply_container {
             margin-top: 750px;
             width: 900px;
-            /*height: 70px;*/
-            background: red;
+            height: 350px;
+            background: #676767;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            /*display: none;*/
-        }
-
-        #reply_list {
-            background: aqua;
-        }
-
-        .board_replys {
-            /*background: red;*/
-            margin-top: 150px;
             display: none;
-        }
-
-        .board_replys_show {
-            /*background: red;*/
-            margin-top: 150px;
-            display: block;
         }
 
         .heart {
@@ -221,6 +205,22 @@
             border-radius: 20px;
             border: 1px solid black;
         }
+
+
+        .bookmark {
+            height: 50px;
+            width: 50px;
+            border-radius: 20px;
+            background: #008293;
+        }
+
+        .bookmark_off {
+            height: 50px;
+            width: 50px;
+            border-radius: 20px;
+            border: 1px solid black;
+        }
+
 
     </style>
 </head>
@@ -245,13 +245,13 @@
     </div>
 
     <section id="board_middle">
+
         <button id="btn_reply" class="btn_reply" onclick="reply_show()">댓글보기</button>
 
         <div class="like_and_ward">
-            <%--            <div class="btn_like">추천</div>--%>
             <div class="btn_like">
                 <c:choose>
-                    <c:when test="${okok==true}">
+                    <c:when test="${like_ok==true}">
                         <div class="like_mini">
                             <div class="heart" onclick="like_off()"></div>
                         </div>
@@ -263,12 +263,26 @@
                     </c:otherwise>
                 </c:choose>
             </div>
-            <div class="btn_ward">즐겨찾기</div>
+            <div class="btn_ward">
+                <c:choose>
+                    <c:when test="${ward_ok==true}">
+                        <div class="ward_mini">
+                            <div class="bookmark" onclick="ward_off()"></div>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="ward_mini">
+                            <div class="bookmark_off" onclick="ward_on()"></div>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+            </div>
         </div>
+
     </section>
 
     <div class="reply_container" id="reply_container">
-        <-- 위치 파악용 -->
+        --------------------------------------------------------- 댓글창 위치 ▼ --------------------------------------------------------------
     </div>
 
     <section id="commandList">
@@ -290,7 +304,7 @@
         function like_off() {
             console.log(${mno});
             $(".heart").hide()
-            /* ajax로 article_like에서 mno를 제거 */
+            /* ajax로 article_like에서 해당 board_num의 mno를 제거하기 위해 데이터를 보냄 */
             $.ajax({
                 async: true,
                 type: 'GET',
@@ -308,13 +322,15 @@
             /* 빈 하트로 바꾸기 */
             $(".like_mini").append("<div class='heart_off' onclick='like_on()''></div>");
             alert("좋아요를 취소하셨습니다.")
+            // location.reload()를 해야 좋아요를 눌렀을 때 즉시 반영된다
+            location.reload();
         }
     </script>
 
     <script>
         function like_on() {
             $(".heart_off").hide()
-            /* ajax로 article_like에서 mno를 추가 */
+            /* ajax로 article_like에서 해당 board_num의 mno를 추가하기 위해 데이터를 보냄 */
             $.ajax({
                 async: true,
                 type: 'GET',
@@ -332,6 +348,66 @@
             /* 빨간 하트로 바꾸기 */
             $(".like_mini").append("<div class='heart' onclick='like_off()''></div>");
             alert("좋아요를 누르셨습니다.")
+            location.reload();
+        }
+    </script>
+
+    <%-- 뒤로가기 후 다시 돌아왔을 때 페이지가 reload 되는 동안 좋아요, 와드를 못하도록 css처리 --%>
+    <script>
+        $(window).bind("pageshow", function (event) {
+            if (event.originalEvent.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                $(".heart_off").css("pointer-events", "none");
+                $(".bookmark_off").css("pointer-events", "none");
+                location.reload();
+            }
+        });
+    </script>
+
+
+    <%-- 와드 버튼 자바스크립트 --%>
+    <script>
+        function ward_off() {
+            $(".bookmark").hide()
+            $.ajax({
+                async: true,
+                type: 'GET',
+                data: {
+                    board_num:${article.board_num},
+                    mno:${mno}
+                },
+                url: "http://localhost:8090/ward_off",
+                success: function (data) {
+                },
+                error: function (textStatus) {
+                    alert("ERROR : " + textStatus);
+                }
+            });
+            $(".ward_mini").append("<div class='bookmark_off' onclick='ward_on()''></div>");
+            alert("와드를 취소하셨습니다.")
+            location.reload();
+        }
+    </script>
+
+    <script>
+        function ward_on() {
+            $(".bookmark_off").hide()
+            $.ajax({
+                async: true,
+                type: 'GET',
+                data: {
+                    board_num:${article.board_num},
+                    mno:${mno}
+                },
+                url: "http://localhost:8090/ward_on",
+                success: function (data) {
+                },
+                error: function (textStatus) {
+                    alert("ERROR : " + textStatus);
+                }
+            });
+            $(".ward_mini").append("<div class='bookmark' onclick='ward_off()''></div>");
+            alert("와드를 누르셨습니다.")
+            location.reload();
         }
     </script>
 
@@ -340,13 +416,14 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         reply_show = () => {
-            if ($("#board_replys").css("display") == "none") {
-                $("#board_replys").show()
+            if ($("#reply_container").css("display") == "none") {
+                $("#reply_container").show()
             } else {
-                $("#board_replys").hide()
+                $("#reply_container").hide()
             }
         }
     </script>
+
 
 </div>
 

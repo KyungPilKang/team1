@@ -9,7 +9,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Star Admin2 Dashboard</title>
+    <title>전체 게시판 - 롤판.DOG</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../static/vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" href="../static/vendors/css/vendor.bundle.base.css">
@@ -62,7 +62,7 @@
 
         .board_body {
             margin-left: 50px;
-            width: 1000px;
+            width: 1500px;
         }
 
 
@@ -81,20 +81,20 @@
 
         .each_board_num {
             margin: 10px;
-            width: 50px;
+            width: 100px;
             /*height:50px;*/
             background: red;
 
         }
 
         .each_board_sub {
-            width: 550px;
+            width: 750px;
             /*height:50px;*/
             background: #ff6a00;
         }
 
         .each_board_nickname {
-            width: 50px;
+            width: 100px;
             /*height:50px;*/
             background: #fcdc10;
         }
@@ -106,21 +106,27 @@
         }
 
         .each_board_replycount {
-            width: 50px;
+            width: 100px;
             /*height:50px;*/
             background: #0739ff;
         }
 
         .each_board_cat {
-            width: 50px;
+            width: 100px;
             /*height:50px;*/
             background: #7c00ff;
         }
 
         .each_board_likecount {
-            width: 50px;
+            width: 100px;
             /*height:50px;*/
             background: #fc8383;
+        }
+
+        .each_board_readcount {
+            width: 100px;
+            /*height:50px;*/
+            background: #a54fd9;
         }
 
         #search_submit {
@@ -251,7 +257,6 @@
                                                 <section id="listForm">
                                                     <c:forEach var="article" items="${articleList }">
                                                         <div class="each_post">
-                                                            <div class="each_board_likecount">${article.board_likecount }</div>
                                                             <div class="each_board_num">보드넘${article.board_num }</div>
                                                             <div class="each_board_sub">
                                                                 <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">
@@ -259,12 +264,16 @@
                                                                 </a>
                                                             </div>
 
-                                                            <div class="each_board_cat">카${article.board_cat }</div>
+                                                            <div class="each_board_cat">카테고리${article.board_cat }</div>
                                                             <div class="each_board_date">날짜${article.board_date }</div>
                                                             <div class="each_board_nickname">
                                                                 닉네임${article.board_nickname }</div>
                                                             <div class="each_board_replycount">
                                                                 리플수${article.board_replycount }</div>
+                                                            <div class="each_board_readcount">
+                                                                조회수${article.board_readcount }</div>
+                                                            <div class="each_board_likecount">
+                                                                좋아요수${article.board_likecount }</div>
                                                         </div>
                                                     </c:forEach>
                                                 </section>

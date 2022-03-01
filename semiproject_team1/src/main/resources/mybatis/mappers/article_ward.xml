@@ -4,6 +4,14 @@
 
 <mapper namespace="com.semi.dao.article_wardDAO">
 
+	<select id="select_article_ward" resultType="string" parameterType="int">
+		<![CDATA[
+		select mno
+		from article_ward
+		where board_num = #{boardNum}
+		]]>
+	</select>
+
 	<insert id="insertWard" parameterType="int">
 		<![CDATA[
 		insert into article_ward
@@ -11,5 +19,18 @@
 		values ('0',#{boardNum})
 		]]>
 	</insert>
+
+	<insert id="insert_ward_mno">
+		<![CDATA[
+		insert into article_ward values(0,#{mno},#{boardNum})
+		]]>
+	</insert>
+
+	<insert id="delete_ward_mno">
+		<![CDATA[
+		delete from article_ward where board_num = #{boardNum} and mno = #{mno}
+		]]>
+	</insert>
+
 
 </mapper>

@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Star Admin2 Dashboard</title>
+    <title>하이라이트 게시판 - 롤판.DOG</title>
     <link rel="stylesheet" href="../static/vendors/ti-icons/css/themify-icons.css">
     <link rel="stylesheet" href="../static/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="../static/vendors/codemirror/codemirror.css">

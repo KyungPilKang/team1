@@ -36,6 +36,7 @@ public class Board_allServiceImpl implements Board_allService {
         board.setBoard_likecount(0);
         board.setBoard_replycount(0);
         boardDAO.insertBoard(board);
+        //게시물 테이블이 생성될 때 like,ward 테이블도 같이 생성해준다
         article_likeDAO.insertLike(boardNum);
         article_wardDAO.insertWard(boardNum);
     }
@@ -161,14 +162,13 @@ public class Board_allServiceImpl implements Board_allService {
         return boardDAO.selectBoard(boardNum);
     }
 
+
+    /* ---------------------- 시작 : 좋아요 ---------------------- */
     @Override
     public Boolean like_check_mno(int boardNum, String mno) throws Exception {
         // 선택된 게시물에 존재하는 번호에 있는 mno들 중 가져온 mno가 존재하는지 체크
         boolean like_ok = false;
-//        String like_member = article_likeDAO.select_article_like(boardNum);
-//        System.out.println("like_member : " + like_member);
         List<String> like_member = article_likeDAO.select_article_like(boardNum);
-//        List<String> arr = List.of(like_member.split(","));
         System.out.println("추천한 유저의 고유번호 : " + like_member);
         if (like_member.contains(mno)) {
             like_ok = true;
@@ -179,14 +179,14 @@ public class Board_allServiceImpl implements Board_allService {
 
     @Override
     public void like_ins_mno(int boardNum, String mno) throws Exception {
-        article_likeDAO.insert_like_mno(boardNum,mno);
+        article_likeDAO.insert_like_mno(boardNum, mno);
         article_likeDAO.update_like_up(boardNum);
     }
 
     @Override
     public void like_del_mno(int boardNum, String mno) throws Exception {
         // article_like에서 mno를 제거하는 DAO
-        article_likeDAO.delete_like_mno(boardNum,mno);
+        article_likeDAO.delete_like_mno(boardNum, mno);
         article_likeDAO.update_like_down(boardNum);
     }
 
@@ -194,9 +194,34 @@ public class Board_allServiceImpl implements Board_allService {
     public void getBoard_likeCount(int boardNum) throws Exception {
         /* DB에 article_like의 mno가 not null이라 생성시 0을 무조건 넣어주므로 -1 해준다 */
         int board_likecount = article_likeDAO.board_like_count(boardNum) - 1;
-        System.out.println("serviceImpl의 board_likecount : "+board_likecount);
-        boardDAO.updateBoardLike(boardNum,board_likecount);
+        System.out.println("serviceImpl의 board_likecount : " + board_likecount);
+        boardDAO.updateBoardLike(boardNum, board_likecount);
+    }
+    /* ----------------------- 끝 : 좋아요 ----------------------- */
+
+
+    /* ---------------------- 시작 : 즐겨찾기 ---------------------- */
+    @Override
+    public Boolean ward_check_mno(int boardNum, String mno) throws Exception {
+        boolean ward_ok = false;
+        List<String> ward_member = article_wardDAO.select_article_ward(boardNum);
+        System.out.println("즐겨찾기한 유저의 고유번호 : " + ward_member);
+        if (ward_member.contains(mno)) {
+            ward_ok = true;
+        }
+        System.out.println(ward_ok);
+        return ward_ok;
     }
 
+    @Override
+    public void ward_ins_mno(int boardNum, String mno) throws Exception {
+        article_wardDAO.insert_ward_mno(boardNum, mno);
+    }
+
+    @Override
+    public void ward_del_mno(int boardNum, String mno) throws Exception {
+        article_wardDAO.delete_ward_mno(boardNum, mno);
+    }
+    /* ----------------------- 끝 : 즐겨찾기 ----------------------- */
 
 }

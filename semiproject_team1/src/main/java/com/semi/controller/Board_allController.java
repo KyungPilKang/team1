@@ -51,11 +51,10 @@ public class Board_allController {
         return mv;
     }
 
-//    @PostMapping("/board_search")
 //    @RequestMapping(value = "/board_search", method = {RequestMethod.GET, RequestMethod.POST})
-    @GetMapping(value="board_search")
+    @GetMapping(value = "board_search")
     public ModelAndView board_search(@ModelAttribute Board board,
-        @RequestParam(value = "page", defaultValue = "1") int page) {
+                                     @RequestParam(value = "page", defaultValue = "1") int page) {
 
         System.out.println(board.getBoard_keyword());
         System.out.println(board.getBoard_type());
@@ -81,12 +80,8 @@ public class Board_allController {
                     mv.addObject("articleList", articleList);
                     break;
                 }
-            };
-//            List<Board> articleList = board_allService.getBoardList_search_subject(page, pageInfo, board);
-//            mv.addObject("articleList", articleList);
-//            System.out.println(articleList);
+            }
             mv.addObject("pageInfo", pageInfo);
-//            mv.setViewName("redirect:/boardlist");
             mv.setViewName("/boardForm_all");
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,9 +105,10 @@ public class Board_allController {
         }
         return mv;
     }
+
     /* 조회수순*/
-    @GetMapping(value="board_all_viewssort")
-    public ModelAndView board_all_viewssort(@RequestParam(value = "page", defaultValue = "1") int page){
+    @GetMapping(value = "board_all_viewssort")
+    public ModelAndView board_all_viewssort(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
         PageInfo pageInfo = new PageInfo();
         try {
@@ -128,8 +124,8 @@ public class Board_allController {
     }
 
     /* 댓글순*/
-    @GetMapping(value="board_all_replysort")
-    public ModelAndView board_all_replysort(@RequestParam(value = "page", defaultValue = "1") int page){
+    @GetMapping(value = "board_all_replysort")
+    public ModelAndView board_all_replysort(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
         PageInfo pageInfo = new PageInfo();
         try {
@@ -145,8 +141,8 @@ public class Board_allController {
     }
 
     /* 좋아요순 */
-    @GetMapping(value="board_all_likesort")
-    public ModelAndView board_all_likesort(@RequestParam(value = "page", defaultValue = "1") int page){
+    @GetMapping(value = "board_all_likesort")
+    public ModelAndView board_all_likesort(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
         PageInfo pageInfo = new PageInfo();
         try {
@@ -162,7 +158,6 @@ public class Board_allController {
     }
 
 
-
     @GetMapping(value = "/boarddetail")
     public ModelAndView boardDetail(@RequestParam(value = "board_num") int boardNum, @RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
@@ -171,8 +166,10 @@ public class Board_allController {
             // 세션에 회원 고유번호(mno)가 존재한다 가정
             session.setAttribute("mno", "14");
             Boolean like_ok = board_allService.like_check_mno(boardNum, (String) session.getAttribute("mno"));
-            mv.addObject("okok", like_ok);
-            mv.addObject("mno",session.getAttribute("mno"));
+            Boolean ward_ok = board_allService.ward_check_mno(boardNum, (String) session.getAttribute("mno"));
+            mv.addObject("like_ok", like_ok);
+            mv.addObject("ward_ok", ward_ok);
+            mv.addObject("mno", session.getAttribute("mno"));
 
             Board board = board_allService.getBoard(boardNum);
             board_allService.getBoard_likeCount(boardNum);
@@ -189,28 +186,27 @@ public class Board_allController {
 
 
     @GetMapping(value = "/like_on")
-    public ModelAndView like_on(@RequestParam(value = "board_num", required=false) int boardNum, @RequestParam(value = "mno") String mno) {
+    public ModelAndView like_on(@RequestParam(value = "board_num", required = false) int boardNum, @RequestParam(value = "mno") String mno) {
         ModelAndView mv = new ModelAndView();
         try {
             //article_like에서 mno를 추가하는 서비스
             System.out.println(boardNum);
-            board_allService.like_ins_mno(boardNum,mno);
+            board_allService.like_ins_mno(boardNum, mno);
             mv.setViewName("/boardDetail");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
-
         }
         return mv;
     }
 
     @GetMapping(value = "/like_off")
-    public ModelAndView like_off(@RequestParam(value = "board_num", required=false) int boardNum, @RequestParam(value = "mno") String mno) {
+    public ModelAndView like_off(@RequestParam(value = "board_num", required = false) int boardNum, @RequestParam(value = "mno") String mno) {
         ModelAndView mv = new ModelAndView();
         try {
             System.out.println(boardNum);
             //article_like에서 mno를 제거하는 서비스
-            board_allService.like_del_mno(boardNum,mno);
+            board_allService.like_del_mno(boardNum, mno);
             mv.setViewName("/boardDetail");
         } catch (Exception e) {
             e.printStackTrace();
@@ -218,6 +214,36 @@ public class Board_allController {
         }
         return mv;
     }
+
+
+    @GetMapping(value = "/ward_on")
+    public ModelAndView ward_on(@RequestParam(value = "board_num", required = false) int boardNum, @RequestParam(value = "mno") String mno) {
+        ModelAndView mv = new ModelAndView();
+        try {
+            System.out.println("ward_on의 boardNum : " + boardNum);
+            board_allService.ward_ins_mno(boardNum, mno);
+            mv.setViewName("/boardDetail");
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
+    }
+
+    @GetMapping(value = "/ward_off")
+    public ModelAndView ward_off(@RequestParam(value = "board_num", required = false) int boardNum, @RequestParam(value = "mno") String mno) {
+        ModelAndView mv = new ModelAndView();
+        try {
+            System.out.println("ward_off의 boardNum : " + boardNum);
+            board_allService.ward_del_mno(boardNum, mno);
+            mv.setViewName("/boardDetail");
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
+    }
+
 
     @GetMapping("/test")
     public String test() {
