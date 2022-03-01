@@ -32,5 +32,10 @@
 		]]>
 	</insert>
 
+	<delete id="delete_ward_boardNum" parameterType="int">
+		<![CDATA[
+		delete from article_ward where board_num=#{boardNum}
+		]]>
+	</delete>
 
 </mapper>

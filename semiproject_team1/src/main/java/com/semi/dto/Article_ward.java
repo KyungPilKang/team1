@@ -5,7 +5,7 @@ public class Article_ward {
 	String article_ward_num; //PK, AI
 	String mno; // 즐겨찾기 한 사용자의 고유번호
 	String board_num; // 즐겨찾기 된 게시물 번호
-	
+
 	public Article_ward() {}
 
 	public String getArticle_ward_num() {

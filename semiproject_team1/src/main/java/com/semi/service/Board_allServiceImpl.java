@@ -162,6 +162,14 @@ public class Board_allServiceImpl implements Board_allService {
         return boardDAO.selectBoard(boardNum);
     }
 
+    @Override
+    public void removeBoard(int boardNum) throws Exception {
+        boardDAO.deleteBoard(boardNum);
+        // 여기에 boardNum에 해당하는 좋아요, 즐찾 테이블도 같이 삭제해야함
+        article_likeDAO.delete_like_boardNum(boardNum);
+        article_wardDAO.delete_ward_boardNum(boardNum);
+    }
+
 
     /* ---------------------- 시작 : 좋아요 ---------------------- */
     @Override

@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface boardDAO {
     void insertBoard(Board board) throws Exception;
+    void deleteBoard(int boardNum) throws Exception;
     Integer selectMaxBoardNum() throws Exception;
 
     int selectBoardCount_all() throws Exception;

@@ -79,9 +79,9 @@
         }
 
         .board_content_container {
-            margin-top: 100px;
+            margin-top: 20px;
             width: 950px;
-            height: 500px;
+            height: 580px;
             /*border: 1px solid darkred;*/
             position: absolute;
             left: 50%;
@@ -107,8 +107,8 @@
         }
 
         #commandList {
-            margin-top: 1050px;
-            text-align: center;
+            margin-top: 100px;
+            margin-left:20px;
         }
 
         #commandList button a {
@@ -222,6 +222,24 @@
         }
 
 
+
+
+        /*모달  css*/
+        .modal{
+            position:absolute; width:100%; height:100%; background: rgba(0,0,0,0.8); top:0; left:0;
+            display:none;
+        }
+
+        .modal_content{
+            width:400px; height:200px;
+            background:#fff; border-radius:10px;
+            position:relative; top:50%; left:50%;
+            margin-top:-100px; margin-left:-200px;
+            text-align:center;
+            box-sizing:border-box; padding:74px 0;
+            line-height:23px; cursor:pointer;
+        }
+
     </style>
 </head>
 
@@ -234,11 +252,29 @@
             <div class="board_category_container"> 카테고리명</div>
             <div class="board_date_container"> 날짜 : ${article.board_date}</div>
             <div class="board_name_container"> 닉네임 : ${article.board_nickname}</div>
-            <div class="board_readcount_container"> 조회수 : ${article.board_readcount}</div>
-            <div class="board_reply_container"> 댓글수 : ${article.board_replycount}</div>
             <div class="board_like_container"> 좋아요수 : ${article.board_likecount}</div>
+            <div class="board_reply_container"> 댓글수 : ${article.board_replycount}</div>
+            <div class="board_readcount_container"> 조회수 : ${article.board_readcount}</div>
         </div>
     </div>
+
+
+    <section id="commandList">
+        <button class="btn_modify">수정</button>
+        <%--        <button class="btn_modify"><a href="modifyform?board_num=${article.board_num}&page=${page}"> 수정 </a></button>--%>
+        <%--        <button class="btn_list"><a href="./boardlist?page=${page}"> 글목록</a></button>--%>
+        <button class="btn_del">삭제</button>
+        <%--        <button class="btn_del"><a href="deleteform?board_num=${article.board_num}&page=${page}"> 삭제 </a></button>--%>
+        <div>
+            첨부파일 :
+            <c:if test="${article.board_fileName!=null }">
+                <a href="file_down?downFile=${article.board_fileName}"> ${article.board_fileName} </a>
+            </c:if>
+        </div>
+    </section>
+
+
+
 
     <div class="board_content_container">
         ${article.board_content }
@@ -285,18 +321,17 @@
         --------------------------------------------------------- 댓글창 위치 ▼ --------------------------------------------------------------
     </div>
 
-    <section id="commandList">
-        <button class="btn_modify"><a href="modifyform?board_num=${article.board_num}&page=${page}"> 수정 </a></button>
-        <button class="btn_list"><a href="./boardlist?page=${page}"> 글목록</a></button>
-        <button class="btn_del"><a href="deleteform?board_num=${article.board_num}&page=${page}"> 삭제 </a></button>
-        <div>
-            첨부파일 :
-            <c:if test="${article.board_fileName!=null }">
-                <a href="file_down?downFile=${article.board_fileName}"> ${article.board_fileName} </a>
-            </c:if>
-        </div>
-    </section>
+</div>
 
+    <div class="modal">
+        <div class="modal_content"
+             title="클릭하면 창이 닫힙니다.">
+            게시물을 삭제하시겠습니까?<br>
+<%--            <button><a href="boarddelete?board_num=${article.board_num}&page=${page}"> 확인 </a></button>--%>
+            <button onclick="location.href='boarddelete?board_num=${article.board_num}&page=${page}'"> 확인 </button>
+            <button class="modal_cancel">취소</button>
+        </div>
+    </div>
 
     <%-- 좋아요 버튼 자바스크립트 --%>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -424,8 +459,41 @@
         }
     </script>
 
+    <%-- 모달 --%>
+    <script>
+        $(function(){
+            $(".btn_del").click(function(){
+                $(".modal").fadeIn();
+                // 모달시 스크롤을 막는다
+                $("body").css("overflow", "hidden");
+            });
+            $(".modal_cancel").click(function(){
+                $(".modal").fadeOut();
+                $("body").css("overflow", "auto");
+            });
 
-</div>
+        });
+    </script>
+
+<%--<script>--%>
+<%--    function board_del() {--%>
+<%--        $.ajax({--%>
+<%--            async: true,--%>
+<%--            type: 'GET',--%>
+<%--            data: {--%>
+<%--                board_num:${article.board_num},--%>
+<%--            },--%>
+<%--            url: "http://localhost:8090/boarddelete",--%>
+<%--            success: function (data) {--%>
+<%--                window.location.href = './boardlist';--%>
+<%--            },--%>
+<%--            error: function (textStatus) {--%>
+<%--                alert("ERROR : " + textStatus);--%>
+<%--            }--%>
+<%--        });--%>
+<%--    }--%>
+<%--</script>--%>
+
 
 </body>
 </html>

@@ -51,7 +51,21 @@ public class Board_allController {
         return mv;
     }
 
-//    @RequestMapping(value = "/board_search", method = {RequestMethod.GET, RequestMethod.POST})
+    @GetMapping(value = "/boarddelete")
+    public ModelAndView boarddelete(@RequestParam(value = "board_num") int boardNum, @RequestParam(value = "page", required = false, defaultValue = "1") int page){
+        ModelAndView mv = new ModelAndView();
+        try {
+            board_allService.removeBoard(boardNum);
+            mv.addObject("page", page);
+            mv.setViewName("redirect:/boardlist");
+        } catch(Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
+    }
+
+
     @GetMapping(value = "board_search")
     public ModelAndView board_search(@ModelAttribute Board board,
                                      @RequestParam(value = "page", defaultValue = "1") int page) {

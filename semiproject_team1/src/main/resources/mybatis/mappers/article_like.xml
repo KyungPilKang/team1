@@ -36,6 +36,13 @@
         ]]>
 	</insert>
 
+	<delete id="delete_like_boardNum" parameterType="int">
+		<![CDATA[
+		delete from article_like where board_num=#{boardNum}
+		]]>
+	</delete>
+
+
     <update id="update_like_up" parameterType="int">
 		<![CDATA[
         update board
@@ -61,6 +68,8 @@
         ]]>
 
 	</select>
+
+
 
 
 </mapper>

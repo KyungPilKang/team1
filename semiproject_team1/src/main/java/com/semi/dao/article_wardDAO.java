@@ -13,4 +13,5 @@ public interface article_wardDAO {
     void insertWard(int boardNum) throws Exception;
     void insert_ward_mno(@Param("boardNum") int boardNum, @Param("mno") String mno) throws Exception;
     void delete_ward_mno(@Param("boardNum") int boardNum, @Param("mno") String mno) throws Exception;
+    void delete_ward_boardNum(int boardNum) throws Exception;
 }

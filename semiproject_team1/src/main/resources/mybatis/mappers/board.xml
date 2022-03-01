@@ -12,6 +12,12 @@
         ]]>
 	</insert>
 
+	<delete id="deleteBoard" parameterType="int">
+		<![CDATA[
+		delete from board where board_num=#{boardNum}
+		]]>
+	</delete>
+
     <select id="selectMaxBoardNum" resultType="integer">
 		<![CDATA[
         select max(board_num)
