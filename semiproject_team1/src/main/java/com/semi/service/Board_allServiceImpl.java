@@ -170,6 +170,11 @@ public class Board_allServiceImpl implements Board_allService {
         article_wardDAO.delete_ward_boardNum(boardNum);
     }
 
+    @Override
+    public void modifyBoard(Board board) throws Exception {
+        boardDAO.updateBoard(board);
+    }
+
 
     /* ---------------------- 시작 : 좋아요 ---------------------- */
     @Override

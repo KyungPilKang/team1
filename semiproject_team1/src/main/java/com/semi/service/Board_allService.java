@@ -16,6 +16,7 @@ public interface Board_allService {
     List<Board> getBoardList_search_content(int page, PageInfo pageInfo, Board board) throws Exception;
     Board getBoard(int boardNum) throws Exception;
     void removeBoard(int boardNum) throws Exception;
+    void modifyBoard(Board board) throws Exception;
 
     /* ---------------------- 시작 : 좋아요 ---------------------- */
     Boolean like_check_mno(int boardNum, String mno) throws Exception;

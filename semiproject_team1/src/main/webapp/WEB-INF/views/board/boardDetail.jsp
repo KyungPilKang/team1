@@ -24,11 +24,10 @@
 
 
     <section id="commandList">
-        <button class="btn_modify">수정</button>
-        <%--        <button class="btn_modify"><a href="modifyform?board_num=${article.board_num}&page=${page}"> 수정 </a></button>--%>
-        <%--        <button class="btn_list"><a href="./boardlist?page=${page}"> 글목록</a></button>--%>
+<%--        <button class="btn_modify">수정</button>--%>
+        <button class="btn_modify" onclick="location.href='modifyform?board_num=${article.board_num}&page=${page}'"> 수정 </button>
+
         <button class="btn_del">삭제</button>
-        <%--        <button class="btn_del"><a href="deleteform?board_num=${article.board_num}&page=${page}"> 삭제 </a></button>--%>
         <div>
             첨부파일 :
             <c:if test="${article.board_fileName!=null }">
@@ -47,6 +46,7 @@
     <section id="board_middle">
 
         <button id="btn_reply" class="btn_reply" onclick="reply_show()">댓글보기</button>
+        <button class ="btn_reply" onclick="location.href='./boardlist?page=${page}'"> 목록(임시) </button>
 
         <div class="like_and_ward">
             <div class="btn_like">
@@ -91,12 +91,11 @@
         <div class="modal_content"
              title="클릭하면 창이 닫힙니다.">
             게시물을 삭제하시겠습니까?<br>
-<%--            <button><a href="boarddelete?board_num=${article.board_num}&page=${page}"> 확인 </a></button>--%>
             <button onclick="location.href='boarddelete?board_num=${article.board_num}&page=${page}'"> 확인 </button>
             <button class="modal_cancel">취소</button>
         </div>
     </div>
- <%-- Test --%>
+
     <%-- 좋아요 버튼 자바스크립트 --%>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>

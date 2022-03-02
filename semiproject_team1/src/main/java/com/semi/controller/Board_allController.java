@@ -50,6 +50,42 @@ public class Board_allController {
         return mv;
     }
 
+    @GetMapping(value = "/modifyform")
+    public ModelAndView modifyform(@RequestParam(value="board_num")int boardNum,
+                                   @RequestParam(value = "page") int page) {
+        ModelAndView mv = new ModelAndView();
+        try {
+            System.out.println("수정폼 여기까지 데이터 오나 : " + boardNum);
+            Board board = board_allService.getBoard(boardNum);
+            System.out.println("보드에서 보드넘 추출 : " + board.getBoard_num());
+            mv.addObject("article", board);
+//            mv.addObject("page", page);
+            mv.setViewName("/board/modifyForm");
+        } catch(Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
+    }
+
+    @PostMapping(value = "/boardmodify")
+    public ModelAndView boardmodify(@ModelAttribute Board board) {
+        ModelAndView mv = new ModelAndView();
+        try {
+            //board객체를 서비스에서 받아서 update
+            board_allService.modifyBoard(board);
+            System.out.println("수정폼 여기까지 데이터 오나 : " + board);
+            System.out.println("수정폼 여기까지 데이터 오나 : " + board.getBoard_num());
+            mv.addObject("board_num", board.getBoard_num());
+            mv.setViewName("redirect:/boarddetail");
+        } catch(Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
+    }
+
+
     @GetMapping(value = "/boarddelete")
     public ModelAndView boarddelete(@RequestParam(value = "board_num") int boardNum, @RequestParam(value = "page", required = false, defaultValue = "1") int page){
         ModelAndView mv = new ModelAndView();
@@ -174,7 +210,7 @@ public class Board_allController {
     @GetMapping(value = "/boarddetail")
     public ModelAndView boardDetail(@RequestParam(value = "board_num") int boardNum, @RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
-        PageInfo pageInfo = new PageInfo();
+//        PageInfo pageInfo = new PageInfo();
         try {
             // 세션에 회원 고유번호(mno)가 존재한다 가정
             session.setAttribute("mno", "14");
@@ -196,6 +232,12 @@ public class Board_allController {
         }
         return mv;
     }
+
+
+
+
+
+
 
 
     @GetMapping(value = "/like_on")
