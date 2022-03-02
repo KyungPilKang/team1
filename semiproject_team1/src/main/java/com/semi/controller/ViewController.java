@@ -2,7 +2,7 @@ package com.semi.controller;
 
 import org.springframework.stereotype.Controller;
 
-//´Ü¼ø È­¸é ÀÌµ¿ ÄÁÆ®·Ñ·¯
+//ï¿½Ü¼ï¿½ È­ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½
 @Controller
 public class ViewController {
 
