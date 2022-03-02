@@ -332,7 +332,7 @@
             <button class="modal_cancel">취소</button>
         </div>
     </div>
-
+ <%-- Test --%>
     <%-- 좋아요 버튼 자바스크립트 --%>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
