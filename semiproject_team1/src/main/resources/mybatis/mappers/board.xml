@@ -18,6 +18,13 @@
 		]]>
 	</delete>
 
+	<update id="updateBoard" parameterType="board">
+		<![CDATA[
+		update board set board_subject=#{board_subject}, board_content=#{board_content}, board_cat=#{board_cat}
+		where board_num=#{board_num}
+		]]>
+	</update>
+
     <select id="selectMaxBoardNum" resultType="integer">
 		<![CDATA[
         select max(board_num)
