@@ -3,7 +3,6 @@ package com.semi.controller;
 import com.semi.dto.Board;
 import com.semi.dto.PageInfo;
 import com.semi.service.Board_allService;
-import com.semi.service.Board_highlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,7 @@ public class Board_allController {
 
     @GetMapping("/boardwriteform")
     public String boardwriteform() {
-        return "/boardwriteForm";
+        return "board/boardwriteForm";
     }
 
     @PostMapping("/regboard")
@@ -96,7 +95,7 @@ public class Board_allController {
                 }
             }
             mv.addObject("pageInfo", pageInfo);
-            mv.setViewName("/boardForm_all");
+            mv.setViewName("board/boardForm_all");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -112,7 +111,7 @@ public class Board_allController {
             List<Board> articleList = board_allService.getBoardList(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
-            mv.setViewName("/boardForm_all");
+            mv.setViewName("board/boardForm_all");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -129,7 +128,7 @@ public class Board_allController {
             List<Board> articleList = board_allService.getBoardList_viewsSort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
-            mv.setViewName("/boardForm_all");
+            mv.setViewName("board/boardForm_all");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -146,7 +145,7 @@ public class Board_allController {
             List<Board> articleList = board_allService.getBoardList_replySort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
-            mv.setViewName("/boardForm_all");
+            mv.setViewName("board/boardForm_all");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -163,7 +162,7 @@ public class Board_allController {
             List<Board> articleList = board_allService.getBoardList_likeSort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
-            mv.setViewName("/boardForm_all");
+            mv.setViewName("board/boardForm_all");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -190,7 +189,7 @@ public class Board_allController {
 
             mv.addObject("article", board);
             mv.addObject("page", page);
-            mv.setViewName("/boardDetail");
+            mv.setViewName("board/boardDetail");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -206,7 +205,7 @@ public class Board_allController {
             //article_like에서 mno를 추가하는 서비스
             System.out.println(boardNum);
             board_allService.like_ins_mno(boardNum, mno);
-            mv.setViewName("/boardDetail");
+            mv.setViewName("board/boardDetail");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -221,7 +220,7 @@ public class Board_allController {
             System.out.println(boardNum);
             //article_like에서 mno를 제거하는 서비스
             board_allService.like_del_mno(boardNum, mno);
-            mv.setViewName("/boardDetail");
+            mv.setViewName("board/boardDetail");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -236,7 +235,7 @@ public class Board_allController {
         try {
             System.out.println("ward_on의 boardNum : " + boardNum);
             board_allService.ward_ins_mno(boardNum, mno);
-            mv.setViewName("/boardDetail");
+            mv.setViewName("board/boardDetail");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -250,7 +249,7 @@ public class Board_allController {
         try {
             System.out.println("ward_off의 boardNum : " + boardNum);
             board_allService.ward_del_mno(boardNum, mno);
-            mv.setViewName("/boardDetail");
+            mv.setViewName("board/boardDetail");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -261,7 +260,7 @@ public class Board_allController {
 
     @GetMapping("/test")
     public String test() {
-        return "/infiniteScroll";
+        return "board/infiniteScroll";
     }
 
 

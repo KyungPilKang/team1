@@ -8,89 +8,15 @@
 <head>
 
     <meta charset="UTF-8">
-    <title>글쓰기</title>
+    <title>롤판.DOG</title>
     <style>
-        h2{
-            margin-left : 10px;
-        }
 
-        #editor {
-            width: 700px;
-            margin-top:25px;
-            /*margin: 0 auto;*/
-        }
-
-        /*#fake{*/
-        /*    display: none;*/
-        /*}*/
-
-        .wf_container{
-            width: 698px;
-            height: 1000px;
-            margin-left: 33%;
-        }
-
-        .board_cat{
-            padding:5px;
-            color: #696969;
-            height: 40px;
-            width: 140px;
-            border: 1px solid darkgray;
-            border-radius : 5px;
-            margin: 8px 0;
-        }
-
-        #board_subject{
-            padding-left: 10px;
-            border : 1px solid darkgray;
-            height: 40px;
-            width: 693px;
-            margin : 8px 0;
-            font-size:14px;
-        }
-        .board_file_cont{
-            margin: 16px 0;
-        }
-        #board_file{
-            display: none;
-        }
-        .btn_file{
-            width: 150px;
-            height: 48px;
-            padding: 6px 25px;
-            background-color:darkgray;
-            border-radius: 4px;
-            color: white;
-            cursor: pointer;
-        }
-        .btn_cc{
-            border : none;
-            border-radius: 4px;
-            width: 120px;
-            height: 48px;
-            background: darkgray;
-            color:white;
-            font-size:15px;
-            cursor: pointer;
-        }
-
-        .btn_ok{
-            border : none;
-            border-radius: 4px;
-            width: 120px;
-            height: 48px;
-            float:right;
-            background: darkgray;
-            color:white;
-            font-size:15px;
-            cursor: pointer;
-        }
     </style>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"/>
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"/>
 
-    <%--    <link href="CSS 파일 경로" rel="stylesheet" type="text/css">--%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/boardwriteForm.css">
 
 </head>
 <body>

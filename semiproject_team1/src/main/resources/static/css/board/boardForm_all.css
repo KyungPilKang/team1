@@ -1,0 +1,104 @@
+.sub-link__list {
+    display: flex;
+    list-style-type: none;
+}
+
+.sub-link__item > a {
+    text-decoration: none;
+    color: black;
+    margin: 40px;
+}
+
+.board_search_container {
+    /* background-color: red; */
+    width: 300px;
+    height: 36px;
+}
+
+.board_search_select {
+    float: left;
+    height: 33px;
+}
+
+.board_search_form {
+    float: left;
+    width: 200px;
+}
+
+.board_header {
+    margin-left: 50px;
+    width: 1000px;
+}
+
+.board_body {
+    margin-left: 50px;
+    width: 1500px;
+}
+
+
+.board_body_inner {
+    background: #f58282;
+
+}
+
+.each_post {
+    background: #b4b4f3;
+    border: 1px solid black;
+    /*width: 800px;*/
+    height: 50px;
+    display: flex;
+}
+
+.each_board_num {
+    margin: 10px;
+    width: 100px;
+    /*height:50px;*/
+    background: red;
+
+}
+
+.each_board_sub {
+    width: 750px;
+    /*height:50px;*/
+    background: #ff6a00;
+}
+
+.each_board_nickname {
+    width: 100px;
+    /*height:50px;*/
+    background: #fcdc10;
+}
+
+.each_board_date {
+    width: 150px;
+    /*height:50px;*/
+    background: #41fc18;
+}
+
+.each_board_replycount {
+    width: 100px;
+    /*height:50px;*/
+    background: #0739ff;
+}
+
+.each_board_cat {
+    width: 100px;
+    /*height:50px;*/
+    background: #7c00ff;
+}
+
+.each_board_likecount {
+    width: 100px;
+    /*height:50px;*/
+    background: #fc8383;
+}
+
+.each_board_readcount {
+    width: 100px;
+    /*height:50px;*/
+    background: #a54fd9;
+}
+
+#search_submit {
+    display: none;
+}

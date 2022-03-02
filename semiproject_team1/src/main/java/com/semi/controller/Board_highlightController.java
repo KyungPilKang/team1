@@ -4,15 +4,12 @@ import com.semi.dto.Board;
 import com.semi.dto.PageInfo;
 import com.semi.service.Board_highlightService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.util.List;
 
 @Controller
@@ -59,7 +56,7 @@ public class Board_highlightController {
                 }
             };
             mv.addObject("pageInfo", pageInfo);
-            mv.setViewName("/boardForm_highlight");
+            mv.setViewName("board/boardForm_highlight");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -78,7 +75,7 @@ public class Board_highlightController {
             List<Board> articleList = board_highlightService.getBoardList(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
-            mv.setViewName("/boardForm_highlight");
+            mv.setViewName("board/boardForm_highlight");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -96,7 +93,7 @@ public class Board_highlightController {
             List<Board> articleList = board_highlightService.getBoardList_viewsSort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
-            mv.setViewName("/boardForm_highlight");
+            mv.setViewName("board/boardForm_highlight");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -113,7 +110,7 @@ public class Board_highlightController {
             List<Board> articleList = board_highlightService.getBoardList_replySort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
-            mv.setViewName("/boardForm_highlight");
+            mv.setViewName("board/boardForm_highlight");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
@@ -130,7 +127,7 @@ public class Board_highlightController {
             List<Board> articleList = board_highlightService.getBoardList_likeSort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
-            mv.setViewName("/boardForm_highlight");
+            mv.setViewName("board/boardForm_highlight");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
