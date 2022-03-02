@@ -16,7 +16,7 @@
     
 
     <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/bootstrap.min.css">
 
     <style>
       .bd-placeholder-img {
@@ -36,13 +36,13 @@
 
     
     <!-- Custom styles for this template -->
-     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login/signin.css">
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/signin.css">
   </head>
   <body class="text-center">
     
 <main class="form-signin">
   <form>
-    <img class="mb-4" src="${pageContext.request.contextPath}/asset/image/login/dog.png" alt="" width="72" height="57">
+    <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog.png" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">롤판.DOG</h1>
     <div class="form-floating">
       <input type="email" class="form-control" id="floatingInput" placeholder="로그인 이메일을 입력하세요">

@@ -16,7 +16,7 @@
     
 
     <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/bootstrap.min.css">
 
     <style>
       .bd-placeholder-img {
@@ -36,15 +36,15 @@
 
     
     <!-- Custom styles for this template -->
-     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login/signin.css">
+     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/signin.css">
   </head>
   <body class="text-center">
+  <div class="col-md-3 grid-margin stretch-card container">
  
     <!-- 롤판.dog 기본 이미지 및 폰트 -->
   
-<main class="form-signin">
   <form>
-    <img class="mb-4" src="${pageContext.request.contextPath}/asset/image/login/dog.png" alt="" width="72" height="57">
+    <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog.png" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">롤판.DOG</h1>
 
     <div style="float:left">
@@ -75,7 +75,7 @@
     
     <!-- 인풋테크 및 버튼 안먹힘 0227 16:57 -->
     <div>
-    <div class="form-floating" style="width:70%; float:left;">
+  <!--   <div class="form-floating" style="width:70%; float:left;">
       <input type="email" class="form-control" id="emailinput" placeholder="이메일 주소">
       <label for="emailinput">이메일 주소</label>
     </div>
@@ -84,9 +84,36 @@
         <button class="btn btn-lg btn-primary" type="submit" style=" width:90%; border-color:white; font-size: 11px; color: black; background-color: grey; ">중복체크</button>
     </div>
     </div>
-  </div>
+    
+  </div> -->
+  
+  				  <div class="form-group mb-2">
+                    <div class="input-group">
+                      <input id="emailinput" type="text" class="form-control" placeholder="이메일 주소를 입력하세요" aria-label="이메일 주소를 입력하세요">
+                      &nbsp;&nbsp;
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">중복 확인</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-2">
+                    <div class="input-group">
+                      <input id="nicknameinput" type="text" class="form-control" placeholder="닉네임을 입력하세요" aria-label="닉네임을 입력하세요">
+                      &nbsp;&nbsp;
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">중복 확인</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group mb-2">
+                    <div class="input-group">
+                      <input id="passwardinput" type="text" class="form-control" placeholder="비밀번호를 입력하세요" aria-label="비밀번호를 입력하세요">
+                    </div>
+                  </div>
+                  <span id="#" class="form-group mb-2" style="display:none;">
+                  </span>
 
-  <div>
+<!--   <div>
     <div class="form-floating" style="width:70%; float:left;">
       <input type="text" class="form-control" id="nicknameinput" placeholder="name@example.com">
       <label for="nicknameinput">닉네임</label>
@@ -102,7 +129,7 @@
     <input type="password" class="form-control" id="floatingPassword" placeholder="비밀번호">
     <label for="floatingPassword" style="top: 112px;">비밀번호</label>
   </div>
-</div>
+</div> -->
 
 <div style="padding-top: 10px;">
   <div style="width:50%; float:left;">
@@ -114,7 +141,7 @@
 </div>  
 </div>
   </form>
-</main>
+</div>
 
 
     
