@@ -74,12 +74,12 @@
 				<td colspan="2"></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit"
-					value="돌아가기"> <input type="reset" value="요청제출"></td>
+				<td colspan="2" align="center"><input type="button"
+					value="돌아가기" onclick="location.href='feedbackform_all'"> <input
+					type="reset" value="요청제출"
+					onclick="location.href='feedbackform_all'"></td>
 			</tr>
 		</table>
-		</td>
-		</tr>
 	</form>
 </body>
 </html>

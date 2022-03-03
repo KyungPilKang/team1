@@ -49,43 +49,43 @@
                                     <div class="sub-link" id="sub-menu"> 
                                         <ul class="sub-link__list">
                                             <li class="sub-link__item ">
-                                                <a href="/boardlist">
+                                                <a href="/feedbacklist">
                                                     <img src="https://talk.op.gg/images/icon-new@2x.png" width="24"
                                                          alt=""><span>최신</span>
                                                 </a>
                                             </li>
                                             <li class="sub-link__item sub-link__item--active">
-                                                <a href="/board_all_viewssort">
+                                                <a href="/feedback_all_viewssort">
                                                     <img src="https://talk.op.gg/images/icon-hot-on@2x.png" width="24"
                                                          alt=""><span>조회수</span>
                                                 </a>
                                             </li>
                                             <li class="sub-link__item ">
-                                                <a href="/board_all_replysort">
+                                                <a href="/feedback_all_replysort">
                                                     <img src="https://talk.op.gg/images/icon-top@2x.png" width="24"
                                                          alt=""><span>댓글</span>
                                                 </a>
                                             </li>
                                             <li class="sub-link__item ">
-                                                <a href="board_all_likesort">
+                                                <a href="feedback_all_likesort">
                                                     <img src="https://talk.op.gg/images/icon-boost@2x.png" width="24"
                                                          alt=""><span>좋아요</span>
                                                 </a>
                                             </li>
                                             <%-- 검색 --%>
-                                            <li class="board_search_form">
-                                                <div class="board_search_container">
-                                                    <form class="search-form" id="boardform" method="get" action="/board_search">
-                                                        <select class="btn-sm btn-secondary board_search_select"
-                                                                name="board_type">
+                                            <li class="feedback_search_form">
+                                                <div class="feedback_search_container">
+                                                    <form class="search-form" id="feedbackform" method="get" action="/feedback_search">
+                                                        <select class="btn-sm btn-secondary feedback_search_select"
+                                                                name="feedback_type">
                                                             <option value="1">제목</option>
                                                             <option value="2">작성자</option>
                                                             <option value="3">내용</option>
                                                         </select>
                                                         <input type="search" class="form-control"
                                                                placeholder="Search Here" title="Search here"
-                                                               name="board_keyword">
-                                                    <div class="board_file_cont">
+                                                               name="feedback_keyword">
+                                                    <div class="feedback_file_cont">
                                                         <label for="search_submit" style="cursor: pointer"> 돋보기
                                                             아이콘 </label>
                                                         <input type="submit" id="search_submit"/>
