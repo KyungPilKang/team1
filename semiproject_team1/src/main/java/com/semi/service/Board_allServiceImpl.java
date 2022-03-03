@@ -35,6 +35,8 @@ public class Board_allServiceImpl implements Board_allService {
         board.setBoard_readcount(0);
         board.setBoard_likecount(0);
         board.setBoard_replycount(0);
+        /* dao에 만들어 줘야 하나 봄 */
+//        board.setBoard_thumbnail(board_thumbnail);
         boardDAO.insertBoard(board);
         //게시물 테이블이 생성될 때 like,ward 테이블도 같이 생성해준다
         article_likeDAO.insertLike(boardNum);

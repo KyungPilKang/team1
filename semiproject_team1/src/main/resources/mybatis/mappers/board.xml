@@ -8,7 +8,7 @@
 		<![CDATA[
         insert into board
         values (#{board_num}, #{board_nickname}, #{board_cat}, #{board_subject}, #{board_content}, #{board_fileName},
-                now(), #{board_readcount}, #{board_likecount}, #{board_replycount})
+                now(), #{board_readcount}, #{board_likecount}, #{board_replycount}, #{board_thumbnail})
         ]]>
 	</insert>
 

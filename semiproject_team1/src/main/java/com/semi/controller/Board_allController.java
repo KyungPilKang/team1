@@ -3,14 +3,22 @@ package com.semi.controller;
 import com.semi.dto.Board;
 import com.semi.dto.PageInfo;
 import com.semi.service.Board_allService;
+import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.List;
 
 @Controller
@@ -25,7 +33,7 @@ public class Board_allController {
     @Autowired
     HttpSession session;
 
-
+    /* 게시물 작성  */
     @GetMapping("/boardwriteform")
     public String boardwriteform() {
         return "board/boardwriteForm";
@@ -36,11 +44,19 @@ public class Board_allController {
         ModelAndView mv = new ModelAndView();
         try {
             if (!board.getFile().isEmpty()) {
-                String path = servletContext.getRealPath("/boardupload/");
+                String path = servletContext.getRealPath("/board_upload/video/");
                 File destFile = new File(path + board.getFile().getOriginalFilename());
                 board.setBoard_fileName(board.getFile().getOriginalFilename());
                 board.getFile().transferTo(destFile);
             }
+            /* 썸네일 시작 */
+            String doc = Jsoup.parse(board.getBoard_content()).select("img").attr("src");
+            System.out.println("파싱된 이미지 : " + doc);
+            // 아래와 같이 board 객체에 base64 형태의 이미지 데이터를 통째로 thumbnail로 넣는 방법은 돌아가게만 만든 형태라 추후 변경 필요 ( 현재 application.properties에 용량을 늘려놓고 돌아가게 만든 상태 )
+            // base64 데이터를 받아와서 가벼운 썸네일 이미지로 변환 후 static 아래에 저장하고, 그 썸네일 이미지를 board객체에 저장하는 방식으로 변경 예정
+            board.setBoard_thumbnail(doc);
+            /* 썸네일 끝 */
+
             board_allService.regBoard(board);
             mv.setViewName("redirect:/boardlist");
         } catch (Exception e) {
@@ -50,18 +66,29 @@ public class Board_allController {
         return mv;
     }
 
+//    @PostMapping("/getthumbnail")
+//    public String getthumbnail(@ModelAttribute Board board){
+//        String list = board.getBoard_content();
+//        String[] realList = list.split(",");
+//        String html = realList[4];
+//        String doc = Jsoup.parse(html).select("img").attr("src");
+//        System.out.println("파싱된 이미지 : " + doc);
+//        return null;
+//    }
+
+
+
+    /* 게시물 수정 */
     @GetMapping(value = "/modifyform")
-    public ModelAndView modifyform(@RequestParam(value="board_num")int boardNum,
+    public ModelAndView modifyform(@RequestParam(value = "board_num") int boardNum,
                                    @RequestParam(value = "page") int page) {
         ModelAndView mv = new ModelAndView();
         try {
-            System.out.println("수정폼 여기까지 데이터 오나 : " + boardNum);
             Board board = board_allService.getBoard(boardNum);
-            System.out.println("보드에서 보드넘 추출 : " + board.getBoard_num());
             mv.addObject("article", board);
 //            mv.addObject("page", page);
             mv.setViewName("/board/modifyForm");
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
         }
@@ -72,28 +99,25 @@ public class Board_allController {
     public ModelAndView boardmodify(@ModelAttribute Board board) {
         ModelAndView mv = new ModelAndView();
         try {
-            //board객체를 서비스에서 받아서 update
             board_allService.modifyBoard(board);
-            System.out.println("수정폼 여기까지 데이터 오나 : " + board);
-            System.out.println("수정폼 여기까지 데이터 오나 : " + board.getBoard_num());
             mv.addObject("board_num", board.getBoard_num());
             mv.setViewName("redirect:/boarddetail");
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
         }
         return mv;
     }
 
-
+    /* 게시물 삭제 */
     @GetMapping(value = "/boarddelete")
-    public ModelAndView boarddelete(@RequestParam(value = "board_num") int boardNum, @RequestParam(value = "page", required = false, defaultValue = "1") int page){
+    public ModelAndView boarddelete(@RequestParam(value = "board_num") int boardNum, @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
         try {
             board_allService.removeBoard(boardNum);
             mv.addObject("page", page);
             mv.setViewName("redirect:/boardlist");
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
         }
@@ -101,9 +125,40 @@ public class Board_allController {
     }
 
 
+    /* 게시물 상세보기 (게시물 클릭시 화면) */
+    @GetMapping(value = "/boarddetail")
+    public ModelAndView boardDetail(@RequestParam(value = "board_num") int boardNum, @RequestParam(value = "page", defaultValue = "1") int page) {
+        ModelAndView mv = new ModelAndView();
+//        PageInfo pageInfo = new PageInfo();
+        try {
+            // 세션에 회원 고유번호(mno)가 존재한다 가정
+            session.setAttribute("mno", "14");
+
+            Boolean like_ok = board_allService.like_check_mno(boardNum, (String) session.getAttribute("mno"));
+            Boolean ward_ok = board_allService.ward_check_mno(boardNum, (String) session.getAttribute("mno"));
+            mv.addObject("like_ok", like_ok);
+            mv.addObject("ward_ok", ward_ok);
+            mv.addObject("mno", session.getAttribute("mno"));
+
+            Board board = board_allService.getBoard(boardNum);
+            board_allService.getBoard_likeCount(boardNum);
+
+            mv.addObject("article", board);
+            mv.addObject("page", page);
+            mv.setViewName("board/boardDetail");
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
+    }
+
+
+
+
+    /* 게시판에서 게시물 검색 */
     @GetMapping(value = "board_search")
-    public ModelAndView board_search(@ModelAttribute Board board,
-                                     @RequestParam(value = "page", defaultValue = "1") int page) {
+    public ModelAndView board_search(@ModelAttribute Board board, @RequestParam(value = "page", defaultValue = "1") int page) {
 
         System.out.println(board.getBoard_keyword());
         System.out.println(board.getBoard_type());
@@ -139,6 +194,7 @@ public class Board_allController {
         return mv;
     }
 
+    /* 게시판 리스트 */
     @RequestMapping(value = "/boardlist", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView boardlist(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
@@ -155,7 +211,7 @@ public class Board_allController {
         return mv;
     }
 
-    /* 조회수순*/
+    /* 조회수순 정렬 */
     @GetMapping(value = "board_all_viewssort")
     public ModelAndView board_all_viewssort(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
@@ -172,7 +228,7 @@ public class Board_allController {
         return mv;
     }
 
-    /* 댓글순*/
+    /* 댓글순 정렬 */
     @GetMapping(value = "board_all_replysort")
     public ModelAndView board_all_replysort(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
@@ -189,7 +245,7 @@ public class Board_allController {
         return mv;
     }
 
-    /* 좋아요순 */
+    /* 좋아요순 정렬 */
     @GetMapping(value = "board_all_likesort")
     public ModelAndView board_all_likesort(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
@@ -206,40 +262,7 @@ public class Board_allController {
         return mv;
     }
 
-
-    @GetMapping(value = "/boarddetail")
-    public ModelAndView boardDetail(@RequestParam(value = "board_num") int boardNum, @RequestParam(value = "page", defaultValue = "1") int page) {
-        ModelAndView mv = new ModelAndView();
-//        PageInfo pageInfo = new PageInfo();
-        try {
-            // 세션에 회원 고유번호(mno)가 존재한다 가정
-            session.setAttribute("mno", "14");
-            Boolean like_ok = board_allService.like_check_mno(boardNum, (String) session.getAttribute("mno"));
-            Boolean ward_ok = board_allService.ward_check_mno(boardNum, (String) session.getAttribute("mno"));
-            mv.addObject("like_ok", like_ok);
-            mv.addObject("ward_ok", ward_ok);
-            mv.addObject("mno", session.getAttribute("mno"));
-
-            Board board = board_allService.getBoard(boardNum);
-            board_allService.getBoard_likeCount(boardNum);
-
-            mv.addObject("article", board);
-            mv.addObject("page", page);
-            mv.setViewName("board/boardDetail");
-        } catch (Exception e) {
-            e.printStackTrace();
-            mv.addObject("err", e.getMessage());
-        }
-        return mv;
-    }
-
-
-
-
-
-
-
-
+    /* 좋아요 버튼 on */
     @GetMapping(value = "/like_on")
     public ModelAndView like_on(@RequestParam(value = "board_num", required = false) int boardNum, @RequestParam(value = "mno") String mno) {
         ModelAndView mv = new ModelAndView();
@@ -255,6 +278,7 @@ public class Board_allController {
         return mv;
     }
 
+    /* 좋아요 버튼 off */
     @GetMapping(value = "/like_off")
     public ModelAndView like_off(@RequestParam(value = "board_num", required = false) int boardNum, @RequestParam(value = "mno") String mno) {
         ModelAndView mv = new ModelAndView();
@@ -270,7 +294,7 @@ public class Board_allController {
         return mv;
     }
 
-
+    /* 즐겨찾기 버튼 on */
     @GetMapping(value = "/ward_on")
     public ModelAndView ward_on(@RequestParam(value = "board_num", required = false) int boardNum, @RequestParam(value = "mno") String mno) {
         ModelAndView mv = new ModelAndView();
@@ -285,6 +309,7 @@ public class Board_allController {
         return mv;
     }
 
+    /* 즐겨찾기 버튼 off */
     @GetMapping(value = "/ward_off")
     public ModelAndView ward_off(@RequestParam(value = "board_num", required = false) int boardNum, @RequestParam(value = "mno") String mno) {
         ModelAndView mv = new ModelAndView();
@@ -299,7 +324,80 @@ public class Board_allController {
         return mv;
     }
 
+    /* 다운로드, 현재 미사용 상태지만 살려둠 */
+    @GetMapping(value = "/file_down")
+    public void filedownload(@RequestParam(value = "downFile") String filename, HttpServletRequest request,
+                             HttpServletResponse response) {
+        String path = servletContext.getRealPath("/board_upload/video/");
+        File file = new File(path + filename);
+        String sfilename = null;
+        FileInputStream fis = null;
+        try {
+            if (request.getHeader("User-Agent").indexOf("MSIE") > -1) {
+                sfilename = URLEncoder.encode(file.getName(), "utf-8");
+            } else {
+                sfilename = new String(file.getName().getBytes("utf-8"), "ISO-8859-1");
+            }
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("application/octet-stream;charset=utf-8");
+            response.setHeader("Content-Disposition", "attachment; filename=" + sfilename);
+            OutputStream out = response.getOutputStream();
+            fis = new FileInputStream(file);
+            FileCopyUtils.copy(fis, out);
+            out.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
+    /* 220128 파일업다운, 게시판구현 참고 (정확한 이해 필요) */
+    @GetMapping(value = "/video_view/{filename}")
+    public void fileview(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response) {
+        String path = servletContext.getRealPath("/board_upload/video/");
+        /* 즉, file은 semiproject_team1/src/main/webapp/board_upload/video/filename */
+        File file = new File(path + filename);
+        String sfilename = null;
+        FileInputStream fis = null;
+
+        try {
+            /* HttpServletRequest request */
+            if (request.getHeader("User-Agent").indexOf("MSIE") > -1) {
+                sfilename = URLEncoder.encode(file.getName(), "utf-8");
+            } else {
+                sfilename = new String(file.getName().getBytes("utf-8"), "ISO-8859-1");
+            }
+            /* HttpServletResponse response */
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("application/octet-stream;charset=utf-8");
+            response.setHeader("Content-Disposition", "attachment; filename=" + sfilename);
+
+            OutputStream out = response.getOutputStream();
+            fis = new FileInputStream(file);
+            FileCopyUtils.copy(fis, out);
+            out.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+    /* 무한스크롤 테스트 */
     @GetMapping("/test")
     public String test() {
         return "board/infiniteScroll";

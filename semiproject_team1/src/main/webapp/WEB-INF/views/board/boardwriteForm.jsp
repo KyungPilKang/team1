@@ -37,6 +37,8 @@
             <option value="tip">팁과노하우</option>
             <option value="normal">자유</option>
         </select>
+        <%-- 카테고리 유효성 체크 출력용 --%>
+        <div id="error_cat"></div>
 
         <input type="hidden" id="board_content" name="board_content" value=""/>
 
@@ -47,8 +49,8 @@
             <input name="board_subject" type="text" id="board_subject" placeholder=" 제목"/><br>
         </div>
         <div class="board_file_cont">
-            <label for="board_file" class="btn_file"> 파일 첨부 </label>
-            <input name="file" type="file" id="board_file" placeholder=" 파일첨부"/>
+            <label for="board_file" class="btn_file"> 동영상 첨부 </label>
+            <input name="file" type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" id="board_file" placeholder=" 파일첨부"/>
         </div>
     </form>
 
@@ -88,6 +90,26 @@
         previewStyle: 'tab'
     });
 </script>
+
+
+<%-- 유효성 체크를 글쓰기, 수정 모두 적용해줘야 한다. 추후 적용 --%>
+<script>
+    board_cat.onblur = function(){
+        if(board_cat.value.includes("none")){
+            board_cat.classList.add('invalid_cat')
+            error_cat.innerHTML = '카테고리를 선택해주세요'
+        }
+    }
+    board_cat.onfocus = function(){
+        if(this.classList.contains('invalid_cat')){
+            this.classList.remove('invalid_cat')
+            error_cat.innerHTML=""
+        }
+    }
+</script>
+
+
+
 
 
 <%-- ajax --%>

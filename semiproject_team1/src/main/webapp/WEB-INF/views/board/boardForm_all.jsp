@@ -152,6 +152,7 @@
                                                                 조회수${article.board_readcount }</div>
                                                             <div class="each_board_likecount">
                                                                 좋아요수${article.board_likecount }</div>
+                                                            <div class="each_board_thumbnail" id="each_board_thumbnail"><img src="${article.board_thumbnail}" id="size_board_thumbnail"/></div>
                                                         </div>
                                                     </c:forEach>
                                                 </section>
@@ -197,6 +198,7 @@
         </div>
     </div>
 </div>
+
 
 
 <%--<script src="http://code.jquery.com/jquery-latest.min.js"></script>--%>
