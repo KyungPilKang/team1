@@ -48,7 +48,7 @@
 		where rnum between #{startrow} and #{startrow} + 9
 		]]>
 	</select>
-	<!-- 댓글수 -->
+	<!-- 답변수 -->
 	<select id="selectFeedbackList_answersort" resultType="feedback"
 		parameterType="int">
 		<![CDATA[
@@ -66,6 +66,17 @@
 		select *
 		from (select @rownum:=@rownum+1 rnum, tot.*
 			  from (select * from feedback order by feedback_likecount desc, feedback_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- 댓글수 -->
+	<select id="selectFeedbackList_all_replySort" resultType="feedback"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from feedback order by feedback_replycount desc, feedback_date desc) tot,
 				  (select @rownum := 0) temp) sub
 		where rnum between #{startrow} and #{startrow} + 9
 		]]>

@@ -23,6 +23,7 @@ public interface feedbackDAO {
 	int selectFeedbackCount_content(String feedback_keyword) throws Exception;
 	
 	List<Feedback> selectFeedbackList(int startrow) throws Exception;
+	List<Feedback> selectFeedbackList_replySort(int startrow) throws Exception;
 	List<Feedback> selectFeedbackList_viewsSort(int startrow) throws Exception;
 	List<Feedback> selectFeedbackList_likeSort(int startrow) throws Exception;
 	List<Feedback> selectFeedbackList_search_subject(@Param("startrow")int startrow,@Param("feedback_keyword")String feedback_keyword) throws Exception;
