@@ -13,8 +13,8 @@
     <div class="board_container_header">
         <div class="board_subject_container">${article.board_subject }</div>
         <div class="board_container_bo">
-            <div class="board_category_container"> 카테고리명</div>
-            <div class="board_date_container"> 날짜 : ${article.board_date}</div>
+            <div class="board_category_container">${article.board_cat}</div>
+            <div class="board_date_container">${board_date}</div>
             <div class="board_name_container"> 닉네임 : ${article.board_nickname}</div>
             <div class="board_like_container"> 좋아요수 : ${article.board_likecount}</div>
             <div class="board_reply_container"> 댓글수 : ${article.board_replycount}</div>
@@ -41,6 +41,7 @@
     <div class="board_content_container">
         <c:if test="${article.board_fileName != null }">
             <video controls="controls" poster="" width="900" height="600">
+                <%-- video_view는 컨트롤러 매핑경로 --%>
                 <source src="/video_view/${article.board_fileName}" type="video/mp4">
             </video>
         </c:if>

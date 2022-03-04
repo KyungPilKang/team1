@@ -3,6 +3,7 @@ package com.semi.controller;
 import com.semi.dto.Board;
 import com.semi.dto.PageInfo;
 import com.semi.service.Board_allService;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,12 +15,13 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class Board_allController {
@@ -49,12 +51,31 @@ public class Board_allController {
                 board.setBoard_fileName(board.getFile().getOriginalFilename());
                 board.getFile().transferTo(destFile);
             }
+
             /* 썸네일 시작 */
-            String doc = Jsoup.parse(board.getBoard_content()).select("img").attr("src");
-            System.out.println("파싱된 이미지 : " + doc);
-            // 아래와 같이 board 객체에 base64 형태의 이미지 데이터를 통째로 thumbnail로 넣는 방법은 돌아가게만 만든 형태라 추후 변경 필요 ( 현재 application.properties에 용량을 늘려놓고 돌아가게 만든 상태 )
-            // base64 데이터를 받아와서 가벼운 썸네일 이미지로 변환 후 static 아래에 저장하고, 그 썸네일 이미지를 board객체에 저장하는 방식으로 변경 예정
-            board.setBoard_thumbnail(doc);
+            String path = servletContext.getRealPath("/board_upload/image/");
+            String thumbnail_base64 = Jsoup.parse(board.getBoard_content()).select("img").attr("src");
+
+            // 위에서 파싱한 b64 데이터에서 split("base64,")로 한 후 0,1 중 1번째 값만 가져와서 디코딩 해줘야한다.
+            List<String> thumbnail_ok = List.of(thumbnail_base64.split("base64,"));
+            // 위에서 파싱한 b64 데이터에서 image 타입을 추출하기 위해 스플릿
+            List<String> image_format = List.of(thumbnail_base64.split(";"));
+            List<String> image_format_result = List.of(image_format.get(0).split("/"));
+            System.out.println("이미지 포맷 체크 : " + image_format_result.get(1));
+            // 파싱 데이터의 1번째 값을 디코딩
+            byte[] decoded = Base64.decodeBase64(thumbnail_ok.get(1));
+            // 고유키값 생성
+            UUIDgeneration uuid = new UUIDgeneration();
+            String filename_uuid = uuid.getUUID();
+            // 경로+파일명(가져오는 파일명이 없으므로 고유키값을 생성하여 넣어준다)+이미지포맷
+            File target = new File(path + filename_uuid + "." + image_format_result.get(1));
+            FileOutputStream fos;
+            fos = new FileOutputStream(target);
+            fos.write(decoded);
+            fos.close();
+            // DB에 thumbnail 이름을 저장 (jsp에서는 아래 이름의 파일이 저장된 경로의 데이터를 불러온다)
+            String thumbnail = filename_uuid + "." + image_format_result.get(1);
+            board.setBoard_thumbnail(thumbnail);
             /* 썸네일 끝 */
 
             board_allService.regBoard(board);
@@ -65,16 +86,6 @@ public class Board_allController {
         }
         return mv;
     }
-
-//    @PostMapping("/getthumbnail")
-//    public String getthumbnail(@ModelAttribute Board board){
-//        String list = board.getBoard_content();
-//        String[] realList = list.split(",");
-//        String html = realList[4];
-//        String doc = Jsoup.parse(html).select("img").attr("src");
-//        System.out.println("파싱된 이미지 : " + doc);
-//        return null;
-//    }
 
 
 
@@ -143,6 +154,13 @@ public class Board_allController {
             Board board = board_allService.getBoard(boardNum);
             board_allService.getBoard_likeCount(boardNum);
 
+            /* 날짜 포맷 변경 시작 */
+            // JSTL 날짜 변경 라이브러리를 사용할 경우 아래와 같은 작업이 필요없다.
+            Date date = board.getBoard_date();
+            SimpleDateFormat b_date = new SimpleDateFormat("yyyy년 M월 d일 E요일 a H:mm");
+            mv.addObject("board_date", b_date.format(date));
+            /* 날짜 포맷 변경 끝 */
+
             mv.addObject("article", board);
             mv.addObject("page", page);
             mv.setViewName("board/boardDetail");
@@ -154,14 +172,9 @@ public class Board_allController {
     }
 
 
-
-
     /* 게시판에서 게시물 검색 */
     @GetMapping(value = "board_search")
     public ModelAndView board_search(@ModelAttribute Board board, @RequestParam(value = "page", defaultValue = "1") int page) {
-
-        System.out.println(board.getBoard_keyword());
-        System.out.println(board.getBoard_type());
 
         ModelAndView mv = new ModelAndView();
         PageInfo pageInfo = new PageInfo();
@@ -171,7 +184,6 @@ public class Board_allController {
                 case "1": {
                     List<Board> articleList = board_allService.getBoardList_search_subject(page, pageInfo, board);
                     mv.addObject("articleList", articleList);
-                    System.out.println(articleList);
                     break;
                 }
                 case "2": {
@@ -268,7 +280,6 @@ public class Board_allController {
         ModelAndView mv = new ModelAndView();
         try {
             //article_like에서 mno를 추가하는 서비스
-            System.out.println(boardNum);
             board_allService.like_ins_mno(boardNum, mno);
             mv.setViewName("board/boardDetail");
         } catch (Exception e) {
@@ -283,7 +294,6 @@ public class Board_allController {
     public ModelAndView like_off(@RequestParam(value = "board_num", required = false) int boardNum, @RequestParam(value = "mno") String mno) {
         ModelAndView mv = new ModelAndView();
         try {
-            System.out.println(boardNum);
             //article_like에서 mno를 제거하는 서비스
             board_allService.like_del_mno(boardNum, mno);
             mv.setViewName("board/boardDetail");
@@ -299,7 +309,6 @@ public class Board_allController {
     public ModelAndView ward_on(@RequestParam(value = "board_num", required = false) int boardNum, @RequestParam(value = "mno") String mno) {
         ModelAndView mv = new ModelAndView();
         try {
-            System.out.println("ward_on의 boardNum : " + boardNum);
             board_allService.ward_ins_mno(boardNum, mno);
             mv.setViewName("board/boardDetail");
         } catch (Exception e) {
@@ -314,7 +323,6 @@ public class Board_allController {
     public ModelAndView ward_off(@RequestParam(value = "board_num", required = false) int boardNum, @RequestParam(value = "mno") String mno) {
         ModelAndView mv = new ModelAndView();
         try {
-            System.out.println("ward_off의 boardNum : " + boardNum);
             board_allService.ward_del_mno(boardNum, mno);
             mv.setViewName("board/boardDetail");
         } catch (Exception e) {
@@ -358,9 +366,9 @@ public class Board_allController {
         }
     }
 
-    /* 220128 파일업다운, 게시판구현 참고 (정확한 이해 필요) */
+    /* 동영상 출력 */
     @GetMapping(value = "/video_view/{filename}")
-    public void fileview(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response) {
+    public void video_view(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response) {
         String path = servletContext.getRealPath("/board_upload/video/");
         /* 즉, file은 semiproject_team1/src/main/webapp/board_upload/video/filename */
         File file = new File(path + filename);
@@ -396,6 +404,59 @@ public class Board_allController {
         }
     }
 
+    /* 썸네일 출력 */
+    @GetMapping(value = "/thumbnail_view/{filename}")
+    public void thumbnail_view(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response) {
+        String path = servletContext.getRealPath("/board_upload/image/");
+        /* 즉, file은 semiproject_team1/src/main/webapp/board_upload/video/filename */
+        File file = new File(path + filename);
+        String sfilename = null;
+        FileInputStream fis = null;
+        try {
+            /* HttpServletRequest request */
+            if (request.getHeader("User-Agent").indexOf("MSIE") > -1) {
+                sfilename = URLEncoder.encode(file.getName(), "utf-8");
+            } else {
+                sfilename = new String(file.getName().getBytes("utf-8"), "ISO-8859-1");
+            }
+            /* HttpServletResponse response */
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("application/octet-stream;charset=utf-8");
+            response.setHeader("Content-Disposition", "attachment; filename=" + sfilename);
+
+            OutputStream out = response.getOutputStream();
+            fis = new FileInputStream(file);
+            FileCopyUtils.copy(fis, out);
+            out.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+
+
+
+    /* UUID 생성 */
+    public static class UUIDgeneration {
+        public String getUUID() {
+            // UUID 생성
+            String uuid = UUID.randomUUID().toString();
+            System.out.println(uuid);
+            // "-" 하이픈 제외
+            uuid = uuid.replace("-", "");
+            System.out.println(uuid);
+            return uuid;
+        }
+    }
 
     /* 무한스크롤 테스트 */
     @GetMapping("/test")

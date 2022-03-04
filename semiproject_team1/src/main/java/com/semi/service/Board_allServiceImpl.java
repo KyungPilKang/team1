@@ -35,8 +35,6 @@ public class Board_allServiceImpl implements Board_allService {
         board.setBoard_readcount(0);
         board.setBoard_likecount(0);
         board.setBoard_replycount(0);
-        /* dao에 만들어 줘야 하나 봄 */
-//        board.setBoard_thumbnail(board_thumbnail);
         boardDAO.insertBoard(board);
         //게시물 테이블이 생성될 때 like,ward 테이블도 같이 생성해준다
         article_likeDAO.insertLike(boardNum);
@@ -120,7 +118,6 @@ public class Board_allServiceImpl implements Board_allService {
         pageInfo.setPage(page);
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
-        System.out.println("listCount : " + listCount);
         return boardDAO.selectBoardList_all_search_subject(startrow, board.getBoard_keyword());
     }
 
@@ -137,7 +134,6 @@ public class Board_allServiceImpl implements Board_allService {
         pageInfo.setPage(page);
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
-        System.out.println("listCount : " + listCount);
         return boardDAO.selectBoardList_all_search_nickname(startrow, board.getBoard_keyword());
     }
 
@@ -154,7 +150,6 @@ public class Board_allServiceImpl implements Board_allService {
         pageInfo.setPage(page);
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
-        System.out.println("listCount : " + listCount);
         return boardDAO.selectBoardList_all_search_content(startrow, board.getBoard_keyword());
     }
 
@@ -184,11 +179,11 @@ public class Board_allServiceImpl implements Board_allService {
         // 선택된 게시물에 존재하는 번호에 있는 mno들 중 가져온 mno가 존재하는지 체크
         boolean like_ok = false;
         List<String> like_member = article_likeDAO.select_article_like(boardNum);
-        System.out.println("추천한 유저의 고유번호 : " + like_member);
+        System.out.println("좋아요를 누른 유저의 고유번호 : " + like_member);
         if (like_member.contains(mno)) {
             like_ok = true;
         }
-        System.out.println(like_ok);
+        System.out.println("좋아요를 누른 유저들 중 현재 유저가 존재? "+ like_ok);
         return like_ok;
     }
 
@@ -224,7 +219,7 @@ public class Board_allServiceImpl implements Board_allService {
         if (ward_member.contains(mno)) {
             ward_ok = true;
         }
-        System.out.println(ward_ok);
+        System.out.println("즐겨찾기한 유저들 중 현재 유저가 존재? "+ward_ok);
         return ward_ok;
     }
 
