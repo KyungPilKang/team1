@@ -36,7 +36,7 @@
 
     
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/signin.css">
+    <link rel="stylesheet"  href="${pageContext.request.contextPath}/resources/css/login/signin.css">
   </head>
   <body class="text-center">
     

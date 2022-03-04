@@ -32,6 +32,12 @@
           font-size: 3.5rem;
         }
       }
+      
+          .email_ok{color:blue; display: none;}
+.email_already{color:red; display: none;}
+      .nick_ok{color:blue; display: none;}
+.nick_already{color:red; display: none;}
+      
     </style>
 
     
@@ -39,10 +45,10 @@
      <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/signin.css">
   </head>
   <body class="text-center">
-  <div class="col-md-3 grid-margin stretch-card container">
  
     <!-- 롤판.dog 기본 이미지 및 폰트 -->
   
+<main class="form-signin">
   <form>
     <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog.png" alt="" width="72" height="57">
     <h1 class="h3 mb-3 fw-normal">롤판.DOG</h1>
@@ -54,96 +60,112 @@
     <div style="clear:left;">
       <textarea style="background-color:ivory; resize:none; width: 100%; height: 80px;  font: size 14px;">회원가입을 위해서 이메일 인증이 진행되며, 인증이 완료되기 전까지 회원가입이 완료가 되지 않습니다.</textarea>
     </div>
-
-    <!-- <div class="form-floating" >
-      <input type="email" class="form-control" id="floatingInput" placeholder="이메일 주소" style="width:70%; float:left;">
-      <label for="floatingInput">이메일 주소</label>
-      <button class="btn btn-lg btn-primary" type="submit" style="width:30%; border-color:white; font-size: 11px; color: black; background-color: grey; ">중복체크</button>
-    </div>
     
-    <div>
-    <div class="form-floating" style="max-width:300px; max-height:58px;" >
-      <input type="text" class="form-control" id="floatingInput" placeholder="이메일 주소" style="width:70%; float:left;">
-      <label for="floatingInput" style="top:25px;">이메일 주소</label>
-      <button class="btn btn-lg btn-primary" type="submit" style="width:30%; border-color:white; font-size: 11px; color: black; background-color: grey; ">중복체크</button>
+<div class="form-floating">
+      <input type="email" class="form-control" id="mem_email_id" name="mem_email_id" placeholder="이메일 주소" required oninput = "emailcheck()" />
+      <label  for="mem_email_id">이메일 주소</label>
     </div>
-  </div>
+    <span class="email_ok">사용 가능한 이메일입니다.</span><br>
+    <span class="email_already">이미 가입된 이메일입니다.</span>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="mem_nickname" name="mem_nickname" placeholder="닉네임" required oninput = "nickcheck()">
+      <label for="mem_nickname">닉네임</label>
+    </div>
+    <span class="nick_ok">사용 가능한 닉네임 입니다.</span><br>
+    <span class="nick_already">이미 가입된 닉네임 입니다.</span>
     <div class="form-floating">
       <input type="password" class="form-control" id="floatingPassword" placeholder="비밀번호">
-      <label for="floatingPassword" style="top:45px;">비밀번호</label>
-    </div> -->
-    
-    <!-- 인풋테크 및 버튼 안먹힘 0227 16:57 -->
-    <div>
-  <!--   <div class="form-floating" style="width:70%; float:left;">
-      <input type="email" class="form-control" id="emailinput" placeholder="이메일 주소">
-      <label for="emailinput">이메일 주소</label>
-    </div>
-    <div>
-        <div style="width:30%; float:right; padding-top:10px;">
-        <button class="btn btn-lg btn-primary" type="submit" style=" width:90%; border-color:white; font-size: 11px; color: black; background-color: grey; ">중복체크</button>
-    </div>
+      <label for="floatingPassword">비밀번호</label>
     </div>
     
-  </div> -->
-  
-  				  <div class="form-group mb-2">
-                    <div class="input-group">
-                      <input id="emailinput" type="text" class="form-control" placeholder="이메일 주소를 입력하세요" aria-label="이메일 주소를 입력하세요">
-                      &nbsp;&nbsp;
-                      <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">중복 확인</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group mb-2">
-                    <div class="input-group">
-                      <input id="nicknameinput" type="text" class="form-control" placeholder="닉네임을 입력하세요" aria-label="닉네임을 입력하세요">
-                      &nbsp;&nbsp;
-                      <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">중복 확인</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group mb-2">
-                    <div class="input-group">
-                      <input id="passwardinput" type="text" class="form-control" placeholder="비밀번호를 입력하세요" aria-label="비밀번호를 입력하세요">
-                    </div>
-                  </div>
-                  <span id="#" class="form-group mb-2" style="display:none;">
-                  </span>
+    <div class="capcha" id=capchacon style="display:inline;">
+      <img src="/captcha"><br>
 
-<!--   <div>
-    <div class="form-floating" style="width:70%; float:left;">
-      <input type="text" class="form-control" id="nicknameinput" placeholder="name@example.com">
-      <label for="nicknameinput">닉네임</label>
-    </div>
-    <div>
-        <div style="width:30%; float:right; padding-top:10px;">
-        <button class="btn btn-lg btn-primary" type="submit" style=" width:90%; border-color:white; font-size: 11px; color: black; background-color: grey; ">중복체크</button>
-    </div>
-    </div>
-  </div>
-  <div>
-  <div class="form-floating">
-    <input type="password" class="form-control" id="floatingPassword" placeholder="비밀번호">
-    <label for="floatingPassword" style="top: 112px;">비밀번호</label>
-  </div>
-</div> -->
+	<input type="text" id="userin" name="userin">
+	<input type="button" id="capchavalid" value="전송">	
+<input type="button" id="capchaRefresh" value="새로고침">	
+
+    </div> 
 
 <div style="padding-top: 10px;">
   <div style="width:50%; float:left;">
-  <button class="btn btn-lg btn-primary" type="submit" style="border-color:white; float:center; width: 80%; color: black; background-color: grey; ">취소</button>
+  <button class="btn btn-lg btn-primary" type="button" onclick = "location.href = 'login'" style="border-color:white; float:center; width: 80%; color: black; background-color: grey; ">취소</button>
 </div>
 <div style="width:50%; float:right;">    
-<button class="btn btn-lg btn-primary" type="submit" style="float:center; width: 80%;">가입하기</button>
+<button class="btn btn-lg btn-primary" type="submit" style="float:center; width: 80%;" onclick = "location.href = 'join_certifyForm'">가입하기</button>
 </div>
 </div>  
-</div>
   </form>
-</div>
+</main>
 
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-    
-  </body>
+    <script>
+	    $('#capchavalid').click(function () {
+	    	if($('#userin').val()==""){
+				alert("문자 또는 숫자를 입력하세요");
+				
+				return false;
+			} 
+			$.ajax({
+				type:"post",
+				dataType:"text",
+				async:false,
+				url:"http://localhost:8090/captchacheck",
+				data:{id:$('#userin').val()},
+				success: function(data, textStatus){
+					if(result=="true"){
+						alert("정상입니다");
+						$('#capchacon').attr("display", 'inline');
+					} else {
+						alert("문자 또는 숫자를 다시 확인하세요");
+						$('#capchacon').attr("display", 'none');
+					}
+				}
+			});
+		});
+	    </script>
+
+<script>
+    function emailcheck(){
+        var mem_email_id = $('#mem_email_id').val(); //id값이 "mem_email_id"인 입력란의 값을 저장
+        $.ajax({
+            url:"http://localhost:8090/emailCheck", //Controller에서 인식할 주소
+            type:'post', //POST 방식으로 전달
+            
+            data:{mem_email_id:mem_email_id},
+            success:function(data){ //컨트롤러에서 넘어온 data값을 받는다 
+                if(data == "true"){ //true인 경우 사용불가
+                    $('.email_ok').css("display","none"); 
+                    $('.email_already').css("display", "inline-block");
+                } else { // 사용가능
+                	 $('.email_ok').css("display", "inline-block"); 
+                     $('.email_already').css("display","none");
+                }
+            }
+        });
+    }
+ </script>
+
+ <script>
+    function nickcheck(){
+        var mem_nickname = $('#mem_nickname').val(); //id값이 "mem_nickname"인 입력란의 값을 저장
+        $.ajax({
+            url:"http://localhost:8090/nickCheck", //Controller에서 인식할 주소
+            type:'post', //POST 방식으로 전달
+            
+            data:{mem_nickname:mem_nickname},
+            success:function(data){ //컨트롤러에서 넘어온 data값을 받는다 
+                if(data == "true"){ //true인 경우 사용불가
+                    $('.nick_ok').css("display","none"); 
+                    $('.nick_already').css("display", "inline-block");
+                } else { // 사용가능
+                	 $('.nick_ok').css("display", "inline-block"); 
+                     $('.nick_already').css("display","none");
+                }
+            }
+        });
+    }
+ </script>
+</body>
 </html>

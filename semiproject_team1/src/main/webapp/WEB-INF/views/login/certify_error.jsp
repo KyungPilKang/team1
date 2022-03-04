@@ -18,6 +18,7 @@
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/bootstrap.min.css">
 
+
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;

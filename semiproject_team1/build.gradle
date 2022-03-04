@@ -22,7 +22,8 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	
+	implementation 'org.json:json:20211205'
+	implementation 'net.morimekta.utils:android-util:1.2.0'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.56'
 	implementation 'javax.servlet:jstl:1.2'
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'

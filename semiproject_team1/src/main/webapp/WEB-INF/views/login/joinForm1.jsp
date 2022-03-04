@@ -54,17 +54,17 @@
         </div>
         </div>
       </div>
-      <!-- 이용약관 동의 체크박스 정렬 해야 함 -->
-      <div class="my-2 d-flex justify-content-between align-items-center">
-        <div class="form-check" style="padding:0;">
-            <div style="padding-right:30px; float: left;">
-          <label for="agree1" class="form-check-label text-muted" style="text-align: left;">롤판.DOG 이용약관 동의</label>
-        </div>
-        <div>
-        <input id="agree1" type="checkbox"  class="form-check-input">
-    </div>
-        </div>
-      </div>
+		<!-- 이용약관 동의 체크박스 정렬 해야 함 -->
+		<div class="my-2 align-items-center">
+			<div class="form-check d-flex justify-content-between" style="padding:0;">
+            	<div style="padding-right:30px; float: left;">
+          			<label for="agree1" class="form-check-label text-muted" style="text-align: left;">롤판.DOG 이용약관 동의</label>
+       			</div>
+       			<div>
+        			<input id="agree1" type="checkbox"  class="form-check-input">
+    			</div>
+       		</div>
+      	</div>
 
 
     <div class="form-floating">
@@ -259,8 +259,8 @@
     </div>
 
     <!-- 개인정보동의 체크박스 정렬해야 함 -->
-    <div class="my-2 d-flex justify-content-between align-items-center">
-        <div class="form-check" style="padding:0;">
+    <div class="my-2 align-items-center">
+        <div class="form-check d-flex justify-content-between" style="padding:0;">
             <div style="padding-right:30px; float: left;">
           <label for="agree2" class="form-check-label text-muted" style="text-align: left;">개인정보 수집 및 이용에 관한 동의</label>
         </div>
@@ -328,16 +328,29 @@
 
 <div style="padding-top: 10px;">
     <div style="width:50%; float:left;">
-    <button class="btn btn-lg btn-primary" type="submit" style="border-color:white; float:center; width: 80%; color: black; background-color: grey; ">비동의</button>
+    <button  class="btn btn-lg btn-primary" type="button" style="border-color:white; float:center; width: 80%; color: black; background-color: grey; " onclick = "location.href = 'login'">비동의</button>
 </div>
 <div style="width:50%; float:right;">    
-<button class="btn btn-lg btn-primary" type="submit" style="float:center; width: 80%;">동의</button>
+<button class="btn btn-lg btn-primary" type="button" onclick = "location.href = 'joinForm2'" style="float:center; width: 80%;">동의</button>
 </div>
 </div>    
   </form>
 </main>
-
-
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
     
+     $("#allagree").click(function(){
+            //만약 전체 선택 체크박스가 체크된상태일경우
+            if($("#allagree").prop("checked")) {
+                $("input[type=checkbox]").prop("checked",true);
+                //input type이 체크박스인것은 모두 체크함
+            } else {
+                $("input[type=checkbox]").prop("checked",false);
+                //input type이 체크박스인것은 모두 체크 해제함
+            }
+      });
+});
+</script>
   </body>
 </html>

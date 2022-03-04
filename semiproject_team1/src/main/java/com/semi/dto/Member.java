@@ -15,13 +15,13 @@ public class Member {
 	
 	public Member() {}
 
-	public int getMem_mno() {
-		return mem_mno;
-	}
-
-	public void setMem_mno(int mem_mno) {
-		this.mem_mno = mem_mno;
-	}
+//	public int getMem_mno() {
+//		return mem_mno;
+//	}
+//
+//	public void setMem_mno(int mem_mno) {
+//		this.mem_mno = mem_mno;
+//	}
 
 	public String getMem_email_id() {
 		return mem_email_id;
