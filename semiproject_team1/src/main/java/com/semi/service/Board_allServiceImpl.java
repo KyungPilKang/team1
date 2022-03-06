@@ -4,17 +4,12 @@ import com.semi.dao.article_likeDAO;
 import com.semi.dao.article_wardDAO;
 import com.semi.dao.b_replyDAO;
 import com.semi.dao.boardDAO;
-import com.semi.dto.Article_like;
 import com.semi.dto.B_reply;
 import com.semi.dto.Board;
 import com.semi.dto.PageInfo;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -210,7 +205,7 @@ public class Board_allServiceImpl implements Board_allService {
     }
 
     @Override
-    public void getBoard_likeCount(int boardNum) throws Exception {
+    public void setBoard_likeCount(int boardNum) throws Exception {
         /* DB에 article_like의 mno가 not null이라 생성시 0을 무조건 넣어주므로 -1 해준다 */
         int board_likecount = article_likeDAO.board_like_count(boardNum) - 1;
         System.out.println("serviceImpl의 board_likecount : " + board_likecount);
@@ -247,9 +242,36 @@ public class Board_allServiceImpl implements Board_allService {
 
     /* ---------------------- 시작 : 댓글 ---------------------- */
     @Override
-    public List<B_reply> getReplyList() throws Exception {
-        return b_replyDAO.selectReplyList();
+    public List<B_reply> getReplyList(int boardNum) throws Exception {
+        return b_replyDAO.selectReplyList(boardNum);
     }
+
+    @Override
+    public void regReply(B_reply b_reply) throws Exception {
+        Integer b_replyNum = b_replyDAO.selectMaxReplyNum();
+        if (b_replyNum == null) b_replyNum = 1;
+        else b_replyNum += 1;
+        //db에서 not null이라 임시로 닉네임 가져간다
+        b_reply.setB_reply_nickname("세션nick");
+        b_reply.setB_reply_num(b_replyNum);
+        b_reply.setB_reply_likecount(0);
+
+        b_reply.setB_reply_ref(b_replyNum);
+        b_reply.setB_reply_lev(0); // 대댓글이 아니라 lev는 0
+        b_reply.setB_reply_seq(0); // 대댓글이 아니라 seq는 0
+//        b_reply.setB_reply_like_member("0");
+        b_replyDAO.insertReply(b_reply);
+        boardDAO.updateReplyCount(b_reply.getB_board_num());
+    }
+
+    @Override
+    public void delReply(int b_reply_num) throws Exception {
+        B_reply b_reply = b_replyDAO.selectReply(b_reply_num);
+        b_replyDAO.deleteReply(b_reply_num);
+        boardDAO.deleteReplyCount(b_reply.getB_board_num());
+    }
+
+
 
 //    @Override
 //    public String getReplyList_json(int page, PageInfo pageInfo) throws Exception {

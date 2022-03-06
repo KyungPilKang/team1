@@ -5,7 +5,7 @@ import java.util.Date;
 public class B_reply {
 	int b_reply_num; //PK, AI
 	String b_reply_nickname;
-	String b_board_num;
+	int b_board_num;
 	String b_reply_content;
 	int b_reply_ref;
 	int b_reply_lev; //대댓글까지만 가능
@@ -14,7 +14,9 @@ public class B_reply {
 	int b_reply_likecount;
 	String b_reply_like_member; //좋아요 누른 회원 고유번호 관리
 	String b_reply_like_ok; //요청한 클라이언트가 좋아요 눌렀는지 판단하는 변수
-	String b_reply_edit_controll; //jQuery 선택자 제어 변수
+	
+	// 수정기능 삭제로 제거
+//	String b_reply_edit_controll; //jQuery 선택자 제어 변수
 	
 	public B_reply() {}
 
@@ -34,11 +36,11 @@ public class B_reply {
 		this.b_reply_nickname = b_reply_nickname;
 	}
 
-	public String getB_board_num() {
+	public int getB_board_num() {
 		return b_board_num;
 	}
 
-	public void setB_board_num(String b_board_num) {
+	public void setB_board_num(int b_board_num) {
 		this.b_board_num = b_board_num;
 	}
 
@@ -104,14 +106,6 @@ public class B_reply {
 
 	public void setB_reply_like_ok(String b_reply_like_ok) {
 		this.b_reply_like_ok = b_reply_like_ok;
-	}
-
-	public String getB_reply_edit_controll() {
-		return b_reply_edit_controll;
-	}
-
-	public void setB_reply_edit_controll(String b_reply_edit_controll) {
-		this.b_reply_edit_controll = b_reply_edit_controll;
 	}
 
 	

@@ -57,5 +57,7 @@ public interface boardDAO {
     Board selectBoard(int boardNum) throws Exception;
     void updateReadCount(int boardNum) throws Exception;
     void updateBoardLike(int boardNum, int board_likecount) throws Exception;
+    void updateReplyCount(int b_board_num) throws Exception;
+    void deleteReplyCount(int b_board_num) throws Exception;
 //    int selectBoard_likeCount(int boardNum) throws Exception;
 }

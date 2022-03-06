@@ -89,34 +89,43 @@
     </section>
 
     <div class="reply_container" id="reply_container">
+        <form>
+            <textarea class="comment_write_content" maxlength="1000"
+                      placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."></textarea>
+            <button class="comment_submits" type="button">댓글 달기</button>
+        </form>
         --------------------------------------------------------- 댓글창 위치 ▼
         --------------------------------------------------------------
         <%-- 댓글 삽입부 시작--%>
         <section id="listForm">
             <table>
                 <c:forEach var="reply" items="${reList }">
-                    <c:if test="${article.board_num == reply.b_board_num }">
-                        <tr>
+                    <tr>
+                        <td>
+                            <div class="ddd">${reply.b_reply_num}</div>
+                        </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${reply.b_reply_lev!=0}">
+                                    <c:forEach var="i" begin="0" end="${reply.b_reply_lev*2}">
+                                        &nbsp;
+                                    </c:forEach>
+                                    ▶
+                                </c:when>
+                                <c:otherwise>▶</c:otherwise>
+                            </c:choose>
+                                ${reply.b_reply_content}
+                        </td>
+                        <td>${reply.b_reply_nickname }</td>
+                        <td><fmt:formatDate value="${reply.b_reply_date }" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
+                            <%-- 세션에 존재하는 닉네임의 게시물만 삭제하도록 변경 예정, 현재 세션이 존재한다 가정 --%>
+                            <%-- 즉, 현재 사용자의 댓글만 삭제 버튼이 출력된다 --%>
+                        <c:if test="${reply.b_reply_nickname == '세션nick'}">
                             <td>
-                                <div class="ddd">${reply.b_reply_num}</div>
+                                <button onclick="removeCheck(${reply.b_reply_num})">삭제</button>
                             </td>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${reply.b_reply_lev!=0}">
-                                        <c:forEach var="i" begin="0" end="${reply.b_reply_lev*2}">
-                                            &nbsp;
-                                        </c:forEach>
-                                        ▶
-                                    </c:when>
-                                    <c:otherwise>▶</c:otherwise>
-                                </c:choose>
-                                    ${reply.b_reply_content}
-                            </td>
-                            <td>${reply.b_reply_nickname }</td>
-                            <td><fmt:formatDate value="${reply.b_reply_date }" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
-
-                        </tr>
-                    </c:if>
+                        </c:if>
+                    </tr>
                 </c:forEach>
             </table>
         </section>
@@ -258,6 +267,63 @@
             $("body").css("overflow", "auto");
         });
     });
+</script>
+
+
+<%-- 댓글 작성 ajax --%>
+<script>
+    $(function () {
+        $(".comment_submits").click(function () {
+            $.ajax({
+                async: true,
+                type: 'POST',
+                // contentType: 'application/json; charset=utf-8',
+                // data: JSON.stringify(b_reply),
+                data: {
+                    b_board_num: ${article.board_num},
+                    b_reply_content: $(".comment_write_content").val()
+                },
+                url: "http://localhost:8090/regreply",
+                // dataType: "text",
+                success: function (data) {
+                    console.log(data);
+                    alert("댓글이 등록되었습니다.");
+                    // reload로 갱신해서 댓글 확인하면 될듯?
+                    location.reload();
+                },
+                error: function (textStatus) {
+                    alert("ERROR : " + textStatus);
+                    console.log("ERROR : " + textStatus);
+                    console.log(JSON.stringify(textStatus));
+                }
+            });
+        })
+    })
+</script>
+
+
+<%-- 댓글삭제 --%>
+<script>
+    function removeCheck(replyNum) {
+        if (confirm("정말 삭제하시겠습니까??") == true) {    //확인
+            console.log(replyNum);
+            $.ajax({
+                async: true,
+                type: 'GET',
+                data: {
+                    b_reply_num: replyNum,
+                },
+                url: "http://localhost:8090/replydelete",
+                success: function (data) {
+                },
+                error: function (textStatus) {
+                    alert("ERROR : " + textStatus);
+                }
+            });
+        } else {
+            return false;
+        }
+    }
 </script>
 
 

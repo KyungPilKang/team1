@@ -10,7 +10,9 @@ import java.util.List;
 @Mapper
 @Repository
 public interface b_replyDAO {
-//    int selectReplyCount() throws Exception;
-//    List<B_reply> selectReplyList_all(int startrow) throws Exception;
-    List<B_reply> selectReplyList() throws Exception;
+    List<B_reply> selectReplyList(int boardNum) throws Exception;
+    Integer selectMaxReplyNum() throws Exception;
+    void insertReply(B_reply b_reply) throws Exception;
+    void deleteReply(int b_reply_num) throws Exception;
+    B_reply selectReply(int b_reply_num) throws Exception;
 }

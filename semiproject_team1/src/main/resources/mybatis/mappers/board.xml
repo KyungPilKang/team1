@@ -321,6 +321,23 @@
 		]]>
 	</update>
 
+
+	<update id="updateReplyCount" parameterType="int">
+		<![CDATA[
+		update board
+		set board_replycount=board_replycount + 1
+		where board_num = #{b_board_num}
+		]]>
+	</update>
+
+	<update id="deleteReplyCount" parameterType="int">
+		<![CDATA[
+		update board
+		set board_replycount=board_replycount - 1
+		where board_num = #{b_board_num}
+		]]>
+	</update>
+
 <!--	<select id="selectBoard_likeCount" resultType="int" parameterType="int">-->
 <!--		<![CDATA[-->
 <!--		select board_likecount-->

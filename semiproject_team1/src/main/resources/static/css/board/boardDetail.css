@@ -235,3 +235,9 @@
     height:100px;
     background: grey;
 }
+
+/* 댓글 작성 박스*/
+.comment_write_content{
+    height:100px;
+    width: 800px;
+}

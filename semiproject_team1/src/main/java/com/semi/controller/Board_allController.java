@@ -151,7 +151,7 @@ public class Board_allController {
             mv.addObject("mno", session.getAttribute("mno"));
 
             Board board = board_allService.getBoard(boardNum);
-            board_allService.getBoard_likeCount(boardNum);
+            board_allService.setBoard_likeCount(boardNum);
 
             /* 날짜 포맷 변경 시작 */
             // JSTL 날짜 변경 라이브러리를 사용할 경우 아래와 같은 작업이 필요없다.
@@ -161,7 +161,8 @@ public class Board_allController {
             /* 날짜 포맷 변경 끝 */
 
             /* 리플 관련 시작*/
-            List<B_reply> reList = board_allService.getReplyList();
+            // board_num에 해당하는 애들을 가져오면 되는건데 왜 이렇게 했니?
+            List<B_reply> reList = board_allService.getReplyList(boardNum);
             mv.addObject("reList", reList);
             mv.setViewName("board/replyTest");
             /* 리플 관련 끝 */
@@ -491,23 +492,33 @@ public class Board_allController {
         return "board/boardForm_all_ajax";
     }
 
-
-    /* 댓글 리스트 */
-    @RequestMapping(value = "/reply", method = {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView reply() {
-        ModelAndView mv = new ModelAndView();
-        PageInfo pageInfo = new PageInfo();
+//    @PostMapping("/regreply")
+    @RequestMapping(value = "regreply", method = {RequestMethod.GET, RequestMethod.POST})
+    public void regreply(@RequestParam(value = "b_board_num") int b_board_num,
+    @RequestParam(value = "b_reply_content") String b_reply_content) {
+        B_reply b_reply = new B_reply();
+        System.out.println("글번호 가져옴? : "+b_board_num);
+        System.out.println("댓글내용 가져옴? : "+b_reply_content);
         try {
-            List<B_reply> reList = board_allService.getReplyList();
-//            List<B_reply> reList = board_allService.getReplyList(page, pageInfo);
-//            mv.addObject("pageInfo", pageInfo);
-            mv.addObject("reList", reList);
-            mv.setViewName("board/replyTest");
-        } catch (Exception e) {
+            // 닉네임은 세션에서 가져왔다고 가정
+            b_reply.setB_board_num(b_board_num);
+            b_reply.setB_reply_content(b_reply_content);
+            board_allService.regReply(b_reply);
+            System.out.println("댓글 작성 확인");
+        }catch (Exception e) {
             e.printStackTrace();
-            mv.addObject("err", e.getMessage());
         }
-        return mv;
+    }
+
+    @RequestMapping(value = "replydelete", method = {RequestMethod.GET, RequestMethod.POST})
+    public void replydelete(@RequestParam(value = "b_reply_num") int b_reply_num) {
+        B_reply b_reply = new B_reply();
+        System.out.println("글번호 가져옴? : "+b_reply_num);
+        try {
+            board_allService.delReply(b_reply_num);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
