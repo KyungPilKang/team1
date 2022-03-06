@@ -3,4 +3,35 @@
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.semi.dao.b_replyDAO">
+
+<!--	<select id="selectReplyCount" resultType="int">-->
+<!--		<![CDATA[-->
+<!--		select count(*)-->
+<!--		from b_reply-->
+<!--		]]>-->
+<!--	</select>-->
+
+
+<!--	<select id="selectReplyList_all" resultType="b_reply"-->
+<!--			parameterType="int">-->
+<!--		<![CDATA[-->
+<!--		select *-->
+<!--		from (select @rownum:=@rownum+1 rnum, tot.*-->
+<!--			  from (select * from b_reply order by b_reply_date desc) tot,-->
+<!--				  (select @rownum := 0) temp) sub-->
+<!--		where rnum between #{startrow} and #{startrow} + 9-->
+<!--		]]>-->
+<!--	</select>-->
+
+
+	<select id="selectReplyList" resultType="b_reply"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from b_reply order by b_reply_date desc
+		]]>
+	</select>
+
+
+
 </mapper>

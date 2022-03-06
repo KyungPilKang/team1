@@ -2,13 +2,19 @@ package com.semi.service;
 
 import com.semi.dao.article_likeDAO;
 import com.semi.dao.article_wardDAO;
+import com.semi.dao.b_replyDAO;
 import com.semi.dao.boardDAO;
 import com.semi.dto.Article_like;
+import com.semi.dto.B_reply;
 import com.semi.dto.Board;
 import com.semi.dto.PageInfo;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,6 +22,9 @@ public class Board_allServiceImpl implements Board_allService {
 
     @Autowired
     boardDAO boardDAO;
+
+    @Autowired
+    b_replyDAO b_replyDAO;
 
     @Autowired
     article_likeDAO article_likeDAO;
@@ -183,7 +192,7 @@ public class Board_allServiceImpl implements Board_allService {
         if (like_member.contains(mno)) {
             like_ok = true;
         }
-        System.out.println("좋아요를 누른 유저들 중 현재 유저가 존재? "+ like_ok);
+        System.out.println("좋아요를 누른 유저들 중 현재 유저가 존재? " + like_ok);
         return like_ok;
     }
 
@@ -219,7 +228,7 @@ public class Board_allServiceImpl implements Board_allService {
         if (ward_member.contains(mno)) {
             ward_ok = true;
         }
-        System.out.println("즐겨찾기한 유저들 중 현재 유저가 존재? "+ward_ok);
+        System.out.println("즐겨찾기한 유저들 중 현재 유저가 존재? " + ward_ok);
         return ward_ok;
     }
 
@@ -232,6 +241,58 @@ public class Board_allServiceImpl implements Board_allService {
     public void ward_del_mno(int boardNum, String mno) throws Exception {
         article_wardDAO.delete_ward_mno(boardNum, mno);
     }
+
     /* ----------------------- 끝 : 즐겨찾기 ----------------------- */
+
+
+    /* ---------------------- 시작 : 댓글 ---------------------- */
+    @Override
+    public List<B_reply> getReplyList() throws Exception {
+        return b_replyDAO.selectReplyList();
+    }
+
+//    @Override
+//    public String getReplyList_json(int page, PageInfo pageInfo) throws Exception {
+//        int listCount = b_replyDAO.selectReplyCount();
+//        int maxPage = (int) Math.ceil((double) listCount / 10);
+//        int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
+//        int endPage = startPage + 10 - 1;
+//        if (endPage > maxPage) endPage = maxPage;
+//        pageInfo.setStartPage(startPage);
+//        pageInfo.setEndPage(endPage);
+//        pageInfo.setMaxPage(maxPage);
+//        pageInfo.setPage(page);
+//        pageInfo.setListCount(listCount);
+//        int startrow = (page - 1) * 10 + 1;
+//
+//        List<B_reply> reList = b_replyDAO.selectReplyList_all(startrow);
+//        JSONObject totalObject=new JSONObject();
+//        JSONArray replysArray=new JSONArray();
+//        for(B_reply re:reList){
+//            JSONObject reply = new JSONObject();
+//            reply.put("b_reply_num",re.getB_reply_num());
+//            reply.put("b_reply_nickname",re.getB_reply_nickname());
+//            reply.put("b_board_num",re.getB_board_num());
+//            reply.put("b_reply_content",re.getB_reply_content());
+//            reply.put("b_reply_ref",re.getB_reply_ref());
+//            reply.put("b_reply_lev",re.getB_reply_lev());
+//            reply.put("b_reply_seq",re.getB_reply_seq());
+//            // 여기서 날짜 형식을 변경해줘야 컨트롤러에서 response시 날짜가 정상적인 json데이터로 넘어간다
+//            // 이유는 모르겠지만 바로 put하면 {"date":2022 KST 11} 같이 따옴표 없이 넘어가서 파싱시 오류뜸
+//            Date date = re.getB_reply_date();
+//            SimpleDateFormat b_date = new SimpleDateFormat("yyyy년 M월 d일 E요일 a H:mm");
+//            reply.put("b_reply_date",b_date.format(date));
+//            reply.put("b_reply_likecount",re.getB_reply_likecount());
+//            reply.put("b_reply_like_member",re.getB_reply_like_member());
+//            reply.put("b_reply_edit_controll",re.getB_reply_edit_controll());
+//            replysArray.add(reply);
+//        }
+//        totalObject.put("replys",replysArray);
+//        return totalObject.toJSONString();
+//    }
+
+
+    /* ----------------------- 끝 : 댓글 ----------------------- */
+
 
 }

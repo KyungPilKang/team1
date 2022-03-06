@@ -180,7 +180,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    display: none;
+    /*display: none;*/
 }
 
 .heart {
@@ -227,4 +227,11 @@
     text-align:center;
     box-sizing:border-box; padding:74px 0;
     line-height:23px; cursor:pointer;
+}
+
+
+/* 댓글 css 테스트용 */
+.ddd {
+    height:100px;
+    background: grey;
 }

@@ -1,5 +1,6 @@
 package com.semi.controller;
 
+import com.semi.dto.B_reply;
 import com.semi.dto.Board;
 import com.semi.dto.PageInfo;
 import com.semi.service.Board_allService;
@@ -18,9 +19,9 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Controller
@@ -88,7 +89,6 @@ public class Board_allController {
     }
 
 
-
     /* 게시물 수정 */
     @GetMapping(value = "/modifyform")
     public ModelAndView modifyform(@RequestParam(value = "board_num") int boardNum,
@@ -97,7 +97,6 @@ public class Board_allController {
         try {
             Board board = board_allService.getBoard(boardNum);
             mv.addObject("article", board);
-//            mv.addObject("page", page);
             mv.setViewName("/board/modifyForm");
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,6 +160,12 @@ public class Board_allController {
             mv.addObject("board_date", b_date.format(date));
             /* 날짜 포맷 변경 끝 */
 
+            /* 리플 관련 시작*/
+            List<B_reply> reList = board_allService.getReplyList();
+            mv.addObject("reList", reList);
+            mv.setViewName("board/replyTest");
+            /* 리플 관련 끝 */
+
             mv.addObject("article", board);
             mv.addObject("page", page);
             mv.setViewName("board/boardDetail");
@@ -206,7 +211,7 @@ public class Board_allController {
         return mv;
     }
 
-    /* 게시판 리스트 */
+    /* 게시판 리스트 (최신순 정렬) */
     @RequestMapping(value = "/boardlist", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView boardlist(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
@@ -215,6 +220,7 @@ public class Board_allController {
             List<Board> articleList = board_allService.getBoardList(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
+            mv.addObject("sort_name", "boardlist");
             mv.setViewName("board/boardForm_all");
         } catch (Exception e) {
             e.printStackTrace();
@@ -232,6 +238,7 @@ public class Board_allController {
             List<Board> articleList = board_allService.getBoardList_viewsSort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
+            mv.addObject("sort_name", "viewssort");
             mv.setViewName("board/boardForm_all");
         } catch (Exception e) {
             e.printStackTrace();
@@ -249,6 +256,7 @@ public class Board_allController {
             List<Board> articleList = board_allService.getBoardList_replySort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
+            mv.addObject("sort_name", "replysort");
             mv.setViewName("board/boardForm_all");
         } catch (Exception e) {
             e.printStackTrace();
@@ -266,6 +274,7 @@ public class Board_allController {
             List<Board> articleList = board_allService.getBoardList_likeSort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
+            mv.addObject("sort_name", "likesort");
             mv.setViewName("board/boardForm_all");
         } catch (Exception e) {
             e.printStackTrace();
@@ -441,10 +450,6 @@ public class Board_allController {
         }
     }
 
-
-
-
-
     /* UUID 생성 */
     public static class UUIDgeneration {
         public String getUUID() {
@@ -458,10 +463,51 @@ public class Board_allController {
         }
     }
 
-    /* 무한스크롤 테스트 */
-    @GetMapping("/test")
-    public String test() {
-        return "board/infiniteScroll";
+    /* ajax 페이지 */
+    @RequestMapping(value = "boardForm_all_ajax", method = {RequestMethod.GET, RequestMethod.POST})
+    public String ajax_boardForm_all(@RequestParam(value = "page", defaultValue = "1") int page,
+                                     @RequestParam(value = "sort") String sort,
+                                     HttpServletRequest request, HttpSession session) {
+        PageInfo pageInfo = new PageInfo();
+        try {
+            if (Objects.equals(sort, "boardlist")) {
+                List<Board> articleList = board_allService.getBoardList(page, pageInfo);
+                request.setAttribute("articleList", articleList);
+            } else if (Objects.equals(sort, "viewssort")) {
+                List<Board> articleList = board_allService.getBoardList_viewsSort(page, pageInfo);
+                request.setAttribute("articleList", articleList);
+            } else if (Objects.equals(sort, "replysort")) {
+                List<Board> articleList = board_allService.getBoardList_replySort(page, pageInfo);
+                request.setAttribute("articleList", articleList);
+            } else if (Objects.equals(sort, "likesort")) {
+                List<Board> articleList = board_allService.getBoardList_likeSort(page, pageInfo);
+                request.setAttribute("articleList", articleList);
+            }
+            request.setAttribute("pageInfo", pageInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("err", e.getMessage());
+        }
+        return "board/boardForm_all_ajax";
+    }
+
+
+    /* 댓글 리스트 */
+    @RequestMapping(value = "/reply", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView reply() {
+        ModelAndView mv = new ModelAndView();
+        PageInfo pageInfo = new PageInfo();
+        try {
+            List<B_reply> reList = board_allService.getReplyList();
+//            List<B_reply> reList = board_allService.getReplyList(page, pageInfo);
+//            mv.addObject("pageInfo", pageInfo);
+            mv.addObject("reList", reList);
+            mv.setViewName("board/replyTest");
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
     }
 
 

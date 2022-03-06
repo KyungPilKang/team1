@@ -1,5 +1,6 @@
 package com.semi.service;
 
+import com.semi.dto.B_reply;
 import com.semi.dto.Board;
 import com.semi.dto.PageInfo;
 
@@ -30,4 +31,9 @@ public interface Board_allService {
     void ward_ins_mno(int boardNum, String mno) throws Exception;
     void ward_del_mno(int boardNum, String mno) throws Exception;
     /* ----------------------- 끝 : 즐겨찾기 ----------------------- */
+
+
+    List<B_reply> getReplyList() throws Exception;
+//    String getReplyList_json(int page, PageInfo pageInfo) throws  Exception;
+
 }

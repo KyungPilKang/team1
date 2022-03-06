@@ -15,6 +15,7 @@
 
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/boardForm_all.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/style.css">
 
 </head>
 
@@ -102,7 +103,8 @@
                                             <%-- 검색 --%>
                                             <li class="board_search_form">
                                                 <div class="board_search_container">
-                                                    <form class="search-form" id="boardform" method="get" action="/board_search">
+                                                    <form class="search-form" id="boardform" method="get"
+                                                          action="/board_search">
                                                         <select class="btn-sm btn-secondary board_search_select"
                                                                 name="board_type">
                                                             <option value="1">제목</option>
@@ -112,11 +114,11 @@
                                                         <input type="search" class="form-control"
                                                                placeholder="Search Here" title="Search here"
                                                                name="board_keyword">
-                                                    <div class="board_file_cont">
-                                                        <label for="search_submit" style="cursor: pointer"> 돋보기
-                                                            아이콘 </label>
-                                                        <input type="submit" id="search_submit"/>
-                                                    </div>
+                                                        <div class="board_file_cont">
+                                                            <label for="search_submit" style="cursor: pointer"> 돋보기
+                                                                아이콘 </label>
+                                                            <input type="submit" id="search_submit"/>
+                                                        </div>
                                                     </form>
                                                 </div>
                                             </li>
@@ -145,7 +147,9 @@
                                                             </div>
 
                                                             <div class="each_board_cat">${article.board_cat }</div>
-                                                            <div class="each_board_date"><fmt:formatDate value="${article.board_date }" pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
+                                                            <div class="each_board_date"><fmt:formatDate
+                                                                    value="${article.board_date }"
+                                                                    pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
                                                             <div class="each_board_nickname">
                                                                 닉네임${article.board_nickname }</div>
                                                             <div class="each_board_replycount">
@@ -154,46 +158,31 @@
                                                                 조회수${article.board_readcount }</div>
                                                             <div class="each_board_likecount">
                                                                 좋아요수${article.board_likecount }</div>
-                                                            <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
+                                                                <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
 
                                                             <c:choose>
-                                                            <c:when test="${article.board_thumbnail != null }">
-                                                            <div class="each_board_thumbnail" id="each_board_thumbnail"><img src="/thumbnail_view/${article.board_thumbnail}" alt="thumbnail" class="thumbnail_size"/></div>
-                                                            </c:when>
+                                                                <c:when test="${article.board_thumbnail != null }">
+                                                                    <div class="each_board_thumbnail"
+                                                                         id="each_board_thumbnail"><img
+                                                                            src="/thumbnail_view/${article.board_thumbnail}"
+                                                                            alt="thumbnail" class="thumbnail_size"/>
+                                                                    </div>
+                                                                </c:when>
                                                                 <c:otherwise>
-                                                                    <div class="each_board_thumbnail" id="each_board_thumbnail"><img src="https://talk.op.gg/images/thumbnail/post_hidden.png" alt="thumbnail" class="thumbnail_size"/></div>
+                                                                    <div class="each_board_thumbnail"
+                                                                         id="each_board_thumbnail"><img
+                                                                            src="https://talk.op.gg/images/thumbnail/post_hidden.png"
+                                                                            alt="thumbnail" class="thumbnail_size"/>
+                                                                    </div>
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </div>
                                                     </c:forEach>
                                                 </section>
-                                                <section id="pageList">
-                                                    <c:choose>
-                                                        <c:when test="${pageInfo.page<=1}">
-                                                            [이전]&nbsp;
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <a href="boardlist?page=${pageInfo.page-1}">[이전]</a>&nbsp;
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                    <c:forEach var="i" begin="${pageInfo.startPage }"
-                                                               end="${pageInfo.endPage }">
-                                                        <c:choose>
-                                                            <c:when test="${pageInfo.page==i }">[${i }]</c:when>
-                                                            <c:otherwise>
-                                                                <a href="boardlist?page=${i}">[${i }]</a>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </c:forEach>
-                                                    <c:choose>
-                                                        <c:when test="${pageInfo.page>=pageInfo.maxPage }">
-                                                            [다음]
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <a href="boardlist?page=${pageInfo.page+1}">[다음]</a>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </section>
+
+                                                <div class="attach_ajax_list"></div>
+                                                <div class="loading"> 로 딩 중 . . .</div>
+
                                             </c:when>
                                             <c:otherwise>
                                                 <section id="emptyArea">등록된 글이 없습니다.</section>
@@ -211,42 +200,63 @@
 </div>
 
 
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
-<%--<script src="http://code.jquery.com/jquery-latest.min.js"></script>--%>
-<%--<script>--%>
-<%--    function fake_submit() {--%>
-<%--        alert(${pageInfo.listCount}+"건 검색 완료")--%>
-<%--        $("#boardform").attr("action", "./board_search").submit();--%>
-<%--    }--%>
-<%--</script>--%>
+<%-- 무한스크롤 --%>
+<script>
+    let currentPage = 1;
+    let isLoading = false;
 
+    $(window).on("scroll", function () {
+        let scrollTop = $(window).scrollTop();
+        let windowHeight = $(window).height();
+        let documentHeight = $(document).height();
+        let isBottom = scrollTop + windowHeight + 10 >= documentHeight;
 
-<%--<script>--%>
-<%--    const form = document.querySelector('#search_submit')--%>
-<%--    form.addEventListener('submit', (e)=>{--%>
-<%--        e.preventDefault();--%>
-<%--    });--%>
-<%--</script>--%>
+        if (isBottom) {
+            if (currentPage === ${pageInfo.maxPage } || isLoading) {
+                return;
+            }
+            isLoading = true;
+            $(".loading").show();
+            setTimeout(loadNewPage, 1400);
+        }
+    });
 
+    function loadNewPage() {
+        currentPage++;
+        console.log("${sort_name}")
+        if ("${sort_name}" === "boardlist") {
+            getList(currentPage, "boardlist");
+        } else if ("${sort_name}" === "viewssort") {
+            getList(currentPage, "viewssort");
+        } else if ("${sort_name}" === "replysort") {
+            getList(currentPage, "replysort");
+        } else if ("${sort_name}" === "likesort") {
+            getList(currentPage, "likesort");
+        }
+    }
 
-<%--<!-- plugins:js -->--%>
-<%--<script src="../template/vendors/js/vendor.bundle.base.js"></script>--%>
-<%--<!-- endinject -->--%>
-<%--<!-- Plugin js for this page-->--%>
-<%--<script src="../template/vendors/codemirror/codemirror.js"></script>--%>
-<%--<script src="../template/vendors/codemirror/javascript.js"></script>--%>
-<%--<script src="../template/vendors/codemirror/shell.js"></script>--%>
-<%--<script src="../template/vendors/pwstabs/jquery.pwstabs.min.js"></script>--%>
-<%--<!-- End Plugin js for this page-->--%>
-<%--<!-- inject:js -->--%>
-<%--<script src="../template/js/template.js"></script>--%>
-<%--<!-- endinject -->--%>
-<%--<!-- Custom js for this page-->--%>
-<%--<script src="../template/js/codeEditor.js"></script>--%>
-<%--<script src="../template/js/tabs.js"></script>--%>
-<%--<script src="../template/js/tooltips.js"></script>--%>
-<%--<script src="documentation.js"></script>--%>
-<%--<!-- End custom js for this page-->--%>
+    const getList = function (currentPage, sortType) {
+        console.log("inGetList : " + currentPage);
+        $.ajax({
+            type: "post",
+            async: false,
+            url: "http://localhost:8090/boardForm_all_ajax",
+            data: {
+                page: currentPage,
+                sort: sortType
+            },
+            success: function (data) {
+                $('.attach_ajax_list').append(data);
+                $(".loading").hide();
+                isLoading = false;
+            }
+        })
+    }
+</script>
+<%-- 끝 : 무한스크롤 --%>
+
 
 </body>
 

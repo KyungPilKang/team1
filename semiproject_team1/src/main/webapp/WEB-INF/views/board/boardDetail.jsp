@@ -1,5 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,19 +31,19 @@
         </button>
 
         <button class="btn_del">삭제</button>
-                <div>
-                    첨부파일 :
-                    <c:if test="${article.board_fileName!=null }">
-                        <a href="file_down?downFile=${article.board_fileName}"> ${article.board_fileName} </a>
-                    </c:if>
-                </div>
+        <div>
+            첨부파일 :
+            <c:if test="${article.board_fileName!=null }">
+                <a href="file_down?downFile=${article.board_fileName}"> ${article.board_fileName} </a>
+            </c:if>
+        </div>
     </section>
 
 
     <div class="board_content_container">
         <c:if test="${article.board_fileName != null }">
             <video controls="controls" poster="" width="900" height="600">
-                <%-- video_view는 컨트롤러 매핑경로 --%>
+                    <%-- video_view는 컨트롤러 매핑경로 --%>
                 <source src="/video_view/${article.board_fileName}" type="video/mp4">
             </video>
         </c:if>
@@ -89,6 +91,37 @@
     <div class="reply_container" id="reply_container">
         --------------------------------------------------------- 댓글창 위치 ▼
         --------------------------------------------------------------
+        <%-- 댓글 삽입부 시작--%>
+        <section id="listForm">
+            <table>
+                <c:forEach var="reply" items="${reList }">
+                    <c:if test="${article.board_num == reply.b_board_num }">
+                        <tr>
+                            <td>
+                                <div class="ddd">${reply.b_reply_num}</div>
+                            </td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${reply.b_reply_lev!=0}">
+                                        <c:forEach var="i" begin="0" end="${reply.b_reply_lev*2}">
+                                            &nbsp;
+                                        </c:forEach>
+                                        ▶
+                                    </c:when>
+                                    <c:otherwise>▶</c:otherwise>
+                                </c:choose>
+                                    ${reply.b_reply_content}
+                            </td>
+                            <td>${reply.b_reply_nickname }</td>
+                            <td><fmt:formatDate value="${reply.b_reply_date }" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
+
+                        </tr>
+                    </c:if>
+                </c:forEach>
+            </table>
+        </section>
+        <%-- 댓글 삽입부 끝--%>
+
     </div>
 
 </div>
@@ -126,12 +159,10 @@
         /* 빈 하트로 바꾸기 */
         $(".like_mini").append("<div class='heart_off' onclick='like_on()''></div>");
         alert("좋아요를 취소하셨습니다.")
-        // location.reload()를 해야 좋아요를 눌렀을 때 즉시 반영된다
+        // 동영상 재생시 reload를 할 경우 영상도 reload 되므로 X
         // location.reload();
     }
-</script>
 
-<script>
     function like_on() {
         $(".heart_off").hide()
         /* ajax로 article_like에서 해당 board_num의 mno를 추가하기 위해 데이터를 보냄 */
@@ -190,9 +221,7 @@
         alert("와드를 취소하셨습니다.")
         // location.reload();
     }
-</script>
 
-<script>
     function ward_on() {
         $(".bookmark_off").hide()
         $.ajax({
@@ -216,18 +245,6 @@
 </script>
 
 
-<%-- 댓글보기 버튼 --%>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script>
-    reply_show = () => {
-        if ($("#reply_container").css("display") == "none") {
-            $("#reply_container").show()
-        } else {
-            $("#reply_container").hide()
-        }
-    }
-</script>
-
 <%-- 모달 --%>
 <script>
     $(function () {
@@ -242,6 +259,19 @@
         });
     });
 </script>
+
+
+<%-- 댓글보기 버튼 --%>
+<%--<script src="http://code.jquery.com/jquery-latest.min.js"></script>--%>
+<%--<script>--%>
+<%--    reply_show = () => {--%>
+<%--        if ($("#reply_container").css("display") == "none") {--%>
+<%--            $("#reply_container").show()--%>
+<%--        } else {--%>
+<%--            $("#reply_container").hide()--%>
+<%--        }--%>
+<%--    }--%>
+<%--</script>--%>
 
 
 </body>
