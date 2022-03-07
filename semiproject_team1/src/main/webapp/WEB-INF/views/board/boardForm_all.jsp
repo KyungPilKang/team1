@@ -142,7 +142,7 @@
                                                             <div class="each_board_num">보드넘${article.board_num }</div>
                                                             <div class="each_board_sub">
                                                                 <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">
-                                                                        ${article.board_subject}
+                                                                        ${article.board_subject}&nbsp;[${article.board_replycount}]
                                                                 </a>
                                                             </div>
 

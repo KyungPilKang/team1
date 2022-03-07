@@ -94,8 +94,6 @@
                       placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."></textarea>
             <button class="comment_submits" type="button">댓글 달기</button>
         </form>
-        --------------------------------------------------------- 댓글창 위치 ▼
-        --------------------------------------------------------------
         <%-- 댓글 삽입부 시작--%>
         <section id="listForm">
             <table>
@@ -122,7 +120,18 @@
                             <%-- 즉, 현재 사용자의 댓글만 삭제 버튼이 출력된다 --%>
                         <c:if test="${reply.b_reply_nickname == '세션nick'}">
                             <td>
+                                <button onclick="reply_show()">답글 쓰기</button>
+                                    <%-- 누르면 아래에 --%>
+                            </td>
+                            <td>
                                 <button onclick="removeCheck(${reply.b_reply_num})">삭제</button>
+                            </td>
+                            <td>
+<%--                                <form id="re_comment_write">--%>
+<%--                                    <textarea class="re_comment_write_content" maxlength="1000"--%>
+<%--                                              placeholder="대댓글을 적어주세요:)"></textarea>--%>
+<%--                                    <button class="re_comment_submits" type="button">작성</button>--%>
+<%--                                </form>--%>
                             </td>
                         </c:if>
                     </tr>
@@ -277,23 +286,18 @@
             $.ajax({
                 async: true,
                 type: 'POST',
-                // contentType: 'application/json; charset=utf-8',
-                // data: JSON.stringify(b_reply),
                 data: {
                     b_board_num: ${article.board_num},
                     b_reply_content: $(".comment_write_content").val()
                 },
                 url: "http://localhost:8090/regreply",
-                // dataType: "text",
                 success: function (data) {
-                    console.log(data);
                     alert("댓글이 등록되었습니다.");
-                    // reload로 갱신해서 댓글 확인하면 될듯?
                     location.reload();
                 },
                 error: function (textStatus) {
-                    alert("ERROR : " + textStatus);
-                    console.log("ERROR : " + textStatus);
+                    alert(textStatus);
+                    console.log(textStatus);
                     console.log(JSON.stringify(textStatus));
                 }
             });
@@ -305,8 +309,7 @@
 <%-- 댓글삭제 --%>
 <script>
     function removeCheck(replyNum) {
-        if (confirm("정말 삭제하시겠습니까??") == true) {    //확인
-            console.log(replyNum);
+        if (confirm("정말 삭제하시겠습니까??") == true) {
             $.ajax({
                 async: true,
                 type: 'GET',
@@ -315,9 +318,11 @@
                 },
                 url: "http://localhost:8090/replydelete",
                 success: function (data) {
+                    alert("댓글이 삭제되었습니다.");
+                    location.reload();
                 },
                 error: function (textStatus) {
-                    alert("ERROR : " + textStatus);
+                    alert(textStatus);
                 }
             });
         } else {
@@ -327,17 +332,17 @@
 </script>
 
 
-<%-- 댓글보기 버튼 --%>
+<%-- 답글쓰기 버튼 --%>
 <%--<script src="http://code.jquery.com/jquery-latest.min.js"></script>--%>
-<%--<script>--%>
-<%--    reply_show = () => {--%>
-<%--        if ($("#reply_container").css("display") == "none") {--%>
-<%--            $("#reply_container").show()--%>
-<%--        } else {--%>
-<%--            $("#reply_container").hide()--%>
-<%--        }--%>
-<%--    }--%>
-<%--</script>--%>
+<script>
+    reply_show = () => {
+        if ($("#re_comment_write").css("display") == "none") {
+            $("#re_comment_write").show()
+        } else {
+            $("#re_comment_write").hide()
+        }
+    }
+</script>
 
 
 </body>

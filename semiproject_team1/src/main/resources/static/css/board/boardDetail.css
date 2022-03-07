@@ -174,9 +174,6 @@
 
 .reply_container {
     margin-top: 750px;
-    width: 900px;
-    height: 350px;
-    background: #676767;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -240,4 +237,9 @@
 .comment_write_content{
     height:100px;
     width: 800px;
+}
+
+/* 대댓글 작성창 숨김처리 css */
+#re_comment_write{
+    display: none;
 }

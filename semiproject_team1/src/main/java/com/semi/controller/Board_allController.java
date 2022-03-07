@@ -54,31 +54,31 @@ public class Board_allController {
             }
 
             /* 썸네일 시작 */
-            String path = servletContext.getRealPath("/board_upload/image/");
             String thumbnail_base64 = Jsoup.parse(board.getBoard_content()).select("img").attr("src");
-
-            // 위에서 파싱한 b64 데이터에서 split("base64,")로 한 후 0,1 중 1번째 값만 가져와서 디코딩 해줘야한다.
-            List<String> thumbnail_ok = List.of(thumbnail_base64.split("base64,"));
-            // 위에서 파싱한 b64 데이터에서 image 타입을 추출하기 위해 스플릿
-            List<String> image_format = List.of(thumbnail_base64.split(";"));
-            List<String> image_format_result = List.of(image_format.get(0).split("/"));
-            System.out.println("이미지 포맷 체크 : " + image_format_result.get(1));
-            // 파싱 데이터의 1번째 값을 디코딩
-            byte[] decoded = Base64.decodeBase64(thumbnail_ok.get(1));
-            // 고유키값 생성
-            UUIDgeneration uuid = new UUIDgeneration();
-            String filename_uuid = uuid.getUUID();
-            // 경로+파일명(가져오는 파일명이 없으므로 고유키값을 생성하여 넣어준다)+이미지포맷
-            File target = new File(path + filename_uuid + "." + image_format_result.get(1));
-            FileOutputStream fos;
-            fos = new FileOutputStream(target);
-            fos.write(decoded);
-            fos.close();
-            // DB에 thumbnail 이름을 저장 (jsp에서는 아래 이름의 파일이 저장된 경로의 데이터를 불러온다)
-            String thumbnail = filename_uuid + "." + image_format_result.get(1);
-            board.setBoard_thumbnail(thumbnail);
-            /* 썸네일 끝 */
-
+            if (!thumbnail_base64.isEmpty()) {
+                String path = servletContext.getRealPath("/board_upload/image/");
+                // 위에서 파싱한 b64 데이터에서 split("base64,")로 한 후 0,1 중 1번째 값만 가져와서 디코딩 해줘야한다.
+                List<String> thumbnail_ok = List.of(thumbnail_base64.split("base64,"));
+                // 위에서 파싱한 b64 데이터에서 image 타입을 추출하기 위해 스플릿
+                List<String> image_format = List.of(thumbnail_base64.split(";"));
+                List<String> image_format_result = List.of(image_format.get(0).split("/"));
+                System.out.println("이미지 포맷 체크 : " + image_format_result.get(1));
+                // 파싱 데이터의 1번째 값을 디코딩
+                byte[] decoded = Base64.decodeBase64(thumbnail_ok.get(1));
+                // 고유키값 생성
+                UUIDgeneration uuid = new UUIDgeneration();
+                String filename_uuid = uuid.getUUID();
+                // 경로+파일명(가져오는 파일명이 없으므로 고유키값을 생성하여 넣어준다)+이미지포맷
+                File target = new File(path + filename_uuid + "." + image_format_result.get(1));
+                FileOutputStream fos;
+                fos = new FileOutputStream(target);
+                fos.write(decoded);
+                fos.close();
+                // DB에 thumbnail 이름을 저장 (jsp에서는 아래 이름의 파일이 저장된 경로의 데이터를 불러온다)
+                String thumbnail = filename_uuid + "." + image_format_result.get(1);
+                board.setBoard_thumbnail(thumbnail);
+                /* 썸네일 끝 */
+            }
             board_allService.regBoard(board);
             mv.setViewName("redirect:/boardlist");
         } catch (Exception e) {
@@ -492,31 +492,31 @@ public class Board_allController {
         return "board/boardForm_all_ajax";
     }
 
-//    @PostMapping("/regreply")
+    @ResponseBody
     @RequestMapping(value = "regreply", method = {RequestMethod.GET, RequestMethod.POST})
     public void regreply(@RequestParam(value = "b_board_num") int b_board_num,
-    @RequestParam(value = "b_reply_content") String b_reply_content) {
+                         @RequestParam(value = "b_reply_content") String b_reply_content) {
         B_reply b_reply = new B_reply();
-        System.out.println("글번호 가져옴? : "+b_board_num);
-        System.out.println("댓글내용 가져옴? : "+b_reply_content);
+        System.out.println("글번호 가져옴? : " + b_board_num);
+        System.out.println("댓글내용 가져옴? : " + b_reply_content);
         try {
             // 닉네임은 세션에서 가져왔다고 가정
             b_reply.setB_board_num(b_board_num);
             b_reply.setB_reply_content(b_reply_content);
             board_allService.regReply(b_reply);
             System.out.println("댓글 작성 확인");
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    @ResponseBody
     @RequestMapping(value = "replydelete", method = {RequestMethod.GET, RequestMethod.POST})
     public void replydelete(@RequestParam(value = "b_reply_num") int b_reply_num) {
-        B_reply b_reply = new B_reply();
-        System.out.println("글번호 가져옴? : "+b_reply_num);
+        System.out.println("글번호 가져옴? : " + b_reply_num);
         try {
             board_allService.delReply(b_reply_num);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
