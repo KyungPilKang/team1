@@ -494,26 +494,44 @@ public class Board_allController {
 
     @ResponseBody
     @RequestMapping(value = "regreply", method = {RequestMethod.GET, RequestMethod.POST})
-    public void regreply(@RequestParam(value = "b_board_num") int b_board_num,
+    public void regreply(@RequestParam(value = "b_board_num") int boardNum,
                          @RequestParam(value = "b_reply_content") String b_reply_content) {
         B_reply b_reply = new B_reply();
-        System.out.println("글번호 가져옴? : " + b_board_num);
-        System.out.println("댓글내용 가져옴? : " + b_reply_content);
         try {
-            // 닉네임은 세션에서 가져왔다고 가정
-            b_reply.setB_board_num(b_board_num);
+            b_reply.setB_board_num(boardNum);
             b_reply.setB_reply_content(b_reply_content);
+            System.out.println("게시물번호 : "+boardNum);
+            System.out.println("댓글 내용 : "+b_reply_content);
             board_allService.regReply(b_reply);
-            System.out.println("댓글 작성 확인");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+
+    @ResponseBody
+    @RequestMapping(value = "re_regreply", method = {RequestMethod.GET, RequestMethod.POST})
+    public void re_regreply(@RequestParam(value = "b_board_num") int boardNum,
+                            @RequestParam(value = "b_reply_num") int b_reply_num,
+                            @RequestParam(value = "b_reply_content") String b_reply_content) {
+        B_reply b_reply = new B_reply();
+        try {
+            b_reply.setB_board_num(boardNum);
+            b_reply.setB_reply_num(b_reply_num);
+            b_reply.setB_reply_content(b_reply_content);
+            System.out.println("게시물 번호 : "+boardNum);
+            System.out.println("대댓글번호 : "+b_reply_num);
+            System.out.println("대댓글 내용 : "+b_reply_content);
+            board_allService.re_regReply(b_reply);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @ResponseBody
     @RequestMapping(value = "replydelete", method = {RequestMethod.GET, RequestMethod.POST})
     public void replydelete(@RequestParam(value = "b_reply_num") int b_reply_num) {
-        System.out.println("글번호 가져옴? : " + b_reply_num);
         try {
             board_allService.delReply(b_reply_num);
         } catch (Exception e) {

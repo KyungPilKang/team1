@@ -15,4 +15,5 @@ public interface b_replyDAO {
     void insertReply(B_reply b_reply) throws Exception;
     void deleteReply(int b_reply_num) throws Exception;
     B_reply selectReply(int b_reply_num) throws Exception;
+    void updateReplyReSeq(B_reply b_reply) throws Exception;
 }

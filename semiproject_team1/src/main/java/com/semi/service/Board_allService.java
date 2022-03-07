@@ -36,7 +36,5 @@ public interface Board_allService {
     List<B_reply> getReplyList(int boardNum) throws Exception;
     void regReply(B_reply b_reply) throws Exception;
     void delReply(int b_reply_num) throws Exception;
-//    int getBoard_replyCount(int boardNum) throws Exception;
-//    String getReplyList_json(int page, PageInfo pageInfo) throws  Exception;
-
+    void re_regReply(B_reply b_reply) throws Exception;
 }

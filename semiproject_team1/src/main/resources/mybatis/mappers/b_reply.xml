@@ -10,18 +10,9 @@
         select *
         from b_reply
         where b_board_num = #{boardNum}
-        order by b_reply_date desc
+        order by b_reply_ref desc, b_reply_lev asc, b_reply_seq asc
         ]]>
 	</select>
-
-<!--	<select id="board_reply_count" parameterType="int" resultType="int">-->
-<!--			<![CDATA[-->
-<!--		select count(*)-->
-<!--		from b_reply-->
-<!--		where b_board_num = #{boardNum}-->
-<!--		]]>-->
-
-<!--	</select>-->
 
 
 	<select id="selectMaxReplyNum" resultType="integer">
@@ -31,7 +22,7 @@
 		]]>
 	</select>
 
-	<insert id="insertReply" parameterType="board">
+	<insert id="insertReply" parameterType="b_reply">
 		<![CDATA[
 		insert into b_reply
 		values (#{b_reply_num}, #{b_reply_nickname}, #{b_board_num}, #{b_reply_content}, #{b_reply_ref}, #{b_reply_lev},
@@ -53,6 +44,12 @@
 		]]>
 	</select>
 
+	<update id="updateReplyReSeq" parameterType="b_reply">
+		<![CDATA[
+		update b_reply set b_reply_seq=b_reply_seq+1
+		where b_reply_ref=#{b_reply_ref} and b_reply_seq > #{b_reply_seq}
+		]]>
+	</update>
 
 
 </mapper>

@@ -265,12 +265,27 @@ public class Board_allServiceImpl implements Board_allService {
     }
 
     @Override
+    public void re_regReply(B_reply b_reply) throws Exception {
+        B_reply src_reply = b_replyDAO.selectReply(b_reply.getB_reply_num());
+        Integer replyNum = b_replyDAO.selectMaxReplyNum();
+        b_reply.setB_reply_num(replyNum+1);
+        b_reply.setB_reply_ref(src_reply.getB_reply_ref());
+        b_reply.setB_reply_lev(src_reply.getB_reply_lev()+1);
+        b_replyDAO.updateReplyReSeq(src_reply);
+        b_reply.setB_reply_seq(src_reply.getB_reply_seq()+1);
+        b_reply.setB_reply_nickname("세션nick");
+        b_reply.setB_reply_likecount(0);
+        b_replyDAO.insertReply(b_reply);
+        boardDAO.updateReplyCount(b_reply.getB_board_num());
+    }
+
+
+    @Override
     public void delReply(int b_reply_num) throws Exception {
         B_reply b_reply = b_replyDAO.selectReply(b_reply_num);
         b_replyDAO.deleteReply(b_reply_num);
         boardDAO.deleteReplyCount(b_reply.getB_board_num());
     }
-
 
 
 //    @Override

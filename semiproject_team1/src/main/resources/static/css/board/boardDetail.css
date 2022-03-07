@@ -240,6 +240,6 @@
 }
 
 /* 대댓글 작성창 숨김처리 css */
-#re_comment_write{
+.re_comment_write{
     display: none;
 }

@@ -119,19 +119,22 @@
                             <%-- 세션에 존재하는 닉네임의 게시물만 삭제하도록 변경 예정, 현재 세션이 존재한다 가정 --%>
                             <%-- 즉, 현재 사용자의 댓글만 삭제 버튼이 출력된다 --%>
                         <c:if test="${reply.b_reply_nickname == '세션nick'}">
+                            <%-- 대댓글 까지만 답글이 가능하도록 제한한다 --%>
+                            <c:if test="${reply.b_reply_lev == '0'}">
                             <td>
-                                <button onclick="reply_show()">답글 쓰기</button>
+                                <button onclick="reply_show(${reply.b_reply_num})">답글 쓰기</button>
                                     <%-- 누르면 아래에 --%>
                             </td>
+                            </c:if>
                             <td>
                                 <button onclick="removeCheck(${reply.b_reply_num})">삭제</button>
                             </td>
                             <td>
-<%--                                <form id="re_comment_write">--%>
-<%--                                    <textarea class="re_comment_write_content" maxlength="1000"--%>
-<%--                                              placeholder="대댓글을 적어주세요:)"></textarea>--%>
-<%--                                    <button class="re_comment_submits" type="button">작성</button>--%>
-<%--                                </form>--%>
+                                <form id="re_comment_write${reply.b_reply_num}" class="re_comment_write">
+                                    <textarea class="re_comment_write_content" id="re${reply.b_reply_num}" maxlength="1000"
+                                              placeholder="대댓글을 적어주세요:)"></textarea>
+                                    <button class="re_comment_submits" onclick="re_reply_submit(${reply.b_reply_num},document.getElementById('re${reply.b_reply_num}').value)">작성</button>
+                                </form>
                             </td>
                         </c:if>
                     </tr>
@@ -335,14 +338,46 @@
 <%-- 답글쓰기 버튼 --%>
 <%--<script src="http://code.jquery.com/jquery-latest.min.js"></script>--%>
 <script>
-    reply_show = () => {
-        if ($("#re_comment_write").css("display") == "none") {
-            $("#re_comment_write").show()
+    reply_show = (replyNum) => {
+        if ($("#re_comment_write"+replyNum).css("display") == "none") {
+            $("#re_comment_write"+replyNum).show()
         } else {
-            $("#re_comment_write").hide()
+            $("#re_comment_write"+replyNum).hide()
         }
     }
 </script>
+
+
+
+<%-- 대댓글 작성 ajax --%>
+<script>
+    function re_reply_submit(re_replyNum,re_value) {
+        console.log(typeof(re_replyNum))
+        console.log(typeof(${article.board_num}))
+        console.log(typeof(re_value))
+        $.ajax({
+            async: true,
+            type: 'POST',
+            data: {
+                b_reply_num: re_replyNum,
+                b_board_num: ${article.board_num},
+                b_reply_content: re_value
+            },
+            url: "http://localhost:8090/re_regreply",
+            success: function (data) {
+                alert("대댓글이 등록되었습니다.");
+                location.reload();
+            },
+            error: function (textStatus) {
+                alert(textStatus);
+            }
+        });
+    }
+</script>
+
+
+
+
 
 
 </body>
