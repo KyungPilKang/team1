@@ -5,30 +5,27 @@
 <head>
 <meta charset="UTF-8">
 <title>피드백 요청하기</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/feedback/feedbackwriteForm.css">
 </head>
 <body>
-	<div class='a'>
-		<img class="mb-4"
-			src="${pageContext.request.contextPath}/resources/asset/image/login/dog.png"
-			alt="" width="72" height="57">
-		<h5 class='title'>롤판.DOG</h5>
-
-		<span class="s1"> <input type="button"
-			class="btn btn-danger btn-block" value='피드백'
-			onclick="location.href='test1.html'"></span> <span class="s2"><input
-			type="button" class="btn btn-danger btn-block" value='듀오매칭'
-			onclick="location.href='test2.html'"></span> <span class="s3"><input
-			type="button" class="btn btn-danger btn-block" value='자유게시판'
-			onclick="location.href='test3.html'"></span> <span class="s3"><input
-			type="button" class="btn btn-danger btn-block" value='마이페이지'
-			onclick="location.href='test3.html'"></span> <span class="s3"><input
-			type="button" class="btn btn-danger btn-block" value='로그아웃'
-			onclick="location.href='test3.html'"></span>
-	</div>
-	<div class="card-body">
-		<h3 class="mb-4">피드백</h3>
-	</div>
-
+<div class="container">
+		<div class="header">
+			<h1>
+				<a href="#">LOLPAN.DOG</a>
+			</h1>
+			<div class="nav">
+				<ul>
+					<li><a href="#">FEEDBACK</a></li>
+					<li><a href="#">DUOMATCHING</a></li>
+					<li><a href="#">FREEBOARD</a></li>
+					<li><a href="#">MYPAGE</a></li>
+					<li><a href="#">LOGOUT</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="hero">
+		<h2>FEEDBACK</h2>
 	<form name="write_form_member" method="post">
 		<table width="940" style="padding: 5px 0 5px 0;">
 			<tr height="2" bgcolor="#FFC8C3">
@@ -65,7 +62,7 @@
 				</select>
 			</tr>
 			<tr>
-				<th>요청사항</th>
+				<th>내용</th>
 				<td><textarea style="margin-left: 31px" cols="50" rows="5"
 						spellcheck="true"></textarea></td>
 			</tr>
@@ -81,5 +78,7 @@
 			</tr>
 		</table>
 	</form>
+	</div>
+	</div>
 </body>
 </html>
