@@ -9,7 +9,9 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Signin Template · Bootstrap v5.1</title>
+    <link rel="shortcut icon" sizes="16x16 32x32 64x64"
+	href="/resources/asset/image/login/dog1.png" />
+    <title>비밀번호찾기</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
 
@@ -42,7 +44,7 @@
     
 <main class="form-signin">
   <form>
-    <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog.png" alt="" width="72" height="57">
+    <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png" alt="" width="72" height="68">
     <h1 class="h3 mb-3 fw-normal">롤판.DOG</h1>
     <div class="form-floating">
       <input type="email" class="form-control" id="floatingInput" placeholder="로그인 이메일을 입력하세요">

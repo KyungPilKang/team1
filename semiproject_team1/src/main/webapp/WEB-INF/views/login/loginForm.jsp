@@ -5,12 +5,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="shortcut icon" sizes="16x16 32x32 64x64"
+	href="/resources/asset/image/login/dog1.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Hugo 0.88.1">
-<title>Signin Template · Bootstrap v5.1</title>
+<title>로그인</title>
 
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
@@ -44,14 +46,16 @@
 	<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
+
 <body class="text-center">
+<div class="container">
 
 	<main class="form-signin">
 
 		<img class="mb-4"
-			src="${pageContext.request.contextPath}/resources/asset/image/login/dog.png"
-			alt="" width="72" height="57">
-		<h1 class="h3 mb-3 fw-normal">롤판.DOG</h1>
+			src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
+			alt="" width="72" height="68">
+		<h1 class="h1 mb-3 fw-normal">LOLPAN.DOG</h1>
 		<form id="form" action="login" method="post">
 			<div class="form-floating">
 				<input type="email" class="form-control" id="mem_email_id" name="mem_email_id"
@@ -176,6 +180,6 @@ console.log(Kakao.isInitialized());
 </script>
  
 
-
+</div>
 </body>
 </html>

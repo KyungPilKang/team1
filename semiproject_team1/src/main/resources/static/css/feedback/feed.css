@@ -29,6 +29,7 @@
 }
 
 .container .header h1 a {
+	height: 100px;
 	text-decoration: none;
 	color: white;
 	font-family: abster;
