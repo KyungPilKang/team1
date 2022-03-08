@@ -8,6 +8,8 @@
 <head>
 
     <meta charset="UTF-8">
+    <link rel="shortcut icon" sizes="16x16 32x32 64x64"
+	href="/resources/asset/image/login/dog1.png" />
     <title>롤판.DOG</title>
     <style>
 
@@ -21,10 +23,11 @@
 </head>
 <body>
 <!-- 게시판 등록 -->
-
+<div class="background">
 <div class="wf_container">
 
-    <h2>글쓰기</h2>
+
+    <h1>WRITING</h1>
 
 
     <%--웹에디터를 통해 입력하는 텍스트 해당 값은 textarea를 hidden 속성을 추가하여 입력된 값을 복사하여 서버로 전송--%>
@@ -61,7 +64,7 @@
     <button onclick="fake_submit()" class="btn_ok">작성완료</button>
 
 </div>
-
+</div>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
     function fake_submit() {

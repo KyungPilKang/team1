@@ -1,17 +1,39 @@
-h2{
-    margin-left : 10px;
+@font-face {
+	font-family: abster;
+	src: url(font/abster-webfont.woff) format('woff');
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.background {
+	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+		url(../../asset/image/board/lol3.jpg);
+	background-size: cover;
+}
+
+h1 {
+	margin-left: 10px;
+	text-decoration: none;
+	color: white;
+	font-size: 60px;
+	margin-bottom: 20px;
+	text-align: center;
 }
 
 #editor {
-    width: 700px;
-    margin-top:25px;
-    /*margin: 0 auto;*/
+	width: 700px;
+	margin-top: 25px;
+	/*margin: 0 auto;*/
 }
 
-.wf_container{
-    width: 698px;
-    height: 1000px;
-    margin-left: 33%;
+.wf_container {
+	width: 698px;
+	height: 1000px;
+	margin-left: 33%;
 }
 
 /*.board_cat{*/
@@ -23,52 +45,60 @@ h2{
 /*    border-radius : 5px;*/
 /*    margin: 8px 0;*/
 /*}*/
-
-#board_subject{
-    padding-left: 10px;
-    border : 1px solid darkgray;
-    height: 40px;
-    width: 693px;
-    margin : 8px 0;
-    font-size:14px;
-}
-.board_file_cont{
-    margin: 16px 0;
-}
-#board_file{
-    display: none;
-}
-.btn_file{
-    width: 150px;
-    height: 48px;
-    padding: 6px 25px;
-    background-color:darkgray;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
-}
-.btn_cc{
-    border : none;
-    border-radius: 4px;
-    width: 120px;
-    height: 48px;
-    background: darkgray;
-    color:white;
-    font-size:15px;
-    cursor: pointer;
+#board_subject {
+	padding-left: 10px;
+	border: 1px solid darkgray;
+	height: 40px;
+	width: 693px;
+	margin: 8px 0;
+	font-size: 14px;
 }
 
-.btn_ok{
-    border : none;
-    border-radius: 4px;
-    width: 120px;
-    height: 48px;
-    float:right;
-    background: darkgray;
-    color:white;
-    font-size:15px;
-    cursor: pointer;
+.board_file_cont {
+	margin: 16px 0;
 }
 
-.invalid_cat { border-color: red }
-#error_cat { color: red }
+#board_file {
+	display: none;
+}
+
+.btn_file {
+	width: 150px;
+	height: 48px;
+	padding: 6px 25px;
+	background-color: darkgray;
+	border-radius: 4px;
+	color: white;
+	cursor: pointer;
+}
+
+.btn_cc {
+	border: none;
+	border-radius: 4px;
+	width: 120px;
+	height: 48px;
+	background: darkgray;
+	color: white;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+.btn_ok {
+	border: none;
+	border-radius: 4px;
+	width: 120px;
+	height: 48px;
+	float: right;
+	background: darkgray;
+	color: white;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+.invalid_cat {
+	border-color: red
+}
+
+#error_cat {
+	color: red
+}

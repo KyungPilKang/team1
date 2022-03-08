@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" sizes="16x16 32x32 64x64"
+	href="/resources/asset/image/login/dog1.png" />
 <title>피드백 게시판</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/feedback/feed.css">
@@ -13,7 +15,7 @@
 		<div class="header">
 			<h1>
 				<a href="#"> <img class="mb-4"
-					src="${pageContext.request.contextPath}/resources/asset/image/login/dog.png"
+					src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
 					alt="" width="72" height="62"> LOLPAN.DOG
 				</a>
 			</h1>
