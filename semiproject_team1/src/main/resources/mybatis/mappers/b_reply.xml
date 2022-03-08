@@ -10,10 +10,19 @@
         select *
         from b_reply
         where b_board_num = #{boardNum}
-        order by b_reply_ref desc, b_reply_lev asc, b_reply_seq asc
+        order by b_reply_ref desc, b_reply_lev asc, b_reply_seq desc
         ]]>
 	</select>
 
+	<select id="selectReplyList_like" resultType="b_reply"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from b_reply
+		where b_board_num = #{boardNum}
+		order by b_reply_likecount desc
+		]]>
+	</select>
 
 	<select id="selectMaxReplyNum" resultType="integer">
 		<![CDATA[
@@ -30,6 +39,13 @@
 		]]>
 	</insert>
 
+	<update id="updateReplyReSeq" parameterType="b_reply">
+		<![CDATA[
+		update b_reply set b_reply_seq=b_reply_seq+1
+		where b_reply_ref=#{b_reply_ref} and b_reply_seq > #{b_reply_seq}
+		]]>
+	</update>
+
 	<delete id="deleteReply" parameterType="int">
 		<![CDATA[
 		delete from b_reply where b_reply_num=#{b_reply_num}
@@ -44,12 +60,46 @@
 		]]>
 	</select>
 
-	<update id="updateReplyReSeq" parameterType="b_reply">
+
+
+	<!-- 댓글 좋아요 관련 -->
+	<update id="re_insert_like_mno">
 		<![CDATA[
-		update b_reply set b_reply_seq=b_reply_seq+1
-		where b_reply_ref=#{b_reply_ref} and b_reply_seq > #{b_reply_seq}
+		update b_reply
+		set b_reply_like_member =concat_ws(',',b_reply_like_member,#{mno})
+		where b_reply_num = #{b_reply_num}
 		]]>
 	</update>
 
+	<update id="re_delete_like_mno">
+		<![CDATA[
+		update b_reply
+		set b_reply_like_member = #{b_reply_like_member}
+		where b_reply_num = #{b_reply_num}
+		]]>
+	</update>
+
+	<update id="re_update_like_up" parameterType="int">
+		<![CDATA[
+		update b_reply
+		set b_reply_likecount = b_reply_likecount + 1
+		where b_reply_num = #{b_reply_num}
+		]]>
+	</update>
+
+	<update id="re_update_like_down" parameterType="int">
+		<![CDATA[
+		update b_reply
+		set b_reply_likecount = b_reply_likecount - 1
+		where b_reply_num = #{b_reply_num}
+		]]>
+	</update>
+
+	<!-- 게시물 삭제시 댓글도 삭제 -->
+	<delete id="deleteReplyWithBoard" parameterType="int">
+		<![CDATA[
+		delete from b_reply where b_board_num=#{boardNum}
+		]]>
+	</delete>
 
 </mapper>

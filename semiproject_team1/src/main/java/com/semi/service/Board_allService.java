@@ -34,7 +34,11 @@ public interface Board_allService {
 
 
     List<B_reply> getReplyList(int boardNum) throws Exception;
+    List<B_reply> getReplyList_like(int boardNum) throws Exception;
     void regReply(B_reply b_reply) throws Exception;
     void delReply(int b_reply_num) throws Exception;
     void re_regReply(B_reply b_reply) throws Exception;
+
+    void re_like_ins_mno(int b_reply_num, String mno) throws Exception;
+    void re_like_del_mno(int b_reply_num, String mno) throws Exception;
 }

@@ -4,9 +4,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>피드백 게시판</title>
+<title>전체 게시판</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/feedback/feed.css">
+	<style>
+		.card ul li h6 {
+			text-decoration: none;
+			color: white;
+			padding: 15px 20px;
+			font-family: abster;
+			display: inline-block;
+		}
+		.card ul li a{
+			margin-left:20px;
+		}
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -34,16 +46,16 @@
 		</div>
 		<div class="card">
 			<ul class="list">
-				<li><a href="#">HOME</a>
+				<li><h6>HOME</h6>
 					<ul class="list">
 						<li><a href="/boardlist">ALL</a></li>
 					</ul></li>
-				<li><a href="#">LOL</a>
+				<li><h6>LOL</h6>
 					<ul class="list">
 						<li><a href="/boardlist_highlight">HIGHLIGHT</a></li>
 						<li><a href="#">TIP.KNOIW-HOW</a></li>
 					</ul></li>
-				<li><a href="#">COMMUNITY</a>
+				<li><h6>COMMUNITY</h6>
 					<ul class="list">
 						<li><a href="#">FREE</a></li>
 					</ul></li>

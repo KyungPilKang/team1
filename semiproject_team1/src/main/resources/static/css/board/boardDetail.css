@@ -243,3 +243,25 @@
 .re_comment_write{
     display: none;
 }
+
+
+.re_heart {
+    height: 15px;
+    width: 15px;
+    border-radius: 10px;
+    background: red;
+    cursor: pointer;
+}
+
+.re_heart_off {
+    height: 15px;
+    width: 15px;
+    border-radius: 10px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+/* 댓글 좋아요 기능구현에 필수 css*/
+.rh_off_hide, .rh_hide{
+    display: none;
+}

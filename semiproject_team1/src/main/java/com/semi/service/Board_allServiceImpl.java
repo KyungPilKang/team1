@@ -169,6 +169,8 @@ public class Board_allServiceImpl implements Board_allService {
         // 여기에 boardNum에 해당하는 좋아요, 즐찾 테이블도 같이 삭제해야함
         article_likeDAO.delete_like_boardNum(boardNum);
         article_wardDAO.delete_ward_boardNum(boardNum);
+        b_replyDAO.deleteReplyWithBoard(boardNum);
+        // 게시물 삭제시 댓글들도 다 삭제되도록
     }
 
     @Override
@@ -187,7 +189,7 @@ public class Board_allServiceImpl implements Board_allService {
         if (like_member.contains(mno)) {
             like_ok = true;
         }
-        System.out.println("좋아요를 누른 유저들 중 현재 유저가 존재? " + like_ok);
+//        System.out.println("좋아요를 누른 유저들 중 현재 유저가 존재? " + like_ok);
         return like_ok;
     }
 
@@ -208,7 +210,7 @@ public class Board_allServiceImpl implements Board_allService {
     public void setBoard_likeCount(int boardNum) throws Exception {
         /* DB에 article_like의 mno가 not null이라 생성시 0을 무조건 넣어주므로 -1 해준다 */
         int board_likecount = article_likeDAO.board_like_count(boardNum) - 1;
-        System.out.println("serviceImpl의 board_likecount : " + board_likecount);
+//        System.out.println("serviceImpl의 board_likecount : " + board_likecount);
         boardDAO.updateBoardLike(boardNum, board_likecount);
     }
     /* ----------------------- 끝 : 좋아요 ----------------------- */
@@ -223,7 +225,7 @@ public class Board_allServiceImpl implements Board_allService {
         if (ward_member.contains(mno)) {
             ward_ok = true;
         }
-        System.out.println("즐겨찾기한 유저들 중 현재 유저가 존재? " + ward_ok);
+//        System.out.println("즐겨찾기한 유저들 중 현재 유저가 존재? " + ward_ok);
         return ward_ok;
     }
 
@@ -241,10 +243,22 @@ public class Board_allServiceImpl implements Board_allService {
 
 
     /* ---------------------- 시작 : 댓글 ---------------------- */
+
+    /* 댓글 최신순 정렬 */
     @Override
     public List<B_reply> getReplyList(int boardNum) throws Exception {
         return b_replyDAO.selectReplyList(boardNum);
     }
+
+    @Override
+    public List<B_reply> getReplyList_like(int boardNum) throws Exception {
+        return b_replyDAO.selectReplyList_like(boardNum);
+    }
+
+    /* 댓글 인기순 정렬 */
+
+
+
 
     @Override
     public void regReply(B_reply b_reply) throws Exception {
@@ -259,7 +273,7 @@ public class Board_allServiceImpl implements Board_allService {
         b_reply.setB_reply_ref(b_replyNum);
         b_reply.setB_reply_lev(0); // 대댓글이 아니라 lev는 0
         b_reply.setB_reply_seq(0); // 대댓글이 아니라 seq는 0
-//        b_reply.setB_reply_like_member("0");
+        b_reply.setB_reply_like_member("0");
         b_replyDAO.insertReply(b_reply);
         boardDAO.updateReplyCount(b_reply.getB_board_num());
     }
@@ -268,6 +282,7 @@ public class Board_allServiceImpl implements Board_allService {
     public void re_regReply(B_reply b_reply) throws Exception {
         B_reply src_reply = b_replyDAO.selectReply(b_reply.getB_reply_num());
         Integer replyNum = b_replyDAO.selectMaxReplyNum();
+
         b_reply.setB_reply_num(replyNum+1);
         b_reply.setB_reply_ref(src_reply.getB_reply_ref());
         b_reply.setB_reply_lev(src_reply.getB_reply_lev()+1);
@@ -275,10 +290,11 @@ public class Board_allServiceImpl implements Board_allService {
         b_reply.setB_reply_seq(src_reply.getB_reply_seq()+1);
         b_reply.setB_reply_nickname("세션nick");
         b_reply.setB_reply_likecount(0);
+        b_reply.setB_reply_like_member("0");
+
         b_replyDAO.insertReply(b_reply);
         boardDAO.updateReplyCount(b_reply.getB_board_num());
     }
-
 
     @Override
     public void delReply(int b_reply_num) throws Exception {
@@ -287,49 +303,39 @@ public class Board_allServiceImpl implements Board_allService {
         boardDAO.deleteReplyCount(b_reply.getB_board_num());
     }
 
-
-//    @Override
-//    public String getReplyList_json(int page, PageInfo pageInfo) throws Exception {
-//        int listCount = b_replyDAO.selectReplyCount();
-//        int maxPage = (int) Math.ceil((double) listCount / 10);
-//        int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
-//        int endPage = startPage + 10 - 1;
-//        if (endPage > maxPage) endPage = maxPage;
-//        pageInfo.setStartPage(startPage);
-//        pageInfo.setEndPage(endPage);
-//        pageInfo.setMaxPage(maxPage);
-//        pageInfo.setPage(page);
-//        pageInfo.setListCount(listCount);
-//        int startrow = (page - 1) * 10 + 1;
-//
-//        List<B_reply> reList = b_replyDAO.selectReplyList_all(startrow);
-//        JSONObject totalObject=new JSONObject();
-//        JSONArray replysArray=new JSONArray();
-//        for(B_reply re:reList){
-//            JSONObject reply = new JSONObject();
-//            reply.put("b_reply_num",re.getB_reply_num());
-//            reply.put("b_reply_nickname",re.getB_reply_nickname());
-//            reply.put("b_board_num",re.getB_board_num());
-//            reply.put("b_reply_content",re.getB_reply_content());
-//            reply.put("b_reply_ref",re.getB_reply_ref());
-//            reply.put("b_reply_lev",re.getB_reply_lev());
-//            reply.put("b_reply_seq",re.getB_reply_seq());
-//            // 여기서 날짜 형식을 변경해줘야 컨트롤러에서 response시 날짜가 정상적인 json데이터로 넘어간다
-//            // 이유는 모르겠지만 바로 put하면 {"date":2022 KST 11} 같이 따옴표 없이 넘어가서 파싱시 오류뜸
-//            Date date = re.getB_reply_date();
-//            SimpleDateFormat b_date = new SimpleDateFormat("yyyy년 M월 d일 E요일 a H:mm");
-//            reply.put("b_reply_date",b_date.format(date));
-//            reply.put("b_reply_likecount",re.getB_reply_likecount());
-//            reply.put("b_reply_like_member",re.getB_reply_like_member());
-//            reply.put("b_reply_edit_controll",re.getB_reply_edit_controll());
-//            replysArray.add(reply);
-//        }
-//        totalObject.put("replys",replysArray);
-//        return totalObject.toJSONString();
-//    }
-
-
     /* ----------------------- 끝 : 댓글 ----------------------- */
 
 
+
+
+    /* ---------------------- 시작 : 댓글 좋아요 ---------------------- */
+
+    // 댓글 좋아요 누른 사용자를 DB에 추가
+    @Override
+    public void re_like_ins_mno(int b_reply_num, String mno) throws Exception {
+        b_replyDAO.re_insert_like_mno(b_reply_num, mno);
+        b_replyDAO.re_update_like_up(b_reply_num);
+    }
+
+    // 댓글 좋아요 취소한 사용자를 DB에서 제거
+    @Override
+    public void re_like_del_mno(int b_reply_num, String mno) throws Exception {
+        // 1. DB에서 해당 b_reply_num의 b_reply_like_member 문자열 값을 가져온다
+        B_reply reply = b_replyDAO.selectReply(b_reply_num);
+        String re_like_mem = reply.getB_reply_like_member();
+        // 2. 값을 ,로 split 해서 list에 담는다
+        List<String> re_like_mem_arr = new java.util.ArrayList<>(List.of(re_like_mem.split(",")));
+        // 3. 받아온 mno값과 일치하는 데이터를를 list에서 제거한다
+        System.out.println("mno가 제거되기 전 리스트 : "+re_like_mem_arr);
+        re_like_mem_arr.remove(mno);
+        // 4. list를 String으로 형변환 후 괄호 및 공백을 제거해서 변수에 넣어준다
+        // (String으로 변환시 괄호가 추가되므로 필요한 작업, list<String>로 mysql에 데이터를 넘기는 방법을 모르기 때문에 임시방편으로 사용)
+        String result_re_like_mem = String.valueOf(re_like_mem_arr).replace("[","").replace("]","").replace(" ","");
+        System.out.println("mno가 제거된 후 리스트 : " + result_re_like_mem);
+        // 5. 넣고 해당 b_reply_num의 b_reply_like_member에 update 시킨다
+        b_replyDAO.re_delete_like_mno(b_reply_num, result_re_like_mem);
+        b_replyDAO.re_update_like_down(b_reply_num);
+    }
+
+    /* ---------------------- 끝 : 댓글 좋아요 ---------------------- */
 }

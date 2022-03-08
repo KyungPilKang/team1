@@ -52,7 +52,6 @@
 
     <section id="board_middle">
 
-        <button id="btn_reply" class="btn_reply" onclick="reply_show()">댓글보기</button>
         <button class="btn_reply" onclick="location.href='./boardlist?page=${page}'"> 목록(임시)</button>
 
         <div class="like_and_ward">
@@ -89,11 +88,25 @@
     </section>
 
     <div class="reply_container" id="reply_container">
-        <form>
+        <%-- 세션의 회원번호(mno)가 존재할 때 글쓰기 가능 --%>
+        <c:if test="${!empty mno}">
+            <form>
             <textarea class="comment_write_content" maxlength="1000"
                       placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."></textarea>
-            <button class="comment_submits" type="button">댓글 달기</button>
-        </form>
+                <button class="comment_submits" type="button">댓글 달기</button>
+            </form>
+        </c:if>
+
+
+        <div><b>댓글</b> 총 ${article.board_replycount}개</div>
+        <div>
+            <%-- 최신순은 페이지 새로고침 해주면 된다 --%>
+            <button onclick="location.reload()">최신순</button>
+            <%-- 인기순은 버튼을 누르면 아래 댓글 삽입부를 ajax로 다 날리고 인기순 정렬한 댓글창을 삽입하면 된다 --%>
+            <button onclick="replyList_sort()">인기순</button>
+        </div>
+
+        <div class="append_replyList"></div>
         <%-- 댓글 삽입부 시작--%>
         <section id="listForm">
             <table>
@@ -105,7 +118,7 @@
                         <td>
                             <c:choose>
                                 <c:when test="${reply.b_reply_lev!=0}">
-                                    <c:forEach var="i" begin="0" end="${reply.b_reply_lev*2}">
+                                    <c:forEach var="i" begin="0" end="${reply.b_reply_lev*3}">
                                         &nbsp;
                                     </c:forEach>
                                     ▶
@@ -118,25 +131,67 @@
                         <td><fmt:formatDate value="${reply.b_reply_date }" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
                             <%-- 세션에 존재하는 닉네임의 게시물만 삭제하도록 변경 예정, 현재 세션이 존재한다 가정 --%>
                             <%-- 즉, 현재 사용자의 댓글만 삭제 버튼이 출력된다 --%>
+                            <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
                         <c:if test="${reply.b_reply_nickname == '세션nick'}">
                             <%-- 대댓글 까지만 답글이 가능하도록 제한한다 --%>
                             <c:if test="${reply.b_reply_lev == '0'}">
-                            <td>
-                                <button onclick="reply_show(${reply.b_reply_num})">답글 쓰기</button>
-                                    <%-- 누르면 아래에 --%>
-                            </td>
+                                <td>
+                                    <button onclick="reply_show(${reply.b_reply_num})">답글 쓰기</button>
+                                        <%-- 누르면 아래에 --%>
+                                </td>
                             </c:if>
                             <td>
                                 <button onclick="removeCheck(${reply.b_reply_num})">삭제</button>
                             </td>
                             <td>
-                                <form id="re_comment_write${reply.b_reply_num}" class="re_comment_write">
-                                    <textarea class="re_comment_write_content" id="re${reply.b_reply_num}" maxlength="1000"
+                                    <%-- 오류 발생 이유 : form tag를 사용했더니 onclick시 boarddetail?로 이동, div로 변경하니까 정상작동.. --%>
+                                    <%-- 해결 : form tag 내부에 button을 넣어둔게 문제의 원인이었다 --%>
+                                <div id="re_comment_write${reply.b_reply_num}" class="re_comment_write">
+                                    <textarea class="re_comment_write_content" id="re${reply.b_reply_num}"
+                                              maxlength="1000"
                                               placeholder="대댓글을 적어주세요:)"></textarea>
-                                    <button class="re_comment_submits" onclick="re_reply_submit(${reply.b_reply_num},document.getElementById('re${reply.b_reply_num}').value)">작성</button>
-                                </form>
+                                    <button type="submit"
+                                            onclick="re_reply_submit(${reply.b_reply_num},(document.getElementById('re${reply.b_reply_num}').value))">
+                                        작성
+                                    </button>
+                                </div>
                             </td>
+
+                            <%-- 댓글 좋아요 시작 --%>
+                            <%-- 대댓글은 좋아요 못누르게 처리 --%>
+                            <c:if test="${reply.b_reply_lev == '0'}">
+                                <td>
+                                    <div class="re_btn_like">
+                                        <c:choose>
+                                            <%-- 세션에 있는 유저를 확인해서 해당 댓글에 좋아요 플래그만 내려보내주면 될듯 --%>
+                                            <c:when test="${reply.b_reply_like_ok == true}">
+                                                <div class="re_like_mini${reply.b_reply_num}">
+                                                    <div class="re_heart rh_${reply.b_reply_num}"
+                                                         onclick="re_like_off(${reply.b_reply_num})"></div>
+                                                    <div class="re_heart_off rh_off_${reply.b_reply_num} rh_off_hide"
+                                                         onclick="re_like_on(${reply.b_reply_num})"></div>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="re_like_mini${reply.b_reply_num}">
+                                                    <div class="re_heart_off rh_off_${reply.b_reply_num}"
+                                                         onclick="re_like_on(${reply.b_reply_num})"></div>
+                                                    <div class="re_heart rh_${reply.b_reply_num} rh_hide"
+                                                         onclick="re_like_off(${reply.b_reply_num})"></div>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                </td>
+                                <%-- 좋아요 숫자 표시 --%>
+                                <td>
+                                        ${reply.b_reply_likecount}
+                                </td>
+                            </c:if>
+
+                            <%-- 댓글 좋아요 끝--%>
                         </c:if>
+                            <%-- 세션이 있을경우 끝--%>
                     </tr>
                 </c:forEach>
             </table>
@@ -160,7 +215,6 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
     function like_off() {
-        console.log(${mno});
         $(".heart").hide()
         /* ajax로 article_like에서 해당 board_num의 mno를 제거하기 위해 데이터를 보냄 */
         $.ajax({
@@ -286,24 +340,29 @@
 <script>
     $(function () {
         $(".comment_submits").click(function () {
-            $.ajax({
-                async: true,
-                type: 'POST',
-                data: {
-                    b_board_num: ${article.board_num},
-                    b_reply_content: $(".comment_write_content").val()
-                },
-                url: "http://localhost:8090/regreply",
-                success: function (data) {
-                    alert("댓글이 등록되었습니다.");
-                    location.reload();
-                },
-                error: function (textStatus) {
-                    alert(textStatus);
-                    console.log(textStatus);
-                    console.log(JSON.stringify(textStatus));
-                }
-            });
+            if ($(".comment_write_content").val() !== "") {
+                $.ajax({
+                    async: true,
+                    type: 'POST',
+                    data: {
+                        b_board_num: ${article.board_num},
+                        b_reply_content: $(".comment_write_content").val()
+                    },
+                    url: "http://localhost:8090/regreply",
+                    success: function (data) {
+                        alert("댓글이 등록되었습니다.");
+                        location.reload();
+                    },
+                    error: function (textStatus) {
+                        alert(textStatus);
+                        console.log(textStatus);
+                        console.log(JSON.stringify(textStatus));
+                    }
+                });
+            } else {
+                alert("댓글 내용을 입력하세요")
+                $(".comment_write_content").focus()
+            }
         })
     })
 </script>
@@ -336,49 +395,126 @@
 
 
 <%-- 답글쓰기 버튼 --%>
-<%--<script src="http://code.jquery.com/jquery-latest.min.js"></script>--%>
 <script>
     reply_show = (replyNum) => {
-        if ($("#re_comment_write"+replyNum).css("display") == "none") {
-            $("#re_comment_write"+replyNum).show()
+        if ($("#re_comment_write" + replyNum).css("display") == "none") {
+            $("#re_comment_write" + replyNum).show()
         } else {
-            $("#re_comment_write"+replyNum).hide()
+            $("#re_comment_write" + replyNum).hide()
         }
     }
 </script>
 
 
-
 <%-- 대댓글 작성 ajax --%>
 <script>
-    function re_reply_submit(re_replyNum,re_value) {
-        console.log(typeof(re_replyNum))
-        console.log(typeof(${article.board_num}))
-        console.log(typeof(re_value))
+    function re_reply_submit(re_replyNum, re_value) {
+        if ($("#re" + re_replyNum).val() !== "") {
+            $.ajax({
+                async: true,
+                type: 'POST',
+                data: {
+                    b_reply_num: re_replyNum,
+                    b_board_num: ${article.board_num},
+                    b_reply_content: re_value
+                },
+                url: "http://localhost:8090/re_regreply",
+                success: function (data) {
+                    console.log(data);
+                    alert("답글이 등록되었습니다.");
+                    location.reload();
+                },
+                error: function (textStatus) {
+                    console.log("에러 : " + textStatus)
+                    alert(textStatus);
+                }
+            });
+        } else {
+            alert("답글 내용을 입력하세요")
+            $("#re" + re_replyNum).focus()
+        }
+    }
+</script>
+
+
+<%-- 댓글 좋아요 버튼 자바스크립트 --%>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    function re_like_off(replyNum) {
+        console.log(replyNum + "번 댓글에");
+        console.log(${mno}+"번 유저가 좋아요 취소");
+        console.log(typeof replyNum);
+        console.log(typeof ${mno});
+        /* b_reply_like_member에 mno를 제거 */
+        /* 제거시 b_reply_likecount도 -1 */
+        $(".rh_" + replyNum).hide()
         $.ajax({
             async: true,
             type: 'POST',
             data: {
-                b_reply_num: re_replyNum,
-                b_board_num: ${article.board_num},
-                b_reply_content: re_value
+                b_reply_num: replyNum,
+                mno:${mno}
             },
-            url: "http://localhost:8090/re_regreply",
+            url: "http://localhost:8090/re_like_off",
             success: function (data) {
-                alert("대댓글이 등록되었습니다.");
-                location.reload();
             },
             error: function (textStatus) {
                 alert(textStatus);
             }
         });
+        /* 빈 하트로 바꾸기 */
+        $(".rh_off_" + replyNum).show()
+        alert(replyNum + "번 댓글에 좋아요를 취소하셨습니다.")
+        location.reload();
+    }
+
+    function re_like_on(replyNum) {
+        console.log(replyNum + "번 댓글에");
+        console.log(${mno}+"번 유저가 좋아요 누름");
+        console.log(typeof replyNum);
+        console.log(typeof ${mno});
+        /* b_reply_like_member에 mno를 추가 */
+        /* 추가시 b_reply_likecount도 +1 */
+        $(".rh_off_" + replyNum).hide()
+        $.ajax({
+            async: true,
+            type: 'POST',
+            data: {
+                b_reply_num: replyNum,
+                mno:${mno}
+            },
+            url: "http://localhost:8090/re_like_on",
+            success: function (data) {
+            },
+            error: function (textStatus) {
+                alert(textStatus);
+            }
+        });
+        /* 빨간 하트로 바꾸기 */
+        $(".rh_" + replyNum).show()
+        alert(replyNum + "번 댓글에 좋아요를 누르셨습니다.")
+        location.reload();
     }
 </script>
 
 
-
-
-
+<%-- 댓글 정렬 --%>
+<script>
+    const replyList_sort = () => {
+        $("#listForm").empty();
+        $.ajax({
+            type: "post",
+            async: false,
+            url: "http://localhost:8090/boardDetail_ajax",
+            data: {
+                board_num: ${article.board_num},
+            },
+            success: function (data) {
+                $('.append_replyList').append(data);
+            }
+        })
+    }
+</script>
 
 </body>
 </html>

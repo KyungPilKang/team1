@@ -142,14 +142,15 @@ public class Board_allController {
 //        PageInfo pageInfo = new PageInfo();
         try {
             // 세션에 회원 고유번호(mno)가 존재한다 가정
+            // 세션 있고없고 테스트시 브라우저 반드시 완전 종료 후 테스트 (안그러면 세션이 살아있음)
             session.setAttribute("mno", "14");
-
-            Boolean like_ok = board_allService.like_check_mno(boardNum, (String) session.getAttribute("mno"));
-            Boolean ward_ok = board_allService.ward_check_mno(boardNum, (String) session.getAttribute("mno"));
-            mv.addObject("like_ok", like_ok);
-            mv.addObject("ward_ok", ward_ok);
-            mv.addObject("mno", session.getAttribute("mno"));
-
+            if(session.getAttribute("mno")!=null) {
+                Boolean like_ok = board_allService.like_check_mno(boardNum, (String) session.getAttribute("mno"));
+                Boolean ward_ok = board_allService.ward_check_mno(boardNum, (String) session.getAttribute("mno"));
+                mv.addObject("like_ok", like_ok);
+                mv.addObject("ward_ok", ward_ok);
+                mv.addObject("mno", session.getAttribute("mno"));
+            }
             Board board = board_allService.getBoard(boardNum);
             board_allService.setBoard_likeCount(boardNum);
 
@@ -161,11 +162,25 @@ public class Board_allController {
             /* 날짜 포맷 변경 끝 */
 
             /* 리플 관련 시작*/
-            // board_num에 해당하는 애들을 가져오면 되는건데 왜 이렇게 했니?
             List<B_reply> reList = board_allService.getReplyList(boardNum);
+
+            for(B_reply reply :reList) {
+                System.out.println(reply.getB_reply_like_member());
+                List<String> reLikeMem_arr = List.of(reply.getB_reply_like_member().split(","));
+                //split해서 배열로 각각 넣은 후 contains
+                if (session.getAttribute("mno") != null) {
+                    if (reLikeMem_arr.contains(session.getAttribute("mno"))) {
+                        reply.setB_reply_like_ok("true");
+                        System.out.println("있어요");
+                    } else {
+                        reply.setB_reply_like_ok("false");
+                        System.out.println("없어요");
+                    }
+                }
+            }
+
             mv.addObject("reList", reList);
-            mv.setViewName("board/replyTest");
-            /* 리플 관련 끝 */
+           /* 리플 관련 끝 */
 
             mv.addObject("article", board);
             mv.addObject("page", page);
@@ -464,7 +479,7 @@ public class Board_allController {
         }
     }
 
-    /* ajax 페이지 */
+    /* 게시판 ajax 페이지 */
     @RequestMapping(value = "boardForm_all_ajax", method = {RequestMethod.GET, RequestMethod.POST})
     public String ajax_boardForm_all(@RequestParam(value = "page", defaultValue = "1") int page,
                                      @RequestParam(value = "sort") String sort,
@@ -492,6 +507,7 @@ public class Board_allController {
         return "board/boardForm_all_ajax";
     }
 
+    /* 댓글 작성 */
     @ResponseBody
     @RequestMapping(value = "regreply", method = {RequestMethod.GET, RequestMethod.POST})
     public void regreply(@RequestParam(value = "b_board_num") int boardNum,
@@ -508,7 +524,7 @@ public class Board_allController {
         }
     }
 
-
+    /* 대댓글 작성 */
     @ResponseBody
     @RequestMapping(value = "re_regreply", method = {RequestMethod.GET, RequestMethod.POST})
     public void re_regreply(@RequestParam(value = "b_board_num") int boardNum,
@@ -528,7 +544,7 @@ public class Board_allController {
         }
     }
 
-
+    /* 댓글 삭제 */
     @ResponseBody
     @RequestMapping(value = "replydelete", method = {RequestMethod.GET, RequestMethod.POST})
     public void replydelete(@RequestParam(value = "b_reply_num") int b_reply_num) {
@@ -539,6 +555,79 @@ public class Board_allController {
         }
     }
 
+    /* 댓글 좋아요 버튼 on */
+    @ResponseBody
+    @RequestMapping(value = "/re_like_on", method = {RequestMethod.GET, RequestMethod.POST})
+    public void re_regreply(@RequestParam(value = "b_reply_num") int b_reply_num,
+                            @RequestParam(value = "mno") String mno) {
+        try {
+            /* b_reply_like_member에 mno를 추가해주는 서비스 */
+            /* 추가시 b_reply_likecount도 +1 */
+            System.out.println("댓글좋아요on ajax 전달 테스트(댓글번호) : " + b_reply_num);
+            System.out.println("댓글좋아요on ajax 전달 테스트(회원번호) : " + mno);
+            board_allService.re_like_ins_mno(b_reply_num,mno);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* 댓글 좋아요 버튼 off */
+    @ResponseBody
+    @RequestMapping(value = "/re_like_off", method = {RequestMethod.GET, RequestMethod.POST})
+    public void re_like_off(@RequestParam(value = "b_reply_num") int b_reply_num,
+                            @RequestParam(value = "mno") String mno) {
+        try {
+            /* b_reply_like_member에 mno를 제거해주는 서비스 */
+            /* 제거시 b_reply_likecount도 -1 */
+            System.out.println("댓글좋아요off ajax 전달 테스트(댓글번호) : " + b_reply_num);
+            System.out.println("댓글좋아요off ajax 전달 테스트(회원번호) : " + mno);
+            board_allService.re_like_del_mno(b_reply_num,mno);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /* 댓글 ajax 페이지 */
+    @RequestMapping(value = "boardDetail_ajax", method = {RequestMethod.GET, RequestMethod.POST})
+    public String boardDetail_ajax(@RequestParam(value = "board_num") int boardNum,
+                                     HttpServletRequest request, HttpSession session) {
+//        session.setAttribute("mno", "14");
+        try {
+            // 인기순 정렬로 서비스를 요청해야한다
+            List<B_reply> reList = board_allService.getReplyList_like(boardNum);
+
+            for(B_reply reply :reList) {
+                System.out.println(reply.getB_reply_like_member());
+                List<String> reLikeMem_arr = List.of(reply.getB_reply_like_member().split(","));
+                //split해서 배열로 각각 넣은 후 contains
+                if (session.getAttribute("mno") != null) {
+                    if (reLikeMem_arr.contains(session.getAttribute("mno"))) {
+                        reply.setB_reply_like_ok("true");
+                        System.out.println("있어요");
+                    } else {
+                        reply.setB_reply_like_ok("false");
+                        System.out.println("없어요");
+                    }
+                }
+            }
+            request.setAttribute("reList", reList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("err", e.getMessage());
+        }
+        return "board/boardDetail_ajax";
+    }
+
+
+
+
+
+
+
+
+
 
     /* 뷰 확인용 */
 //    @RequestMapping(value="/custom/{pageName}")
@@ -546,5 +635,9 @@ public class Board_allController {
 //        return "/custom/"+pageName;
 //    }
 
+    @GetMapping("/viewtest")
+    public String viewTest() {
+        return "board/sh";
+    }
 
 }

@@ -92,7 +92,7 @@ CREATE TABLE `article_ward` (
  `article_ward_num` int AUTO_INCREMENT not null,
  `mno` varchar(30) NOT NULL,
  `board_num` varchar(30) NOT NULL,
- PRIMARY KEY (`article_ward`)
+ PRIMARY KEY (`article_ward_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `feedback` (

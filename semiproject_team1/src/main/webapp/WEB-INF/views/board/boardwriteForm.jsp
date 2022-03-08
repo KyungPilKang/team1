@@ -70,7 +70,20 @@
     function fake_submit() {
         let content = editor.getHTML(); // editor.getHTML(); : String
         // $("#boardform").children().eq(0).attr("value", content);
+        let cat = $('.board_cat').val();
+        let subject = $('#board_subject').val();
         $("#board_content").val(content);
+        if (!(cat === "" || cat === "none")) {
+            if (subject === "") {
+                alert("제목을 입력하세요")
+                $('#board_subject').focus()
+                return;
+            }
+        } else {
+            alert("카테고리를 선택하세요")
+            $('.board_cat').focus()
+            return;
+        }
         $("#boardform").attr("action", "./regboard").submit();
     }
 </script>
