@@ -398,7 +398,8 @@
 <script>
     reply_show = (replyNum) => {
         if ($("#re_comment_write" + replyNum).css("display") == "none") {
-            $("#re_comment_write" + replyNum).show()
+            $(".re_comment_write").hide() // class로 다 닫아버리고
+            $("#re_comment_write" + replyNum).show() // 해당 id만 열어준다
         } else {
             $("#re_comment_write" + replyNum).hide()
         }

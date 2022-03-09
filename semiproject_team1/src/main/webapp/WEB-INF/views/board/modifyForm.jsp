@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>롤판.DOG 수정</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"/>
     <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"/>
@@ -58,7 +58,20 @@
 <script>
     function modify_submit() {
         let content = editor.getHTML();
+        let cat = $('.board_cat').val();
+        let subject = $('#board_subject').val();
         $("#board_content").val(content);
+        if (!(cat === "" || cat === "none")) {
+            if (subject === "") {
+                alert("제목을 입력하세요")
+                $('#board_subject').focus()
+                return;
+            }
+        } else {
+            alert("카테고리를 선택하세요")
+            $('.board_cat').focus()
+            return;
+        }
         $("#modifyform").attr("action", "./boardmodify").submit();
     }
 </script>
@@ -80,6 +93,15 @@
         previewStyle: 'tab'
     });
 </script>
+
+<%-- 이전 카테고리값으로 select하는 스크립트 --%>
+<script>
+    let select_cat = "${article.board_cat}";
+    $(".board_cat").val(select_cat).prop("selected", true);
+</script>
+
+
+
 
 </body>
 </html>

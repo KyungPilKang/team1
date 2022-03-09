@@ -9,11 +9,18 @@
 	box-sizing: border-box;
 }
 
-.background {
+.background{
+	width: 100%;
+	height: 100vh;
+	background-color: gray;
+}
+
+.background_main{
 	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
 		url(../../asset/image/board/lol3.jpg);
 	background-size: cover;
 }
+
 
 h1 {
 	margin-left: 10px;

@@ -621,23 +621,15 @@ public class Board_allController {
     }
 
 
-
-
-
-
-
-
-
-
     /* 뷰 확인용 */
 //    @RequestMapping(value="/custom/{pageName}")
 //    public String getSinglePage(@PathVariable("pageName")String pageName){
 //        return "/custom/"+pageName;
 //    }
 
-    @GetMapping("/viewtest")
-    public String viewTest() {
-        return "board/sh";
-    }
+//    @GetMapping("/viewtest")
+//    public String viewTest() {
+//        return "board/layout_boardForm_all";
+//    }
 
 }
