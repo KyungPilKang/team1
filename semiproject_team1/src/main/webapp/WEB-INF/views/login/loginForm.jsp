@@ -146,12 +146,16 @@ console.log(Kakao.isInitialized());
           resultdiv += '<h4>connected_at: '+connected_at+'<h4>'
           email ="";
           gender = "";
+          nickname = "";
           if(typeof kakao_account != 'undefined'){
         	  email = kakao_account.email;
         	  gender = kakao_account.gender;
+        	  nickname = properties.nickname;
+        	 
           }
           resultdiv += '<h4>email: '+email+'<h4>'
           resultdiv += '<h4>gender: '+gender+'<h4>'
+          resultdiv += '<h4>gender: '+nickname+'<h4>'
           $('#result').append(resultdiv);
         },
         fail: function(error) {

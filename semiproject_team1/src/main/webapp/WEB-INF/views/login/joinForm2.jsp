@@ -80,12 +80,14 @@
       <label for="floatingPassword">비밀번호</label>
     </div>
     
-    <div class="capcha" id=capchacon style="display:inline;">
-      <img src="/captcha"><br>
+    <div class="captcha" id=capchacon style="display:inline;">
+      <img src="/captcha" id="cap_img">
+      <input type="button" onclick="caprefesh()" value="새로고침"><br>
 
-	<input type="text" id="userin" name="userin">
-	<input type="button" id="capchavalid" value="전송">	
-<input type="button" id="capchaRefresh" value="새로고침">	
+	<input type="text" id="userin" name="userin" style="width:70%; position:relative;">
+		
+	<input type="button" id="captchavalid" value="전송">	
+
 
     </div> 
 
@@ -101,9 +103,16 @@
 </main>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
+<!-- captcha 이미지 새로고침 -->
+<script>
+function caprefesh(){
+              var imgsrc = document.getElementById("cap_img");
+               imgsrc.src = "/captcha?ver=" + Math.random();
+         }
+</script>
+<!-- captcha 입력 유효성 체크 -->
     <script>
-	    $('#capchavalid').click(function () {
+	    $('#captchavalid').click(function () {
 	    	if($('#userin').val()==""){
 				alert("문자 또는 숫자를 입력하세요");
 				
@@ -116,18 +125,18 @@
 				url:"http://localhost:8090/captchacheck",
 				data:{id:$('#userin').val()},
 				success: function(data, textStatus){
-					if(result=="true"){
+					if(data=="true"){
 						alert("정상입니다");
-						$('#capchacon').attr("display", 'inline');
+						$('.captcha').css("display","none"); 
 					} else {
 						alert("문자 또는 숫자를 다시 확인하세요");
-						$('#capchacon').attr("display", 'none');
+						$('.captcha').css("display","inline-block"); 
 					}
 				}
 			});
 		});
 	    </script>
-
+<!-- 이메일 db중복 체크 -->
 <script>
     function emailcheck(){
         var mem_email_id = $('#mem_email_id').val(); //id값이 "mem_email_id"인 입력란의 값을 저장
@@ -148,7 +157,7 @@
         });
     }
  </script>
-
+<!-- 닉네임 db중복 체크 -->
  <script>
     function nickcheck(){
         var mem_nickname = $('#mem_nickname').val(); //id값이 "mem_nickname"인 입력란의 값을 저장
