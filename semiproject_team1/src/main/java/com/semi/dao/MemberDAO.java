@@ -9,7 +9,8 @@ import com.semi.dto.Member;
 
 @Mapper
 @Repository
-public interface memberDAO {
+public interface MemberDAO {
 	public Member queryMember(String id) throws Exception;
 	public Member queryMember_nickname(String id) throws Exception;
+	public void insertMember(Member member) throws Exception;
 }

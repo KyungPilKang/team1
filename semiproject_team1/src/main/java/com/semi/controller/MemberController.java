@@ -7,18 +7,17 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.semi.dto.Member;
 import com.semi.service.MemberServiceImpl;
 
 @Controller
-public class MemberController 
-{
+public class MemberController {
 	@Autowired
 	MemberServiceImpl memberService;
 	
@@ -68,7 +67,16 @@ public class MemberController
 		return String.valueOf(overlap);
 	}
 	
-	@RequestMapping(value = "/joinForm2")
-	public String join2() {return "login/joinForm2";}
-
+	@PostMapping("join")
+	public ModelAndView join(@ModelAttribute Member member) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			memberService.insertMember(member);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("login/join_certifyForm");
+		return mav;
+	}
+	
 }

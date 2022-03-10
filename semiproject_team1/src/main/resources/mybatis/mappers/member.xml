@@ -2,17 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.semi.dao.memberDAO">
+<mapper namespace="com.semi.dao.MemberDAO">
 
-<select id="queryMember" resultType="Member" parameterType="String">
+	<select id="queryMember" resultType="Member" parameterType="String">
 		<![CDATA[
 			select * from semi.member where mem_email_id=#{mem_email_id}
 		]]>
 	</select>
 	
-<select id="queryMember_nickname" resultType="Member" parameterType="String">
+	<select id="queryMember_nickname" resultType="Member" parameterType="String">
 		<![CDATA[
 			select * from semi.member where mem_nickname=#{mem_nickname}
 		]]>
 	</select>
+	<insert id="insertMember" parameterType="Member">
+		<![CDATA[
+			insert into member (mem_email_id, mem_nickname, mem_pw, mem_code, mem_code_confirm, mem_link_id, 
+			mem_link_code, mem_link_confirm, mem_duo_reg_ok)
+			values(#{mem_email_id}, #{mem_nickname}, #{mem_pw}, #{mem_code}, #{mem_code_confirm}, #{mem_link_id}, 
+			#{mem_link_code}, #{mem_link_confirm}, #{mem_duo_reg_ok})
+		]]>
+	</insert>
 </mapper>
