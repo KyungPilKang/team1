@@ -52,6 +52,7 @@ h1 {
 /*    border-radius : 5px;*/
 /*    margin: 8px 0;*/
 /*}*/
+
 #board_subject {
 	padding-left: 10px;
 	border: 1px solid darkgray;
@@ -66,7 +67,7 @@ h1 {
 }
 
 #board_file {
-	display: none;
+	/*display: none;*/
 }
 
 .btn_file {

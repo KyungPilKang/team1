@@ -152,7 +152,6 @@ public class Board_allController {
                 mv.addObject("mno", session.getAttribute("mno"));
             }
             Board board = board_allService.getBoard(boardNum);
-            board_allService.setBoard_likeCount(boardNum);
 
             /* 날짜 포맷 변경 시작 */
             // JSTL 날짜 변경 라이브러리를 사용할 경우 아래와 같은 작업이 필요없다.

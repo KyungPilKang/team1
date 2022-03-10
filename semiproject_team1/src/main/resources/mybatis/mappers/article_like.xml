@@ -60,16 +60,6 @@
 	</update>
 
 
-    <select id="board_like_count" parameterType="int" resultType="int">
-			<![CDATA[
-        select count(mno)
-        from article_like
-        where board_num = #{boardNum}
-        ]]>
-
-	</select>
-
-
 
 
 </mapper>
