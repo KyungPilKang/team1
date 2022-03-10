@@ -133,6 +133,7 @@
         </div>
       </div>
     </div>
+   </div>
 
     <!-- plugins:js -->
     <script src="${pageContext.request.contextPath}/resources/js/duo/js/vendor.bundle.base.js"></script>
