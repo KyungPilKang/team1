@@ -35,9 +35,9 @@
         }
       }
       
-          .email_ok{color:blue; display: none;}
+.email_ok{color:blue; display: none;}
 .email_already{color:red; display: none;}
-      .nick_ok{color:blue; display: none;}
+.nick_ok{color:blue; display: none;}
 .nick_already{color:red; display: none;}
       
     </style>
@@ -76,8 +76,8 @@
     <span class="nick_ok">사용 가능한 닉네임 입니다.</span>	
     <span class="nick_already">이미 가입된 닉네임 입니다.</span>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" name="mem_pw" placeholder="비밀번호">
-      <label for="floatingPassword">비밀번호</label>
+      <input type="password" class="form-control" id="mem_pw" name="mem_pw" placeholder="비밀번호" required oninput = "pwcheck()">
+      <label for="mem_pw">비밀번호</label>
     </div>
     
     <div class="captcha" id=capchacon style="display:inline;">
@@ -192,9 +192,28 @@
             }
         });
     }
-    /* if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
-    	$('#form_submit').attr('disabled', false);
-    } */
+    <!-- 비밀번호 유효성 체크 --> 
+    function pwcheck(){
+
+    	 var pw = $("#mem_pw").val();
+    	 var num = pw.search(/[0-9]/g);
+    	 var eng = pw.search(/[a-z]/ig);
+    	 var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+    	 if(pw.length < 8 || pw.length > 20){
+    	  alert("8자리 ~ 20자리 이내로 입력해주세요.");
+    	  return false;
+    	 }else if(pw.search(/\s/) != -1){
+    	  alert("비밀번호는 공백 없이 입력해주세요.");
+    	  return false;
+    	 }else if( (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0) ){
+    	  alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
+    	  return false;
+    	 }else {
+    		console.log("정상입니다");	 
+    	 }
+
+    	}
 </script>
 </body>
 </html>
