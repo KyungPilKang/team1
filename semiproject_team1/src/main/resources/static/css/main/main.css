@@ -20,6 +20,7 @@
 }
 
 .container .header {
+	border-bottom: 5px solid #4169E1;
 	background-color: black;
     /*border: 2px dotted white;*/
     width: 100%;
@@ -76,7 +77,7 @@
 
 .container .hero button {
 	background: none;
-	border: 2px solid darkseagreen;
+	border: 5px solid #4169E1;
 	color: white;
 	padding: 15px 20px;
 	border-radius: 20px;
