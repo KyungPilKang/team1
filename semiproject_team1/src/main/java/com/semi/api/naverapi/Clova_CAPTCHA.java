@@ -79,6 +79,8 @@ public class Clova_CAPTCHA {
     	try {
             String code = "1"; // 키 발급시 0,  캡차 이미지 비교시 1로 세팅
             String value = userin; // 사용자가 입력한 캡차 이미지 글자값
+            System.out.println("value:"+value);
+            System.out.println("key:"+key);
             String apiURL = "https://naveropenapi.apigw.ntruss.com/captcha/v1/nkey?code=" + code +"&key="+ key + "&value="+ value;
 
             URL url = new URL(apiURL);
