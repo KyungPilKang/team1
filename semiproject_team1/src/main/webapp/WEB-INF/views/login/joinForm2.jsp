@@ -51,8 +51,8 @@
     <!-- 롤판.dog 기본 이미지 및 폰트 -->
   
 <main class="form-signin">
-  <form>
-    <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png" alt="" width="72" height="68">
+  <form action="/join" method="post" >
+    <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png" alt="" width="80" height="80">
     <h1 class="h3 mb-3 fw-normal">롤판.DOG</h1>
 
     <div style="float:left">
@@ -66,17 +66,17 @@
 <div class="form-floating">
       <input type="email" class="form-control" id="mem_email_id" name="mem_email_id" placeholder="이메일 주소" required oninput = "emailcheck()" />
       <label  for="mem_email_id">이메일 주소</label>
-    </div>
-    <span class="email_ok">사용 가능한 이메일입니다.</span><br>
+    </div><br>
+    <span class="email_ok">사용 가능한 이메일입니다.</span>
     <span class="email_already">이미 가입된 이메일입니다.</span>
     <div class="form-floating">
       <input type="text" class="form-control" id="mem_nickname" name="mem_nickname" placeholder="닉네임" required oninput = "nickcheck()">
       <label for="mem_nickname">닉네임</label>
-    </div>
-    <span class="nick_ok">사용 가능한 닉네임 입니다.</span><br>
+    </div><br>
+    <span class="nick_ok">사용 가능한 닉네임 입니다.</span>	
     <span class="nick_already">이미 가입된 닉네임 입니다.</span>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="비밀번호">
+      <input type="password" class="form-control" id="floatingPassword" name="mem_pw" placeholder="비밀번호">
       <label for="floatingPassword">비밀번호</label>
     </div>
     

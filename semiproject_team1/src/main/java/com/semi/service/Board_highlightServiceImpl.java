@@ -1,6 +1,6 @@
 package com.semi.service;
 
-import com.semi.dao.boardDAO;
+import com.semi.dao.BoardDAO;
 import com.semi.dto.Board;
 import com.semi.dto.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.List;
 public class Board_highlightServiceImpl implements Board_highlightService {
 
     @Autowired
-    boardDAO boardDAO;
+    BoardDAO boardDAO;
     
 
     @Override

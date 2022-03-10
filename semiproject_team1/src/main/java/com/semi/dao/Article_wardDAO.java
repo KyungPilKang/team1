@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface article_wardDAO {
+public interface Article_wardDAO {
     List<String> select_article_ward(int boardNum) throws Exception;
     void insertWard(int boardNum) throws Exception;
     void insert_ward_mno(@Param("boardNum") int boardNum, @Param("mno") String mno) throws Exception;

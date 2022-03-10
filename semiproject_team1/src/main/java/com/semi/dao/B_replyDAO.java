@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface b_replyDAO {
+public interface B_replyDAO {
     List<B_reply> selectReplyList(int boardNum) throws Exception;
     List<B_reply> selectReplyList_like(int boardNum) throws Exception;
     Integer selectMaxReplyNum() throws Exception;

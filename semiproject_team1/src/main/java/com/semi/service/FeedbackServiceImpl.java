@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.semi.dao.feedbackDAO;
+import com.semi.dao.FeedbackDAO;
 import com.semi.dto.Feedback;
 import com.semi.dto.PageInfo;
 
@@ -13,7 +13,7 @@ import com.semi.dto.PageInfo;
 public class FeedbackServiceImpl implements FeedbackService {
 
 	@Autowired
-	feedbackDAO feedbackDAO;
+	FeedbackDAO feedbackDAO;
 	
 	@Override
 	public void regFeedback(Feedback feedback) throws Exception {

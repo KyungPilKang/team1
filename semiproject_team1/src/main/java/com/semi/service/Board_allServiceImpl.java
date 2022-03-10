@@ -1,9 +1,9 @@
 package com.semi.service;
 
-import com.semi.dao.article_likeDAO;
-import com.semi.dao.article_wardDAO;
-import com.semi.dao.b_replyDAO;
-import com.semi.dao.boardDAO;
+import com.semi.dao.Article_likeDAO;
+import com.semi.dao.Article_wardDAO;
+import com.semi.dao.B_replyDAO;
+import com.semi.dao.BoardDAO;
 import com.semi.dto.B_reply;
 import com.semi.dto.Board;
 import com.semi.dto.PageInfo;
@@ -16,16 +16,16 @@ import java.util.List;
 public class Board_allServiceImpl implements Board_allService {
 
     @Autowired
-    boardDAO boardDAO;
+    BoardDAO boardDAO;
 
     @Autowired
-    b_replyDAO b_replyDAO;
+    B_replyDAO b_replyDAO;
 
     @Autowired
-    article_likeDAO article_likeDAO;
+    Article_likeDAO article_likeDAO;
 
     @Autowired
-    article_wardDAO article_wardDAO;
+    Article_wardDAO article_wardDAO;
 
     @Override
     public void regBoard(Board board) throws Exception {

@@ -44,7 +44,7 @@
     
 <main class="form-signin">
   <form>
-      <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png" alt="" width="72" height="68">
+      <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png" alt="" width="80" height="80">
     <h1 class="h3 mb-3 fw-normal">롤판.DOG</h1>
     <div class="form-floating">
       <input type="email" class="form-control" id="floatingInput" placeholder="로그인 이메일을 입력하세요">

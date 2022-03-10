@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface boardDAO {
+public interface BoardDAO {
     void insertBoard(Board board) throws Exception;
     void deleteBoard(int boardNum) throws Exception;
     void updateBoard(Board board) throws Exception;
