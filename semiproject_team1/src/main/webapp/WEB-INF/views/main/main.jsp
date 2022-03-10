@@ -19,12 +19,12 @@
 	<div class="container">
 		<div class="header">
 			<h1>
-				<a href="/"> <img style="margin-top:20px;"
+				<a href="/"> <img 
 					src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
 					alt="" width="60" height="60"> LOLPAN.DOG
 				</a>
 			</h1>
-			<div class="nav" style="margin-top:20px;">
+			<div class="nav">
 				<ul>
 					<li><a href="#">FEEDBACK</a></li>
 					<li><a href="/boardlist">FREEBOARD</a></li>

@@ -20,12 +20,18 @@
 }
 
 .container .header {
-	width: 80%;
-	height: 70px;
-	margin: 0 auto;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	background-color: black;
+    /*border: 2px dotted white;*/
+    width: 100%;
+    height: 80px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-shadow: 0 2px 3px 0 rgba(255, 255, 255, 0.2);
 }
 
 .container .header h1 a {
