@@ -8,4 +8,5 @@ public interface MemberService
 	public boolean emailOverlap(String mem_email_id) throws Exception;
 	public boolean nickOverlap(String mem_nickname) throws Exception;
 	public void insertMember(Member member) throws Exception;
+	public Member selectMemeber(String id) throws Exception;
 }

@@ -45,8 +45,9 @@ public class MemberController {
 			String mem_email_id=info.get("mem_email_id");
 			String mem_pw=info.get("mem_pw");
 			if(memberService.accessMember(mem_email_id, mem_pw)) {
-				session.setAttribute("mem_email_id", mem_email_id);
-				session.setAttribute("mem_nickname", "테스트");
+				Member mem=memberService.selectMemeber(mem_email_id);
+				session.setAttribute("mem_mno", mem.getMem_mno());
+				session.setAttribute("mem_nickname", mem.getMem_nickname());
 			} else throw new Exception();
 			if(page.equals("board")) {
 				mav.setViewName("redirect:/boardlist");

@@ -31,15 +31,8 @@
 					<li><a href="#">FEEDBACK</a></li>
 					<li><a href="/boardlist">FREEBOARD</a></li>
 					<c:choose>
-						<c:when test="${not empty mem_email_id }">
+						<c:when test="${not empty mem_mno }">
 							<li><a href="">DUO</a></li>
-							<li><a href="">MYPAGE</a></li>
-							<li><a href="/logout?page=board">LOGOUT</a></li>
-							<li style="color:white;">
-								<img class="mb-4"
-								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
-								alt="" width="30" height="30">${mem_nickname }님 환영합니다
-							</li>
 						</c:when>
 						<c:otherwise>
 							<li><a href="/login?page=board">LOGIN</a></li>	
@@ -56,25 +49,39 @@
         <%-- 좌측 메뉴 --%>
         <div class="card_left">
             <div class="card_outline">
-                <div class="user_info_box">회원 로그인시 정보가 입력될 공간</div>
+            	<c:if test="${not empty mem_mno }">
+                	<div class="user_info_box">
+                		<img class="mb-4"
+						src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
+						alt="" width="30" height="30">${mem_nickname }님 환영합니다
+						<br><br><br><br>
+						<div class="nav">
+							<ul>
+								<li><a href="/boardwriteform">글쓰기</a></li>
+								<li><a href="">마이페이지</a></li>
+								<li><a href="/logout?page=board">로그아웃</a></li>
+							</ul>
+						</div>
+                	</div>
+            	</c:if>
                 <div class="card">
                     <ul class="list">
                         <li><h6>HOME</h6>
                             <ul class="list">
-                                <li><a href="/boardlist">ALL</a></li>
+                                <li><a href="/boardlist">전체</a></li>
                             </ul>
                             <hr>
                         </li>
                         <li><h6>LOL</h6>
                             <ul class="list">
-                                <li><a href="/boardlist_highlight">HIGHLIGHT</a></li>
-                                <li><a href="#">TIP.KNOW-HOW</a></li>
+                                <li><a href="/boardlist_highlight">하이라이트</a></li>
+                                <li><a href="#">팁&노하우</a></li>
                             </ul>
                         </li>
                         <hr>
                         <li><h6>COMMUNITY</h6>
                             <ul class="list">
-                                <li><a href="#">FREE</a></li>
+                                <li><a href="#">자유</a></li>
                             </ul>
                         </li>
                     </ul>

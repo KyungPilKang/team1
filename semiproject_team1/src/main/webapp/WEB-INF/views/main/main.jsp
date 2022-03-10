@@ -29,7 +29,7 @@
 					<li><a href="#">FEEDBACK</a></li>
 					<li><a href="/boardlist">FREEBOARD</a></li>
 					<c:choose>
-						<c:when test="${not empty mem_email_id }">
+						<c:when test="${not empty mem_mno }">
 							<li><a href="">DUO</a></li>
 							<li><a href="">MYPAGE</a></li>
 							<li><a href="/logout?page=main">LOGOUT</a></li>
