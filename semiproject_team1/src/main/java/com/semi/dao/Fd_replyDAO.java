@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Mapper
 @Repository
-public interface duoDAO {
+public interface Fd_replyDAO {
 
 }

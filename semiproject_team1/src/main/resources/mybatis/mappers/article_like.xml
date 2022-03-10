@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.semi.dao.article_likeDAO">
+<mapper namespace="com.semi.dao.Article_likeDAO">
 
     <select id="select_article_like" resultType="string" parameterType="int">
 		<![CDATA[

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 @Repository
-public interface article_likeDAO {
+public interface Article_likeDAO {
     List<String> select_article_like(int boardNum) throws Exception;
     void insertLike(int boardNum) throws Exception;
     void insert_like_mno(@Param("boardNum") int boardNum, @Param("mno") String mno) throws Exception;

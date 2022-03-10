@@ -10,7 +10,7 @@ import com.semi.dto.Feedback;
 
 @Mapper
 @Repository
-public interface feedbackDAO {
+public interface FeedbackDAO {
 	
 	void insertFeedback(Feedback feedback) throws Exception;
 	void deleteFeedback(int feedback) throws Exception;

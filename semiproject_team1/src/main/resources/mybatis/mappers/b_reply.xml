@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.semi.dao.b_replyDAO">
+<mapper namespace="com.semi.dao.B_replyDAO">
 
     <select id="selectReplyList" resultType="b_reply"
             parameterType="int">

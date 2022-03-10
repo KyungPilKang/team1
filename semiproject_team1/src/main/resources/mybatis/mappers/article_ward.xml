@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.semi.dao.article_wardDAO">
+<mapper namespace="com.semi.dao.Article_wardDAO">
 
 	<select id="select_article_ward" resultType="string" parameterType="int">
 		<![CDATA[
