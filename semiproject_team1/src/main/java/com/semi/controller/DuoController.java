@@ -7,7 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DuoController {
 	
 	@GetMapping("/duoform")
-	public String duoform() {
+	public String duoForm() {
 		return "duo/duoForm";
+	}
+	
+	@GetMapping("/duoregform")
+	public String duoRegForm() {
+		return "duo/duoregForm";
+	}
+	
+	@GetMapping("/duodetailform")
+	public String duoDetailForm() {
+		return "duo/duodetailForm";
 	}
 }
