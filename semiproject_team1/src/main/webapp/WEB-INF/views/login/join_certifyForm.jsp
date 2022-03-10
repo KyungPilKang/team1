@@ -43,14 +43,15 @@
   <body class="text-center">
     
 <main class="form-signin">
-  <form>
+  <form action="join_certify" method="post">
+  	<input type="hidden" name="mem_mno" value="${mem_mno }">
      <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png" alt="" width="80" height="80">
     <h1 class="h3 mb-3 fw-normal">롤판.DOG</h1>
     <div>
       <p style="font-size: 13px;">입력하신 이메일로 인증코드가 발송되었습니다.</p>
     </div>
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="6자리 인증코드">
+      <input type="text" class="form-control" id="mem_code" name="mem_code" placeholder="6자리 인증코드">
       <label for="floatingInput">6자리 인증코드</label><br>
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">인증코드 제출</button>

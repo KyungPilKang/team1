@@ -42,7 +42,7 @@
 <!-- Custom styles for this template -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login/signin.css">
-
+	
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -88,7 +88,7 @@
 	<button class="api-btn" onclick="unlinkApp()">앱 탈퇴하기</button>
 	<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
 	<div id="result"></div>
-
+	
 		<div class="text-center mt-4 fw-light">
 			롤판.DOG에 처음이세요? <a href="/joinForm1" class="text-primary">회원가입</a>
 		</div>
@@ -139,28 +139,29 @@ $(function (){
 			contentType:"application/json; charset=utf-8",
 			data:JSON.stringify(formdata),
 			success: function(data, textStatus){
-				Swal.fire({
-					title: "로그인 성공",
-					text: data.mem.mem_nickname+"님 환영합니다",
-					icon: "success",
-					confirmButtonText: "확인"
-				}).then((result)=>{
-					if(result){
-						if(data.mem.mem_code_confirm=="no"){
-							$.ajax({
-								type:"POST",
-								async:true,
-								url:"http://localhost:8090/join_certifyForm",
-								contentType:"application/json; charset=utf-8",
-								data:{mem:data.mem},
-								success: function(data, textStatus){
-
-								}
-    					} else{
-    						window.location.href="/";
-    					}
-					}
-				})
+				if(data.mem.mem_code_confirm=="no"){
+					Swal.fire({
+						title: "미인증 계정",
+						text: "인증페이지로 이동합니다",
+						icon: "warning",
+						confirmButtonText: "확인"
+					}).then((result)=>{
+						if(result){
+	        				window.location.href="/join_certifyForm?mem_mno="+data.mem.mem_mno;
+						}
+					})
+				} else{
+					Swal.fire({
+						title: "로그인 성공",
+						text: data.mem.mem_nickname+"님 환영합니다",
+						icon: "success",
+						confirmButtonText: "확인"
+					}).then((result)=>{
+						if(result){
+	        				window.location.href="/";
+						}
+					})
+				}
 			},
 			error: function(data, textStatus){
 				Swal.fire({
@@ -193,7 +194,7 @@ function kakaoLogin(){
 				console.log(kakao_account);
 			}
 		});
-		}
+	}
 	}
 }
 </script>
@@ -223,7 +224,7 @@ console.log(Kakao.isInitialized());
           }
           resultdiv += '<h4>email: '+email+'<h4>'
           resultdiv += '<h4>gender: '+gender+'<h4>'
-
+          
           $('#result').append(resultdiv);
         },
         fail: function(error) {
@@ -250,7 +251,7 @@ console.log(Kakao.isInitialized());
     })
   }
 </script>
-
+ 
 
 </div>
 </body>
