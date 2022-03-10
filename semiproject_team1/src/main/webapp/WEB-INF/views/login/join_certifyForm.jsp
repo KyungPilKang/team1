@@ -44,7 +44,7 @@
     
 <main class="form-signin">
   <form>
-     <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png" alt="" width="72" height="68">
+     <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png" alt="" width="80" height="80">
     <h1 class="h3 mb-3 fw-normal">롤판.DOG</h1>
     <div>
       <p style="font-size: 13px;">입력하신 이메일로 인증코드가 발송되었습니다.</p>
