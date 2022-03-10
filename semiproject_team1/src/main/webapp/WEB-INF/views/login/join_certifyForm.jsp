@@ -45,20 +45,24 @@
 <main class="form-signin">
   <form action="join_certify" method="post">
   	<input type="hidden" name="mem_mno" value="${mem_mno }">
-     <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png" alt="" width="80" height="80">
-    <h1 class="h3 mb-3 fw-normal">롤판.DOG</h1>
-    <div>
-      <p style="font-size: 13px;">입력하신 이메일로 인증코드가 발송되었습니다.</p>
+    <img class="mb-4"
+	src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
+	alt="" width="80" height="80">
+	<h1 class="h1 mb-3 fw-normal" style="font-family:abster;">LOLPAN.DOG</h1>
+    <div class="mt-4 mb-4">
+      <h5 class="text-white">입력하신 이메일로 인증코드가 발송되었습니다.</h5>
     </div>
     <div class="form-floating">
       <input type="text" class="form-control" id="mem_code" name="mem_code" placeholder="6자리 인증코드">
       <label for="floatingInput">6자리 인증코드</label><br>
     </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">인증코드 제출</button>
-    <p></p>
-    <button class="w-100 btn btn-lg btn-primary" type="submit" style="font-size:15px; height:48px;">메일을 받지 못하셨나요? 다시보내기</button>
-    
+    <button class="w-100 btn btn-lg btn-secondary" type="submit">인증코드 제출</button>
+  </form><br>
+  <form action="re_join_certify" method="post">
+  	<input type="hidden" name="mem_mno" value="${mem_mno }">
+    <button class="w-100 btn btn-lg btn-secondary" type="submit" style="font-size:15px; height:48px;">메일을 받지 못하셨나요? 다시보내기</button>
   </form>
+    
 </main>
 
 
