@@ -32,8 +32,9 @@
 					<li><a href="/boardlist">FREEBOARD</a></li>
 					<c:choose>
 						<c:when test="${not empty mem_email_id }">
+							<li><a href="">DUO</a></li>
 							<li><a href="">MYPAGE</a></li>
-							<li><a href="/logout">LOGOUT</a></li>
+							<li><a href="/logout?page=board">LOGOUT</a></li>
 							<li style="color:white;">
 								<img class="mb-4"
 								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
@@ -41,7 +42,7 @@
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="/login">LOGIN</a></li>	
+							<li><a href="/login?page=board">LOGIN</a></li>	
 						</c:otherwise>
 					</c:choose>
 				</ul>

@@ -39,8 +39,8 @@ public class MemberController {
     private ServletContext servletContext;
 	
 	@PostMapping(value="/login")
-	public ModelAndView login(@RequestParam Map<String,String> info) {
-		ModelAndView modelAndView=new ModelAndView("redirect:/");
+	public ModelAndView login(@RequestParam Map<String,String> info, @RequestParam("page")String page) {
+		ModelAndView mav=new ModelAndView();
 		try {
 			String mem_email_id=info.get("mem_email_id");
 			String mem_pw=info.get("mem_pw");
@@ -48,20 +48,27 @@ public class MemberController {
 				session.setAttribute("mem_email_id", mem_email_id);
 				session.setAttribute("mem_nickname", "테스트");
 			} else throw new Exception();
-		} catch(EmptyResultDataAccessException e) {
-			modelAndView.addObject("fail", "로그인실패");
-			
+			if(page.equals("board")) {
+				mav.setViewName("redirect:/boardlist");
+			} else if(page.equals("main")){
+				mav.setViewName("redirect:/");
+			}
 		} catch(Exception e){
-			modelAndView.addObject("fail2", "실패");
+			e.printStackTrace();
 		}
-		return modelAndView;
+		return mav;
 	}
 	
 	@GetMapping(value="/logout")
-	public ModelAndView logout() {
-		ModelAndView modelAndView=new ModelAndView("redirect:/");
+	public ModelAndView logout(@RequestParam("page")String page) {
+		ModelAndView mav=new ModelAndView();
 		session.invalidate();
-		return modelAndView;
+		if(page.equals("main")) {
+			mav.setViewName("redirect:/");
+		} else if(page.equals("board")) {
+			mav.setViewName("redirect:/boardlist");
+		}
+		return mav;
 	}
 	
 //	@RequestMapping(value = "/join_certifyForm")
