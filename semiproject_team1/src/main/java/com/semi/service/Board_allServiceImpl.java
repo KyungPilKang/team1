@@ -206,13 +206,6 @@ public class Board_allServiceImpl implements Board_allService {
         article_likeDAO.update_like_down(boardNum);
     }
 
-    @Override
-    public void setBoard_likeCount(int boardNum) throws Exception {
-        /* DB에 article_like의 mno가 not null이라 생성시 0을 무조건 넣어주므로 -1 해준다 */
-        int board_likecount = article_likeDAO.board_like_count(boardNum) - 1;
-//        System.out.println("serviceImpl의 board_likecount : " + board_likecount);
-        boardDAO.updateBoardLike(boardNum, board_likecount);
-    }
     /* ----------------------- 끝 : 좋아요 ----------------------- */
 
 

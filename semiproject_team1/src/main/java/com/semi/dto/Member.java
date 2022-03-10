@@ -12,8 +12,17 @@ public class Member {
 	String mem_link_code;
 	String mem_link_confirm;
 	String mem_duo_reg_ok;
+	String page;
 	
 	public Member() {}
+	
+	public String getPage() {
+		return page;
+	}
+
+	public void setPage(String page) {
+		this.page = page;
+	}
 
 	public int getMem_mno() {
 		return mem_mno;

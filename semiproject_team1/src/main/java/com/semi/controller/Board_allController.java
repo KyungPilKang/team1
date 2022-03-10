@@ -19,10 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class Board_allController {
@@ -152,13 +149,33 @@ public class Board_allController {
                 mv.addObject("mno", session.getAttribute("mno"));
             }
             Board board = board_allService.getBoard(boardNum);
-//            board_allService.setBoard_likeCount(boardNum); //임시 주석 처리(?)
+            //불필요 코드
+//            board_allService.setBoard_likeCount(boardNum);
 
             /* 날짜 포맷 변경 시작 */
             // JSTL 날짜 변경 라이브러리를 사용할 경우 아래와 같은 작업이 필요없다.
             Date date = board.getBoard_date();
-            SimpleDateFormat b_date = new SimpleDateFormat("yyyy년 M월 d일 E요일 a H:mm");
+            SimpleDateFormat b_date = new SimpleDateFormat("yyyy년 M월 d일 E요일 a h:mm");
             mv.addObject("board_date", b_date.format(date));
+            /* 날짜 포맷 변경 끝 */
+//
+//            /* 날짜 포맷 변경 시작 */
+//            // JSTL 날짜 변경 라이브러리를 사용할 경우 아래와 같은 작업이 필요없다.
+//            Date date = new Date();
+//            String form = new SimpleDateFormat("yyyy-MM-dd h:mmss").format(board.getBoard_date());
+//            String datea = form.toString();
+//
+//            System.out.println("DB에서 가져온 시간 : "+datea);
+//            SimpleDateFormat b_date = new SimpleDateFormat("yyyy년 M월 d일 E요일 a H:mm");
+
+//            TimeZone time;
+//            time = TimeZone.getTimeZone("America/New_York");
+//            b_date.setTimeZone(time);
+
+//            System.out.println("변환한 시간 : "+b_date);
+
+//            String strDate = b_date.format(date);
+//            System.out.println("스트링으로 변환한 시간 : "+strDate);
             /* 날짜 포맷 변경 끝 */
 
             /* 리플 관련 시작*/

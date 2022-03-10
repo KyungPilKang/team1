@@ -75,6 +75,23 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.insertMember(member);
 		mailService.joinMailSend(member);
 	}
+
+	@Override
+	public Member selectMemeber(String id) throws Exception {
+		Member mem=memberDAO.queryMember(id);
+		return mem;
+	}
+
+	@Override
+	public Member selectMemeber_bymno(int mno) throws Exception {
+		Member mem=memberDAO.selelctMember_bymno(mno);
+		return mem;
+	}
+
+	@Override
+	public void updateMem_code_confirm(int mno) throws Exception {
+		memberDAO.updateMem_code_confirm(mno);
+	}
 	
 	
     

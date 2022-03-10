@@ -3,6 +3,8 @@ package com.semi.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class ViewController {
@@ -12,7 +14,16 @@ public class ViewController {
 		return "main/main";
 	}
 	@RequestMapping(value = "/login") 
-	public String login() { return "login/loginForm"; }
+	public ModelAndView login(@RequestParam("page")String page) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("page", page);
+		mav.setViewName("login/loginForm");
+		return mav; 
+	}
+//	@GetMapping("login")
+//	public String login() {
+//		return "login/loginForm";
+//	}
 
 	@RequestMapping(value = "/kakao")
 	public String join() { return "login/kakao"; }
@@ -25,9 +36,6 @@ public class ViewController {
 
 	@RequestMapping(value = "/recoverForm1")
 	public String recoverForm1() {return "login/recoverForm1";}
-	
-	@RequestMapping(value = "/join_certifyForm")
-	public String join_certifyForm() {return "login/join_certifyForm";}
 	
 	@RequestMapping(value = "/test2")
 	public String test() {return "login/test2";}
