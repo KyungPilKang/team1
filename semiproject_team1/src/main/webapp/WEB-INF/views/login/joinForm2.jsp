@@ -95,26 +95,27 @@
   <button class="btn btn-lg btn-primary" type="button" onclick = "location.href = 'login'" style="border-color:white; float:center; width: 80%; color: black; background-color: grey; ">취소</button>
 </div>
 <div style="width:50%; float:right;">    
-<button class="btn btn-lg btn-primary" type="submit" style="float:center; width: 80%;" onclick = "location.href = 'join_certifyForm'">가입하기</button>
+<button class="btn btn-lg btn-primary" id="form_submit" type="submit" style="float:center; width: 80%;" onclick = "location.href = 'join_certifyForm'" disabled>가입하기</button>
 </div>
 </div>  
 </form>
 </main>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<!-- captcha 이미지 새로고침 -->
+
 <script>
-function caprefesh(){
+	let email_ok=false;
+	let nickname_ok=false;
+	let pw_ok=false;
+	let captcha_ok=false;
+	function caprefesh(){
               var imgsrc = document.getElementById("cap_img");
                imgsrc.src = "/captcha?ver=" + Math.random();
          }
-</script>
 <!-- captcha 입력 유효성 체크 -->
-    <script>
 	    $('#captchavalid').click(function () {
 	    	if($('#userin').val()==""){
 				alert("문자 또는 숫자를 입력하세요");
-				
 				return false;
 			} 
 			$.ajax({
@@ -126,17 +127,21 @@ function caprefesh(){
 				success: function(data, textStatus){
 					if(data=="false"){
 						alert("문자 또는 숫자를 다시 확인하세요");
-						$('.captcha').css("display","inline-block"); 
+						$('.captcha').css("display","inline-block");
+						captcha_ok=false;
 					} else {
 						alert("정상입니다");
 						$('.captcha').css("display","none");
+						captcha_ok=true;
+						console.log(captcha_ok);
+						if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
+					    	$('#form_submit').attr('disabled', false);
+					    }
 					}
-				}
+				});
 			});
 		});
-	    </script>
 <!-- 이메일 db중복 체크 -->
-<script>
     function emailcheck(){
         var mem_email_id = $('#mem_email_id').val(); //id값이 "mem_email_id"인 입력란의 값을 저장
         $.ajax({
@@ -148,16 +153,21 @@ function caprefesh(){
                 if(data == "true"){ //true인 경우 사용불가
                     $('.email_ok').css("display","none"); 
                     $('.email_already').css("display", "inline-block");
+                    email_ok=false;
                 } else { // 사용가능
                 	 $('.email_ok').css("display", "inline-block"); 
                      $('.email_already').css("display","none");
+                     email_ok=true;
+                     console.log(email_ok);
+                     if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
+					    	$('#form_submit').attr('disabled', false);
+					 }
                 }
             }
         });
     }
- </script>
 <!-- 닉네임 db중복 체크 -->
- <script>
+ 	
     function nickcheck(){
         var mem_nickname = $('#mem_nickname').val(); //id값이 "mem_nickname"인 입력란의 값을 저장
         $.ajax({
@@ -169,13 +179,22 @@ function caprefesh(){
                 if(data == "true"){ //true인 경우 사용불가
                     $('.nick_ok').css("display","none"); 
                     $('.nick_already').css("display", "inline-block");
+                    nickname_ok=false;
                 } else { // 사용가능
                 	 $('.nick_ok').css("display", "inline-block"); 
                      $('.nick_already').css("display","none");
+                     nickname_ok=true;
+                     console.log(nickname_ok);
+                     if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
+					    	$('#form_submit').attr('disabled', false);
+					 }
                 }
             }
         });
     }
- </script>
+    /* if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
+    	$('#form_submit').attr('disabled', false);
+    } */
+</script>
 </body>
 </html>

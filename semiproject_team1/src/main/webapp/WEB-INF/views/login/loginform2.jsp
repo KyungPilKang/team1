@@ -43,8 +43,7 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login/signin.css">
 	
-<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
@@ -57,8 +56,7 @@
 			src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
 			alt="" width="80" height="80">
 		<h1 class="h1 mb-3 fw-normal">LOLPAN.DOG</h1>
-		<form id="loginForm">
-			<input type="hidden" name="page" value="${page }">
+		<form id="form" action="login" method="post">
 			<div class="form-floating">
 				<input type="email" class="form-control" id="mem_email_id" name="mem_email_id"
 					placeholder="이메일 주소"> <label for="mem_email_id">이메일
@@ -80,7 +78,6 @@
 		</div>
 
 		<!-- 카카오 로그인 구현부분  -->
-		<a id="kakao-login-btn"></a>
 		<a href="javascript:kakaoLogin();">
 		<img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
     width="222"
@@ -96,7 +93,7 @@
 	<script>
 	/* 로그인 유효성 검사 */
 $(function (){
-	/* form.onsubmit = function (){
+	form.onsubmit = function (){
 		let email = $('#mem_email_id').val();
 		let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		if (email==''){
@@ -113,73 +110,12 @@ $(function (){
 	        	alert("비밀번호를 입력하세요.");
 	        	$('#mem_pw').focus();
 	        	return false;
-		}
-	} */
-	let sweetalert=(icon,title,contents)=>{
-        Swal.fire({
-            icon: icon,
-            title: title,
-            text: contents,
-            confirmButtonText: "확인"
-        })
-    };
-	$('#loginForm').submit(function(){
-        function objectifyForm(formArray){
-        	var returnArray={};
-        	for(var i=0;i<formArray.length;i++){
-        		returnArray[formArray[i]['name']]=formArray[i]['value'];
-        	}
-        	return returnArray;
-        }
-        let formdata=objectifyForm($("#loginForm").serializeArray());
-        $.ajax({
-			type:"POST",
-			async:true,
-			url:"http://localhost:8090/login",
-			contentType:"application/json; charset=utf-8",
-			data:JSON.stringify(formdata),
-			success: function(data, textStatus){
-				if(data.mem.mem_code_confirm=="no"){
-					Swal.fire({
-						title: "미인증 계정",
-						text: "인증페이지로 이동합니다",
-						icon: "warning",
-						confirmButtonText: "확인"
-					}).then((result)=>{
-						if(result){
-	        				window.location.href="/join_certifyForm?mem_mno="+data.mem.mem_mno;
-						}
-					})
-				} else{
-					Swal.fire({
-						title: "로그인 성공",
-						text: data.mem.mem_nickname+"님 환영합니다",
-						icon: "success",
-						confirmButtonText: "확인"
-					}).then((result)=>{
-						if(result){
-	        				window.location.href="/";
-						}
-					})
-				}
-			},
-			error: function(data, textStatus){
-				Swal.fire({
-					title: "로그인 실패",
-					text: data.responseText,
-					icon: "error",
-					confirmButtonText: "확인"
-				})
-			},
-			complete: function(data, textStatus){
-			}
-		});
-        return false;
-	})
+	}
+	}
 });
 </script>
 
-<script>
+ <script>
 window.Kakao.init('00263ffa1f8a32229866207737b5f29d');
 
 function kakaoLogin(){
@@ -194,13 +130,14 @@ function kakaoLogin(){
 				console.log(kakao_account);
 			}
 		});
-		}
-	})
+	}
 }
-</script>
+}
+
 <script type="text/javascript">
 Kakao.init('00263ffa1f8a32229866207737b5f29d');
 console.log(Kakao.isInitialized());
+ 
   Kakao.Auth.createLoginButton({
     container: '#kakao-login-btn',
     success: function(authObj) {
