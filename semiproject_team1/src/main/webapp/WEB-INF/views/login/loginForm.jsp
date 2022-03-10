@@ -42,7 +42,7 @@
 <!-- Custom styles for this template -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login/signin.css">
-	
+
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -88,7 +88,7 @@
 	<button class="api-btn" onclick="unlinkApp()">앱 탈퇴하기</button>
 	<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
 	<div id="result"></div>
-	
+
 		<div class="text-center mt-4 fw-light">
 			롤판.DOG에 처음이세요? <a href="/joinForm1" class="text-primary">회원가입</a>
 		</div>
@@ -154,7 +154,7 @@ $(function (){
 								contentType:"application/json; charset=utf-8",
 								data:{mem:data.mem},
 								success: function(data, textStatus){
-									
+
 								}
     					} else{
     						window.location.href="/";
@@ -223,7 +223,7 @@ console.log(Kakao.isInitialized());
           }
           resultdiv += '<h4>email: '+email+'<h4>'
           resultdiv += '<h4>gender: '+gender+'<h4>'
-          
+
           $('#result').append(resultdiv);
         },
         fail: function(error) {
@@ -250,7 +250,7 @@ console.log(Kakao.isInitialized());
     })
   }
 </script>
- 
+
 
 </div>
 </body>

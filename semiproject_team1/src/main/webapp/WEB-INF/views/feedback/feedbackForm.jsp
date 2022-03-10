@@ -11,9 +11,9 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" sizes="16x16 32x32 64x64"
           href="/resources/asset/image/login/dog1.png"/>
-    <title>전체 게시판 - 롤판.DOG</title>
+    <title>피드백 게시판 - 롤판.DOG</title>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/boardForm_all.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedback/feedbackForm.css">
 </head>
 <body>
 <div class="container">
@@ -32,7 +32,7 @@
                     <li><a href="/boardlist">FREEBOARD</a></li>
                     <c:choose>
                         <c:when test="${not empty mem_mno }">
-<%--                        <c:when test="${empty mem_mno }">--%>
+                            <%--                        <c:when test="${empty mem_mno }">--%>
                             <li><a href="">DUO</a></li>
                         </c:when>
                         <c:otherwise>
@@ -51,7 +51,7 @@
             <div class="card_left">
                 <div class="card_outline">
                     <c:if test="${not empty mem_mno }">
-<%--                    <c:if test="${empty mem_mno }">--%>
+                        <%--                    <c:if test="${empty mem_mno }">--%>
                         <div class="user_info_box">
                             <img class="mb-4"
                                  src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
