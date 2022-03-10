@@ -21,7 +21,7 @@
 .each_post {
     background: #ffffff;
     border: 1px solid black;
-    height: 80px;
+    height: 100px;
     width: 45vw;
     display: flex;
 }
@@ -98,8 +98,9 @@
 }
 
 .thumbnail_size{
+    text-align: center;
     width: 120px;
-    height: 90px;
+    height: 100px;
 }
 
 .loading{
@@ -119,6 +120,9 @@
     list-style-type: none;
 }
 
+body{
+    background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.9),rgba(0, 0, 0, 1));
+}
 
 .container {
     width: 100%;
@@ -127,7 +131,6 @@
     url(../../asset/image/board/lol4.jpg);
     background-size: cover;
 }
-
 
 /* 헤더 영역 */
 .container .header {
@@ -255,6 +258,10 @@
     position: fixed;
     margin-top: -50px;
     width: 45vw;
+}
+
+.board_body.fixed{
+    margin-top: 90px;
 }
 
 

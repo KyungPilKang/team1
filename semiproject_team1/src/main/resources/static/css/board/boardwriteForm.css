@@ -52,6 +52,7 @@ h1 {
 /*    border-radius : 5px;*/
 /*    margin: 8px 0;*/
 /*}*/
+
 #board_subject {
 	padding-left: 10px;
 	border: 1px solid darkgray;
@@ -61,23 +62,39 @@ h1 {
 	font-size: 14px;
 }
 
-.board_file_cont {
-	margin: 16px 0;
+
+.board_file_cont .upload-name {
+	display: inline-block;
+	height: 40px;
+	padding: 0 10px;
+	vertical-align: middle;
+	border: 1px solid #dddddd;
+	width: 200px;
+	color: #999999;
 }
 
-#board_file {
-	display: none;
-}
-
-.btn_file {
-	width: 150px;
-	height: 48px;
-	padding: 6px 25px;
-	background-color: darkgray;
-	border-radius: 4px;
-	color: white;
+.board_file_cont label {
+	display: inline-block;
+	padding: 10px 20px;
+	color: #fff;
+	vertical-align: middle;
+	background-color: #999999;
 	cursor: pointer;
+	height: 40px;
+	margin-left: 10px;
 }
+
+.board_file_cont input[type="file"] {
+	position: absolute;
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+}
+
+
+
 
 .btn_cc {
 	border: none;

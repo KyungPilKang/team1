@@ -23,7 +23,7 @@ public interface Board_allService {
     Boolean like_check_mno(int boardNum, String mno) throws Exception;
     void like_ins_mno(int boardNum, String mno) throws Exception;
     void like_del_mno(int boardNum, String mno) throws Exception;
-    void setBoard_likeCount(int boardNum) throws Exception;
+
     /* ----------------------- 끝 : 좋아요 ----------------------- */
 
     /* ---------------------- 시작 : 즐겨찾기 ---------------------- */

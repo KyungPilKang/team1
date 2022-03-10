@@ -56,25 +56,25 @@
         <%-- 좌측 메뉴 --%>
         <div class="card_left">
             <div class="card_outline">
-                <!-- <div class="user_info_box">회원 로그인시 정보가 입력될 공간</div> -->
+                <div class="user_info_box">회원 로그인시 정보가 입력될 공간</div>
                 <div class="card">
                     <ul class="list">
                         <li><h6>HOME</h6>
                             <ul class="list">
-                                <li><a href="/boardlist">전체</a></li>
+                                <li><a href="/boardlist">ALL</a></li>
                             </ul>
                             <hr>
                         </li>
                         <li><h6>LOL</h6>
                             <ul class="list">
-                                <li><a href="/boardlist_highlight">하이라이트</a></li>
-                                <li><a href="#">팁&노하우</a></li>
+                                <li><a href="/boardlist_highlight">HIGHLIGHT</a></li>
+                                <li><a href="#">TIP.KNOW-HOW</a></li>
                             </ul>
                         </li>
                         <hr>
                         <li><h6>COMMUNITY</h6>
                             <ul class="list">
-                                <li><a href="#">자유</a></li>
+                                <li><a href="#">FREE</a></li>
                             </ul>
                         </li>
                     </ul>
