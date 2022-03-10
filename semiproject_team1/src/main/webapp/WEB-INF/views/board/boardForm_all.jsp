@@ -51,7 +51,7 @@
             <div class="card_left">
                 <div class="card_outline">
 <%--                    <c:if test="${not empty mem_mno }">--%>
-                    <c:if test="${empty mem_mno }">
+                    <c:if test="${not empty mem_mno }">
                         <div class="user_info_box">
                             <img class="mb-4"
                                  src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
