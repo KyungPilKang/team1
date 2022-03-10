@@ -81,10 +81,10 @@
 
 		<!-- 카카오 로그인 구현부분  -->
 		<a id="kakao-login-btn"></a>
-		<!-- <a href="javascript:kakaoLogin();">
+	<a href="javascript:kakaoLogin();">
 		<img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
     width="222"
-    alt="카카오 로그인 버튼"/></a> -->
+    alt="카카오 로그인 버튼"/></a>
 	<button class="api-btn" onclick="unlinkApp()">앱 탈퇴하기</button>
 	<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
 	<div id="result"></div>
@@ -195,9 +195,10 @@ function kakaoLogin(){
 			}
 		});
 	}
-	}
+	})
 }
 </script>
+
 <script type="text/javascript">
 Kakao.init('00263ffa1f8a32229866207737b5f29d');
 console.log(Kakao.isInitialized());

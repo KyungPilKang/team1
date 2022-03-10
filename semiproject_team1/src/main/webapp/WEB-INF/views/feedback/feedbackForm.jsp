@@ -46,55 +46,12 @@
 
     <%-- 바디 영역 --%>
     <div class="body_board">
-        <div class="body_board_mar">
-            <%-- 좌측 메뉴 --%>
-            <div class="card_left">
-                <div class="card_outline">
-                    <c:if test="${not empty mem_mno }">
-                        <%--                    <c:if test="${empty mem_mno }">--%>
-                        <div class="user_info_box">
-                            <img class="mb-4"
-                                 src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
-                                 alt="" width="30" height="30">${mem_nickname }님 환영합니다
-                            <br><br><br><br>
-                            <div class="nav">
-                                <ul>
-                                    <li><a href="/boardwriteform">글쓰기</a></li>
-                                    <li><a href="">마이페이지</a></li>
-                                    <li><a href="/logout?page=board">로그아웃</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </c:if>
-                    <div class="card">
-                        <ul class="list">
-                            <li><h6>HOME</h6>
-                                <ul class="list">
-                                    <li><a href="/boardlist">전체</a></li>
-                                </ul>
-                                <hr>
-                            </li>
-                            <li><h6>LOL</h6>
-                                <ul class="list">
-                                    <li><a href="/boardlist_highlight">하이라이트</a></li>
-                                    <li><a href="#">팁&노하우</a></li>
-                                </ul>
-                            </li>
-                            <hr>
-                            <li><h6>COMMUNITY</h6>
-                                <ul class="list">
-                                    <li><a href="#">자유</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="body_feedback_mar">
 
             <%-- main 컨테이너 --%>
             <div class="main_container">
                 <%-- main 컨테이너의 위쪽 --%>
-                <div class="board_header">
+                <div class="feedback_header">
                     <h3 class="">전체</h3>
                     <div><a href="/boardwriteform">게시판글쓰기</a></div>
                     <div class="sub-link" id="sub-menu">
@@ -149,15 +106,31 @@
                     </div>
                 </div>
                 <%-- main 컨테이너의 아래쪽 (게시판이 들어갈 공간) --%>
-                <div class="board_body">
+                <div class="feedback_body">
 
-                    <div class="board_body_inner">
+                    <div class="feedback_body_inner">
 
                         <c:choose>
                             <c:when test="${articleList!=null && pageInfo.listCount>0 }">
                                 <section id="listForm">
                                     <c:forEach var="article" items="${articleList }">
                                         <div class="each_post">
+                                            <c:choose>
+                                                <c:when test="${article.board_thumbnail != null }">
+                                                    <div class="each_board_thumbnail"
+                                                         id="each_board_thumbnail"><img
+                                                            src="/thumbnail_view/${article.board_thumbnail}"
+                                                            alt="thumbnail" class="thumbnail_size"/>
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="each_board_thumbnail"
+                                                         id="each_board_thumbnail"><img
+                                                            src="https://talk.op.gg/images/thumbnail/post_hidden.png"
+                                                            alt="thumbnail" class="thumbnail_size"/>
+                                                    </div>
+                                                </c:otherwise>
+                                            </c:choose>
                                             <div class="each_board_likecount">
                                                 좋아요수${article.board_likecount }</div>
                                             <div class="each_board_content">
@@ -181,22 +154,6 @@
 
                                                 <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
 
-                                            <c:choose>
-                                                <c:when test="${article.board_thumbnail != null }">
-                                                    <div class="each_board_thumbnail"
-                                                         id="each_board_thumbnail"><img
-                                                            src="/thumbnail_view/${article.board_thumbnail}"
-                                                            alt="thumbnail" class="thumbnail_size"/>
-                                                    </div>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <div class="each_board_thumbnail"
-                                                         id="each_board_thumbnail"><img
-                                                            src="https://talk.op.gg/images/thumbnail/post_hidden.png"
-                                                            alt="thumbnail" class="thumbnail_size"/>
-                                                    </div>
-                                                </c:otherwise>
-                                            </c:choose>
                                         </div>
                                     </c:forEach>
                                 </section>
@@ -210,15 +167,8 @@
                             </c:otherwise>
                         </c:choose>
                     </div>
-
-
                 </div>
-
             </div>
-            <%-- 우측 메뉴 --%>
-            <div class="card_right">
-            </div>
-
         </div>
     </div>
 </div>
@@ -284,15 +234,15 @@
 
 <script>
     $(function () {
-        let fixx = $(".board_header").offset().top;
+        let fixx = $(".feedback_header").offset().top;
         $(window).scroll(function () {
             let window = $(this).scrollTop() + 80;
             if (fixx <= window) {
-                $(".board_header").addClass("fixed");
-                $(".board_body").addClass("fixed");
+                $(".feedback_header").addClass("fixed");
+                $(".feedback_body").addClass("fixed");
             } else {
-                $(".board_header").removeClass("fixed");
-                $(".board_body").removeClass("fixed");
+                $(".feedback_header").removeClass("fixed");
+                $(".feedback_body").removeClass("fixed");
             }
         })
     });
