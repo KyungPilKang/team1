@@ -40,13 +40,13 @@ public class MemberController {
 	
 	@PostMapping(value="/login")
 	public ModelAndView login(@RequestParam Map<String,String> info) {
-		ModelAndView modelAndView=new ModelAndView("login/test");
+		ModelAndView modelAndView=new ModelAndView("redirect:/");
 		try {
 			String mem_email_id=info.get("mem_email_id");
 			String mem_pw=info.get("mem_pw");
 			if(memberService.accessMember(mem_email_id, mem_pw)) {
 				session.setAttribute("mem_email_id", mem_email_id);
-				modelAndView.addObject("success", "로그인성공");
+				session.setAttribute("mem_nickname", "테스트");
 			} else throw new Exception();
 		} catch(EmptyResultDataAccessException e) {
 			modelAndView.addObject("fail", "로그인실패");
@@ -56,6 +56,14 @@ public class MemberController {
 		}
 		return modelAndView;
 	}
+	
+	@GetMapping(value="/logout")
+	public ModelAndView logout() {
+		ModelAndView modelAndView=new ModelAndView("redirect:/");
+		session.invalidate();
+		return modelAndView;
+	}
+	
 //	@RequestMapping(value = "/join_certifyForm")
 //	public ModelAndView join_certifyForm(@RequestParam) {return "login/join_certifyForm";}
 	
