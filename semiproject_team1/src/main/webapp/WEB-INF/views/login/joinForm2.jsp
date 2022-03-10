@@ -95,7 +95,7 @@
   <button class="btn btn-lg btn-primary" type="button" onclick = "location.href = 'login'" style="border-color:white; float:center; width: 80%; color: black; background-color: grey; ">취소</button>
 </div>
 <div style="width:50%; float:right;">    
-<button class="btn btn-lg btn-primary" id="form_submit" type="submit" style="float:center; width: 80%;" onclick = "location.href = 'join_certifyForm'" disabled>가입하기</button>
+<button class="btn btn-lg btn-primary" id="form_submit" type="submit" style="float:center; width: 80%;" disabled>가입하기</button>
 </div>
 </div>  
 </form>
