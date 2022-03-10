@@ -43,6 +43,8 @@ public class MemberController
 		}
 		return modelAndView;
 	}
+//	@RequestMapping(value = "/join_certifyForm")
+//	public ModelAndView join_certifyForm(@RequestParam) {return "login/join_certifyForm";}
 	
 	@ResponseBody
 	@PostMapping(value="/emailCheck")
@@ -65,26 +67,8 @@ public class MemberController
 		}
 		return String.valueOf(overlap);
 	}
-    
-	@RequestMapping(value = "/") 
-	public String login() { return "login/loginForm"; }
-
-	@RequestMapping(value = "/kakao")
-	public String join() { return "login/kakao"; }
-	
-	@RequestMapping(value = "/joinForm1")
-	public String join1() {return "login/joinForm1";}
 	
 	@RequestMapping(value = "/joinForm2")
 	public String join2() {return "login/joinForm2";}
-
-	@RequestMapping(value = "/recoverForm1")
-	public String recoverForm1() {return "login/recoverForm1";}
-	
-	@RequestMapping(value = "/join_certifyForm")
-	public String join_certifyForm() {return "login/join_certifyForm";}
-	
-	@RequestMapping(value = "/test2")
-	public String test() {return "login/test2";}
 
 }

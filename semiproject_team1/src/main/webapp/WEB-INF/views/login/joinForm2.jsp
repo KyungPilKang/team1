@@ -63,6 +63,7 @@
       <textarea style="background-color:ivory; resize:none; width: 100%; height: 80px;  font: size 14px;">회원가입을 위해서 이메일 인증이 진행되며, 인증이 완료되기 전까지 회원가입이 완료가 되지 않습니다.</textarea>
     </div>
     
+    <form>
 <div class="form-floating">
       <input type="email" class="form-control" id="mem_email_id" name="mem_email_id" placeholder="이메일 주소" required oninput = "emailcheck()" />
       <label  for="mem_email_id">이메일 주소</label>
@@ -79,6 +80,7 @@
       <input type="password" class="form-control" id="floatingPassword" placeholder="비밀번호">
       <label for="floatingPassword">비밀번호</label>
     </div>
+    </form>
     
     <div class="captcha" id=capchacon style="display:inline;">
       <img src="/captcha" id="cap_img">
@@ -87,9 +89,8 @@
 	<input type="text" id="userin" name="userin" style="width:70%; position:relative;">
 		
 	<input type="button" id="captchavalid" value="전송">	
-
-
-    </div> 
+    </div>
+    
 
 <div style="padding-top: 10px;">
   <div style="width:50%; float:left;">
@@ -125,12 +126,12 @@ function caprefesh(){
 				url:"http://localhost:8090/captchacheck",
 				data:{id:$('#userin').val()},
 				success: function(data, textStatus){
-					if(data=="true"){
-						alert("정상입니다");
-						$('.captcha').css("display","none"); 
-					} else {
+					if(data=="false"){
 						alert("문자 또는 숫자를 다시 확인하세요");
 						$('.captcha').css("display","inline-block"); 
+					} else {
+						alert("정상입니다");
+						$('.captcha').css("display","none");
 					}
 				}
 			});
