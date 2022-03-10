@@ -56,6 +56,8 @@ public class MemberController {
 		}
 		return modelAndView;
 	}
+//	@RequestMapping(value = "/join_certifyForm")
+//	public ModelAndView join_certifyForm(@RequestParam) {return "login/join_certifyForm";}
 	
 	@ResponseBody
 	@PostMapping(value="/emailCheck")
