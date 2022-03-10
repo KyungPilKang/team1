@@ -148,7 +148,7 @@
                                                     <div class="each_board_cat">${article.board_cat }</div>
                                                     <div class="each_board_date"><fmt:formatDate
                                                             value="${article.board_date }"
-                                                            pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
+                                                            pattern="yyyy년 M월 d일 E요일 a h:mm"/></div>
                                                     <div class="each_board_nickname">
                                                         닉네임${article.board_nickname }</div>
                                                 </div>
