@@ -81,10 +81,10 @@
 
 		<!-- 카카오 로그인 구현부분  -->
 		<a id="kakao-login-btn"></a>
-		<a href="javascript:kakaoLogin();">
+		<!-- <a href="javascript:kakaoLogin();">
 		<img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
     width="222"
-    alt="카카오 로그인 버튼"/></a>
+    alt="카카오 로그인 버튼"/></a> -->
 	<button class="api-btn" onclick="unlinkApp()">앱 탈퇴하기</button>
 	<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
 	<div id="result"></div>
@@ -93,7 +93,8 @@
 			롤판.DOG에 처음이세요? <a href="/joinForm1" class="text-primary">회원가입</a>
 		</div>
 	</main>
-	<script>
+
+<script>
 	/* 로그인 유효성 검사 */
 $(function (){
 	/* form.onsubmit = function (){
@@ -195,7 +196,7 @@ function kakaoLogin(){
 			}
 		});
 		}
-	})
+	}
 }
 </script>
 <script type="text/javascript">

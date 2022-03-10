@@ -138,7 +138,7 @@
 					    	$('#form_submit').attr('disabled', false);
 					    }
 					}
-				});
+				}
 			});
 		});
 <!-- 이메일 db중복 체크 -->
