@@ -15,4 +15,5 @@ public interface MemberDAO {
 	public void insertMember(Member member) throws Exception;
 	public Member selelctMember_bymno(int mno) throws Exception;
 	public void updateMem_code_confirm(int mno) throws Exception;
+	public void updateMem_code(Member member) throws Exception;
 }

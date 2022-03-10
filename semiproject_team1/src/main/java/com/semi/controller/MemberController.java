@@ -173,4 +173,16 @@ public class MemberController {
 		return mav;
 	}
 	
+	@PostMapping("re_join_certify")
+	public ModelAndView re_join_certify(@RequestParam("mem_mno")int mem_mno) {
+		ModelAndView mav=new ModelAndView();
+		try {
+			memberService.updateMem_code(mem_mno);
+			mav.setViewName("redirect:/join_certifyForm?mem_mno="+mem_mno);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	
 }

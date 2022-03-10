@@ -28,7 +28,7 @@
         <div class="nav">
             <div class="nav">
                 <ul>
-                    <li><a href="#">FEEDBACK</a></li>
+                    <li><a href="/feedback">FEEDBACK</a></li>
                     <li><a href="/boardlist">FREEBOARD</a></li>
                     <c:choose>
                         <c:when test="${not empty mem_mno }">
@@ -50,8 +50,8 @@
             <%-- 좌측 메뉴 --%>
             <div class="card_left">
                 <div class="card_outline">
-                    <c:if test="${not empty mem_mno }">
-<%--                    <c:if test="${empty mem_mno }">--%>
+<%--                    <c:if test="${not empty mem_mno }">--%>
+                    <c:if test="${empty mem_mno }">
                         <div class="user_info_box">
                             <img class="mb-4"
                                  src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"

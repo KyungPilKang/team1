@@ -198,7 +198,6 @@ body{
     /*flex-shrink: 0;*/
     /*border: 2px dotted white;*/
     margin: 0 5px;
-    background-color: rgba(15, 81, 50, 	0);
     position: fixed;
     z-index: 9999;
 }
@@ -206,13 +205,15 @@ body{
 
 
 .card_outline{
+
+    background-color: red;
+    /*background-color: rgba(0, 0, 0, 0.6);*/
     box-shadow: 1px 2px 3px 1px rgba(255, 255, 255, 0.3);
     /*border : 2px white dotted;*/
     border-radius: 2px;
     margin-left : 10vw;
     width: 15vw;
     height: 70vh;
-    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .user_info_box{
