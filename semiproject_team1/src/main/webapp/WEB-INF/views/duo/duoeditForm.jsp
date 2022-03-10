@@ -1,27 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>duoeditForm</title>
 
   <!-- plugins:css -->
-  <link rel="stylesheet" href="../../vendors/feather/feather.css">
-  <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
-  <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
-  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/feather/feather.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/typicons/typicons.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/css/vendor.bundle.base.css">
   <!-- endinject -->
   <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="../../vendors/select2/select2.min.css">
-  <link rel="stylesheet" href="../../vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/select2/select2.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/select2-bootstrap-theme/select2-bootstrap.min.css">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="../../images/favicon.png" />
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/image/duo/favicon.png" />
 
 </head>
 <body>
@@ -41,7 +42,6 @@
               </div>
             </div>
 
-
             <div class="form-group d-sm-flex d-inline-flex align-items-center">
               <label for="exampleInputUsername2" class="col-sm-3 col-form-label">롤 아이디 입력</label>
               <div class="col-sm-4">
@@ -49,10 +49,8 @@
               </div>
             </div>
 
-
             <div class="form-group d-sm-flex d-inline-flex align-items-center">
               <label for="positionSelect" class="col-sm-3 col-form-label">포지션(주/서브)</label>
-
 
               <div class="align-items-center">
                 <select class="form-control" id="positionSelect">
@@ -85,7 +83,6 @@
               </div>
             </div>
 
-
             <div class="form-group d-sm-flex d-inline-flex align-items-center">
               <label for="exampleInputUsername2" class="col-sm-3 col-form-label">승률</label>
               <div class="col-sm-4">
@@ -93,11 +90,8 @@
               </div>
             </div>
 
-
             <div class="form-group d-sm-flex d-inline-flex align-items-center">
               <label for="selectChamp" class="col-sm-3 col-form-label">선호 챔피언</label>
-
-       
 
               <select class="js-example-basic-single col-sm-4" id="selectChamp">
                 <option value="">챔피언 선택</option>
@@ -264,7 +258,6 @@
 
             </div>
 
-
             <div class="form-group d-sm-flex d-inline-flex align-items-center">
               <label for="selectMic" class="col-sm-3 col-form-label">마이크 가능 여부</label>
 
@@ -274,10 +267,7 @@
                 </label>
               </div>
 
-      
-
             </div>
-
 
             <div class="form-group d-sm-flex d-inline-flex align-items-center">
               <label for="selectAllChamp" class="col-sm-3 col-form-label">올챔 여부</label>
@@ -287,8 +277,6 @@
                   <input type="checkbox" class="form-check-input" name="optionsRadios" id="selectAllChamp" value="">
                 </label>
               </div>
-
-           
 
             </div>
 
@@ -303,14 +291,13 @@
                 </select>
               </div>
 
-              
             </div>
             <div class="form-group">
               <label for="textarea" class="col-sm-3 col-form-label">소개글</label>
               <textarea class="form-control h-25" id="textarea" rows="7"></textarea>
             </div>
 
-   
+  
             <br />
             <button type="submit" class="btn btn-primary me-2">돌아가기</button>
             <button type="submit" class="btn btn-primary me-2">수정</button>
@@ -321,27 +308,26 @@
     </div>
   </div>
 
-
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="../../vendors/js/vendor.bundle.base.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/duo/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
-  <script src="../../vendors/typeahead.js/typeahead.bundle.min.js"></script>
-  <script src="../../vendors/select2/select2.min.js"></script>
-  <script src="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/duo/typeahead.bundle.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/duo/select2/select2.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/duo/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
   <!-- End plugin js for this page -->
   <!-- inject:js -->
-  <script src="../../js/off-canvas.js"></script>
-  <script src="../../js/hoverable-collapse.js"></script>
-  <script src="../../js/template.js"></script>
-  <script src="../../js/settings.js"></script>
-  <script src="../../js/todolist.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/duo/off-canvas.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/duo/hoverable-collapse.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/duo/template.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/duo/settings.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/duo/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="../../js/file-upload.js"></script>
-  <script src="../../js/typeahead.js"></script>
-  <script src="../../js/select2.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/duo/file-upload.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/duo/typeahead.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/duo/select2.js"></script>
   <!-- End custom js for this page-->
 
 </body>

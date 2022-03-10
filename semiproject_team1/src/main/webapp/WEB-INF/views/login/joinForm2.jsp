@@ -20,27 +20,25 @@
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/bootstrap.min.css">
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
+@media (min-width: 768px) {
+	.bd-placeholder-img-lg {
+    font-size: 3.5rem;
+	}
+}
+#email_ok{visibility: hidden;}
+#nick_ok{visibility: hidden;}
+#pw_ok{visibility: hidden;}
       
-.email_ok{color:blue; display: none;}
-.email_already{color:red; display: none;}
-.nick_ok{color:blue; display: none;}
-.nick_already{color:red; display: none;}
-      
-    </style>
+</style>
 
     
     <!-- Custom styles for this template -->
@@ -52,50 +50,56 @@
   
 <main class="form-signin">
   <form action="/join" method="post" >
-    <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png" alt="" width="80" height="80">
-    <h1 class="h3 mb-3 fw-normal">롤판.DOG</h1>
+    	<img class="mb-4"
+		src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
+		alt="" width="80" height="80">
+		<h1 class="h1 mb-3 fw-normal" style="font-family:abster;">LOLPAN.DOG</h1>
 
-    <div style="float:left">
-      <h5>기본정보입력</h5>
+    <div style="float:center">
+      <h5 class="text-white">기본정보입력</h5>
     </div>
 
     <div style="clear:left;">
-      <textarea style="background-color:ivory; resize:none; width: 100%; height: 80px;  font: size 14px;">회원가입을 위해서 이메일 인증이 진행되며, 인증이 완료되기 전까지 회원가입이 완료가 되지 않습니다.</textarea>
+      <textarea style="background-color:ivory; resize:none; width: 100%; height: 80px;  font: size 14px;" disabled>회원가입을 위해서 이메일 인증이 진행되며, 인증이 완료되기 전까지 회원가입이 완료가 되지 않습니다.</textarea>
     </div>
     
-<div class="form-floating">
+	<div class="form-floating mt-2">
       <input type="email" class="form-control" id="mem_email_id" name="mem_email_id" placeholder="이메일 주소" required oninput = "emailcheck()" />
       <label  for="mem_email_id">이메일 주소</label>
-    </div><br>
-    <span class="email_ok">사용 가능한 이메일입니다.</span>
-    <span class="email_already">이미 가입된 이메일입니다.</span>
+    </div>
+    <div class="mt-2 mb-2" id="email_ok">
+    .
+    </div>
     <div class="form-floating">
       <input type="text" class="form-control" id="mem_nickname" name="mem_nickname" placeholder="닉네임" required oninput = "nickcheck()">
       <label for="mem_nickname">닉네임</label>
-    </div><br>
-    <span class="nick_ok">사용 가능한 닉네임 입니다.</span>	
-    <span class="nick_already">이미 가입된 닉네임 입니다.</span>
+    </div>
+    <div class="mt-2 mb-2" id="nick_ok">
+    .
+    </div>
     <div class="form-floating">
       <input type="password" class="form-control" id="mem_pw" name="mem_pw" placeholder="비밀번호" required oninput = "pwcheck()">
       <label for="mem_pw">비밀번호</label>
     </div>
-    
+    <div class="mt-2 mb-2" id="pw_ok">
+    .
+    </div>
     <div class="captcha" id=capchacon style="display:inline;">
       <img src="/captcha" id="cap_img">
-      <input type="button" onclick="caprefesh()" value="새로고침"><br>
-
-	<input type="text" id="userin" name="userin" style="width:70%; position:relative;">
-		
-	<input type="button" id="captchavalid" value="전송">	
+	<div class="mt-2 mb-2">
+		<input class="form-control" type="text" id="userin" name="userin">
+	</div>
+	    <input class="btn btn-success" type="button" onclick="caprefesh()" value="새로고침">
+		<input class="btn btn-success" type="button" id="captchavalid" value="확인하기">	
     </div>
     
 
-<div style="padding-top: 10px;">
+<div style="padding-top: 50px;">
   <div style="width:50%; float:left;">
-  <button class="btn btn-lg btn-primary" type="button" onclick = "location.href = 'login'" style="border-color:white; float:center; width: 80%; color: black; background-color: grey; ">취소</button>
+  <button class="btn btn-lg btn-secondary" type="button" onclick = "history.back()" style="float:center; width: 80%;">취소</button>
 </div>
 <div style="width:50%; float:right;">    
-<button class="btn btn-lg btn-primary" id="form_submit" type="submit" style="float:center; width: 80%;" onclick = "location.href = 'join_certifyForm'" disabled>가입하기</button>
+<button class="btn btn-lg btn-secondary" id="form_submit" type="submit" style="float:center; width: 80%;" disabled>가입하기</button>
 </div>
 </div>  
 </form>
@@ -151,17 +155,19 @@
             data:{mem_email_id:mem_email_id},
             success:function(data){ //컨트롤러에서 넘어온 data값을 받는다 
                 if(data == "true"){ //true인 경우 사용불가
-                    $('.email_ok').css("display","none"); 
-                    $('.email_already').css("display", "inline-block");
+                	$('#email_ok').text("이미 가입된 이메일입니다");
+                	$('#email_ok').css("visibility", "visible");
+                	$('#email_ok').css("color", "orangered");
                     email_ok=false;
                 } else { // 사용가능
-                	 $('.email_ok').css("display", "inline-block"); 
-                     $('.email_already').css("display","none");
-                     email_ok=true;
-                     console.log(email_ok);
-                     if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
-					    	$('#form_submit').attr('disabled', false);
-					 }
+                	$('#email_ok').text("사용 가능한 이메일입니다");
+                	$('#email_ok').css("visibility", "visible");
+                	$('#email_ok').css("color", "greenyellow");
+                    email_ok=true;
+                    console.log(email_ok);
+                    if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
+					   	$('#form_submit').attr('disabled', false);
+					}
                 }
             }
         });
@@ -177,17 +183,19 @@
             data:{mem_nickname:mem_nickname},
             success:function(data){ //컨트롤러에서 넘어온 data값을 받는다 
                 if(data == "true"){ //true인 경우 사용불가
-                    $('.nick_ok').css("display","none"); 
-                    $('.nick_already').css("display", "inline-block");
+                	$('#nick_ok').text("이미 사용중인 닉네임입니다");
+                	$('#nick_ok').css("visibility", "visible");
+                	$('#nick_ok').css("color", "orangered");
                     nickname_ok=false;
                 } else { // 사용가능
-                	 $('.nick_ok').css("display", "inline-block"); 
-                     $('.nick_already').css("display","none");
-                     nickname_ok=true;
-                     console.log(nickname_ok);
-                     if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
-					    	$('#form_submit').attr('disabled', false);
-					 }
+                	$('#nick_ok').text("사용 가능한 닉네임입니다");
+                	$('#nick_ok').css("visibility", "visible");
+                	$('#nick_ok').css("color", "greenyellow");
+                    nickname_ok=true;
+                    console.log(nickname_ok);
+                    if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
+					   	$('#form_submit').attr('disabled', false);
+					}
                 }
             }
         });

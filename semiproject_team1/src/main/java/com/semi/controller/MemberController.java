@@ -48,8 +48,8 @@ public class MemberController {
 			if(memberService.accessMember(mem.getMem_email_id(), mem.getMem_pw())) {
 				Member result=memberService.selectMemeber(mem.getMem_email_id());
 				if(result.getMem_code_confirm().equals("yes")) {
-					session.setAttribute("mem_mno", mem.getMem_mno());
-					session.setAttribute("mem_nickname", mem.getMem_nickname());
+					session.setAttribute("mem_mno", result.getMem_mno());
+					session.setAttribute("mem_nickname", result.getMem_nickname());
 				}
 				map.put("mem", result);
 			} else throw new Exception();
@@ -102,10 +102,12 @@ public class MemberController {
 	}
 	
 	@PostMapping("join")
-	public ModelAndView join(@ModelAttribute Member member) {
+	public ModelAndView join(@ModelAttribute Member mem) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			memberService.insertMember(member);
+			memberService.insertMember(mem);
+			Member result=memberService.selectMemeber(mem.getMem_email_id());
+			mav.addObject("mem_mno", result.getMem_mno());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -165,6 +167,18 @@ public class MemberController {
 				memberService.updateMem_code_confirm(mem.getMem_mno());
 				mav.setViewName("redirect:/login?page=main");
 			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	
+	@PostMapping("re_join_certify")
+	public ModelAndView re_join_certify(@RequestParam("mem_mno")int mem_mno) {
+		ModelAndView mav=new ModelAndView();
+		try {
+			memberService.updateMem_code(mem_mno);
+			mav.setViewName("redirect:/join_certifyForm?mem_mno="+mem_mno);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

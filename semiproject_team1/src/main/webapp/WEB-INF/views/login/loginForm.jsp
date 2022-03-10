@@ -20,8 +20,8 @@
 
 
 <!-- Bootstrap core CSS -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/login/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/signin.css">
 <style>
 .bd-placeholder-img {
 	font-size: 1.125rem;
@@ -40,8 +40,6 @@
 
 
 <!-- Custom styles for this template -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/login/signin.css">
 	
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -56,41 +54,42 @@
 		<img class="mb-4"
 			src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
 			alt="" width="80" height="80">
-		<h1 class="h1 mb-3 fw-normal">LOLPAN.DOG</h1>
+		<h1 class="h1 mb-3 fw-normal" style="font-family:abster;">LOLPAN.DOG</h1>
 		<form id="loginForm">
 			<input type="hidden" name="page" value="${page }">
 			<div class="form-floating">
 				<input type="email" class="form-control" id="mem_email_id" name="mem_email_id"
-					placeholder="이메일 주소"> <label for="mem_email_id">이메일
+					placeholder="이메일 주소"> <label class="text-bold" for="mem_email_id">이메일
 					주소</label>
 			</div>
-			<div class="form-floating">
+			<div class="form-floating mt-2">
 				<input type="password" class="form-control" id="mem_pw" name="mem_pw"
 					placeholder="비밀번호"> <label for="mem_pw">비밀번호</label>
 			</div>
-			<button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+			<button class="w-100 btn btn-lg btn-secondary" type="submit">로그인</button>
 		</form>
 		<div class="my-2 d-flex justify-content-between align-items-center">
 			<div class="form-check">
-				<label class="form-check-label text-muted"> <input
-					type="checkbox" class="form-check-input"> 로그인 상태 유지하기
+				<label class="form-check-label text-white"> <input
+					type="checkbox" class="form-check-input "> 로그인 상태 유지하기
 				</label>
 			</div>
-			<a href="recoverForm1" class="auth-link text-black">비밀번호 찾기</a>
+			<a href="recoverForm1" class="auth-link text-white">비밀번호 찾기</a>
 		</div>
 
 		<!-- 카카오 로그인 구현부분  -->
+		<div class="mt-4">
 		<a id="kakao-login-btn"></a>
+		</div>
 		<!-- <a href="javascript:kakaoLogin();">
 		<img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
     width="222"
     alt="카카오 로그인 버튼"/></a> -->
-	<button class="api-btn" onclick="unlinkApp()">앱 탈퇴하기</button>
-	<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
-	<div id="result"></div>
-	
-		<div class="text-center mt-4 fw-light">
-			롤판.DOG에 처음이세요? <a href="/joinForm1" class="text-primary">회원가입</a>
+	<!-- <button class="w-7 btn btn-secondary" onclick="unlinkApp()">앱 탈퇴하기</button>
+	<button class="w-7 btn btn-secondary" onclick="kakaoLogout()">로그아웃</button>
+	<div id="result"></div> -->
+		<div class="text-center mt-4 fw-light text-white">
+			롤판.DOG에 처음이세요?&nbsp;&nbsp;&nbsp;<a href="/joinForm1" class="text-white">회원가입</a>
 		</div>
 	</main>
 
