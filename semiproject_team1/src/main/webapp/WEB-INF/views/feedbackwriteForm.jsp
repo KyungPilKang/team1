@@ -18,7 +18,7 @@
 				<h1>
 					<a href="#"> <img class="mb-4"
 						src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
-						alt="" width="72" height="68"> LOLPAN.DOG
+						alt="" width="60" height="60"> LOLPAN.DOG
 					</a>
 				</h1>
 				<div class="nav">

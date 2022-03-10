@@ -66,7 +66,7 @@ public class MemberController
 		return String.valueOf(overlap);
 	}
     
-	@RequestMapping(value = "/") 
+	@RequestMapping(value = "/login") 
 	public String login() { return "login/loginForm"; }
 
 	@RequestMapping(value = "/kakao")

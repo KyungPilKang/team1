@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" sizes="16x16 32x32 64x64"
 	href="/resources/asset/image/login/dog1.png" />
-<title>피드백 게시판</title>
+<title>메인 페이지</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/feedback/feed.css">
+	href="${pageContext.request.contextPath}/resources/css/main/feed.css">
 </head>
 <body>
 	<div class="container">
@@ -22,19 +22,17 @@
 			<div class="nav">
 				<ul>
 					<li><a href="#">FEEDBACK</a></li>
-					<li><a href="#">DUOMATCHING</a></li>
 					<li><a href="#">FREEBOARD</a></li>
-					<li><a href="#">MYPAGE</a></li>
-					<li><a href="#">LOGOUT</a></li>
+					<li><a href="/login">LOGIN</a></li>
 				</ul>
 			</div>
 		</div>
 		<div class="hero">
-			<h2>BOARD</h2>
-			<button type="button" onclick="location.href='/feedbackwriteform' ">REQUEST</button>
-			<p>HOT NEW SUBJECT SERTCH</p>
+			<h2>Today's Feedback</h2>
+			<p>Lorem Ipsum</p><br><br>
+			<button type="button" onclick="location.href='#' ">상세보기</button>
 		</div>
-		<div class="card">
+		<!-- <div class="card">
 			<ul class="list">
 				<li><a href="#">HOME</a>
 					<ul class="list">
@@ -50,7 +48,7 @@
 						<li><a href="#">FREE</a></li>
 					</ul></li>
 			</ul>
-		</div>
+		</div> -->
 	</div>
 </body>
 </html>
