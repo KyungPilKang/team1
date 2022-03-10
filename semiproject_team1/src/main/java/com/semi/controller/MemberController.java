@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,8 +47,10 @@ public class MemberController {
 		try {
 			if(memberService.accessMember(mem.getMem_email_id(), mem.getMem_pw())) {
 				Member result=memberService.selectMemeber(mem.getMem_email_id());
-				session.setAttribute("mem_mno", mem.getMem_mno());
-				session.setAttribute("mem_nickname", mem.getMem_nickname());
+				if(result.getMem_code_confirm().equals("yes")) {
+					session.setAttribute("mem_mno", mem.getMem_mno());
+					session.setAttribute("mem_nickname", mem.getMem_nickname());
+				}
 				map.put("mem", result);
 			} else throw new Exception();
 //			if(page.equals("board")) {
@@ -147,11 +150,24 @@ public class MemberController {
         }
     }
 	
-	@PostMapping(value = "/join_certifyForm")
-	public ModelAndView join_certifyForm(@RequestParam("mem")Member mem) {
+	@GetMapping(value = "/join_certifyForm")
+	public String join_certifyForm(@RequestParam("mem_mno")int mem_mno, Model model) {
+		model.addAttribute("mem_mno", mem_mno);
+		return "login/join_certifyForm";
+	}
+	
+	@PostMapping("join_certify")
+	public ModelAndView join_certify(@ModelAttribute Member mem) {
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("mem", mem);
-		mav.setViewName("login/join_certifyForm");
+		try {
+			Member result=memberService.selectMemeber_bymno(mem.getMem_mno());
+			if(result.getMem_code().equals(mem.getMem_code())) {
+				memberService.updateMem_code_confirm(mem.getMem_mno());
+				mav.setViewName("redirect:/login?page=main");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		return mav;
 	}
 	

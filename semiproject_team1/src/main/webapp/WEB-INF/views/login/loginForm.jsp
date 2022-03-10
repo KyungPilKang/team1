@@ -139,28 +139,29 @@ $(function (){
 			contentType:"application/json; charset=utf-8",
 			data:JSON.stringify(formdata),
 			success: function(data, textStatus){
-				Swal.fire({
-					title: "로그인 성공",
-					text: data.mem.mem_nickname+"님 환영합니다",
-					icon: "success",
-					confirmButtonText: "확인"
-				}).then((result)=>{
-					if(result){
-						if(data.mem.mem_code_confirm=="no"){
-							$.ajax({
-								type:"POST",
-								async:true,
-								url:"http://localhost:8090/join_certifyForm",
-								contentType:"application/json; charset=utf-8",
-								data:{mem:data.mem},
-								success: function(data, textStatus){
-									
-								}
-    					} else{
-    						window.location.href="/";
-    					}
-					}
-				})
+				if(data.mem.mem_code_confirm=="no"){
+					Swal.fire({
+						title: "미인증 계정",
+						text: "인증페이지로 이동합니다",
+						icon: "warning",
+						confirmButtonText: "확인"
+					}).then((result)=>{
+						if(result){
+	        				window.location.href="/join_certifyForm?mem_mno="+data.mem.mem_mno;
+						}
+					})
+				} else{
+					Swal.fire({
+						title: "로그인 성공",
+						text: data.mem.mem_nickname+"님 환영합니다",
+						icon: "success",
+						confirmButtonText: "확인"
+					}).then((result)=>{
+						if(result){
+	        				window.location.href="/";
+						}
+					})
+				}
 			},
 			error: function(data, textStatus){
 				Swal.fire({
@@ -193,7 +194,7 @@ function kakaoLogin(){
 				console.log(kakao_account);
 			}
 		});
-		}
+	}
 	}
 }
 </script>

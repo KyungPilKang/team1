@@ -23,4 +23,14 @@
 			#{mem_link_code}, #{mem_link_confirm}, #{mem_duo_reg_ok})
 		]]>
 	</insert>
+	<select id="selelctMember_bymno" resultType="Member" parameterType="Integer">
+		<![CDATA[
+			select * from semi.member where mem_mno=#{mno}
+		]]>
+	</select>
+	<update id="updateMem_code_confirm" parameterType="Integer">
+		<![CDATA[
+			update member set mem_code_confirm="yes" where mem_mno=#{mno}
+		]]>
+	</update>
 </mapper>

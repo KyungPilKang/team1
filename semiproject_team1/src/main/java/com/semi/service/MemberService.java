@@ -9,4 +9,6 @@ public interface MemberService
 	public boolean nickOverlap(String mem_nickname) throws Exception;
 	public void insertMember(Member member) throws Exception;
 	public Member selectMemeber(String id) throws Exception;
+	public Member selectMemeber_bymno(int mno) throws Exception;
+	public void updateMem_code_confirm(int mno) throws Exception;
 }
