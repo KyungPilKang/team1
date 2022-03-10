@@ -62,7 +62,6 @@
   	<input type="hidden" name="mem_mno" value="${mem_mno }">
     <button class="w-100 btn btn-lg btn-secondary" type="submit" style="font-size:15px; height:48px;">메일을 받지 못하셨나요? 다시보내기</button>
   </form>
-    
 </main>
 
 
