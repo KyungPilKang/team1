@@ -56,7 +56,7 @@
                     <label for="board_file" class="btn_file"> 동영상 첨부 </label>
                     <input name="file" type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" id="board_file"
                            placeholder=" 파일첨부" class="board_file"/>
-                    <input class="upload-name" value="첨부파일" placeholder="첨부파일">
+                    <input class="upload-name" value="첨부파일" placeholder="첨부파일" disabled>
                 </div>
             </form>
 

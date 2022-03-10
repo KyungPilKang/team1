@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -13,13 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,26 +39,26 @@ public class MemberController {
 	@Autowired
     private ServletContext servletContext;
 	
+	@ResponseBody
 	@PostMapping(value="/login")
-	public ModelAndView login(@RequestParam Map<String,String> info, @RequestParam("page")String page) {
-		ModelAndView mav=new ModelAndView();
+	public Map<String, Object> login(@RequestBody Member mem) {
+		Map<String, Object> map=new HashMap<>();
 		try {
-			String mem_email_id=info.get("mem_email_id");
-			String mem_pw=info.get("mem_pw");
-			if(memberService.accessMember(mem_email_id, mem_pw)) {
-				Member mem=memberService.selectMemeber(mem_email_id);
+			if(memberService.accessMember(mem.getMem_email_id(), mem.getMem_pw())) {
+				Member result=memberService.selectMemeber(mem.getMem_email_id());
 				session.setAttribute("mem_mno", mem.getMem_mno());
 				session.setAttribute("mem_nickname", mem.getMem_nickname());
+				map.put("mem", result);
 			} else throw new Exception();
-			if(page.equals("board")) {
-				mav.setViewName("redirect:/boardlist");
-			} else if(page.equals("main")){
-				mav.setViewName("redirect:/");
-			}
+//			if(page.equals("board")) {
+//				mav.setViewName("redirect:/boardlist");
+//			} else if(page.equals("main")){
+//				mav.setViewName("redirect:/");
+//			}
 		} catch(Exception e){
 			e.printStackTrace();
 		}
-		return mav;
+		return map;
 	}
 	
 	@GetMapping(value="/logout")
@@ -145,5 +146,13 @@ public class MemberController {
             }
         }
     }
+	
+	@PostMapping(value = "/join_certifyForm")
+	public ModelAndView join_certifyForm(@RequestParam("mem")Member mem) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("mem", mem);
+		mav.setViewName("login/join_certifyForm");
+		return mav;
+	}
 	
 }

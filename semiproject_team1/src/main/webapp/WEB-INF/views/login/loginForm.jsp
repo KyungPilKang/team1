@@ -43,7 +43,8 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/login/signin.css">
 	
-	<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
@@ -56,7 +57,7 @@
 			src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
 			alt="" width="80" height="80">
 		<h1 class="h1 mb-3 fw-normal">LOLPAN.DOG</h1>
-		<form id="form" action="login" method="post">
+		<form id="loginForm">
 			<input type="hidden" name="page" value="${page }">
 			<div class="form-floating">
 				<input type="email" class="form-control" id="mem_email_id" name="mem_email_id"
@@ -95,7 +96,7 @@
 	<script>
 	/* 로그인 유효성 검사 */
 $(function (){
-	form.onsubmit = function (){
+	/* form.onsubmit = function (){
 		let email = $('#mem_email_id').val();
 		let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		if (email==''){
@@ -112,8 +113,68 @@ $(function (){
 	        	alert("비밀번호를 입력하세요.");
 	        	$('#mem_pw').focus();
 	        	return false;
-	}
-	}
+		}
+	} */
+	let sweetalert=(icon,title,contents)=>{
+        Swal.fire({
+            icon: icon,
+            title: title,
+            text: contents,
+            confirmButtonText: "확인"
+        })
+    };
+	$('#loginForm').submit(function(){
+        function objectifyForm(formArray){
+        	var returnArray={};
+        	for(var i=0;i<formArray.length;i++){
+        		returnArray[formArray[i]['name']]=formArray[i]['value'];
+        	}
+        	return returnArray;
+        }
+        let formdata=objectifyForm($("#loginForm").serializeArray());
+        $.ajax({
+			type:"POST",
+			async:true,
+			url:"http://localhost:8090/login",
+			contentType:"application/json; charset=utf-8",
+			data:JSON.stringify(formdata),
+			success: function(data, textStatus){
+				Swal.fire({
+					title: "로그인 성공",
+					text: data.mem.mem_nickname+"님 환영합니다",
+					icon: "success",
+					confirmButtonText: "확인"
+				}).then((result)=>{
+					if(result){
+						if(data.mem.mem_code_confirm=="no"){
+							$.ajax({
+								type:"POST",
+								async:true,
+								url:"http://localhost:8090/join_certifyForm",
+								contentType:"application/json; charset=utf-8",
+								data:{mem:data.mem},
+								success: function(data, textStatus){
+									
+								}
+    					} else{
+    						window.location.href="/";
+    					}
+					}
+				})
+			},
+			error: function(data, textStatus){
+				Swal.fire({
+					title: "로그인 실패",
+					text: data.responseText,
+					icon: "error",
+					confirmButtonText: "확인"
+				})
+			},
+			complete: function(data, textStatus){
+			}
+		});
+        return false;
+	})
 });
 </script>
 
@@ -132,7 +193,7 @@ function kakaoLogin(){
 				console.log(kakao_account);
 			}
 		});
-	}
+		}
 	}
 }
 </script>
