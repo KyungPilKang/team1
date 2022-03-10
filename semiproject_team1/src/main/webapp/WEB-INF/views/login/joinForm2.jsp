@@ -63,7 +63,7 @@
       <textarea style="background-color:ivory; resize:none; width: 100%; height: 80px;  font: size 14px;">회원가입을 위해서 이메일 인증이 진행되며, 인증이 완료되기 전까지 회원가입이 완료가 되지 않습니다.</textarea>
     </div>
     
-    <form>
+   
 <div class="form-floating">
       <input type="email" class="form-control" id="mem_email_id" name="mem_email_id" placeholder="이메일 주소" required oninput = "emailcheck()" />
       <label  for="mem_email_id">이메일 주소</label>
@@ -80,8 +80,7 @@
       <input type="password" class="form-control" id="floatingPassword" name="mem_pw" placeholder="비밀번호">
       <label for="floatingPassword">비밀번호</label>
     </div>
-    </form>
-    
+   </form> 
     <div class="captcha" id=capchacon style="display:inline;">
       <img src="/captcha" id="cap_img">
       <input type="button" onclick="caprefesh()" value="새로고침"><br>
@@ -97,87 +96,129 @@
   <button class="btn btn-lg btn-primary" type="button" onclick = "location.href = 'login'" style="border-color:white; float:center; width: 80%; color: black; background-color: grey; ">취소</button>
 </div>
 <div style="width:50%; float:right;">    
-<button class="btn btn-lg btn-primary" type="submit" style="float:center; width: 80%;" onclick = "location.href = 'join_certifyForm'">가입하기</button>
+<button class="btn btn-lg btn-primary" disabled id="submit"type="submit" style="float:center; width: 80%;" onclick = "location.href = 'join_certifyForm'">가입하기</button>
 </div>
 </div>  
-  </form>
+  
 </main>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script>
 <!-- captcha 이미지 새로고침 -->
-<script>
-function caprefesh(){
-              var imgsrc = document.getElementById("cap_img");
-               imgsrc.src = "/captcha?ver=" + Math.random();
-         }
+	function caprefesh(){
+	              var imgsrc = document.getElementById("cap_img");
+	               imgsrc.src = "/captcha?ver=" + Math.random();
+	         		}
 </script>
-<!-- captcha 입력 유효성 체크 -->
-    <script>
-	    $('#captchavalid').click(function () {
-	    	if($('#userin').val()==""){
-				alert("문자 또는 숫자를 입력하세요");
-				
-				return false;
-			} 
-			$.ajax({
-				type:"post",
-				dataType:"text",
-				async:false,
-				url:"http://localhost:8090/captchacheck",
-				data:{id:$('#userin').val()},
-				success: function(data, textStatus){
-					if(data=="false"){
-						alert("문자 또는 숫자를 다시 확인하세요");
-						$('.captcha').css("display","inline-block"); 
-					} else {
-						alert("정상입니다");
-						$('.captcha').css("display","none");
-					}
-				}
-			});
-		});
-	    </script>
-<!-- 이메일 db중복 체크 -->
+	
 <script>
-    function emailcheck(){
-        var mem_email_id = $('#mem_email_id').val(); //id값이 "mem_email_id"인 입력란의 값을 저장
-        $.ajax({
-            url:"http://localhost:8090/emailCheck", //Controller에서 인식할 주소
-            type:'post', //POST 방식으로 전달
-            
-            data:{mem_email_id:mem_email_id},
-            success:function(data){ //컨트롤러에서 넘어온 data값을 받는다 
-                if(data == "true"){ //true인 경우 사용불가
-                    $('.email_ok').css("display","none"); 
-                    $('.email_already').css("display", "inline-block");
-                } else { // 사용가능
-                	 $('.email_ok').css("display", "inline-block"); 
-                     $('.email_already').css("display","none");
-                }
-            }
-        });
+	<!-- captcha 입력 유효성 체크 -->
+	$('#submit').attr("disabled", true);
+		    $('#captchavalid').click(function () {
+		    	if($('#userin').val()==""){
+					alert("문자 또는 숫자를 입력하세요");
+					return false;
+				} 
+				$.ajax({
+					type:"post",
+					dataType:"text",
+					async:false,
+					url:"http://localhost:8090/captchacheck",
+					data:{userin:$('#userin').val()},
+					success: function(data, textStatus){
+						if(data=="false"){
+							alert("문자 또는 숫자를 다시 확인하세요");
+							$('.captcha').css("display","inline-block"); 
+						} else {
+							alert("정상입니다");
+							$('.captcha').css("display","none");
+							$('#submit').attr("disabled", false);
+						}
+					}
+				});
+			});
+
+	<!-- 이메일 db중복 체크 -->
+	function emailcheck(){
+	        var mem_email_id = $('#mem_email_id').val(); //id값이 "mem_email_id"인 입력란의 값을 저장
+	        $.ajax({
+	            url:"http://localhost:8090/emailCheck", //Controller에서 인식할 주소
+	            type:'post', //POST 방식으로 전달
+	            
+	            data:{mem_email_id:mem_email_id},
+	            success:function(data){ //컨트롤러에서 넘어온 data값을 받는다 
+	                if(data == "true"){ //true인 경우 사용불가
+	                    $('.email_ok').css("display","none"); 
+	                    $('.email_already').css("display", "inline-block");
+	                } else { // 사용가능
+	                	 $('.email_ok').css("display", "inline-block"); 
+	                     $('.email_already').css("display","none");
+	                     $('#submit').attr("disabled", false);
+	                }
+	            }
+	        });
+	    }
+</script>
+	<!-- 닉네임 db중복 체크 -->
+<script>
+$('#submit').attr("disabled", true);
+	    function nickcheck(){
+	        var mem_nickname = $('#mem_nickname').val(); //id값이 "mem_nickname"인 입력란의 값을 저장
+	        $.ajax({
+	            url:"http://localhost:8090/nickCheck", //Controller에서 인식할 주소
+	            type:'post', //POST 방식으로 전달
+	            
+	            data:{mem_nickname:mem_nickname},
+	            success:function(data){ //컨트롤러에서 넘어온 data값을 받는다 
+	                if(data == "true"){ //true인 경우 사용불가
+	                    $('.nick_ok').css("display","none"); 
+	                    $('.nick_already').css("display", "inline-block");
+	                } else { // 사용가능
+	                	 $('.nick_ok').css("display", "inline-block"); 
+	                     $('.nick_already').css("display","none");
+	                     $('#submit').attr("disabled", false);
+	                }
+	            }
+	        });
+	    }
+</script>
+	    
+<script>
+$('#form').submit(function() {
+    let name = $('#name').val();
+    if(name=='') {
+    	alert("이름을 입력하세요.");
+    	$('#name').focus();
+    	return false;
     }
- </script>
-<!-- 닉네임 db중복 체크 -->
- <script>
-    function nickcheck(){
-        var mem_nickname = $('#mem_nickname').val(); //id값이 "mem_nickname"인 입력란의 값을 저장
-        $.ajax({
-            url:"http://localhost:8090/nickCheck", //Controller에서 인식할 주소
-            type:'post', //POST 방식으로 전달
-            
-            data:{mem_nickname:mem_nickname},
-            success:function(data){ //컨트롤러에서 넘어온 data값을 받는다 
-                if(data == "true"){ //true인 경우 사용불가
-                    $('.nick_ok').css("display","none"); 
-                    $('.nick_already').css("display", "inline-block");
-                } else { // 사용가능
-                	 $('.nick_ok').css("display", "inline-block"); 
-                     $('.nick_already').css("display","none");
-                }
-            }
-        });
+	let id = $('#id').val();
+    if(id=='') {
+    	alert("아이디를 입력하세요.");
+    	$('#id').focus();
+    	return false;
     }
- </script>
+    let password1 = $('#password').val();
+    if(password1=='') {
+    	alert("비밀번호를 입력하세요.");
+    	$('#password1').focus();
+    	return false;
+    }
+    let email = $('#email').val();
+    if(email=='') {
+    	alert("이메일을 입력하세요.");
+    	$('#email').focus();
+    	return false;
+    }
+    let password2 = $('#password2').val();
+    if(password1!=password2){
+    	alert("비밀번호 확인이 일치하지 않습니다.")
+    	$('#password2').focus();
+    	return false;
+    }
+});   
+
+
+ </script> 
 </body>
 </html>
