@@ -11,6 +11,7 @@
 </head>
 
 <body>
+<div class="container">
 <div class="board_container">
     <div class="board_container_header">
         <div class="board_subject_container">${article.board_subject }</div>
@@ -210,7 +211,7 @@
         <button class="modal_cancel">취소</button>
     </div>
 </div>
-
+</div>
 <%-- 좋아요 버튼 자바스크립트 --%>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
