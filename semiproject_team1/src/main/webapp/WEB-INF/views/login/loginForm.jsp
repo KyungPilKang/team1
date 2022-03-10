@@ -78,7 +78,10 @@
 		</div>
 
 		<!-- 카카오 로그인 구현부분  -->
-		<a id="kakao-login-btn"></a>
+		<a href="javascript:kakaoLogin();">
+		<img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+    width="222"
+    alt="카카오 로그인 버튼"/></a>
 	<button class="api-btn" onclick="unlinkApp()">앱 탈퇴하기</button>
 	<button class="api-btn" onclick="kakaoLogout()">로그아웃</button>
 	<div id="result"></div>
@@ -112,20 +115,25 @@ $(function (){
 });
 </script>
 
-<script type="text/javascript">
-  function unlinkApp() {
-    Kakao.API.request({
-      url: '/v1/user/unlink',
-      success: function(res) {
-        alert('success: ' + JSON.stringify(res))
-      },
-      fail: function(err) {
-        alert('fail: ' + JSON.stringify(err))
-      },
-    })
-  }
-</script>
- 
+ <script>
+window.Kakao.init('00263ffa1f8a32229866207737b5f29d');
+
+function kakaoLogin(){
+	window.Kakao.Auth.login({
+		scope:'profile_nickname, account_email',
+		success: function(authObj){
+			console.log(authObj);
+			window.Kakao.API.request({
+				url:'/v2/user/me',
+			success:res =>{
+				const kakao_account = res.kakao_account;
+				console.log(kakao_account);
+			}
+		});
+	}
+}
+}
+
 <script type="text/javascript">
 Kakao.init('00263ffa1f8a32229866207737b5f29d');
 console.log(Kakao.isInitialized());
@@ -150,12 +158,10 @@ console.log(Kakao.isInitialized());
           if(typeof kakao_account != 'undefined'){
         	  email = kakao_account.email;
         	  gender = kakao_account.gender;
-        	  nickname = properties.nickname;
-        	 
           }
           resultdiv += '<h4>email: '+email+'<h4>'
           resultdiv += '<h4>gender: '+gender+'<h4>'
-          resultdiv += '<h4>gender: '+nickname+'<h4>'
+          
           $('#result').append(resultdiv);
         },
         fail: function(error) {

@@ -1,3 +1,10 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: abster;
+    src: url(font/abster-webfont.woff) format('woff');
+}
+
 .sub-link__list {
     display: flex;
     list-style-type: none;
@@ -105,13 +112,6 @@
     text-align: center;
 }
 
-
-@charset "UTF-8";
-
-@font-face {
-    font-family: abster;
-    src: url(font/abster-webfont.woff) format('woff');
-}
 
 * {
     margin: 0;
