@@ -21,11 +21,11 @@
 			</h1>
 			<div class="nav">
 				<ul>
-					<li><a href="#">FEEDBACK</a></li>
-					<li><a href="#">DUOMATCHING</a></li>
-					<li><a href="#">FREEBOARD</a></li>
-					<li><a href="#">MYPAGE</a></li>
-					<li><a href="#">LOGOUT</a></li>
+					<li><a href="#">피드백</a></li>
+					<li><a href="#">듀오매칭</a></li>
+					<li><a href="#">자유게시판</a></li>
+					<li><a href="#">마이페이지</a></li>
+					<li><a href="#">로그아웃</a></li>
 				</ul>
 			</div>
 		</div>
