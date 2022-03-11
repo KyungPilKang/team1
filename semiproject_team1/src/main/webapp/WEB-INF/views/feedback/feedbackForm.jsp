@@ -51,9 +51,9 @@
                         <c:when test="${not empty mem_mno }">
                             <%--                        <c:when test="${empty mem_mno }">--%>
                             <li><a href="">DUO</a></li>
+                            <li><a href="/log_out?page=board">로그아웃</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="/login?page=board">로그인</a></li>
                             <li><a href="/loginform?page=board">로그인</a></li>
                         </c:otherwise>
                     </c:choose>
@@ -118,9 +118,11 @@
                                 <input type="submit" id="search_submit"/>
                             </form>
                         </div>
+                        <c:if test="${not empty mem_mno }">
                         <button type="button" class="request_btn" onclick="location.href='/feedbackwriteform' ">
                             REQUEST
                         </button>
+                        </c:if>
                     </div>
                 </div>
                 <%-- main 컨테이너의 아래쪽 (게시판이 들어갈 공간) --%>
@@ -132,10 +134,10 @@
                                 <c:forEach var="article" items="${articleList }">
                                     <div class="each_post">
                                         <c:choose>
-                                            <c:when test="${article.board_thumbnail != null }">
+                                            <c:when test="${article.feedback_thumbnail != null }">
                                                 <div class="each_board_thumbnail"
                                                      id="each_board_thumbnail"><img
-                                                        src="/thumbnail_view/${article.board_thumbnail}"
+                                                        src="/fd_thumbnail_view/${article.feedback_thumbnail}"
                                                         alt="thumbnail" class="thumbnail_size"/>
                                                 </div>
                                             </c:when>
@@ -148,24 +150,24 @@
                                             </c:otherwise>
                                         </c:choose>
                                         <div class="each_board_likecount"><br>
-                                            ♥<br>${article.board_likecount }</div>
+                                            ♥<br>${article.feedback_likecount }</div>
                                         <div class="each_board_content">
                                             <div class="each_board_sub">
-                                                <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">
-                                                        ${article.board_subject}&nbsp;[${article.board_replycount}]
+                                                <a href="./boarddetail?board_num=${article.feedback_num}&page=${pageInfo.page}">
+                                                        ${article.feedback_subject}&nbsp;[${article.feedback_replycount}]
                                                 </a>
                                             </div>
                                             <div class="each_board_sub_bottom">
                                                 <div class="each_board_date"><br><br><br><fmt:formatDate
-                                                        value="${article.board_date }"
+                                                        value="${article.feedback_date }"
                                                         pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
                                                 <div class="each_board_nickname"><br><br><br>
-                                                    닉네임${article.board_nickname }</div>
+                                                    닉네임${article.feedback_nickname }</div>
                                             </div>
                                         </div>
 
                                         <div class="each_board_readcount">
-                                           <br>▲<br>${article.board_readcount }</div>
+                                           <br>▲<br>${article.feedback_readcount }</div>
 
                                             <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
 
@@ -178,7 +180,7 @@
 
                         </c:when>
                         <c:otherwise>
-                            <section id="emptyArea">등록된 글이 없습니다.</section>
+                            <section id="emptyArea" style="color:white; text-align: center; margin-top:100px;"><h3>등록된 글이 없습니다.</h3></section>
                         </c:otherwise>
                     </c:choose>
                 </div>
@@ -228,8 +230,8 @@
     function loadNewPage() {
         currentPage++;
         console.log("${sort_name}")
-        if ("${sort_name}" === "boardlist") {
-            getList(currentPage, "boardlist");
+        if ("${sort_name}" === "feedbacklist") {
+            getList(currentPage, "feedbacklist");
         } else if ("${sort_name}" === "viewssort") {
             getList(currentPage, "viewssort");
         } else if ("${sort_name}" === "replysort") {

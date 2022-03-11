@@ -9,13 +9,16 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.List;
 
 @Controller
@@ -41,13 +44,13 @@ public class FeedbackController {
         PageInfo pageInfo = new PageInfo();
         try {
             // 일단 화면 출력용으로 boardlist 데이터를 보내줌
-            List<Board> articleList = board_allService.getBoardList(page, pageInfo);
-//            List<Feedback> articleList = feedbackService.getFeedbackList(page, pageInfo);
+//            List<Board> articleList = board_allService.getBoardList(page, pageInfo);
+            List<Feedback> articleList = feedbackService.getFeedbackList(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
-            // 아래 sort_name은 안바꿔도 되는데 좀 찜찜하니까 변경 예정
+            // 아래 sort_name은 안바꿔도 되는데 좀 찜찜하니까 변경 예정 (무한스크롤 내려보내는거)
             // 폼에서 자바스크립트 부분에 있음
-            mv.addObject("sort_name", "boardlist");
+            mv.addObject("sort_name", "feedbacklist");
             mv.setViewName("feedback/feedbackForm");
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,6 +58,47 @@ public class FeedbackController {
         }
         return mv;
     }
+
+
+    /* 썸네일 출력 */
+    @GetMapping(value = "/fd_thumbnail_view/{filename}")
+    public void thumbnail_view(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response) {
+        String path = servletContext.getRealPath("/feedback_upload/image/");
+        /* 즉, file은 semiproject_team1/src/main/webapp/feedback_upload/image/filename */
+        File file = new File(path + filename);
+        String sfilename = null;
+        FileInputStream fis = null;
+        try {
+            /* HttpServletRequest request */
+            if (request.getHeader("User-Agent").indexOf("MSIE") > -1) {
+                sfilename = URLEncoder.encode(file.getName(), "utf-8");
+            } else {
+                sfilename = new String(file.getName().getBytes("utf-8"), "ISO-8859-1");
+            }
+            /* HttpServletResponse response */
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("application/octet-stream;charset=utf-8");
+            response.setHeader("Content-Disposition", "attachment; filename=" + sfilename);
+
+            OutputStream out = response.getOutputStream();
+            fis = new FileInputStream(file);
+            FileCopyUtils.copy(fis, out);
+            out.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
+
 
     /* 피드백 게시판 조회수순 정렬 */
     @GetMapping(value = "feedback_viewssort")
@@ -159,7 +203,6 @@ public class FeedbackController {
                 feedback.setFeedback_thumbnail(thumbnail);
                 /* 썸네일 끝 */
             }
-
             /* 리플레이 시작 */
             /* 리플레이 여부, 피드백 게시판은 필수이므로 if문 제거 예정  */
             if (!feedback.getReplay_file().isEmpty()) {
@@ -169,6 +212,9 @@ public class FeedbackController {
                 feedback.getReplay_file().transferTo(destFile_reply);
             }
             /* 리플레이 끝 */
+
+            String feedback_nickname = (String) session.getAttribute("mem_nickname");
+            feedback.setFeedback_nickname(feedback_nickname);
             feedbackService.regFeedback(feedback);
             mv.setViewName("redirect:/feedback");
         } catch (Exception e) {

@@ -18,14 +18,21 @@ public class FeedbackServiceImpl implements FeedbackService {
 	@Override
 	public void regFeedback(Feedback feedback) throws Exception {
 		Integer feedbackNum = feedbackDAO.selectMaxFeedbackNum();
+        String nickName = feedback.getFeedback_nickname();
 		if (feedbackNum == null) feedbackNum = 1;
 		else feedbackNum += 1;
-		
-		feedback.setFeedback_nickname("mno");
+		feedback.setFeedback_nickname(nickName);
 		feedback.setFeedback_num(feedbackNum);
 		feedback.setFeedback_readcount(0);
 		feedback.setFeedback_likecount(0);
 		feedback.setFeedback_replycount(0);
+        // not null이라 0 넣어준다
+        feedback.setFeedback_vote_member("0");
+        feedback.setFeedback_vote_top(0);
+        feedback.setFeedback_vote_jungle(0);
+        feedback.setFeedback_vote_mid(0);
+        feedback.setFeedback_vote_ad(0);
+        feedback.setFeedback_vote_support(0);
 		feedbackDAO.insertFeedback(feedback);
 	}
 	

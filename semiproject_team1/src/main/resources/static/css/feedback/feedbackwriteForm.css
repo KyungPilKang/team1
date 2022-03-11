@@ -61,7 +61,7 @@
 }
 
 .fd_write_body_inner{
-	height: 1700px;
+	height: 100vh;
 	width: 50vw;
 	margin-left:25vw;
 	display: flex;
@@ -124,31 +124,9 @@
 
 
 
-.fd_request_btn{
+.fd_request {
 	text-align: center;
 }
-.fd_request_btn > button{
-	align-self: center;
-}
-
-.fd_request_btn > button{
-	align-self: center;
-	background: none;
-	border: 2px solid #ffffff;
-	color: white;
-	padding: 15px 20px;
-	border-radius: 20px;
-	margin:10px;
-	outline: none;
-	cursor: pointer;
-	transition: all .4s;
-}
-
-.fd_request_btn > button{
-	width: 400px;
-	background-color: rgb(68, 68, 68);
-}
-
 
 
 #editor {
