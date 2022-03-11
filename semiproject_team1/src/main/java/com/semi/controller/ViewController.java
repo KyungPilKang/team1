@@ -13,7 +13,7 @@ public class ViewController {
 	public String main() {
 		return "main/main";
 	}
-	@RequestMapping(value = "/login") 
+	@GetMapping(value = "/loginform") 
 	public ModelAndView login(@RequestParam("page")String page) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("page", page);

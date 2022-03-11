@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -51,12 +52,14 @@ public class MemberController {
 					session.setAttribute("mem_mno", result.getMem_mno());
 					session.setAttribute("mem_nickname", result.getMem_nickname());
 				}
+				result.setPage(mem.getPage());
 				map.put("mem", result);
+				System.out.println(result.getPage());
 			} else throw new Exception();
-//			if(page.equals("board")) {
-//				mav.setViewName("redirect:/boardlist");
-//			} else if(page.equals("main")){
-//				mav.setViewName("redirect:/");
+//			if(mem.getPage().equals("board")) {
+//				map.put("page", "board");
+//			} else if(mem.getPage().equals("main")){
+//				map.put("page", "main");
 //			}
 		} catch(Exception e){
 			e.printStackTrace();
@@ -64,8 +67,8 @@ public class MemberController {
 		return map;
 	}
 	
-	@GetMapping(value="/logout")
-	public ModelAndView logout(@RequestParam("page")String page) {
+	@GetMapping(value="/log_out")
+	public ModelAndView logout(@RequestParam("page") String page) {
 		ModelAndView mav=new ModelAndView();
 		session.invalidate();
 		if(page.equals("main")) {
@@ -75,6 +78,7 @@ public class MemberController {
 		}
 		return mav;
 	}
+
 	
 //	@RequestMapping(value = "/join_certifyForm")
 //	public ModelAndView join_certifyForm(@RequestParam) {return "login/join_certifyForm";}
@@ -153,8 +157,16 @@ public class MemberController {
     }
 	
 	@GetMapping(value = "/join_certifyForm")
-	public String join_certifyForm(@RequestParam("mem_mno")int mem_mno, Model model) {
+	public String join_certifyForm(@RequestParam("mem_mno")int mem_mno, Model model,
+			@RequestParam(value="ok", required=false, defaultValue="yes")String ok,
+			@RequestParam(value="re", required=false, defaultValue="no")String re) {
 		model.addAttribute("mem_mno", mem_mno);
+		if(ok.equals("no")) {
+			model.addAttribute("ok", ok);
+		}
+		if(re.equals("yes")) {
+			model.addAttribute("re", re);
+		}
 		return "login/join_certifyForm";
 	}
 	
@@ -165,7 +177,11 @@ public class MemberController {
 			Member result=memberService.selectMemeber_bymno(mem.getMem_mno());
 			if(result.getMem_code().equals(mem.getMem_code())) {
 				memberService.updateMem_code_confirm(mem.getMem_mno());
-				mav.setViewName("redirect:/login?page=main");
+				mav.setViewName("redirect:/loginform?page=main");
+			} else {
+				mav.addObject("mem_mno", mem.getMem_mno());
+				mav.addObject("ok", "no");
+				mav.setViewName("redirect:/join_certifyForm");
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -178,6 +194,7 @@ public class MemberController {
 		ModelAndView mav=new ModelAndView();
 		try {
 			memberService.updateMem_code(mem_mno);
+			mav.addObject("re", "yes");
 			mav.setViewName("redirect:/join_certifyForm?mem_mno="+mem_mno);
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -31,6 +31,9 @@ public interface FeedbackDAO {
 	List<Feedback> selectFeedbackList_search_content(@Param("startrow")int startrow,@Param("feedback_keyword")String feedback_keyword) throws Exception;
 	
 	Feedback selectFeedback(int feedbackNum) throws Exception;
-	void updateReadCount(int FeedbackNum) throws Exception;
-	void updateFeedbackLike(int feedbackNumm, int feedback_likecount)throws Exception; 
+	void updateReadCount(int feedbackNum) throws Exception;
+	void updateReplyCount(int feedbackNum) throws Exception;
+	void deleteReplyCount(int feedbackNum) throws Exception;
+
+//	void updateFeedbackLike(int feedbackNumm, int feedback_likecount)throws Exception;
 }

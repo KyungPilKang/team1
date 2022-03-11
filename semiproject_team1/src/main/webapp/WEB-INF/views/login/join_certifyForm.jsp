@@ -12,13 +12,14 @@
     <link rel="shortcut icon" sizes="16x16 32x32 64x64"
 	href="/resources/asset/image/login/dog1.png" />
     <title>이메일 인증</title>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
 
     
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/bootstrap.min.css">
+
 
     <style>
       .bd-placeholder-img {
@@ -65,6 +66,33 @@
 </main>
 
 
-    
-  </body>
+</body>
+<script>
+	let sweetalert=(icon,title,contents)=>{
+    Swal.fire({
+        icon: icon,
+        title: title,
+        text: contents,
+        confirmButtonText: "확인"
+    })
+	};
+	let ok="<c:out value='${ok}'/>";
+	if(ok=="no"){
+		Swal.fire({
+			title: "인증번호 오류",
+			text: "다시 입력하시기 바랍니다",
+			icon: "error",
+			confirmButtonText: "확인"
+		})
+	}
+	let re="<c:out value='${re}'/>";
+	if(re=="yes"){
+		Swal.fire({
+			title: "재발급 성공",
+			text: "이메일을 확인하시기 바랍니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		})
+	}
+</script>
 </html>

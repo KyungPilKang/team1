@@ -73,6 +73,6 @@ public class FeedbackController {
 	 
 	 @GetMapping("/feedbackwriteform")
 	 	public String feedbackwriteform() {
-		 return "feedbackwriteForm";
+		 return "feedback/feedbackwriteForm";
 	 }
 }
