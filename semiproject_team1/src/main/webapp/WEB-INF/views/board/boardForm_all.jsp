@@ -95,7 +95,7 @@
             <div class="main_container">
                 <%-- main 컨테이너의 위쪽 --%>
                 <div class="board_header">
-                    <h3 class="">전체 고유번호:${mem_mno }/닉네임:${mem_nickname }</h3>
+                    <h3 class="">전체</h3>
                     <c:choose>
                         <c:when test="${not empty mem_mno}">
                             <div><a href="/boardwriteform">게시판글쓰기</a></div>

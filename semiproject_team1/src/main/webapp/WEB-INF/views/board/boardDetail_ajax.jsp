@@ -26,10 +26,10 @@
                 </td>
                 <td>${reply.b_reply_nickname }</td>
                 <td><fmt:formatDate value="${reply.b_reply_date }" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
-                    <%-- 세션에 존재하는 닉네임의 게시물만 삭제하도록 변경 예정, 현재 세션이 존재한다 가정 --%>
-                    <%-- 즉, 현재 사용자의 댓글만 삭제 버튼이 출력된다 --%>
+
+
                     <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
-                <c:if test="${reply.b_reply_nickname == '세션nick'}">
+                <c:if test="${!empty mem_nickname}">
                     <%-- 대댓글 까지만 답글이 가능하도록 제한한다 --%>
                     <c:if test="${reply.b_reply_lev == '0'}">
                         <td>
@@ -37,9 +37,11 @@
                                 <%-- 누르면 아래에 --%>
                         </td>
                     </c:if>
-                    <td>
-                        <button onclick="removeCheck(${reply.b_reply_num})">삭제</button>
-                    </td>
+                    <c:if test="${reply.b_reply_nickname == mem_nickname}">
+                        <td>
+                            <button onclick="removeCheck(${reply.b_reply_num})">삭제</button>
+                        </td>
+                    </c:if>
                     <td>
                             <%-- 오류 발생 이유 : form tag를 사용했더니 onclick시 boarddetail?로 이동, div로 변경하니까 정상작동.. --%>
                             <%-- 해결 : form tag 내부에 button을 넣어둔게 문제의 원인이었다 --%>
@@ -54,7 +56,7 @@
                         </div>
                     </td>
 
-                    <%-- 댓글 좋아요 시작 --%>
+                    <%-- 대댓글 좋아요 시작 --%>
                     <%-- 대댓글은 좋아요 못누르게 처리 --%>
                     <c:if test="${reply.b_reply_lev == '0'}">
                         <td>
@@ -80,15 +82,14 @@
                                 </c:choose>
                             </div>
                         </td>
+                    </c:if>
+                </c:if>
                         <%-- 좋아요 숫자 표시 --%>
                         <td>
                                 ${reply.b_reply_likecount}
                         </td>
-                    </c:if>
-
-                    <%-- 댓글 좋아요 끝--%>
-                </c:if>
-                    <%-- 세션이 있을경우 끝--%>
+                    <%-- 대댓글 좋아요 끝--%>
+                    <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
             </tr>
         </c:forEach>
     </table>
