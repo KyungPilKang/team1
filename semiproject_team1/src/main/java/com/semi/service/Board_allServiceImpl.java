@@ -189,7 +189,6 @@ public class Board_allServiceImpl implements Board_allService {
         if (like_member.contains(mno)) {
             like_ok = true;
         }
-//        System.out.println("좋아요를 누른 유저들 중 현재 유저가 존재? " + like_ok);
         return like_ok;
     }
 
@@ -258,8 +257,7 @@ public class Board_allServiceImpl implements Board_allService {
         Integer b_replyNum = b_replyDAO.selectMaxReplyNum();
         if (b_replyNum == null) b_replyNum = 1;
         else b_replyNum += 1;
-        //db에서 not null이라 임시로 닉네임 가져간다
-        b_reply.setB_reply_nickname("세션nick");
+
         b_reply.setB_reply_num(b_replyNum);
         b_reply.setB_reply_likecount(0);
 
@@ -281,7 +279,6 @@ public class Board_allServiceImpl implements Board_allService {
         b_reply.setB_reply_lev(src_reply.getB_reply_lev()+1);
         b_replyDAO.updateReplyReSeq(src_reply);
         b_reply.setB_reply_seq(src_reply.getB_reply_seq()+1);
-        b_reply.setB_reply_nickname("세션nick");
         b_reply.setB_reply_likecount(0);
         b_reply.setB_reply_like_member("0");
 

@@ -145,16 +145,13 @@ public class Board_allController {
         ModelAndView mv = new ModelAndView();
 //        PageInfo pageInfo = new PageInfo();
         try {
-            // 세션에 회원 고유번호(mno)가 존재한다 가정
-            // 세션 있고없고 테스트시 브라우저 반드시 완전 종료 후 테스트 (안그러면 세션이 살아있음)
-//            session.setAttribute("mno", "14");
-
+            String mno = String.valueOf(session.getAttribute("mem_mno"));
             if(session.getAttribute("mem_nickname")!=null) {
-                Boolean like_ok = board_allService.like_check_mno(boardNum, (String) session.getAttribute("mem_nickname"));
-                Boolean ward_ok = board_allService.ward_check_mno(boardNum, (String) session.getAttribute("mem_nickname"));
+                Boolean like_ok = board_allService.like_check_mno(boardNum,mno );
+                Boolean ward_ok = board_allService.ward_check_mno(boardNum,mno);
                 mv.addObject("like_ok", like_ok);
                 mv.addObject("ward_ok", ward_ok);
-                mv.addObject("mno", session.getAttribute("mem_nickname"));
+                mv.addObject("mno", mno);
             }
             Board board = board_allService.getBoard(boardNum);
 
@@ -172,8 +169,8 @@ public class Board_allController {
                 System.out.println(reply.getB_reply_like_member());
                 List<String> reLikeMem_arr = List.of(reply.getB_reply_like_member().split(","));
                 //split해서 배열로 각각 넣은 후 contains
-                if (session.getAttribute("mem_nickname") != null) {
-                    if (reLikeMem_arr.contains(session.getAttribute("mem_nickname"))) {
+                if (mno != null) {
+                    if (reLikeMem_arr.contains(mno)) {
                         reply.setB_reply_like_ok("true");
                         System.out.println("있어요");
                     } else {
@@ -518,6 +515,9 @@ public class Board_allController {
                          @RequestParam(value = "b_reply_content") String b_reply_content) {
         B_reply b_reply = new B_reply();
         try {
+
+            String board_nickname = (String) session.getAttribute("mem_nickname");
+            b_reply.setB_reply_nickname(board_nickname);
             b_reply.setB_board_num(boardNum);
             b_reply.setB_reply_content(b_reply_content);
             System.out.println("게시물번호 : "+boardNum);
@@ -536,6 +536,9 @@ public class Board_allController {
                             @RequestParam(value = "b_reply_content") String b_reply_content) {
         B_reply b_reply = new B_reply();
         try {
+
+            String board_nickname = (String) session.getAttribute("mem_nickname");
+            b_reply.setB_reply_nickname(board_nickname);
             b_reply.setB_board_num(boardNum);
             b_reply.setB_reply_num(b_reply_num);
             b_reply.setB_reply_content(b_reply_content);
@@ -596,17 +599,19 @@ public class Board_allController {
     @RequestMapping(value = "boardDetail_ajax", method = {RequestMethod.GET, RequestMethod.POST})
     public String boardDetail_ajax(@RequestParam(value = "board_num") int boardNum,
                                      HttpServletRequest request, HttpSession session) {
-//        session.setAttribute("mno", "14");
+
         try {
             // 인기순 정렬로 서비스를 요청해야한다
             List<B_reply> reList = board_allService.getReplyList_like(boardNum);
+
+            String mno = String.valueOf(session.getAttribute("mem_mno"));
 
             for(B_reply reply :reList) {
                 System.out.println(reply.getB_reply_like_member());
                 List<String> reLikeMem_arr = List.of(reply.getB_reply_like_member().split(","));
                 //split해서 배열로 각각 넣은 후 contains
-                if (session.getAttribute("mno") != null) {
-                    if (reLikeMem_arr.contains(session.getAttribute("mno"))) {
+                if (mno != null) {
+                    if (reLikeMem_arr.contains(mno)) {
                         reply.setB_reply_like_ok("true");
                         System.out.println("있어요");
                     } else {
