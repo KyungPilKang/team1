@@ -18,17 +18,19 @@
 
 .each_post {
     background: #ffffff;
-    border: 1px solid black;
+    border: 5px solid skyblue;
     height: 15vh;
     width: 60vw;
     display: flex;
+    margin: 10px;
+    font-weight: bold;
 }
 
 .each_board_num {
     margin: 10px;
     width: 100px;
     /*height:50px;*/
-    background: #fadfdf;
+    background: white;
 
 }
 
@@ -52,6 +54,8 @@
 .each_board_sub > a {
     color: black;
     text-decoration: none;
+    font-weight: bold;
+    font-size: 30px;
 }
 
 .each_board_cat {
@@ -77,8 +81,10 @@
 
 .each_board_likecount {
     width: 70px;
-    /*height:50px;*/
-    background: #fc8383;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
 }
 
 .each_board_readcount {
@@ -140,18 +146,19 @@ body {
 
 /* 헤더 영역 */
 .container .header {
-    background-color: black;
-    /*border: 2px dotted white;*/
-    width: 100%;
-    height: 80px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: fixed;
-    left: 0;
-    top: 0;
-    box-shadow: 0 2px 3px 0 rgba(255, 255, 255, 0.2);
+	border-bottom: 5px solid #4169E1;
+	background-color: black;
+	/*border: 2px dotted white;*/
+	width: 100%;
+	height: 80px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	position: fixed;
+	left: 0;
+	top: 0;
+	box-shadow: 0 2px 3px 0 rgba(255, 255, 255, 0.2);
 }
 
 
@@ -172,7 +179,7 @@ body {
 }
 
 .container .nav ul li a:hover {
-    color: #1fdfdf;
+    color: #4169E1;
 }
 
 
@@ -202,11 +209,12 @@ body {
 
 .feedback_header {
     display: flex;
-    background-color: black;
+    background-color: none;
     width: 60vw;
     border-top: 1px solid #5b5b5b;
     border-radius: 2px;
     /*box-shadow: 1px 2px 3px 1px rgba(255, 255, 255, 0.1);*/
+    border : 5px solid #4169E1;
 }
 
 .feedback_header.fixed {

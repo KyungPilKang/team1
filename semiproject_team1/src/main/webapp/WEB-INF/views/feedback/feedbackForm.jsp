@@ -45,15 +45,15 @@
         <div class="nav">
             <div class="nav">
                 <ul>
-                    <li><a href="/feedback">FEEDBACK</a></li>
-                    <li><a href="/boardlist">FREEBOARD</a></li>
+                    <li><a href="/feedback">피드백</a></li>
+                    <li><a href="/boardlist">자유게시판</a></li>
                     <c:choose>
                         <c:when test="${not empty mem_mno }">
                             <%--                        <c:when test="${empty mem_mno }">--%>
                             <li><a href="">DUO</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="/login?page=board">LOGIN</a></li>
+                            <li><a href="/login?page=board">로그인</a></li>
                         </c:otherwise>
                     </c:choose>
                 </ul>
@@ -146,8 +146,8 @@
                                                 </div>
                                             </c:otherwise>
                                         </c:choose>
-                                        <div class="each_board_likecount">
-                                            좋아요수${article.board_likecount }</div>
+                                        <div class="each_board_likecount"><br>
+                                            ♥<br>${article.board_likecount }</div>
                                         <div class="each_board_content">
                                             <div class="each_board_sub">
                                                 <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">
@@ -155,10 +155,10 @@
                                                 </a>
                                             </div>
                                             <div class="each_board_sub_bottom">
-                                                <div class="each_board_date"><fmt:formatDate
+                                                <div class="each_board_date"><br><br><br><fmt:formatDate
                                                         value="${article.board_date }"
                                                         pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
-                                                <div class="each_board_nickname">
+                                                <div class="each_board_nickname"><br><br><br>
                                                     닉네임${article.board_nickname }</div>
                                             </div>
                                         </div>

@@ -279,7 +279,7 @@ body{
 
 
 .board_header{
-    background-color: black;
+    background-color: none;
     border-top: 1px solid #5b5b5b;
     border-radius: 2px;
     /*box-shadow: 1px 2px 3px 1px rgba(255, 255, 255, 0.1);*/
