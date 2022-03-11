@@ -31,13 +31,8 @@
 .each_board_num {
     margin: 10px;
     width: 100px;
-<<<<<<< HEAD
-    /*height:50px;*/
     background: white;
-=======
     background: #fadfdf;
->>>>>>> branch 'develop' of https://github.com/KyungPilKang/team1.git
-
 }
 
 .each_board_content {

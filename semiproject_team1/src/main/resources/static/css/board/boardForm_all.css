@@ -305,13 +305,10 @@ body{
 }
 
 .board_header{
-<<<<<<< HEAD
     background-color: none;
-=======
     background-color: black;
     width: 46vw;
     height: 10vh;
->>>>>>> branch 'develop' of https://github.com/KyungPilKang/team1.git
     border-top: 1px solid #5b5b5b;
     border-radius: 2px;
     border : 5px solid #4169E1;
