@@ -12,10 +12,28 @@
     <link rel="shortcut icon" sizes="16x16 32x32 64x64"
           href="/resources/asset/image/login/dog1.png"/>
     <title>피드백 게시판 - 롤판.DOG</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedback/feedbackForm.css">
 </head>
 <body>
 <div class="container">
+
+
+    <%-- div안 무한스크롤 테스트--%>
+    <%--    <div class="testList" style="overflow:scroll; width: 300px; height: 500px; margin-top:100px; margin-left: 40vw;">--%>
+    <%--        <div class="red" style=" background: red; width: 100px; height: 100px" ></div>--%>
+    <%--        <div class="red" style=" background: red; width: 100px; height: 100px" ></div>--%>
+    <%--        <div class="red" style=" background: red; width: 100px; height: 100px" ></div>--%>
+    <%--        <div class="red" style=" background: red; width: 100px; height: 100px" ></div>--%>
+    <%--        <div class="red" style=" background: red; width: 100px; height: 100px" ></div>--%>
+    <%--        <div class="red" style=" background: red; width: 100px; height: 100px" ></div>--%>
+    <%--        <div class="red" style=" background: red; width: 100px; height: 100px" ></div>--%>
+    <%--    </div>--%>
+
+
     <%-- 헤더 영역--%>
     <div class="header">
         <h1>
@@ -94,13 +112,14 @@
                                 <input type="search" class="form-control"
                                        placeholder="Search Here" title="Search here"
                                        name="board_keyword">
-                                <label for="search_submit" style="cursor: pointer">돋</label>
+                                <label for="search_submit" style="cursor: pointer"><i
+                                        class="fa-solid fa-magnifying-glass"></i></label>
                                 <input type="submit" id="search_submit"/>
                             </form>
                         </div>
-                            <button type="button" class="request_btn" onclick="location.href='/feedbackwriteform' ">
-                                REQUEST
-                            </button>
+                        <button type="button" class="request_btn" onclick="location.href='/feedbackwriteform' ">
+                            REQUEST
+                        </button>
                     </div>
                 </div>
                 <%-- main 컨테이너의 아래쪽 (게시판이 들어갈 공간) --%>
@@ -136,7 +155,6 @@
                                                 </a>
                                             </div>
                                             <div class="each_board_sub_bottom">
-                                                <div class="each_board_cat">${article.board_cat }</div>
                                                 <div class="each_board_date"><fmt:formatDate
                                                         value="${article.board_date }"
                                                         pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
@@ -167,7 +185,6 @@
         </div>
     </div>
 </div>
-</div>
 
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -177,21 +194,34 @@
     let currentPage = 1;
     let isLoading = false;
 
-    $(window).on("scroll", function () {
-        let scrollTop = $(window).scrollTop();
-        let windowHeight = $(window).height();
-        let documentHeight = $(document).height();
-        let isBottom = scrollTop + windowHeight + 10 >= documentHeight;
 
-        if (isBottom) {
-            if (currentPage === ${pageInfo.maxPage } || isLoading) {
-                return;
-            }
-            isLoading = true;
-            $(".loading").show();
-            setTimeout(loadNewPage, 1400);
+    /* div 내 무한스크롤 시작 */
+    $(".feedback_body").scroll(function () {
+        if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+            return;
         }
+        isLoading = true;
+        $(".loading").show();
+        setTimeout(loadNewPage, 1400);
     });
+    /* div 내 무한스크롤 끝 */
+
+
+    <%--$(window).on("scroll", function () {--%>
+    <%--    let scrollTop = $(window).scrollTop();--%>
+    <%--    let windowHeight = $(window).height();--%>
+    <%--    let documentHeight = $(document).height();--%>
+    <%--    let isBottom = scrollTop + windowHeight + 10 >= documentHeight;--%>
+
+    <%--    if (isBottom) {--%>
+    <%--        if (currentPage === ${pageInfo.maxPage } || isLoading) {--%>
+    <%--            return;--%>
+    <%--        }--%>
+    <%--        isLoading = true;--%>
+    <%--        $(".loading").show();--%>
+    <%--        setTimeout(loadNewPage, 1400);--%>
+    <%--    }--%>
+    <%--});--%>
 
     function loadNewPage() {
         currentPage++;
@@ -242,6 +272,16 @@
             }
         })
     });
+</script>
+
+
+<%--div내 무한스크롤 테스트 스크립트--%>
+<script>
+    // $(".testList").scroll(function () {
+    //     if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+    //         $(".red").append("<div class='blue' style='background: blue; width: 100px; height: 100px'' ></div>");
+    //     }
+    // });
 </script>
 
 

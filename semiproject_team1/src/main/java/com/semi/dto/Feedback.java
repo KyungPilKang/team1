@@ -21,7 +21,10 @@ public class Feedback {
 	int feedback_readcount;
 	int feedback_likecount;
 	int feedback_replycount;
+	String feedback_thumbnail;
 	String feedback_vote_member; //투표한 회원의 고유번호 관리
+
+
 	//이하는 각 라인에 대한 투표수
 	int feedback_vote_top; 
 	int feedback_vote_jungle;
@@ -191,7 +194,12 @@ public class Feedback {
 		this.feedback_replycount = feedback_replycount;
 	}
 
-
-		
+	public String getFeedback_thumbnail() {
+		return feedback_thumbnail;
 	}
+
+	public void setFeedback_thumbnail(String feedback_thumbnail) {
+		this.feedback_thumbnail = feedback_thumbnail;
+	}
+}
 	
