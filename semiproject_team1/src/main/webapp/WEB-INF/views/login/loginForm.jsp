@@ -95,20 +95,6 @@
 
 <script>
 	/* 로그인 유효성 검사 */
-	/* $('#next').click(function(){
-		var email = $('#mem_email_id').val();
-		if (email==''){
-			alert("이메일을 입력하세요");
-			$('#mem_email_id').focus();
-		}else{
-		let password = $('#mem_pw').val();
-        if(password=='') {
-        	alert("비밀번호를 입력하세요.");
-        	$('#mem_pw').focus();
-        	}
-        }
-	}); */
-	
 	let sweetalert=(icon,title,contents)=>{
         Swal.fire({
             icon: icon,
@@ -117,6 +103,30 @@
             confirmButtonText: "확인"
         })
     };
+	$('#next').click(function(){
+		var email = $('#mem_email_id').val();
+		if (email==''){
+				Swal.fire({
+					title: "입력 오류",
+					text: "이메일을 입력하세요",
+					icon: "error",
+					confirmButtonText: "확인"
+				})
+				return false
+		}else{
+			let password = $('#mem_pw').val();
+       		if(password=='') {
+	        	Swal.fire({
+					title: "입력 오류",
+					text: "비밀번호를 입력하세요",
+					icon: "error",
+					confirmButtonText: "확인"
+				})
+				return false
+        	}
+        }
+	});
+
 	$('#loginForm').submit(function(){
         function objectifyForm(formArray){		
         	var returnArray={};
