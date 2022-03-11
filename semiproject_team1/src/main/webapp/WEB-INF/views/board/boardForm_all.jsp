@@ -159,7 +159,7 @@
                                     <c:forEach var="article" items="${articleList }">
                                         <div class="each_post">
                                             <div class="each_board_likecount">
-                                                좋아요수${article.board_likecount }</div>
+                                              <br>♥<br>${article.board_likecount }</div>
                                             <div class="each_board_content">
                                                 <div class="each_board_sub">
                                                     <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">
@@ -167,17 +167,17 @@
                                                     </a>
                                                 </div>
                                                 <div class="each_board_sub_bottom">
-                                                    <div class="each_board_cat">${article.board_cat }</div>
-                                                    <div class="each_board_date"><fmt:formatDate
+                                                    <div class="each_board_cat"><br>${article.board_cat }</div>
+                                                    <div class="each_board_date"><br><fmt:formatDate
                                                             value="${article.board_date }"
                                                             pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
-                                                    <div class="each_board_nickname">
+                                                    <div class="each_board_nickname"><br>
                                                         닉네임${article.board_nickname }</div>
                                                 </div>
                                             </div>
 
                                             <div class="each_board_readcount">
-                                                ▲    ${article.board_readcount }</div>
+                                                <br>▲<br>${article.board_readcount }</div>
 
                                                 <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
 
