@@ -51,12 +51,14 @@ public class MemberController {
 					session.setAttribute("mem_mno", result.getMem_mno());
 					session.setAttribute("mem_nickname", result.getMem_nickname());
 				}
+				result.setPage(mem.getPage());
 				map.put("mem", result);
+				System.out.println(result.getPage());
 			} else throw new Exception();
-//			if(page.equals("board")) {
-//				mav.setViewName("redirect:/boardlist");
-//			} else if(page.equals("main")){
-//				mav.setViewName("redirect:/");
+//			if(mem.getPage().equals("board")) {
+//				map.put("page", "board");
+//			} else if(mem.getPage().equals("main")){
+//				map.put("page", "main");
 //			}
 		} catch(Exception e){
 			e.printStackTrace();
@@ -64,8 +66,8 @@ public class MemberController {
 		return map;
 	}
 	
-	@GetMapping(value="/logout")
-	public ModelAndView logout(@RequestParam("page")String page) {
+	@GetMapping(value="/log_out")
+	public ModelAndView logout(@RequestParam("page") String page) {
 		ModelAndView mav=new ModelAndView();
 		session.invalidate();
 		if(page.equals("main")) {
@@ -75,6 +77,7 @@ public class MemberController {
 		}
 		return mav;
 	}
+
 	
 //	@RequestMapping(value = "/join_certifyForm")
 //	public ModelAndView join_certifyForm(@RequestParam) {return "login/join_certifyForm";}
