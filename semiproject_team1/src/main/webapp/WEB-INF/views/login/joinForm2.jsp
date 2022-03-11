@@ -99,7 +99,7 @@
   <button class="btn btn-lg btn-secondary" type="button" onclick = "history.back()" style="float:center; width: 80%;">취소</button>
 </div>
 <div style="width:50%; float:right;">    
-<button class="btn btn-lg btn-secondary" id="form_submit" type="submit" style="float:center; width: 80%;" disabled>가입하기</button>
+<button class="btn btn-lg btn-secondary" id="form_submit"  type="submit" style="float:center; width: 80%;" disabled>가입하기</button>
 </div>
 </div>  
 </form>
@@ -108,14 +108,16 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script>
+
 	let email_ok=false;
 	let nickname_ok=false;
 	let pw_ok=false;
 	let captcha_ok=false;
+	
 	function caprefesh(){
-              var imgsrc = document.getElementById("cap_img");
-               imgsrc.src = "/captcha?ver=" + Math.random();
-         }
+	    var imgsrc = document.getElementById("cap_img");
+	     imgsrc.src = "/captcha?ver=" + Math.random();
+	}
 <!-- captcha 입력 유효성 체크 -->
 	    $('#captchavalid').click(function () {
 	    	if($('#userin').val()==""){
@@ -202,26 +204,64 @@
     }
     <!-- 비밀번호 유효성 체크 --> 
     function pwcheck(){
-
     	 var pw = $("#mem_pw").val();
     	 var num = pw.search(/[0-9]/g);
     	 var eng = pw.search(/[a-z]/ig);
     	 var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
-    	 if(pw.length < 8 || pw.length > 20){
-    	  alert("8자리 ~ 20자리 이내로 입력해주세요.");
-    	  return false;
+    	 if(pw.length < 8 || pw.length > 16){
+    		$('#pw_ok').text("8자리 ~ 16자리 이내로 입력해주세요.");
+         	$('#pw_ok').css("visibility", "visible");
+         	$('#pw_ok').css("color", "orangered");
+         	pw_ok=false;
     	 }else if(pw.search(/\s/) != -1){
-    	  alert("비밀번호는 공백 없이 입력해주세요.");
-    	  return false;
+    		$('#pw_ok').text("비밀번호는 공백 없이 입력해주세요.");
+          	$('#pw_ok').css("visibility", "visible");
+          	$('#pw_ok').css("color", "orangered");
+          	pw_ok=false;
     	 }else if( (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0) ){
-    	  alert("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
-    	  return false;
+    		$('#pw_ok').text("영문,숫자, 특수문자 중 2가지 이상을 혼합하여 입력해주세요.");
+           	$('#pw_ok').css("visibility", "visible");
+           	$('#pw_ok').css("color", "orangered");
+           	pw_ok=false; 
     	 }else {
-    		console.log("정상입니다");	 
+    		$('#pw_ok').text("사용 가능합니다");
+         	$('#pw_ok').css("visibility", "visible");
+         	$('#pw_ok').css("color", "greenyellow");	 
     	 }
-
-    	}
+    }
+    	 
+   
+    $('#form_submit').click(function(){
+		var email = $('#mem_email_id').val();
+		var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		if (email==''){
+			alert("이메일을 입력하세요");
+			$('#mem_email_id').focus();
+		} else if (emailVal.match(regExp) == null){
+			alert('이메일 형식이 올바르지 않습니다.');
+			$('#email').focus();
+		}
+		 let password = $('#mem_pw').val();
+	        if(password=='') {
+	        	alert("비밀번호를 입력하세요.");
+	        	$('#mem_pw').focus();
+		}
+	     let nickname = $('#mem_nickname').val();
+	     var spe = nickname.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+	     	if(nickname==''){
+	     		alert("닉네임을 입력하세요");
+	     		$('#mem_nickname').focus();
+	     	}else if(nickname.length < 3 || nickname.length > 10){
+	     		alert("닉네임은 2자리~10자리 이내로 입력해 주세요")
+	     		$('#mem_nickname').focus();
+	     	}else if(spe > 0){
+	     		alert("닉네임은 영문 또는 숫자로만 입력해 주세요")
+	     		$('#mem_nickname').focus();
+	     	} 
+	});
+    
+   
 </script>
 </body>
 </html>

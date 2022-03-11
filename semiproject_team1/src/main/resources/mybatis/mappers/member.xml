@@ -17,7 +17,7 @@
 	</select>
 	<insert id="insertMember" parameterType="Member">
 		<![CDATA[
-			insert into member (mem_email_id, mem_nickname, mem_pw, mem_code, mem_code_confirm, mem_link_id, 
+			insert into semi.member (mem_email_id, mem_nickname, mem_pw, mem_code, mem_code_confirm, mem_link_id, 
 			mem_link_code, mem_link_confirm, mem_duo_reg_ok)
 			values(#{mem_email_id}, #{mem_nickname}, #{mem_pw}, #{mem_code}, #{mem_code_confirm}, #{mem_link_id}, 
 			#{mem_link_code}, #{mem_link_confirm}, #{mem_duo_reg_ok})

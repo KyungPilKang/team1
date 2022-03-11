@@ -3,6 +3,8 @@ package com.semi.service;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.semi.dao.MemberDAO;
@@ -15,17 +17,20 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
 	MailService mailService;
-
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Override
 	public boolean accessMember(String mem_email_id, String mem_pw) throws Exception {
 		Member mem=memberDAO.queryMember(mem_email_id);
-		if(mem_email_id.equals(mem.getMem_email_id())&&mem_pw.equals(mem.getMem_pw())) {
+		if(mem_email_id.equals(mem.getMem_email_id())&&passwordEncoder.matches(mem_pw, mem.getMem_pw())) {
 			return true;
-		} else if(mem_email_id.equals(mem.getMem_email_id())&&!mem_pw.equals(mem.getMem_pw())) {
-			throw new Exception("비밀번호가 일치하지 않습니다");
+		} else if(mem_email_id.equals(mem.getMem_email_id())&&!passwordEncoder.matches(mem_pw, mem.getMem_pw())) {
+			throw new Exception("아이디 또는 비밀번호가 일치하지 않습니다");
 		} else return false;
 	}
-
+	   
 	@Override
 	public boolean emailOverlap(String mem_email_id) throws Exception {
 		Member email = memberDAO.queryMember(mem_email_id);
@@ -66,6 +71,8 @@ public class MemberServiceImpl implements MemberService {
                 }
             }
         }
+        String encodedPassword = passwordEncoder.encode(member.getMem_pw());
+        member.setMem_pw(encodedPassword);
 		member.setMem_code(numStr);
 		member.setMem_code_confirm("no");
 		member.setMem_link_id(null);
