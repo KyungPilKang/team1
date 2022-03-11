@@ -132,16 +132,30 @@ body{
 
 .container {
     width: 100%;
-    height: 500vh;
+    height: 280vh;
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url(../../asset/image/login/wo.jpg);
     background-size: cover;
 }
 
+.footer {
+    background-color: black;
+    border-top: 5px solid skyblue;
+    width: 100%;
+    height: 100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    left: 0;
+    bottom: 0;
+    box-shadow: 0 2px 3px 0 rgba(255, 255, 255, 0.2);
+}
+
 /* 헤더 영역 */
 .container .header {
     background-color: black;
-    /*border: 2px dotted white;*/
+    border-bottom: 5px solid skyblue;
     width: 100%;
     height: 80px;
     margin: 0 auto;
@@ -221,7 +235,7 @@ body{
 
 .feedback_body{
     width: 47vw;
-    height: 40vh;
+    height: 36vh;
     overflow-y: auto;
     /*background-color: rgba(250, 134, 134, 0);*/
 }
@@ -290,4 +304,85 @@ body{
 
 .request_btn {
     background-color: rgba(255, 0, 0, 0.54);
+}
+
+/*mypage 단독*/
+
+.board_header{
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 2px;
+    /*box-shadow: 1px 2px 3px 1px rgba(255, 255, 255, 0.1);*/
+    border : 5px solid skyblue;
+    width: 47.5vw;
+    height: 5.5vh;
+    margin-bottom: 10px;
+}
+
+.sub-link__list {
+    display: flex;
+    list-style-type: none;
+}
+
+.sub-link__item > a {
+    text-decoration: none;
+    color: white;
+    margin: 40px;
+}
+
+.mypage_body_tl{
+	background-color: rgba(0,0,0,0.3);
+    border-radius: 2px;
+    /*box-shadow: 1px 2px 3px 1px rgba(255, 255, 255, 0.1);*/
+    border : 5px solid skyblue;
+    width: 27vw;
+    height: 50vh;
+    margin-bottom: 10px;
+    margin-left: 300px;
+    margin-top: 100px;
+}
+
+.mypage_body_tr{
+	background-color: rgba(0,0,0,0.3);
+    border-radius: 2px;
+    /*box-shadow: 1px 2px 3px 1px rgba(255, 255, 255, 0.1);*/
+    border : 5px solid skyblue;
+    width: 27vw;
+    height: 50vh;
+    margin-bottom: 10px;
+    margin-right: 300px;
+    margin-top: 100px;
+}
+
+.mypage_body_status{
+	background-color: rgba(0,0,0,0.3);
+    border-radius: 2px;
+    /*box-shadow: 1px 2px 3px 1px rgba(255, 255, 255, 0.1);*/
+    border : 5px solid skyblue;
+    width: 47.5vw;
+    height: 35vh;
+    margin-bottom: 100px;
+}
+
+.hero button {
+	background: none;
+	border: 5px solid skyblue;
+	color: white;
+	padding: 15px 20px;
+	border-radius: 20px;
+	margin-bottom: 20px;
+	outline: none;
+	cursor: pointer;
+	transition: all .4s;
+	font-family: abster;
+	font-size: 18px;
+}
+
+.hero button:hover {
+	background-color: rgba(135, 206, 235, 0.4);
+}
+
+.body_feedback h1{
+    text-decoration: none;
+    color: white;
+    font-family: abster;
 }
