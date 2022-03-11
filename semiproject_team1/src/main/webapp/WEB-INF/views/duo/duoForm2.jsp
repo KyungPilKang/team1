@@ -82,7 +82,7 @@
 			</div>
 		</div>
 			<div class="hero" style="margin-top:700px;">
-			<button type="button" onclick="location.href='#' ">돌아가기</button>
+			<button type="button" onclick="location.href='duoform1' ">돌아가기</button>
 		</div>
 	</div>
 	<div class="footer"></div>
