@@ -36,7 +36,7 @@
                             <li><a href="">DUO</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="/login?page=board">LOGIN</a></li>
+                            <li><a href="/loginform?page=board">LOGIN</a></li>
                         </c:otherwise>
                     </c:choose>
                 </ul>
@@ -61,7 +61,7 @@
                                 <ul>
                                     <li><a href="/boardwriteform">글쓰기</a></li>
                                     <li><a href="">마이페이지</a></li>
-                                    <li><a href="/logout?page=board">로그아웃</a></li>
+                                    <li><a href="/log_out?page=board">로그아웃</a></li>
                                 </ul>
                             </div>
                         </div>

@@ -124,7 +124,7 @@ $(function (){
         })
     };
 	$('#loginForm').submit(function(){
-        function objectifyForm(formArray){
+        function objectifyForm(formArray){		
         	var returnArray={};
         	for(var i=0;i<formArray.length;i++){
         		returnArray[formArray[i]['name']]=formArray[i]['value'];
@@ -158,7 +158,12 @@ $(function (){
 						confirmButtonText: "확인"
 					}).then((result)=>{
 						if(result){
-	        				window.location.href="/";
+							console.log(data.mem);
+							if(data.mem.page=="main"){
+		        				window.location.href="/";
+							} else if(data.mem.page=="board"){
+								window.location.href="/boardlist";
+							}
 						}
 					})
 				}

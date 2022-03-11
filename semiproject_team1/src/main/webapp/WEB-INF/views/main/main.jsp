@@ -32,7 +32,7 @@
 						<c:when test="${not empty mem_mno }">
 							<li><a href="">DUO</a></li>
 							<li><a href="">MYPAGE</a></li>
-							<li><a href="/logout?page=main">LOGOUT</a></li>
+							<li><a href="/log_out?page=main">LOGOUT</a></li>
 							<li style="color:white;">
 								<img class="mb-4"
 								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
@@ -40,7 +40,7 @@
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="/login?page=main">LOGIN</a></li>	
+							<li><a href="/loginform?page=main">LOGIN</a></li>	
 						</c:otherwise>
 					</c:choose>
 				</ul>
