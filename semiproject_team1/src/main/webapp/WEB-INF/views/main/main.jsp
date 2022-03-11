@@ -26,13 +26,13 @@
 			</h1>
 			<div class="nav">
 				<ul>
-					<li><a href="#">FEEDBACK</a></li>
-					<li><a href="/boardlist">FREEBOARD</a></li>
+					<li><a href="#">피드백</a></li>
+					<li><a href="/boardlist">자유게시판</a></li>
 					<c:choose>
 						<c:when test="${not empty mem_mno }">
-							<li><a href="">DUO</a></li>
-							<li><a href="">MYPAGE</a></li>
-							<li><a href="/log_out?page=main">LOGOUT</a></li>
+							<li><a href="">듀오</a></li>
+							<li><a href="/mypage">마이페이지</a></li>
+							<li><a href="/log_out?page=main">로그아웃</a></li>
 							<li style="color:white;">
 								<img class="mb-4"
 								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
@@ -40,7 +40,7 @@
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="/loginform?page=main">LOGIN</a></li>	
+							<li><a href="/loginform?page=main">로그인</a></li>	
 						</c:otherwise>
 					</c:choose>
 				</ul>

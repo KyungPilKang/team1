@@ -24,6 +24,9 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean accessMember(String mem_email_id, String mem_pw) throws Exception {
 		Member mem=memberDAO.queryMember(mem_email_id);
+		if(mem==null) {
+			throw new Exception("아이디 또는 비밀번호가 일치하지 않습니다");
+		}
 		if(mem_email_id.equals(mem.getMem_email_id())&&passwordEncoder.matches(mem_pw, mem.getMem_pw())) {
 			return true;
 		} else if(mem_email_id.equals(mem.getMem_email_id())&&!passwordEncoder.matches(mem_pw, mem.getMem_pw())) {

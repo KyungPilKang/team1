@@ -61,7 +61,6 @@
             </form>
 
 
-
             <div id="editor"></div>
             <br>
 
@@ -128,13 +127,11 @@
 </script>
 
 <script>
-    $("#board_file").on('change',function(){
+    $("#board_file").on('change', function () {
         let fileName = $(".board_file").val();
         $(".upload-name").val(fileName);
     });
 </script>
-
-
 
 
 </body>

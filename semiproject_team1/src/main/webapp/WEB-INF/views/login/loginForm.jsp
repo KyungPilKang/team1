@@ -68,13 +68,13 @@
 			</div>
 			<button class="w-100 btn btn-lg btn-secondary" id="next" type="submit">로그인</button>
 		</form>
-		<div class="my-2 d-flex justify-content-between align-items-center">
+		<div class="text-center mt-2 fw-light text-white">
 			<div class="form-check">
 				<label class="form-check-label text-white"> <input
 					type="checkbox" id="remember-me" name="remember-me" class="form-check-input "> 로그인 상태 유지하기
 				</label>
 			</div>
-			<a href="recoverForm1" class="auth-link text-white">비밀번호 찾기</a>
+			<!-- <a href="recoverForm1" class="auth-link text-white">비밀번호 찾기</a> -->
 		</div>
 
 		<!-- 카카오 로그인 구현부분  -->
@@ -95,7 +95,7 @@
 
 <script>
 	/* 로그인 유효성 검사 */
-	$('#next').click(function(){
+	/* $('#next').click(function(){
 		var email = $('#mem_email_id').val();
 		if (email==''){
 			alert("이메일을 입력하세요");
@@ -107,7 +107,7 @@
         	$('#mem_pw').focus();
         	}
         }
-		});
+	}); */
 	
 	let sweetalert=(icon,title,contents)=>{
         Swal.fire({
@@ -175,7 +175,6 @@
 		});
         return false;
 	})
-});
 </script>
 
 <script>

@@ -40,30 +40,68 @@
     <!-- Custom styles for this template -->
      <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/login/signin.css">
   </head>
-  <body class="text-center">
-    
-<main class="form-signin">
-  <form>
-    <img class="mb-4" src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png" alt="" width="80" height="80">
-    <h1 class="h3 mb-3 fw-normal">롤판.DOG</h1>
-    <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="로그인 이메일을 입력하세요">
-      <label for="floatingInput">로그인 이메일을 입력하세요</label><br>
-    </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">인증코드 발송</button>
-    <p></p>
-    <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="6자리 인증코드">
-      <label for="floatingInput">6자리 인증코드 입력</label><br>
-    </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">인증코드 제출</button>
-    <p></p>
-    <button class="w-100 btn btn-lg btn-primary" type="submit" style="font-size:15px; height:48px;">메일을 받지 못하셨나요? 다시보내기</button>
-    
-  </form>
-</main>
-
-
-    
-  </body>
+<body class="text-center">
+	<main class="form-signin">
+	    <img class="mb-4"
+		src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
+		alt="" width="80" height="80">
+		<h1 class="h1 mb-3 fw-normal" style="font-family:abster;">LOLPAN.DOG</h1>
+	  <form id="recoverForm">
+	    <div class="form-floating">
+		    <input type="email" class="form-control" id="mem_email_id" name="mem_email_id" placeholder="로그인 이메일을 입력하세요">
+		    <label for="floatingInput">로그인 이메일을 입력하세요</label><br>
+	    </div>
+	    <button class="w-100 btn btn-lg btn-secondary" type="submit">인증코드 발송</button>
+	  </form>
+	  <form>
+	    <div class="form-floating mt-4">
+		    <input type="hidden" id="mem_email_id_2" name="mem_email_id">
+		    <input type="email" class="form-control" id="mem_code" name="mem_code" placeholder="6자리 인증코드">
+		    <label for="floatingInput">6자리 인증코드 입력</label><br>
+	    </div>
+	    <button class="w-100 btn btn-lg btn-secondary" type="submit">인증코드 제출</button>
+	  </form>
+	  <form>
+	  	<div class="mt-4">
+	    <button class="w-100 btn btn-lg btn-secondary" type="submit" style="font-size:15px; height:48px;">메일을 받지 못하셨나요? 다시보내기</button>
+	  	</div>
+	  </form>
+	    
+	</main>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+	let sweetalert=(icon,title,contents)=>{
+	    Swal.fire({
+	        icon: icon,
+	        title: title,
+	        text: contents,
+	        confirmButtonText: "확인"
+	    })
+	};
+	$('#recoverForm').submit(function(){
+	    function objectifyForm(formArray){		
+	    	var returnArray={};
+	    	for(var i=0;i<formArray.length;i++){
+	    		returnArray[formArray[i]['name']]=formArray[i]['value'];
+	    	}
+	    	return returnArray;
+	    }
+	    let formdata=objectifyForm($("#recoverForm").serializeArray());
+	    $.ajax({
+			type:"POST",
+			async:true,
+			url:"http://localhost:8090/recover",
+			contentType:"application/json; charset=utf-8",
+			data:JSON.stringify(formdata),
+			success: function(data, textStatus){
+				
+			},
+			error: function(data, textStatus){
+				
+			}
+		});
+	    return false;
+	})
+</script>
 </html>
