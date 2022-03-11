@@ -43,7 +43,7 @@
 
                       <div class="d-sm-flex align-items-center justify-content-between">
                         <div class="btn-group-vertical d-sm-flex justify-content-center align-items-center">
-                          <img src="images/lol-symbol/b.png" class="img-fluid" alt="b">
+                          <img src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png" class="img-fluid" alt="b">
 
                           <h4 class="">너는 죽엇다<span>[브론즈]</span></h4>
                           <a href="#" class="btn btn-primary text-white me-0"> 상세보기</a>
@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="btn-group-vertical d-sm-flex justify-content-center align-items-center">
-                          <img src="images/lol-symbol/c.png" class="img-fluid" alt="c">
+                          <img src="${pageContext.request.contextPath}/resources/asset/image/duo/c.png" class="img-fluid" alt="c">
 
                           <h4 class="">초초딩<span>[챌린저]</span></h4>
                           <a href="#" class="btn btn-primary text-white me-0"> 상세보기</a>
@@ -59,7 +59,7 @@
                         </div>
 
                         <div class="btn-group-vertical d-sm-flex justify-content-center align-items-center">
-                          <img src="images/lol-symbol/i.png" class="img-fluid" alt="i">
+                          <img src="${pageContext.request.contextPath}/resources/asset/image/duo/i.png" class="img-fluid" alt="i">
 
                           <h4 class="">대대딩<span>[아이언]</span></h4>
                           <a href="#" class="btn btn-primary text-white me-0"> 상세보기</a>
@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="btn-group-vertical d-sm-flex justify-content-center align-items-center">
-                          <img src="images/lol-symbol/gm.png" class="img-fluid" alt="gm">
+                          <img src="${pageContext.request.contextPath}/resources/asset/image/duo/gm.png" class="img-fluid" alt="gm">
 
                           <h4 class="">아이킬유<span>[그랜드마스터]</span></h4>
                           <a href="#" class="btn btn-primary text-white me-0"> 상세보기</a>
@@ -80,7 +80,7 @@
 
                       <div class="d-sm-flex align-items-center justify-content-between">
                         <div class="btn-group-vertical d-sm-flex justify-content-center align-items-center">
-                          <img src="images/lol-symbol/g.png" class="img-fluid" alt="g">
+                          <img src="${pageContext.request.contextPath}/resources/asset/image/duo/g.png" class="img-fluid" alt="g">
 
                           <h4 class="">오키라이방<span>[골드]</span></h4>
                           <a href="#" class="btn btn-primary text-white me-0"> 상세보기</a>
@@ -88,7 +88,7 @@
                         </div>
 
                         <div class="btn-group-vertical d-sm-flex justify-content-center align-items-center">
-                          <img src="images/lol-symbol/s.png" class="img-fluid" alt="s">
+                          <img src="${pageContext.request.contextPath}/resources/asset/image/duo/s.png" class="img-fluid" alt="s">
 
                           <h4 class="">아이돈라이크유<span>[실버]</span></h4>
                           <a href="#" class="btn btn-primary text-white me-0"> 상세보기</a>
@@ -96,7 +96,7 @@
                         </div>
 
                         <div class="btn-group-vertical d-sm-flex justify-content-center align-items-center">
-                          <img src="images/lol-symbol/p.png" class="img-fluid" alt="p">
+                          <img src="${pageContext.request.contextPath}/resources/asset/image/duo/p.png" class="img-fluid" alt="p">
 
                           <h4 class="">꺼져라<span>[플래티넘]</span></h4>
                           <a href="#" class="btn btn-primary text-white me-0"> 상세보기</a>
@@ -104,7 +104,7 @@
                         </div>
 
                         <div class="btn-group-vertical d-sm-flex justify-content-center align-items-center">
-                          <img src="images/lol-symbol/d.png" class="img-fluid" alt="d">
+                          <img src="${pageContext.request.contextPath}/resources/asset/image/duo/d.png" class="img-fluid" alt="d">
 
                           <h4 class="">강법규<span>[다이아몬드]</span></h4>
                           <a href="#" class="btn btn-primary text-white me-0"> 상세보기</a>
