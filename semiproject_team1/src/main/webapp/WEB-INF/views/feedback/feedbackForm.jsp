@@ -35,7 +35,7 @@
 
 
     <%-- 헤더 영역--%>
-    <div class="header">
+    <div class="header" style="z-index: 2;">
         <h1>
             <a href="/"> <img class="mb-4"
                               src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
@@ -53,11 +53,8 @@
                             <li><a href="">DUO</a></li>
                         </c:when>
                         <c:otherwise>
-<<<<<<< HEAD
                             <li><a href="/login?page=board">로그인</a></li>
-=======
                             <li><a href="/loginform?page=board">로그인</a></li>
->>>>>>> branch 'develop' of https://github.com/KyungPilKang/team1.git
                         </c:otherwise>
                     </c:choose>
                 </ul>
@@ -72,7 +69,7 @@
             <%-- main 컨테이너 --%>
             <div class="main_container">
                 <%-- main 컨테이너의 위쪽 --%>
-                <div class="feedback_header">
+                <div class="feedback_header" style="z-index: 2;">
 
                     <div class="fd_hd_left" id="fd_hdu">
                         <ul class="fd_hd_list">
@@ -168,7 +165,7 @@
                                         </div>
 
                                         <div class="each_board_readcount">
-                                            조회수${article.board_readcount }</div>
+                                           <br>▲<br>${article.board_readcount }</div>
 
                                             <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
 

@@ -21,7 +21,7 @@
 <body>
 <div class="container" style="background-attachment: fixed;">
     <%-- 헤더 영역--%>
-    <div class="header">
+    <div class="header" style="z-index: 2;">
         <h1>
             <a href="/"> <img class="mb-4"
                               src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
@@ -97,7 +97,7 @@
             <%-- main 컨테이너 --%>
             <div class="main_container">
                 <%-- main 컨테이너의 위쪽 --%>
-                <div class="board_header">
+                <div class="board_header" style="z-index: 2;">
                     <div class="hd-link"><h3 class="">전체</h3>
                     <c:choose>
                         <c:when test="${not empty mem_mno}">
@@ -156,7 +156,7 @@
                     </div>
                 </div>
                 <%-- main 컨테이너의 아래쪽 (게시판이 들어갈 공간) --%>
-                <div class="board_body">
+                <div class="board_body" style="z-index: 1;">
                     <c:choose>
                         <c:when test="${articleList!=null && pageInfo.listCount>0 }">
                             <section id="listForm">
