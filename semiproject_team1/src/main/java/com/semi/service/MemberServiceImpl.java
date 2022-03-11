@@ -132,6 +132,7 @@ public class MemberServiceImpl implements MemberService {
         }
 		mem.setMem_code(numStr);
 		memberDAO.updateMem_code(mem);
+		mailService.joinMailSend(mem);
 	}
 	
 	
