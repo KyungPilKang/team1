@@ -34,6 +34,58 @@
 			<button type="button" onclick="location.href='/duoForm2' ">매칭등록/수정</button>
 			<button type="button" onclick="location.href='/feedbackwriteform' ">매칭신청/조회</button>
 		</div>
+		<div class="user-container">
+			<ul>
+				<li><a href="#">&nbsp&nbsp&nbsp <img class="mb-5"
+						src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png"
+						alt="" width="150" height="150"> <br>넌죽었다 [포지션]
+				</a><br>
+					<button type="button" onclick="location.href='/duoForm2' ">상세보기</button>
+					<button type="button" onclick="location.href='/duoForm2' ">쪽지</button></li>
+				<li><a href="#">&nbsp&nbsp&nbsp <img class="mb-5"
+						src="${pageContext.request.contextPath}/resources/asset/image/duo/c.png"
+						alt="" width="150" height="150"> <br>아이킬유 [포지션]
+				</a><br>
+					<button type="button" onclick="location.href='/duoForm2' ">상세보기</button>
+					<button type="button" onclick="location.href='/duoForm2' ">쪽지</button></li>
+				<li><a href="#">&nbsp&nbsp&nbsp <img class="mb-5"
+						src="${pageContext.request.contextPath}/resources/asset/image/duo/d.png"
+						alt="" width="150" height="150"> <br>아이킬유 [포지션]
+				</a><br>
+					<button type="button" onclick="location.href='/duoForm2' ">상세보기</button>
+					<button type="button" onclick="location.href='/duoForm2' ">쪽지</button></li>
+				<li><a href="#">&nbsp&nbsp&nbsp <img class="mb-5"
+						src="${pageContext.request.contextPath}/resources/asset/image/duo/g.png"
+						alt="" width="150" height="150"> <br>아이킬유 [포지션]
+				</a><br>
+					<button type="button" onclick="location.href='/duoForm2' ">상세보기</button>
+					<button type="button" onclick="location.href='/duoForm2' ">쪽지</button></li>
+				<li><a href="#">&nbsp&nbsp&nbsp <img class="mb-5"
+						src="${pageContext.request.contextPath}/resources/asset/image/duo/m.png"
+						alt="" width="150" height="150"> <br>아이킬유 [포지션]
+				</a><br>
+					<button type="button" onclick="location.href='/duoForm2' ">상세보기</button>
+					<button type="button" onclick="location.href='/duoForm2' ">쪽지</button></li>
+				<li><a href="#">&nbsp&nbsp&nbsp <img class="mb-5"
+						src="${pageContext.request.contextPath}/resources/asset/image/duo/p.png"
+						alt="" width="150" height="150"> <br>아이킬유 [포지션]
+				</a><br>
+					<button type="button" onclick="location.href='/duoForm2' ">상세보기</button>
+					<button type="button" onclick="location.href='/duoForm2' ">쪽지</button></li>
+				<li><a href="#">&nbsp&nbsp&nbsp <img class="mb-5"
+						src="${pageContext.request.contextPath}/resources/asset/image/duo/s.png"
+						alt="" width="150" height="150"> <br>아이킬유 [포지션]
+				</a><br>
+					<button type="button" onclick="location.href='/duoForm2' ">상세보기</button>
+					<button type="button" onclick="location.href='/duoForm2' ">쪽지</button></li>
+				<li><a href="#">&nbsp&nbsp&nbsp <img class="mb-5"
+						src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png"
+						alt="" width="150" height="150"> <br>아이킬유 [포지션]
+				</a><br>
+					<button type="button" onclick="location.href='/duoForm2' ">상세보기</button>
+					<button type="button" onclick="location.href='/duoForm2' ">쪽지</button></li>
+			</ul>
+		</div>
 	</div>
 </body>
 </html>

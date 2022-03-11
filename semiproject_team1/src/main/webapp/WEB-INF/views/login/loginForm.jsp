@@ -66,7 +66,7 @@
 				<input type="password" class="form-control" id="mem_pw" name="mem_pw"
 					placeholder="비밀번호"> <label for="mem_pw">비밀번호</label>
 			</div>
-			<button class="w-100 btn btn-lg btn-secondary" type="submit">로그인</button>
+			<button class="w-100 btn btn-lg btn-secondary" id="next" type="submit">로그인</button>
 		</form>
 		<div class="text-center mt-2 fw-light text-white">
 			<div class="form-check">
@@ -95,26 +95,20 @@
 
 <script>
 	/* 로그인 유효성 검사 */
-$(function (){
-	/* form.onsubmit = function (){
-		let email = $('#mem_email_id').val();
-		let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	$('#next').click(function(){
+		var email = $('#mem_email_id').val();
 		if (email==''){
 			alert("이메일을 입력하세요");
 			$('#mem_email_id').focus();
-      return false;
-		} else if (emailVal.match(regExp) == null){
-			alert('이메일 형식이 올바르지 않습니다.');
-			$('#email').focus();
-			return false;
-		}
-		 let password = $('#mem_pw').val();
-	        if(password=='') {
-	        	alert("비밀번호를 입력하세요.");
-	        	$('#mem_pw').focus();
-	        	return false;
-		}
-	} */
+		}else{
+		let password = $('#mem_pw').val();
+        if(password=='') {
+        	alert("비밀번호를 입력하세요.");
+        	$('#mem_pw').focus();
+        	}
+        }
+		});
+	
 	let sweetalert=(icon,title,contents)=>{
         Swal.fire({
             icon: icon,
