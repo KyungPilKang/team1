@@ -81,7 +81,7 @@
 	color: #999999;
 }
 
-.fd_write_body > div > label {
+.fd_write_body_inner > .fd_wr_replay > label {
 	display: inline-block;
 	padding: 10px 20px;
 	color: #fff;
@@ -92,7 +92,19 @@
 	margin-left: 10px;
 }
 
-.fd_wr_replay > div >  input[type="file"] {
+.fd_write_body_inner > .fd_wr_file > label {
+	display: inline-block;
+	padding: 10px 20px;
+	color: #fff;
+	vertical-align: middle;
+	background-color: #999999;
+	cursor: pointer;
+	height: 40px;
+	margin-left: 10px;
+}
+
+
+.fd_wr_replay > input[type="file"] {
 	position: absolute;
 	width: 0;
 	height: 0;
@@ -100,6 +112,16 @@
 	overflow: hidden;
 	border: 0;
 }
+
+.fd_wr_file > input[type="file"] {
+	position: absolute;
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
+}
+
 
 
 .fd_request_btn{

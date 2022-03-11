@@ -121,12 +121,13 @@
 }
 
 .loading{
-    width: 100%;
+    width: 46vw;
     height: 150px;
-    background-color: #ff7171;
+    background-color: rgba(248, 81, 81, 0);
     display: none;
-    font-size: 100px;
+    font-size: 50px;
     text-align: center;
+    color: #00ffbd;
 }
 
 
@@ -283,6 +284,7 @@ body{
     border-radius: 2px;
     /*box-shadow: 1px 2px 3px 1px rgba(255, 255, 255, 0.1);*/
     border : 5px solid #4169E1;
+    width: 46vw;
 }
 
 .board_header.fixed{
@@ -290,8 +292,10 @@ body{
     box-shadow: 1px 2px 3px 1px rgba(255, 255, 255, 0.2);
     position: fixed;
     margin-top: -50px;
-    width: 45vw;
+    width: 46vw;
 }
+
+
 
 .board_body.fixed{
     margin-top: 90px;
@@ -317,10 +321,17 @@ body{
 
 .board_body{
     width: 60vw;
-    height: 700px;
+    height: 85vh;
     overflow-y: auto;
 }
 
+.board_body {
+    -ms-overflow-style: none;
+}
+
+.board_body::-webkit-scrollbar {
+    display: none;
+}
 
 .card ul li a {
     text-decoration: none;
