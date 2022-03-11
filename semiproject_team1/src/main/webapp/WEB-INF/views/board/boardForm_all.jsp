@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/boardForm_all.css">
 </head>
 <body>
-<div class="container">
+<div class="container" style="background-attachment: fixed;">
     <%-- 헤더 영역--%>
     <div class="header">
         <h1>
@@ -150,9 +150,6 @@
                 </div>
                 <%-- main 컨테이너의 아래쪽 (게시판이 들어갈 공간) --%>
                 <div class="board_body">
-
-                    <div class="board_body_inner">
-
                         <c:choose>
                             <c:when test="${articleList!=null && pageInfo.listCount>0 }">
                                 <section id="listForm">
@@ -209,11 +206,7 @@
                                 <section id="emptyArea">등록된 글이 없습니다.</section>
                             </c:otherwise>
                         </c:choose>
-                    </div>
-
-
                 </div>
-
             </div>
             <%-- 우측 메뉴 --%>
             <div class="card_right">
@@ -222,7 +215,9 @@
         </div>
     </div>
 </div>
-
+	<div class="footer">
+        
+    </div>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -230,8 +225,17 @@
 <script>
     let currentPage = 1;
     let isLoading = false;
+    
+    $(".board_body").scroll(function () {
+        if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+            return;
+        }
+        isLoading = true;
+        $(".loading").show();
+        setTimeout(loadNewPage, 1400);
+    });
 
-    $(window).on("scroll", function () {
+    /* $(window).on("scroll", function () {
         let scrollTop = $(window).scrollTop();
         let windowHeight = $(window).height();
         let documentHeight = $(document).height();
@@ -245,7 +249,7 @@
             $(".loading").show();
             setTimeout(loadNewPage, 1400);
         }
-    });
+    }); */
 
     function loadNewPage() {
         currentPage++;
