@@ -30,13 +30,11 @@
 .each_board_num {
     margin: 10px;
     width: 100px;
-    /*height:50px;*/
     background: #fadfdf;
 }
 
 .each_board_content{
     width: 35vw;
-    /*height:50px;*/
     background: white;
     display: flex;
     flex-direction: column;
@@ -277,14 +275,46 @@ body{
     /*background-color: red;*/
 }
 
+.hd-link{
+    height: 5vh;
+}
+
+.hd-link > h3{
+    margin-top: 10px;
+    margin-left: 1vw;
+    float: left;
+}
+
+.hd-link > div > a {
+    margin-top: 10px;
+    margin-right : 1vw;
+    float: right;
+}
+
+.fa-brands{
+    color:white;
+}
+
+.fa-solid{
+    margin-left:10px;
+}
+
+.pencil > a{
+    color:white;
+    text-decoration: none;
+}
 
 .board_header{
+<<<<<<< HEAD
     background-color: none;
+=======
+    background-color: black;
+    width: 46vw;
+    height: 10vh;
+>>>>>>> branch 'develop' of https://github.com/KyungPilKang/team1.git
     border-top: 1px solid #5b5b5b;
     border-radius: 2px;
-    /*box-shadow: 1px 2px 3px 1px rgba(255, 255, 255, 0.1);*/
     border : 5px solid #4169E1;
-    width: 46vw;
 }
 
 .board_header.fixed{
@@ -354,3 +384,6 @@ body{
     display: inline-block;
 }
 
+.board_file_cont{
+    float:right;
+}

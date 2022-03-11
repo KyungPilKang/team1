@@ -53,7 +53,11 @@
                             <li><a href="">DUO</a></li>
                         </c:when>
                         <c:otherwise>
+<<<<<<< HEAD
                             <li><a href="/login?page=board">로그인</a></li>
+=======
+                            <li><a href="/loginform?page=board">로그인</a></li>
+>>>>>>> branch 'develop' of https://github.com/KyungPilKang/team1.git
                         </c:otherwise>
                     </c:choose>
                 </ul>

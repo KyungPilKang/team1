@@ -7,12 +7,14 @@
 
 
 .fd_hd_list {
-
+    display: flex;
+    list-style-type: none;
 }
 
 .fd_hd_item > a {
-    color: white;
     text-decoration: none;
+    color: black;
+    margin: 40px;
 }
 
 
@@ -29,14 +31,17 @@
 .each_board_num {
     margin: 10px;
     width: 100px;
+<<<<<<< HEAD
     /*height:50px;*/
     background: white;
+=======
+    background: #fadfdf;
+>>>>>>> branch 'develop' of https://github.com/KyungPilKang/team1.git
 
 }
 
 .each_board_content {
     width: 35vw;
-    /*height:50px;*/
     background: rgba(199, 199, 199, 0.53);
     display: flex;
     flex-direction: column;

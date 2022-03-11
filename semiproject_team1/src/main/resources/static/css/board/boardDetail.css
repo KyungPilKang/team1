@@ -190,12 +190,12 @@ body {
 	border: 5px solid #708090;
 	border-radius: 8px;
 	background-color: rgba(0, 0, 0, 0);
+	width: 50vw;
 	font-weight: bold;
 	margin-top: 750px;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
-	/*display: none;*/
 }
 
 .heart {
