@@ -57,28 +57,19 @@
             </div>
             <div class="fd_wr_subject">
                 <span>제목</span><input type="text"></div>
+
             <div class="fd_wr_replay">
-                <label for="fd_replay" class="fd_replay"> 동영상 첨부 </label>
-                <input name="file" type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" id="fd_replay"
+                <label for="fd_replay"> 파일 첨부 </label>
+                <input name="fd_replay" type="file" id="fd_replay"
                        placeholder=" 파일첨부" class="fd_replay"/>
-                <input class="upload-name1" value="첨부파일" placeholder="첨부파일" disabled>
+                <input class="upload-name1" value="리플레이" placeholder="리플레이" disabled>
             </div>
             <div class="fd_wr_file">
-                <label for="fd_file" class="fd_file"> 동영상 첨부 </label>
-                <input name="file" type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" id="fd_file"
+                <label for="fd_file"> 영상 첨부 </label>
+                <input name="fd_file" type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" id="fd_file"
                        placeholder=" 파일첨부" class="fd_file"/>
-                <input class="upload-name2" value="첨부파일" placeholder="첨부파일" disabled>
+                <input class="upload-name2" value="영상" placeholder="영상" disabled>
             </div>
-            <div class="fd_wr_capture">
-                <label for="fd_capture" class="fd_capture"> 동영상 첨부 </label>
-                <input name="file" type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" id="fd_capture"
-                       placeholder=" 파일첨부" class="fd_capture"/>
-                <input class="upload-name3" value="첨부파일" placeholder="첨부파일" disabled>
-            </div>
-
-
-
-
 
 
             <div class-="fd_wr_limit">
@@ -126,24 +117,22 @@
     });
 </script>
 
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
 <script>
     $("#fd_replay").on('change',function(){
-        let fileName = $("#fd_replay").val();
-        $(".upload-name1").val(fileName);
+        let fileName1 = $(".fd_replay").val();
+        $(".upload-name1").val(fileName1);
     });
 </script>
 <script>
     $("#fd_file").on('change',function(){
-        let fileName = $("#fd_file").val();
-        $(".upload-name2").val(fileName);
+        let fileName2 = $("#fd_file").val();
+        $(".upload-name2").val(fileName2);
     });
 </script>
-<script>
-    $("#fd_capture").on('change',function(){
-        let fileName = $(".fd_capture").val();
-        $(".upload-name3").val(fileName);
-    });
-</script>
+
 
 
 </body>
