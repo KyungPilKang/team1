@@ -118,6 +118,7 @@
 	    var imgsrc = document.getElementById("cap_img");
 	     imgsrc.src = "/captcha?ver=" + Math.random();
 	}
+	
 <!-- captcha 입력 유효성 체크 -->
 	    $('#captchavalid').click(function () {
 	    	if($('#userin').val()==""){
@@ -147,60 +148,96 @@
 				}
 			});
 		});
-<!-- 이메일 db중복 체크 -->
-    function emailcheck(){
-        var mem_email_id = $('#mem_email_id').val(); //id값이 "mem_email_id"인 입력란의 값을 저장
-        $.ajax({
-            url:"http://localhost:8090/emailCheck", //Controller에서 인식할 주소
-            type:'post', //POST 방식으로 전달
-            
-            data:{mem_email_id:mem_email_id},
-            success:function(data){ //컨트롤러에서 넘어온 data값을 받는다 
-                if(data == "true"){ //true인 경우 사용불가
-                	$('#email_ok').text("이미 가입된 이메일입니다");
-                	$('#email_ok').css("visibility", "visible");
-                	$('#email_ok').css("color", "orangered");
-                    email_ok=false;
-                } else { // 사용가능
-                	$('#email_ok').text("사용 가능한 이메일입니다");
-                	$('#email_ok').css("visibility", "visible");
-                	$('#email_ok').css("color", "greenyellow");
-                    email_ok=true;
-                    console.log(email_ok);
-                    if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
-					   	$('#form_submit').attr('disabled', false);
-					}
-                }
-            }
-        });
-    }
+	    
+	    <!-- 이메일 db중복 체크 -->
+	    function emailcheck(){
+	        var mem_email_id = $('#mem_email_id').val(); //id값이 "mem_email_id"인 입력란의 값을 저장
+	        var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	        if(mem_email_id==''){
+	        		('#email_ok').text("이메일주소를 입력하세요");
+	            	$('#email_ok').css("visibility", "visible");
+	            	$('#email_ok').css("color", "orangered");
+	            	email_ok=false;
+	    		}else{
+	    			$.ajax({
+		            url:"http://localhost:8090/emailCheck", //Controller에서 인식할 주소
+		            type:'post', //POST 방식으로 전달
+		            
+		            data:{mem_email_id:mem_email_id},
+		            success:function(data){ //컨트롤러에서 넘어온 data값을 받는다 
+		                if(data == "true"){ //true인 경우 사용불가
+		                	$('#email_ok').text("이미 가입된 이메일입니다");
+		                	$('#email_ok').css("visibility", "visible");
+		                	$('#email_ok').css("color", "orangered");
+		                    email_ok=false;
+		                } else { // 사용가능
+		                	if (mem_email_id.match(regExp) == null){
+		            			$('#email_ok').text("이메일 형식이 올바르지 않습니다.");
+		                    	$('#email_ok').css("visibility", "visible");
+		                    	$('#email_ok').css("color", "orangered");
+		                        email_ok=false;
+		            		}else{
+		            		$('#email_ok').text("사용 가능한 이메일입니다");
+		                	$('#email_ok').css("visibility", "visible");
+		                	$('#email_ok').css("color", "greenyellow");
+		                    email_ok=true;
+		                    console.log(email_ok);
+		                    if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
+							$('#form_submit').attr('disabled', false);
+							}
+		                    }
+		                }
+		            }
+		        });
+	    	}
+	    }
+        
+
 <!-- 닉네임 db중복 체크 -->
- 	
     function nickcheck(){
         var mem_nickname = $('#mem_nickname').val(); //id값이 "mem_nickname"인 입력란의 값을 저장
-        $.ajax({
-            url:"http://localhost:8090/nickCheck", //Controller에서 인식할 주소
-            type:'post', //POST 방식으로 전달
-            
-            data:{mem_nickname:mem_nickname},
-            success:function(data){ //컨트롤러에서 넘어온 data값을 받는다 
-                if(data == "true"){ //true인 경우 사용불가
-                	$('#nick_ok').text("이미 사용중인 닉네임입니다");
-                	$('#nick_ok').css("visibility", "visible");
-                	$('#nick_ok').css("color", "orangered");
-                    nickname_ok=false;
-                } else { // 사용가능
-                	$('#nick_ok').text("사용 가능한 닉네임입니다");
-                	$('#nick_ok').css("visibility", "visible");
-                	$('#nick_ok').css("color", "greenyellow");
-                    nickname_ok=true;
-                    console.log(nickname_ok);
-                    if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
-					   	$('#form_submit').attr('disabled', false);
-					}
-                }
-            }
-        });
+        var spe = mem_nickname.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+        if(mem_nickname==''){
+     		$('#nick_ok').text("닉네임을 입력해주세요");
+        	$('#nick_ok').css("visibility", "visible");
+        	$('#nick_ok').css("color", "orangered");
+            nickname_ok=false;
+     	}else if(mem_nickname.length < 2 || mem_nickname.length > 10){
+     		$('#nick_ok').text("닉네임은 2자이상 10자 미만으로 입력하세요");
+        	$('#nick_ok').css("visibility", "visible");
+        	$('#nick_ok').css("color", "orangered");
+        	nickname_ok=false;
+     	}else if(spe > 0){
+     		$('#nick_ok').text("닉네임은 영문 또는 숫자로만 입력해 주세요");
+        	$('#nick_ok').css("visibility", "visible");
+        	$('#nick_ok').css("color", "orangered");
+        	nickname_ok=false;
+     	}else{
+     		 $.ajax({
+                 url:"http://localhost:8090/nickCheck", //Controller에서 인식할 주소
+                 type:'post', //POST 방식으로 전달
+                 
+                 data:{mem_nickname:mem_nickname},
+                 success:function(data){ //컨트롤러에서 넘어온 data값을 받는다 
+                     if(data == "true"){ //true인 경우 사용불가
+                     	$('#nick_ok').text("이미 사용중인 닉네임입니다");
+                     	$('#nick_ok').css("visibility", "visible");
+                     	$('#nick_ok').css("color", "orangered");
+                         nickname_ok=false;
+                     } else { // 사용가능
+                     	$('#nick_ok').text("사용 가능한 닉네임입니다");
+                     	$('#nick_ok').css("visibility", "visible");
+                     	$('#nick_ok').css("color", "greenyellow");
+                         nickname_ok=true;
+                         console.log(nickname_ok);
+                         if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
+     					   	$('#form_submit').attr('disabled', false);
+     					}
+                     }
+                 }
+             });
+     	}
+       
     }
     <!-- 비밀번호 유효성 체크 --> 
     function pwcheck(){
@@ -208,8 +245,13 @@
     	 var num = pw.search(/[0-9]/g);
     	 var eng = pw.search(/[a-z]/ig);
     	 var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
-
-    	 if(pw.length < 8 || pw.length > 16){
+		
+    	 if(pw=='') {
+    		$('#pw_ok').text("비밀번호를 입력하세요");
+          	$('#pw_ok').css("visibility", "visible");
+          	$('#pw_ok').css("color", "orangered");
+          	pw_ok=false;
+    	 }else if(pw.length < 8 || pw.length > 16){
     		$('#pw_ok').text("8자리 ~ 16자리 이내로 입력해주세요.");
          	$('#pw_ok').css("visibility", "visible");
          	$('#pw_ok').css("color", "orangered");
@@ -230,36 +272,6 @@
          	$('#pw_ok').css("color", "greenyellow");	 
     	 }
     }
-    	 
-   
-    $('#form_submit').click(function(){
-		var email = $('#mem_email_id').val();
-		var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		if (email==''){
-			alert("이메일을 입력하세요");
-			$('#mem_email_id').focus();
-		} else if (emailVal.match(regExp) == null){
-			alert('이메일 형식이 올바르지 않습니다.');
-			$('#email').focus();
-		}
-		 let password = $('#mem_pw').val();
-	        if(password=='') {
-	        	alert("비밀번호를 입력하세요.");
-	        	$('#mem_pw').focus();
-		}
-	     let nickname = $('#mem_nickname').val();
-	     var spe = nickname.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
-	     	if(nickname==''){
-	     		alert("닉네임을 입력하세요");
-	     		$('#mem_nickname').focus();
-	     	}else if(nickname.length < 3 || nickname.length > 10){
-	     		alert("닉네임은 2자리~10자리 이내로 입력해 주세요")
-	     		$('#mem_nickname').focus();
-	     	}else if(spe > 0){
-	     		alert("닉네임은 영문 또는 숫자로만 입력해 주세요")
-	     		$('#mem_nickname').focus();
-	     	} 
-	});
     
    
 </script>
