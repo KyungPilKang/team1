@@ -71,7 +71,7 @@
 		<div class="my-2 d-flex justify-content-between align-items-center">
 			<div class="form-check">
 				<label class="form-check-label text-white"> <input
-					type="checkbox" id="remember" name="obscure-remember-me" class="form-check-input "> 로그인 상태 유지하기
+					type="checkbox" id="remember-me" name="remember-me" class="form-check-input "> 로그인 상태 유지하기
 				</label>
 			</div>
 			<a href="recoverForm1" class="auth-link text-white">비밀번호 찾기</a>
