@@ -32,7 +32,7 @@
                     <li><a href="/boardlist">FREEBOARD</a></li>
                     <c:choose>
                         <c:when test="${not empty mem_mno }">
-<%--                        <c:when test="${empty mem_mno }">--%>
+                            <%--                        <c:when test="${empty mem_mno }">--%>
                             <li><a href="">DUO</a></li>
                         </c:when>
                         <c:otherwise>
@@ -50,7 +50,7 @@
             <%-- 좌측 메뉴 --%>
             <div class="card_left">
                 <div class="card_outline">
-<%--                    <c:if test="${not empty mem_mno }">--%>
+                    <%--                    <c:if test="${not empty mem_mno }">--%>
                     <c:if test="${not empty mem_mno }">
                         <div class="user_info_box">
                             <img class="mb-4"
@@ -95,8 +95,16 @@
             <div class="main_container">
                 <%-- main 컨테이너의 위쪽 --%>
                 <div class="board_header">
-                    <h3 class="">전체</h3>
-                    <div><a href="/boardwriteform">게시판글쓰기</a></div>
+                    <h3 class="">전체 고유번호:${mem_mno }/닉네임:${mem_nickname }</h3>
+                    <c:choose>
+                        <c:when test="${not empty mem_mno}">
+                            <div><a href="/boardwriteform">게시판글쓰기</a></div>
+                        </c:when>
+                        <c:otherwise>
+
+                        </c:otherwise>
+                    </c:choose>
+
                     <div class="sub-link" id="sub-menu">
                         <ul class="sub-link__list">
                             <li class="sub-link__item ">
@@ -150,62 +158,62 @@
                 </div>
                 <%-- main 컨테이너의 아래쪽 (게시판이 들어갈 공간) --%>
                 <div class="board_body">
-                        <c:choose>
-                            <c:when test="${articleList!=null && pageInfo.listCount>0 }">
-                                <section id="listForm">
-                                    <c:forEach var="article" items="${articleList }">
-                                        <div class="each_post">
-                                            <div class="each_board_likecount">
-                                              <br>♥<br>${article.board_likecount }</div>
-                                            <div class="each_board_content">
-                                                <div class="each_board_sub">
-                                                    <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">
-                                                            ${article.board_subject}&nbsp;[${article.board_replycount}]
-                                                    </a>
-                                                </div>
-                                                <div class="each_board_sub_bottom">
-                                                    <div class="each_board_cat"><br>${article.board_cat }</div>
-                                                    <div class="each_board_date"><br><fmt:formatDate
-                                                            value="${article.board_date }"
-                                                            pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
-                                                    <div class="each_board_nickname"><br>
-                                                        닉네임${article.board_nickname }</div>
-                                                </div>
+                    <c:choose>
+                        <c:when test="${articleList!=null && pageInfo.listCount>0 }">
+                            <section id="listForm">
+                                <c:forEach var="article" items="${articleList }">
+                                    <div class="each_post">
+                                        <div class="each_board_likecount">
+                                            <br>♥<br>${article.board_likecount }</div>
+                                        <div class="each_board_content">
+                                            <div class="each_board_sub">
+                                                <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">
+                                                        ${article.board_subject}&nbsp;[${article.board_replycount}]
+                                                </a>
                                             </div>
-
-                                            <div class="each_board_readcount">
-                                                <br>▲<br>${article.board_readcount }</div>
-
-                                                <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
-
-                                            <c:choose>
-                                                <c:when test="${article.board_thumbnail != null }">
-                                                    <div class="each_board_thumbnail"
-                                                         id="each_board_thumbnail"><img
-                                                            src="/thumbnail_view/${article.board_thumbnail}"
-                                                            alt="thumbnail" class="thumbnail_size"/>
-                                                    </div>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <div class="each_board_thumbnail"
-                                                         id="each_board_thumbnail"><img
-                                                            src="https://talk.op.gg/images/thumbnail/post_hidden.png"
-                                                            alt="thumbnail" class="thumbnail_size"/>
-                                                    </div>
-                                                </c:otherwise>
-                                            </c:choose>
+                                            <div class="each_board_sub_bottom">
+                                                <div class="each_board_cat"><br>${article.board_cat }</div>
+                                                <div class="each_board_date"><br><fmt:formatDate
+                                                        value="${article.board_date }"
+                                                        pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
+                                                <div class="each_board_nickname"><br>
+                                                    ${article.board_nickname }</div>
+                                            </div>
                                         </div>
-                                    </c:forEach>
-                                </section>
 
-                                <div class="attach_ajax_list"></div>
-                                <div class="loading"> 로 딩 중 . . .</div>
+                                        <div class="each_board_readcount">
+                                            <br>▲<br>${article.board_readcount }</div>
 
-                            </c:when>
-                            <c:otherwise>
-                                <section id="emptyArea">등록된 글이 없습니다.</section>
-                            </c:otherwise>
-                        </c:choose>
+                                            <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
+
+                                        <c:choose>
+                                            <c:when test="${article.board_thumbnail != null }">
+                                                <div class="each_board_thumbnail"
+                                                     id="each_board_thumbnail"><img
+                                                        src="/thumbnail_view/${article.board_thumbnail}"
+                                                        alt="thumbnail" class="thumbnail_size"/>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="each_board_thumbnail"
+                                                     id="each_board_thumbnail"><img
+                                                        src="https://talk.op.gg/images/thumbnail/post_hidden.png"
+                                                        alt="thumbnail" class="thumbnail_size"/>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                </c:forEach>
+                            </section>
+
+                            <div class="attach_ajax_list"></div>
+                            <div class="loading"> 로 딩 중 . . .</div>
+
+                        </c:when>
+                        <c:otherwise>
+                            <section id="emptyArea">등록된 글이 없습니다.</section>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
             <%-- 우측 메뉴 --%>
@@ -215,9 +223,9 @@
         </div>
     </div>
 </div>
-	<div class="footer">
-        
-    </div>
+<div class="footer">
+
+</div>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -225,7 +233,7 @@
 <script>
     let currentPage = 1;
     let isLoading = false;
-    
+
     $(".board_body").scroll(function () {
         if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
             return;
