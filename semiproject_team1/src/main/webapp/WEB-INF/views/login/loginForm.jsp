@@ -95,7 +95,7 @@
 
 <script>
 	/* 로그인 유효성 검사 */
-	$('#next').click(function(){
+	/* $('#next').click(function(){
 		var email = $('#mem_email_id').val();
 		if (email==''){
 			alert("이메일을 입력하세요");
@@ -107,7 +107,7 @@
         	$('#mem_pw').focus();
         	}
         }
-		});
+	}); */
 	
 	let sweetalert=(icon,title,contents)=>{
         Swal.fire({
@@ -175,7 +175,6 @@
 		});
         return false;
 	})
-});
 </script>
 
 <script>

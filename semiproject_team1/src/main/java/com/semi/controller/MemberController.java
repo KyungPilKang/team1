@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -43,7 +44,7 @@ public class MemberController {
 	
 	@ResponseBody
 	@PostMapping(value="/login")
-	public Map<String, Object> login(@RequestBody Member mem) {
+	public ResponseEntity<?> login(@RequestBody Member mem) {
 		Map<String, Object> map=new HashMap<>();
 		try {
 			if(memberService.accessMember(mem.getMem_email_id(), mem.getMem_pw())) {
@@ -54,17 +55,11 @@ public class MemberController {
 				}
 				result.setPage(mem.getPage());
 				map.put("mem", result);
-				System.out.println(result.getPage());
-			} else throw new Exception();
-//			if(mem.getPage().equals("board")) {
-//				map.put("page", "board");
-//			} else if(mem.getPage().equals("main")){
-//				map.put("page", "main");
-//			}
+			}
 		} catch(Exception e){
-			e.printStackTrace();
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
-		return map;
+		return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/log_out")
@@ -78,7 +73,6 @@ public class MemberController {
 		}
 		return mav;
 	}
-
 	
 //	@RequestMapping(value = "/join_certifyForm")
 //	public ModelAndView join_certifyForm(@RequestParam) {return "login/join_certifyForm";}

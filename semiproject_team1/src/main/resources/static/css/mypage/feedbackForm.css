@@ -6,11 +6,6 @@
 }
 
 
-
-.fd_hd_list{
-
-}
-
 .fd_hd_item > a{
     color:white;
     text-decoration: none;
@@ -18,11 +13,12 @@
 
 
 .each_post {
-    background: #ffffff;
-    border: 1px solid black;
-    height: 15vh;
-    width: 60vw;
+    background: white;
+    border: 5px solid skyblue;
+    height: 100px;
+    width: 45vw;
     display: flex;
+    margin: 10px;
 }
 
 .each_board_num {
@@ -30,13 +26,12 @@
     width: 100px;
     /*height:50px;*/
     background: #fadfdf;
-
 }
 
 .each_board_content{
     width: 35vw;
     /*height:50px;*/
-    background: rgba(199, 199, 199, 0.53);
+    background: white;
     display: flex;
     flex-direction: column;
 }
@@ -53,21 +48,26 @@
 .each_board_sub > a {
     color: black;
     text-decoration: none;
+    font-weight: bold;
+    font-size: 30px;
 }
 
 .each_board_cat {
-    background: #7c00ff;
+    background: white;
     padding: 5px;
+    font-weight: bold;
 }
 
 .each_board_nickname {
-    background: #fcdc10;
+    background: white;
     padding: 5px;
+    font-weight: bold;
 }
 
 .each_board_date {
-    background: #41fc18;
+    background: white;
     padding: 5px;
+    font-weight: bold;
 }
 
 .each_board_replycount {
@@ -79,13 +79,20 @@
 .each_board_likecount {
     width: 70px;
     /*height:50px;*/
-    background: #fc8383;
+    background: white;
+    font-weight: bold;
+    text-align: center;
+    border-right: 5px solid skyblue;
 }
 
 .each_board_readcount {
     width: 50px;
     /*height:50px;*/
-    background: #a54fd9;
+    background: white;
+    text-align: center;
+    font-weight: bold;
+    border-left: 5px solid skyblue;
+    border-right: 5px solid skyblue;
 }
 
 #search_submit {
@@ -182,7 +189,7 @@ body{
 }
 
 .body_feedback_mar{
-    margin-left:20vw;
+    margin-left:26vw;
     margin-top: 50px;
     display: flex;
 }
@@ -213,8 +220,8 @@ body{
 }
 
 .feedback_body{
-    width: 61vw;
-    height: 700px;
+    width: 47vw;
+    height: 40vh;
     overflow-y: auto;
     /*background-color: rgba(250, 134, 134, 0);*/
 }

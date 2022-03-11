@@ -105,13 +105,14 @@
 	background: white;
 }
 
+.each_board_thumbnail{
+    overflow: hidden;
+}
+
 #search_submit {
     display: none;
 }
 
-.each_board_thumbnail{
-    overflow: hidden;
-}
 
 .thumbnail_size{
     text-align: center;
