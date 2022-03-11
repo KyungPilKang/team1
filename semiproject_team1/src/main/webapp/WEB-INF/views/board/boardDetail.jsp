@@ -25,13 +25,14 @@
         </div>
     </div>
 
-
     <section id="commandList">
+        <%-- 세션과 게시물 작성자가 동일하면 수정, 삭제를 출력--%>
+        <c:if test="${mem_nickname == article.board_nickname}">
         <button class="btn_modify" onclick="location.href='modifyform?board_num=${article.board_num}&page=${page}'">
             수정
         </button>
-
         <button class="btn_del">삭제</button>
+        </c:if>
         <div>
             첨부파일 :
             <c:if test="${article.board_fileName!=null }">
@@ -89,8 +90,8 @@
     </section>
 
     <div class="reply_container" id="reply_container">
-        <%-- 세션의 회원번호(mno)가 존재할 때 글쓰기 가능 --%>
-        <c:if test="${!empty mno}">
+        <%-- 세션의 회원번호(mno)가 존재할 때 댓글쓰기 가능 --%>
+        <c:if test="${!empty mem_nickname}">
             <form>
             <textarea class="comment_write_content" maxlength="1000"
                       placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."></textarea>

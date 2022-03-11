@@ -185,6 +185,7 @@
         </div>
     </div>
 </div>
+    <div class="fd_footer"></div>
 
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
