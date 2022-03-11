@@ -13,6 +13,9 @@
           href="/resources/asset/image/login/dog1.png"/>
     <title>전체 게시판 - 롤판.DOG</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/boardForm_all.css">
 </head>
 <body>
@@ -95,40 +98,36 @@
             <div class="main_container">
                 <%-- main 컨테이너의 위쪽 --%>
                 <div class="board_header">
-                    <h3 class="">전체</h3>
+                    <div class="hd-link"><h3 class="">전체</h3>
                     <c:choose>
                         <c:when test="${not empty mem_mno}">
-                            <div><a href="/boardwriteform">게시판글쓰기</a></div>
+                            <div class="pencil"><a href="/boardwriteform"><i class="fa-solid fa-pencil"></i></a></div>
                         </c:when>
                         <c:otherwise>
-
+                            <div class="pencil"><a href="void(0)" onclick="alert('로그인이 필요합니다:)');return false;"><i class="fa-solid fa-pencil"></i></a></div>
                         </c:otherwise>
                     </c:choose>
-
+                    </div>
                     <div class="sub-link" id="sub-menu">
                         <ul class="sub-link__list">
                             <li class="sub-link__item ">
                                 <a href="/boardlist">
-                                    <img src="https://talk.op.gg/images/icon-new@2x.png" width="24"
-                                         alt=""><span>최신</span>
+                                    <i class="fa-brands fa-free-code-camp"></i> <span>최신</span>
                                 </a>
                             </li>
                             <li class="sub-link__item sub-link__item--active">
                                 <a href="/board_all_viewssort">
-                                    <img src="https://talk.op.gg/images/icon-hot-on@2x.png" width="24"
-                                         alt=""><span>조회수</span>
+                                    <i class="fa-brands fa-free-code-camp"></i> <span>조회수</span>
                                 </a>
                             </li>
                             <li class="sub-link__item ">
                                 <a href="/board_all_replysort">
-                                    <img src="https://talk.op.gg/images/icon-top@2x.png" width="24"
-                                         alt=""><span>댓글</span>
+                                    <i class="fa-brands fa-free-code-camp"></i> <span>댓글</span>
                                 </a>
                             </li>
                             <li class="sub-link__item ">
                                 <a href="board_all_likesort">
-                                    <img src="https://talk.op.gg/images/icon-boost@2x.png" width="24"
-                                         alt=""><span>좋아요</span>
+                                    <i class="fa-brands fa-free-code-camp"></i> <span>좋아요</span>
                                 </a>
                             </li>
                             <%-- 검색 --%>
@@ -136,7 +135,7 @@
                                 <div class="board_search_container">
                                     <form class="search-form" id="boardform" method="get"
                                           action="/board_search">
-                                        <select class="btn-sm btn-secondary board_search_select"
+                                        <select class=""
                                                 name="board_type">
                                             <option value="1">제목</option>
                                             <option value="2">작성자</option>
@@ -146,8 +145,8 @@
                                                placeholder="Search Here" title="Search here"
                                                name="board_keyword">
                                         <div class="board_file_cont">
-                                            <label for="search_submit" style="cursor: pointer"> 돋보기
-                                                아이콘 </label>
+                                            <label for="search_submit" style="cursor: pointer"><i
+                                                    class="fa-solid fa-magnifying-glass"></i> </label>
                                             <input type="submit" id="search_submit"/>
                                         </div>
                                     </form>

@@ -45,15 +45,15 @@
         <div class="nav">
             <div class="nav">
                 <ul>
-                    <li><a href="/feedback">FEEDBACK</a></li>
-                    <li><a href="/boardlist">FREEBOARD</a></li>
+                    <li><a href="/feedback">피드백</a></li>
+                    <li><a href="/boardlist">자유게시판</a></li>
                     <c:choose>
                         <c:when test="${not empty mem_mno }">
                             <%--                        <c:when test="${empty mem_mno }">--%>
                             <li><a href="">DUO</a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="/login?page=board">LOGIN</a></li>
+                            <li><a href="/loginform?page=board">로그인</a></li>
                         </c:otherwise>
                     </c:choose>
                 </ul>
