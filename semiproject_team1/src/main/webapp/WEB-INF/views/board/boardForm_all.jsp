@@ -177,7 +177,7 @@
                                             </div>
 
                                             <div class="each_board_readcount">
-                                                조회수${article.board_readcount }</div>
+                                                ▲    ${article.board_readcount }</div>
 
                                                 <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
 
