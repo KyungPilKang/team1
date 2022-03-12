@@ -46,9 +46,9 @@
 <main class="form-signin">
   <form action="join_certify" method="post">
   	<input type="hidden" name="mem_mno" value="${mem_mno }">
-    <img class="mb-4"
-	src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
-	alt="" width="80" height="80">
+   <a href="/main"><img class="mb-4"
+			src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
+			alt="" width="80" height="80"></a>
 	<h1 class="h1 mb-3 fw-normal" style="font-family:abster;">LOLPAN.DOG</h1>
     <div class="mt-4 mb-4">
       <h5 class="text-white">입력하신 이메일로 인증코드가 발송되었습니다.</h5>

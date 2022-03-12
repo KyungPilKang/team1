@@ -50,9 +50,9 @@
   
 <main class="form-signin">
   <form action="/join" method="post" >
-    	<img class="mb-4"
-		src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
-		alt="" width="80" height="80">
+    	<a href="/main"><img class="mb-4"
+			src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
+			alt="" width="80" height="80"></a>
 		<h1 class="h1 mb-3 fw-normal" style="font-family:abster;">LOLPAN.DOG</h1>
 
     <div style="float:center">

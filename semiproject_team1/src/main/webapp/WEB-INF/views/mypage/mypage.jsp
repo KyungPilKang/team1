@@ -23,7 +23,7 @@
     <%-- 헤더 영역--%>
     <div class="header">
         <h1>
-            <a href="/"> <img class="mb-4"
+            <a href="/main"> <img class="mb-4"
                               src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
                               alt="" width="60" height="60"> LOLPAN.DOG
             </a>
