@@ -51,9 +51,9 @@
 
 	<main class="form-signin">
 
-		<img class="mb-4"
+		<a href="/main"><img class="mb-4"
 			src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
-			alt="" width="80" height="80">
+			alt="" width="80" height="80"></a>
 		<h1 class="h1 mb-3 fw-normal" style="font-family:abster;">LOLPAN.DOG</h1>
 		<form id="loginForm">
 			<input type="hidden" name="page" value="${page }">
@@ -164,7 +164,7 @@
 						if(result){
 							console.log(data.mem);
 							if(data.mem.page=="main"){
-		        				window.location.href="/";
+		        				window.location.href="/main";
 							} else if(data.mem.page=="board"){
 								window.location.href="/boardlist";
 							}

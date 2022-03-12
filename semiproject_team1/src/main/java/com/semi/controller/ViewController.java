@@ -9,10 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ViewController {
 
-	@GetMapping("/")
-	public String main() {
-		return "main/main";
-	}
 	@GetMapping(value = "/loginform") 
 	public ModelAndView login(@RequestParam("page")String page) {
 		ModelAndView mav=new ModelAndView();

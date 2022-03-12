@@ -44,9 +44,9 @@
     
 <main class="form-signin">
   <form>
-    	<img class="mb-4"
+    	<a href="/main"><img class="mb-4"
 			src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
-			alt="" width="80" height="80">
+			alt="" width="80" height="80"></a>
 		<h1 class="h1 mb-3 fw-normal" style="font-family:abster;">LOLPAN.DOG</h1>
     <div class="my-2 d-flex justify-content-between align-items-center">
         <div class="form-check" style="padding:0;">

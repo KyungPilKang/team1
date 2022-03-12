@@ -25,7 +25,7 @@
     <%-- 헤더 영역--%>
     <div class="header" style="z-index: 2;">
         <h1>
-            <a href="/"> <img class="mb-4"
+            <a href="/main"> <img class="mb-4"
                               src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
                               alt="" width="60" height="60"> LOLPAN.DOG
             </a>
@@ -65,7 +65,7 @@
                             <div class="nav">
                                 <ul>
                                     <li><a href="/boardwriteform">글쓰기</a></li>
-                                    <li><a href="">마이페이지</a></li>
+                                    <li><a href="/mypage">마이페이지</a></li>
                                     <li><a href="/log_out?page=board">로그아웃</a></li>
                                 </ul>
                             </div>

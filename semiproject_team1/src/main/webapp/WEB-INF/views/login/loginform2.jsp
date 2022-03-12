@@ -52,9 +52,9 @@
 
 	<main class="form-signin">
 
-		<img class="mb-4"
+		<a href="/main"><img class="mb-4"
 			src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
-			alt="" width="80" height="80">
+			alt="" width="80" height="80"></a>
 		<h1 class="h1 mb-3 fw-normal">LOLPAN.DOG</h1>
 		<form id="form" action="login" method="post">
 			<div class="form-floating">

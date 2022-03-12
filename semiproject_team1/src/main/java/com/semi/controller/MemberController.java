@@ -67,7 +67,7 @@ public class MemberController {
 		ModelAndView mav=new ModelAndView();
 		session.invalidate();
 		if(page.equals("main")) {
-			mav.setViewName("redirect:/");
+			mav.setViewName("redirect:/main");
 		} else if(page.equals("board")) {
 			mav.setViewName("redirect:/boardlist");
 		}
