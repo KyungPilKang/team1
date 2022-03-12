@@ -64,4 +64,20 @@
 			update member set mem_admin_confirm='yes' where mem_mno=#{mno}
 		]]>
 	</update>
+	<select id="selectBoardList_mine" parameterType="Member" resultType="Board">
+		<![CDATA[
+		]]>
+	</select>
+	<select id="selectFeedbackList_mine" parameterType="Member" resultType="Feedback">
+		<![CDATA[
+		]]>
+	</select>
+	<select id="selectBoard_numList_ward" parameterType="String" resultType="String">
+		<![CDATA[
+		]]>
+	</select>
+	<select id="selectBoard_ward" parameterType="String" resultType="Board">
+		<![CDATA[
+		]]>
+	</select>
 </mapper>

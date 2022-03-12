@@ -324,7 +324,7 @@
                 </div>
                 <div class="feedback_body">
                     <c:choose>
-                            <c:when test="${articleList!=null && pageInfo.listCount>0 }">
+                            <c:when test="${articleList!=null}">
                                 <section id="listForm">
                                     <c:forEach var="article" items="${articleList }">
                                         <div class="each_post">
@@ -332,7 +332,7 @@
                                               <br>♥<br>${article.board_likecount }</div>
                                             <div class="each_board_content">
                                                 <div class="each_board_sub">
-                                                    <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">
+                                                    <a href="./boarddetail?board_num=${article.board_num}">
                                                             ${article.board_subject}&nbsp;[${article.board_replycount}]
                                                     </a>
                                                 </div>
@@ -387,7 +387,7 @@
                 </div>
                 <div class="feedback_body">
                     <c:choose>
-                            <c:when test="${articleList!=null && pageInfo.listCount>0 }">
+                            <c:when test="${articleList!=null}">
                                 <section id="listForm">
                                     <c:forEach var="article" items="${articleList }">
                                         <div class="each_post">
@@ -395,7 +395,7 @@
                                               <br>♥<br>${article.board_likecount }</div>
                                             <div class="each_board_content">
                                                 <div class="each_board_sub">
-                                                    <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">
+                                                    <a href="./boarddetail?board_num=${article.board_num}">
                                                             ${article.board_subject}&nbsp;[${article.board_replycount}]
                                                     </a>
                                                 </div>
@@ -451,7 +451,7 @@
                 </div>
                 <div class="feedback_body">
                     <c:choose>
-                            <c:when test="${articleList!=null && pageInfo.listCount>0 }">
+                            <c:when test="${articleList!=null}">
                                 <section id="listForm">
                                     <c:forEach var="article" items="${articleList }">
                                         <div class="each_post">
@@ -459,7 +459,7 @@
                                               <br>♥<br>${article.board_likecount }</div>
                                             <div class="each_board_content">
                                                 <div class="each_board_sub">
-                                                    <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">
+                                                    <a href="./boarddetail?board_num=${article.board_num}">
                                                             ${article.board_subject}&nbsp;[${article.board_replycount}]
                                                     </a>
                                                 </div>

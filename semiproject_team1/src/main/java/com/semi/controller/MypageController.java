@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.semi.api.riotapi.LOL_champion;
 import com.semi.api.riotapi.RiotAPI;
 import com.semi.dto.Board;
+import com.semi.dto.Feedback;
 import com.semi.dto.Member;
 import com.semi.dto.PageInfo;
 import com.semi.service.Board_allService;
@@ -98,11 +98,19 @@ public class MypageController {
 				mv.addObject("most3", champ_map.get("most3"));
 			}
 			
-			//게시판 리스트
-			List<Board> articleList = board_allService.getBoardList(page, pageInfo);
-			mv.addObject("pageInfo", pageInfo);
+			//내가쓴 게시글 리스트
+			List<Board> articleList = mypageService.selectBoardList_mine((Integer)session.getAttribute("mem_mno"));
 			mv.addObject("articleList", articleList);
-			mv.addObject("sort_name", "boardlist");
+			mv.setViewName("mypage/mypage");
+			
+			//와드 누른 게시글 리스트
+			List<Board> articleList_ward = mypageService.selectBoardList_ward((Integer)session.getAttribute("mem_mno"));
+			mv.addObject("articleList_ward", articleList_ward);
+			mv.setViewName("mypage/mypage");
+			
+			//내가쓴 피드백 리스트
+			List<Feedback> articleList_feedback = mypageService.selectFeedbackList_mine((Integer)session.getAttribute("mem_mno"));
+			mv.addObject("articleList_feedback", articleList_feedback);
 			mv.setViewName("mypage/mypage");
 			
 			

@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.semi.dto.Board;
+import com.semi.dto.Feedback;
 import com.semi.dto.Member;
 
 
@@ -23,4 +25,8 @@ public interface MemberDAO {
 	public void updateMem_link_confirm(Member mem) throws Exception;
 	public List<Member> link_member_list() throws Exception;
 	public void adminConfirm(int mno) throws Exception;
+	public List<Board> selectBoardList_mine(Member mem) throws Exception;
+	public List<Feedback> selectFeedbackList_mine(Member mem) throws Exception;
+	public List<String> selectBoard_numList_ward(String mno) throws Exception;
+	public Board selectBoard_ward(String board_num) throws Exception;
 }

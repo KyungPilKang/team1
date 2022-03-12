@@ -73,6 +73,7 @@
                           <a href="#" class="btn btn-primary text-white me-0"> 상세보기</a>
                           <a href="#" class="btn btn-primary text-white me-0"> 쪽지</a>
                         </div>
+                        
                       </div>
 
                       <br />
@@ -121,6 +122,13 @@
       </div>
     </div>
   </div>
+  
+  <c:forEach begin="0" end="10" var="i" varStatus="stat">
+	${stat.count }
+	<c:if test="${stat.count%4==0 }">
+		<br><br>
+	</c:if>
+	</c:forEach>
 
 
 

@@ -1,6 +1,8 @@
 package com.semi.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.semi.api.riotapi.LOL_champion;
 import com.semi.api.riotapi.RiotAPI;
 import com.semi.dao.MemberDAO;
+import com.semi.dto.Board;
+import com.semi.dto.Feedback;
 import com.semi.dto.Member;
 
 @Service
@@ -117,6 +121,28 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public void adminConfirm(int mno) throws Exception {
 		memberDAO.adminConfirm(mno);
+	}
+
+	@Override
+	public List<Board> selectBoardList_mine(int mno) throws Exception {
+		Member mem=memberDAO.selelctMember_bymno(mno);
+		return memberDAO.selectBoardList_mine(mem);
+	}
+
+	@Override
+	public List<Board> selectBoardList_ward(int mno) throws Exception {
+		List<Board> result = new ArrayList<Board>();
+		List<String> board_numList=memberDAO.selectBoard_numList_ward(String.valueOf(mno));
+		for(String board_num : board_numList) {
+		    result.add(memberDAO.selectBoard_ward(board_num));
+		}
+		return result;
+	}
+
+	@Override
+	public List<Feedback> selectFeedbackList_mine(int mno) throws Exception {
+		Member mem=memberDAO.selelctMember_bymno(mno);
+		return memberDAO.selectFeedbackList_mine(mem);
 	}
 
 }
