@@ -63,7 +63,7 @@
                             <div class="nav">
                                 <ul>
                                     <li><a href="/boardwriteform">글쓰기</a></li>
-                                    <li><a href="">마이페이지</a></li>
+                                    <li><a href="/mypage">마이페이지</a></li>
                                     <li><a href="/log_out?page=board">로그아웃</a></li>
                                 </ul>
                             </div>

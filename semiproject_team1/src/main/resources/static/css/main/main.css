@@ -69,6 +69,7 @@
 .container .hero h2 {
 	font-size: 60px;
 	margin-bottom: 20px;
+	font-family:abster;
 }
 
 .container .hero p {
@@ -87,11 +88,10 @@
 	transition: all .4s;
 	font-family: abster;
 	font-size: 18px;
-
 }
 
 .container .hero button:hover {
-	background-color: rgb(242, 132, 59);
+	background-color: rgba(135, 206, 235, 0.4);
 }
 
 .card ul li a {
