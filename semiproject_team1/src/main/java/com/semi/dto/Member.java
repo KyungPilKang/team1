@@ -12,8 +12,21 @@ public class Member {
 	String mem_link_code;
 	String mem_link_confirm;
 	String mem_duo_reg_ok;
+	int mem_score;
+	String page;
+	String mem_type;
+	String mem_admin_confirm;
+	String mem_kakao_id;
 	
 	public Member() {}
+	
+	public String getPage() {
+		return page;
+	}
+
+	public void setPage(String page) {
+		this.page = page;
+	}
 
 	public int getMem_mno() {
 		return mem_mno;
@@ -94,6 +107,39 @@ public class Member {
 	public void setMem_duo_reg_ok(String mem_duo_reg_ok) {
 		this.mem_duo_reg_ok = mem_duo_reg_ok;
 	}
+
+	public int getMem_score() {
+		return mem_score;
+	}
+
+	public void setMem_score(int mem_score) {
+		this.mem_score = mem_score;
+	}
+
+	public String getMem_type() {
+		return mem_type;
+	}
+
+	public void setMem_type(String mem_type) {
+		this.mem_type = mem_type;
+	}
+
+	public String getMem_admin_confirm() {
+		return mem_admin_confirm;
+	}
+
+	public void setMem_admin_confirm(String mem_admin_confirm) {
+		this.mem_admin_confirm = mem_admin_confirm;
+	}
+
+	public String getMem_kakao_id() {
+		return mem_kakao_id;
+	}
+
+	public void setMem_kakao_id(String mem_kakao_id) {
+		this.mem_kakao_id = mem_kakao_id;
+	}
 	
+
 	
 }

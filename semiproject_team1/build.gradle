@@ -16,17 +16,26 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	
+	implementation 'org.json:json:20211205'
+	implementation 'net.morimekta.utils:android-util:1.2.0'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:9.0.56'
 	implementation 'javax.servlet:jstl:1.2'
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+
+	implementation 'org.jsoup:jsoup:1.13.1'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
+
+
+
+
 }
 
 tasks.named('test') {

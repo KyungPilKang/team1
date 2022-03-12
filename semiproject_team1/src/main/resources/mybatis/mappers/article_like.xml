@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.semi.dao.article_likeDAO">
+<mapper namespace="com.semi.dao.Article_likeDAO">
+
+    <select id="select_article_like" resultType="string" parameterType="int">
+		<![CDATA[
+        select mno
+        from article_like
+        where board_num = #{boardNum}
+        ]]>
+	</select>
+
+    <insert id="insertLike" parameterType="int">
+		<![CDATA[
+        insert into article_like
+            (mno, board_num)
+        values ('0', #{boardNum})
+        ]]>
+	</insert>
+
+    <insert id="insert_like_mno">
+		<![CDATA[
+        insert into article_like
+        values (0, #{mno}, #{boardNum})
+        ]]>
+	</insert>
+
+    <insert id="delete_like_mno">
+		<![CDATA[
+        delete
+        from article_like
+        where board_num = #{boardNum}
+          and mno = #{mno}
+        ]]>
+	</insert>
+
+	<delete id="delete_like_boardNum" parameterType="int">
+		<![CDATA[
+		delete from article_like where board_num=#{boardNum}
+		]]>
+	</delete>
+
+
+    <update id="update_like_up" parameterType="int">
+		<![CDATA[
+        update board
+        set board_likecount = board_likecount + 1
+        where board_num = #{boardNum}
+        ]]>
+	</update>
+
+    <update id="update_like_down" parameterType="int">
+		<![CDATA[
+        update board
+        set board_likecount = board_likecount - 1
+        where board_num = #{boardNum}
+        ]]>
+	</update>
+
+
+
+
 </mapper>

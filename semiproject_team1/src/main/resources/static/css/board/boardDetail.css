@@ -1,0 +1,299 @@
+body {
+	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+		url(../../asset/image/board/lol4.jpg);
+	background-size: cover;
+}
+
+.board_container {
+	background: white;
+	width: 1000px;
+	height: 1400px;
+	border: 5px solid #4169E1;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 15px 20px;
+	border-radius: 30px;
+	margin-bottom: 20px;
+	outline: none;
+}
+
+.board_subject_container {
+	padding-left: 20px;
+	font-weight: bold;
+	font-size: 40px;
+	width: 980px;
+	height: 55px;
+	color: black;
+	border: 6px solid #708090;
+	border-radius: 30px;
+}
+
+.board_container_bo {
+	margin-top: 20px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.board_category_container {
+	width: 100px;
+	height: 40px;
+	/*border: 1px solid black;*/
+	float: left;
+}
+
+.board_date_container {
+	width: 300px;
+	height: 40px;
+	/*border: 1px solid black;*/
+	float: left;
+}
+
+.board_name_container {
+	width: 100px;
+	height: 40px;
+	/*border: 1px solid black;*/
+	float: left;
+}
+
+.board_readcount_container {
+	width: 100px;
+	height: 40px;
+	/*border: 1px solid black;*/
+	float: right;
+}
+
+.board_reply_container {
+	width: 100px;
+	height: 40px;
+	/*border: 1px solid black;*/
+	float: right;
+}
+
+.board_like_container {
+	width: 100px;
+	height: 40px;
+	/*border: 1px solid black;*/
+	float: right;
+}
+
+.board_content_container {
+	margin-top: 20px;
+	width: 950px;
+	height: 580px;
+	border: 3px solid #708090;
+	border-radius: 7px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	overflow: scroll;
+	overflow-x: hidden;
+	font-weight: bold;
+}
+
+.board_content_container img {
+	width: 880px;
+	/*height: 400px;*/
+	object-fit: cover;
+}
+
+#board_middle {
+	margin-top: 620px;
+	width: 900px;
+	height: 70px;
+	/*border:1px solid black;*/
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#commandList {
+	margin-top: 100px;
+	margin-left: 20px;
+}
+
+#commandList button a {
+	text-decoration: none;
+	color: black;
+}
+
+.like_and_ward {
+	display: flex;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.btn_reply {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	width: 120px;
+	height: 48px;
+	float: left;
+	font-size: 15px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.btn_like {
+	padding: 20px;
+	width: 50px;
+	height: 48px;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+.btn_ward {
+	padding: 20px;
+	width: 80px;
+	height: 48px;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+.btn_modify {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	width: 120px;
+	height: 48px;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+.btn_list {
+	margin-top: 100px;
+	border: none;
+	border-radius: 4px;
+	width: 120px;
+	height: 48px;
+	background: darkgray;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+.btn_del {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	width: 120px;
+	height: 48px;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+.reply_container {
+	border: 5px solid #708090;
+	border-radius: 8px;
+	background-color: rgba(0, 0, 0, 0);
+	width: 50vw;
+	font-weight: bold;
+	margin-top: 750px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.heart {
+	height: 50px;
+	width: 50px;
+	border-radius: 20px;
+	background: red;
+}
+
+.heart_off {
+	height: 50px;
+	width: 50px;
+	border-radius: 20px;
+	border: 1px solid black;
+}
+
+.bookmark {
+	height: 50px;
+	width: 50px;
+	border-radius: 20px;
+	background: #008293;
+}
+
+.bookmark_off {
+	height: 50px;
+	width: 50px;
+	border-radius: 20px;
+	border: 1px solid black;
+}
+
+/*모달  css*/
+.modal {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	top: 0;
+	left: 0;
+	display: none;
+}
+
+.modal_content {
+	width: 400px;
+	height: 200px;
+	background: #fff;
+	border-radius: 10px;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	margin-top: -100px;
+	margin-left: -200px;
+	text-align: center;
+	box-sizing: border-box;
+	padding: 74px 0;
+	line-height: 23px;
+	cursor: pointer;
+}
+
+/* 댓글 css 테스트용 */
+.ddd {
+	border: 5px solid skyblue;
+	border-radius: 8px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	height: 20px;
+}
+
+/* 댓글 작성 박스*/
+.comment_write_content {
+	border: 2px solid #4169E1;
+	background-color: rgba(0, 0, 0, 0);
+	height: 100px;
+	width: 800px;
+	font-weight: bold;
+}
+
+/* 대댓글 작성창 숨김처리 css */
+.re_comment_write {
+	display: none;
+}
+
+.re_heart {
+	height: 15px;
+	width: 15px;
+	border-radius: 10px;
+	background: red;
+	cursor: pointer;
+}
+
+.re_heart_off {
+	height: 15px;
+	width: 15px;
+	border-radius: 10px;
+	border: 1px solid black;
+	cursor: pointer;
+}
+
+/* 댓글 좋아요 기능구현에 필수 css*/
+.rh_off_hide, .rh_hide {
+	display: none;
+}

@@ -16,6 +16,7 @@ public class Board {
 	int board_readcount; 
 	int board_likecount;
 	int board_replycount;
+	String board_thumbnail; // 0303 추가, 게시판 리스트 출력시 board 객체에 썸네일을 담아오는 목적, 테이블 변경 필수
 
 	public Board() {}
 
@@ -124,6 +125,12 @@ public class Board {
 	public void setBoard_replycount(int board_replycount) {
 		this.board_replycount = board_replycount;
 	}
-	
-	
+
+	public String getBoard_thumbnail() {
+		return board_thumbnail;
+	}
+
+	public void setBoard_thumbnail(String board_thumbnail) {
+		this.board_thumbnail = board_thumbnail;
+	}
 }
