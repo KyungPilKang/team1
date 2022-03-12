@@ -43,4 +43,15 @@
 			select mem_score from member where mem_mno=#{mno}
 		]]>
 	</select>
+	<update id="idLink" parameterType="Member">
+		<![CDATA[
+			update member set mem_link_id=#{mem_link_id}, mem_link_code=#{mem_link_code},
+			mem_link_confirm='ing' where mem_mno=#{mem_mno}
+		]]>
+	</update>
+	<update id="updateMem_link_confirm" parameterType="Member">
+		<![CDATA[
+			update member set mem_link_confirm='yes' where mem_mno=#{mem_mno}
+		]]>
+	</update>
 </mapper>

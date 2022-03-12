@@ -7,8 +7,13 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -105,5 +110,33 @@ public class MypageController {
 			mv.addObject("err", e.getMessage());
 		}
 		return mv;
+	}
+	
+	@ResponseBody
+	@PostMapping("idlink")
+	public String idLink(@RequestBody Member mem) {
+		mem.setMem_mno((Integer)session.getAttribute("mem_mno"));
+		try {
+			mypageService.idLink(mem);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mem.getMem_link_id();
+	}
+	
+	@ResponseBody
+	@PostMapping("codeconfirm")
+	public ResponseEntity<?> codeConfirm(@RequestBody Member mem) {
+		mem.setMem_mno((Integer)session.getAttribute("mem_mno"));
+		Member result;
+		try {
+			result=memberService.selectMemeber_bymno(mem.getMem_mno());
+			if(mypageService.codeConfirm(mem)) {
+			} else new Exception();
+		} catch(Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("에러 발생", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<String>(result.getMem_link_id(), HttpStatus.OK);
 	}
 }
