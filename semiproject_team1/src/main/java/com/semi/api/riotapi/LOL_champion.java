@@ -110,8 +110,6 @@ public class LOL_champion {
 			ChampionName =   "케이틀린";break;
 		case   76:
 			ChampionName =  "니달리";break;
-		case 85:
-			ChampionName =  "케인";break;
 		case 3:
 			ChampionName =  "갈리오";break;
 		case 45:
@@ -139,7 +137,7 @@ public class LOL_champion {
 		case  106:
 			ChampionName =  "볼리베어";break;
 		case 20:
-			ChampionName = "누누";break;
+			ChampionName = "누누와 윌럼프";break;
 		case 4:
 			ChampionName =  "트위스티드 페이트";break;
 		case 24:
@@ -169,7 +167,7 @@ public class LOL_champion {
 		case  84:
 			ChampionName =  "아칼리";break;
 		case  163:
-			ChampionName =  "탈리아";break;
+			ChampionName =  "탈리야";break;
 		case  18:
 			ChampionName =  "트리스타나";break;
 		case  120:
@@ -257,7 +255,7 @@ public class LOL_champion {
 		case  32:
 			ChampionName = "아무무";break;
 		case 41:
-			ChampionName =  "갱플랭";break;
+			ChampionName =  "갱플랭크";break;
 		case  48:
 			ChampionName =  "트런들";break;
 		case   38:
@@ -291,7 +289,7 @@ public class LOL_champion {
 		case   555:
 			ChampionName =   "파이크";break;
 		case  164:
-			ChampionName =   "카멜";break;
+			ChampionName =   "카밀";break;
 		case   246:
 			ChampionName = "키아나";break;
 		case   497:
@@ -320,6 +318,12 @@ public class LOL_champion {
 			ChampionName = "아크샨";break;
 		case 711:
 			ChampionName = "벡스";break;
+		case 85:
+			ChampionName = "케넨";break;
+		case 221:
+			ChampionName = "제리";break;
+		case 147:
+			ChampionName = "세라핀";break;
 		default :ChampionName="Not Found"; break;
 		
 		}
