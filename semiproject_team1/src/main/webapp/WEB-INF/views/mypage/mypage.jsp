@@ -324,34 +324,33 @@
                 </div>
                 <div class="feedback_body">
                     <c:choose>
-                            <c:when test="${articleList!=null}">
+                            <c:when test="${articleList_feedback!=null}">
                                 <section id="listForm">
-                                    <c:forEach var="article" items="${articleList }">
+                                    <c:forEach var="article_feedback" items="${articleList_feedback }">
                                         <div class="each_post">
                                             <div class="each_board_likecount">
-                                              <br>♥<br>${article.board_likecount }</div>
+                                              <br>♥<br>${article_feedback.feedback_likecount }</div>
                                             <div class="each_board_content">
                                                 <div class="each_board_sub">
-                                                    <a href="./boarddetail?board_num=${article.board_num}">
-                                                            ${article.board_subject}&nbsp;[${article.board_replycount}]
+                                                    <a href="./feedbackdetail?feedback_num=${article_feedback.feedback_num}">
+                                                            ${article_feedback.feedback_subject}
                                                     </a>
                                                 </div>
                                                 <div class="each_board_sub_bottom">
-                                                    <div class="each_board_cat"><br>카테고리 : ${article.board_cat }</div>
                                                     <div class="each_board_date"><br><fmt:formatDate
-                                                            value="${article.board_date }"
+                                                            value="${article_feedback.feedback_date }"
                                                             pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
                                                     <div class="each_board_nickname"><br>
-                                                        닉네임 : ${article.board_nickname }</div>
+                                                        닉네임 : ${article_feedback.feedback_nickname }</div>
                                                 </div>
                                             </div>
 
                                             <div class="each_board_readcount">
-                                                <br>▲<br>${article.board_readcount }</div>
+                                                <br>▲<br>${article_feedback.feedback_readcount }</div>
 
                                                 <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
 
-                                            <c:choose>
+                                            <%-- <c:choose>
                                                 <c:when test="${article.board_thumbnail != null }">
                                                     <div class="each_board_thumbnail"
                                                          id="each_board_thumbnail"><img
@@ -366,14 +365,10 @@
                                                             alt="thumbnail" class="thumbnail_size"/>
                                                     </div>
                                                 </c:otherwise>
-                                            </c:choose>
+                                            </c:choose> --%>
                                         </div>
                                     </c:forEach>
                                 </section>
-
-                                <div class="attach_ajax_list"></div>
-                                <div class="loading"> 로 딩 중 . . .</div>
-
                             </c:when>
                             <c:otherwise>
                                 <section id="emptyArea">등록된 글이 없습니다.</section>
@@ -446,44 +441,44 @@
                 </div><br><br><br>
                 <div class="board_header">
                     <div style="margin-top: 10px;">
-	                    <center><h3 style="color:white">좋아요 게시글 리스트</h3></center>
+	                    <center><h3 style="color:white">와드박은 게시글</h3></center>
             		</div>
                 </div>
                 <div class="feedback_body">
                     <c:choose>
-                            <c:when test="${articleList!=null}">
+                            <c:when test="${articleList_ward!=null}">
                                 <section id="listForm">
-                                    <c:forEach var="article" items="${articleList }">
+                                    <c:forEach var="article_ward" items="${articleList_ward }">
                                         <div class="each_post">
                                             <div class="each_board_likecount">
-                                              <br>♥<br>${article.board_likecount }</div>
+                                              <br>♥<br>${article_ward.board_likecount }</div>
                                             <div class="each_board_content">
                                                 <div class="each_board_sub">
-                                                    <a href="./boarddetail?board_num=${article.board_num}">
-                                                            ${article.board_subject}&nbsp;[${article.board_replycount}]
+                                                    <a href="./boarddetail?board_num=${article_ward.board_num}">
+                                                            ${article_ward.board_subject}&nbsp;[${article_ward.board_replycount}]
                                                     </a>
                                                 </div>
                                                 <div class="each_board_sub_bottom">
-                                                    <div class="each_board_cat"><br>카테고리 : ${article.board_cat }</div>
+                                                    <div class="each_board_cat"><br>카테고리 : ${article_ward.board_cat }</div>
                                                     <div class="each_board_date"><br><fmt:formatDate
-                                                            value="${article.board_date }"
+                                                            value="${article_ward.board_date }"
                                                             pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
                                                     <div class="each_board_nickname"><br>
-                                                        닉네임 : ${article.board_nickname }</div>
+                                                        닉네임 : ${article_ward.board_nickname }</div>
                                                 </div>
                                             </div>
 
 
                                             <div class="each_board_readcount">
-                                                <br>▲<br>${article.board_readcount }</div>
+                                                <br>▲<br>${article_ward.board_readcount }</div>
 
                                                 <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
 
                                             <c:choose>
-                                                <c:when test="${article.board_thumbnail != null }">
+                                                <c:when test="${article_ward.board_thumbnail != null }">
                                                     <div class="each_board_thumbnail"
                                                          id="each_board_thumbnail"><img
-                                                            src="/thumbnail_view/${article.board_thumbnail}"
+                                                            src="/thumbnail_view/${article_ward.board_thumbnail}"
                                                             alt="thumbnail" class="thumbnail_size"/>
                                                     </div>
                                                 </c:when>

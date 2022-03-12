@@ -106,6 +106,7 @@ public class MypageController {
 			//와드 누른 게시글 리스트
 			List<Board> articleList_ward = mypageService.selectBoardList_ward((Integer)session.getAttribute("mem_mno"));
 			mv.addObject("articleList_ward", articleList_ward);
+			System.out.println(articleList_ward.get(0).getBoard_num());
 			mv.setViewName("mypage/mypage");
 			
 			//내가쓴 피드백 리스트

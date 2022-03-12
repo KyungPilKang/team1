@@ -66,18 +66,22 @@
 	</update>
 	<select id="selectBoardList_mine" parameterType="Member" resultType="Board">
 		<![CDATA[
+			select * from board where board_nickname=#{mem_nickname}
 		]]>
 	</select>
 	<select id="selectFeedbackList_mine" parameterType="Member" resultType="Feedback">
 		<![CDATA[
+			select * from feedback where feedback_nickname=#{mem_nickname}
 		]]>
 	</select>
 	<select id="selectBoard_numList_ward" parameterType="String" resultType="String">
 		<![CDATA[
+			select board_num from article_ward where mno=#{mno}
 		]]>
 	</select>
 	<select id="selectBoard_ward" parameterType="String" resultType="Board">
 		<![CDATA[
+			select * from board where board_num=#{board_num}
 		]]>
 	</select>
 </mapper>
