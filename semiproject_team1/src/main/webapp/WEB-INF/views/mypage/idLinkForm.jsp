@@ -45,7 +45,10 @@
 	    <img class="mb-4"
 		src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
 		alt="" width="80" height="80">
-		<h1 class="h1 mb-3 fw-normal" style="font-family:abster;">LOLPAN.DOG</h1>
+		<h1 class="h1 mb-4 fw-normal" style="font-family:abster;">LOLPAN.DOG</h1>
+		<h5 class="mb-1 fw-normal" style="color:orangered;">관리자 LOL 계정 친구요청을</h5>
+		<h5 class="mb-1 fw-normal" style="color:orangered;">반드시 수락하세요</h5>
+		<h5 class="mb-4 fw-normal" style="color:orangered;">ID : LOLPANDOG</h5>
 	  <form id="idLinkForm">
 	    <div class="form-floating">
 		    <input type="text" class="form-control" id="mem_link_id" name="mem_link_id" placeholder="연동할 아이디를 입력하세요">
@@ -81,7 +84,7 @@
 			Swal.fire({
 		        icon: "error",
 		        title: "입력 오류",
-		        text:"아이디를 입력하시기 바랍니다",
+		        text: "아이디를 입력하시기 바랍니다",
 		        confirmButtonText: "확인"
 		    })
 		    return false;

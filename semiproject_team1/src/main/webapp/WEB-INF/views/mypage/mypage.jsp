@@ -71,9 +71,9 @@
 					                    		<center><h2 style="color:white">PANG.DOG LV.1(0p)</h2></center>
 					                    	</c:when>
 					                    	<c:otherwise>
+				                    			<center><h2 style="color:white">PANG.DOG LV.1(${mem_score}p)</h2></center>
 					                    	</c:otherwise>
 				                    	</c:choose>
-		                    			<center><h2 style="color:white">PANG.DOG LV.1(${mem_score}p)</h2></center>
 	                    			</div>
 	                    		</c:when>
 	                    		<c:when test="${mem_score>100&&mem_score<=500}">
@@ -520,7 +520,7 @@
 
 <%-- 무한스크롤 --%>
 <script>
-    let currentPage = 1;
+    /* let currentPage = 1;
     let isLoading = false;
 
 
@@ -532,7 +532,7 @@
         isLoading = true;
         $(".loading").show();
         setTimeout(loadNewPage, 1400);
-    });
+    }); */
     /* div 내 무한스크롤 끝 */
 
 
@@ -552,7 +552,7 @@
     <%--    }--%>
     <%--});--%>
 
-    function loadNewPage() {
+    /* function loadNewPage() {
         currentPage++;
         console.log("${sort_name}")
         if ("${sort_name}" === "boardlist") {
@@ -582,13 +582,13 @@
                 isLoading = false;
             }
         })
-    }
+    } */
 </script>
 <%-- 끝 : 무한스크롤 --%>
 
 
 <script>
-    $(function () {
+    /* $(function () {
         let fixx = $(".feedback_header").offset().top;
         $(window).scroll(function () {
             let window = $(this).scrollTop() + 80;
@@ -600,7 +600,7 @@
                 $(".feedback_body").removeClass("fixed");
             }
         })
-    });
+    }); */
 </script>
 
 

@@ -1,5 +1,6 @@
 package com.semi.service;
 
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +84,8 @@ public class MemberServiceImpl implements MemberService {
 		member.setMem_link_confirm("no");
 		member.setMem_duo_reg_ok("no");
 		member.setMem_score(0);
+		member.setMem_type("normal");
+		member.setMem_admin_confirm("no");
 		memberDAO.insertMember(member);
 		mailService.joinMailSend(member);
 	}
@@ -141,6 +144,11 @@ public class MemberServiceImpl implements MemberService {
 		int mem_score=0;
 		mem_score=memberDAO.selectMem_score(mno);
 		return mem_score;
+	}
+
+	@Override
+	public List<Member> link_member_list() throws Exception {
+		return memberDAO.link_member_list();
 	}
 	
 	

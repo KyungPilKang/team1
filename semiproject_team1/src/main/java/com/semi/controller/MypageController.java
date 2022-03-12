@@ -79,6 +79,25 @@ public class MypageController {
 			mem=memberService.selectMemeber_bymno((Integer)session.getAttribute("mem_mno"));
 			mv.addObject("mem", mem);
 			
+			if(mem.getMem_link_confirm().equals("yes")) {
+				//롤 티어 정보
+				tier_map=mypageService.selectTier((Integer)session.getAttribute("mem_mno"));
+				mv.addObject("lol_tier", tier_map.get("lol_tier"));
+				mv.addObject("lol_rank", tier_map.get("lol_rank"));
+				mv.addObject("lol_point", tier_map.get("lol_point"));
+				
+				//롤 승률 정보
+				mv.addObject("lol_wins", tier_map.get("lol_wins"));
+				mv.addObject("lol_losses", tier_map.get("lol_losses"));
+				mv.addObject("lol_rate", tier_map.get("lol_rate"));
+				
+				//모스트 챔피언 정보
+				champ_map=mypageService.selectChamp((Integer)session.getAttribute("mem_mno"));
+				mv.addObject("most1", champ_map.get("most1"));
+				mv.addObject("most2", champ_map.get("most2"));
+				mv.addObject("most3", champ_map.get("most3"));
+			}
+			
 			//게시판 리스트
 			List<Board> articleList = board_allService.getBoardList(page, pageInfo);
 			mv.addObject("pageInfo", pageInfo);
@@ -86,25 +105,29 @@ public class MypageController {
 			mv.addObject("sort_name", "boardlist");
 			mv.setViewName("mypage/mypage");
 			
-			//롤 티어 정보
-			tier_map=mypageService.selectTier((Integer)session.getAttribute("mem_mno"));
-			mv.addObject("lol_tier", tier_map.get("lol_tier"));
-			mv.addObject("lol_rank", tier_map.get("lol_rank"));
-			mv.addObject("lol_point", tier_map.get("lol_point"));
-			
-			//롤 승률 정보
-			mv.addObject("lol_wins", tier_map.get("lol_wins"));
-			mv.addObject("lol_losses", tier_map.get("lol_losses"));
-			mv.addObject("lol_rate", tier_map.get("lol_rate"));
-			
-			//모스트 챔피언 정보
-			champ_map=mypageService.selectChamp((Integer)session.getAttribute("mem_mno"));
-			mv.addObject("most1", champ_map.get("most1"));
-			mv.addObject("most2", champ_map.get("most2"));
-			mv.addObject("most3", champ_map.get("most3"));
 			
 			//롤 판독 티어 정보
 			mv.addObject("mem_score", memberService.selectMem_score((Integer)session.getAttribute("mem_mno")));
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("err", e.getMessage());
+		}
+		return mv;
+	}
+	
+	@GetMapping("mypage_admin")
+	public ModelAndView mypage_admin(@RequestParam(value = "page", defaultValue = "1") int page) {
+		ModelAndView mv = new ModelAndView();
+		Member mem=null;
+		try {
+			mem=memberService.selectMemeber_bymno((Integer)session.getAttribute("mem_mno"));
+			mv.addObject("mem", mem);
+			
+			//게시판 리스트
+			List<Member> memList = memberService.link_member_list();
+			mv.addObject("memList", memList);
+			mv.setViewName("mypage/mypageAdmin");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
@@ -138,5 +161,17 @@ public class MypageController {
 			return new ResponseEntity<String>("에러 발생", HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<String>(result.getMem_link_id(), HttpStatus.OK);
+	}
+	
+	@PostMapping("/admin_confirm")
+	public String adminConfirm(@RequestParam("mem_email_id")String mem_email_id) {
+		Member mem;
+		try {
+			mem=memberService.selectMemeber(mem_email_id);
+			mypageService.adminConfirm(mem.getMem_mno());
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "redirect:/mypage_admin";
 	}
 }

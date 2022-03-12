@@ -114,4 +114,9 @@ public class MypageServiceImpl implements MypageService {
 		}
 	}
 
+	@Override
+	public void adminConfirm(int mno) throws Exception {
+		memberDAO.adminConfirm(mno);
+	}
+
 }
