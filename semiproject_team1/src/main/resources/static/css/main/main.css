@@ -87,10 +87,11 @@
 	transition: all .4s;
 	font-family: abster;
 	font-size: 18px;
+
 }
 
 .container .hero button:hover {
-	background-color: rgba(135, 206, 235, 0.4);
+	background-color: rgb(242, 132, 59);
 }
 
 .card ul li a {

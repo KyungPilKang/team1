@@ -111,8 +111,8 @@
 
 .thumbnail_size {
 	text-align: center;
-	width: 120px;
-	height: 100px;
+    width: 5vw;
+    height: 10vh;
 }
 
 .loading {
