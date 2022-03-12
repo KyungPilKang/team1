@@ -229,24 +229,49 @@
             	<div class="mypage_body_status">
             		<div style="margin-top: 10px;">
 	                    <div style="margin-top: 16px;">
-	                    <center><h1 style="color:white">LOL STATUS</h1></center>
-	                    <div style="margin-top:35px; margin-left:110px; float:left;'">
-	                    	<center><h1 style="color:white">WIN / LOSE</h1></center>
-	                    	<div style="float:left; margin-top:15px; margin-right:25px">
-	                    		<h1 style="color:rgb(75, 108, 214); font-size:3em;">W:${lol_wins }</h1>
-	                    	</div>
-	                    	<div style="float:right; margin-top:15px;">
-	                    		<h1 style="color:rgb(237, 81, 81); font-size:3em">L:${lol_losses }</h1>
-	                    	</div>
-	                    	<div>
-	                    		<center><h1 style="color:rgb(81, 237, 177); font-size:3em">${lol_rate }%</h1></center>
-	                    	</div>
-	                    </div>
+	                    	<center><h1 style="color:white">LOL STATUS</h1></center>
+		                    <div style="margin-top:35px; margin-left:110px; float:left;'">
+		                    	<center><h1 style="color:white">WIN / LOSE</h1></center>
+		                    	<div style="float:left; margin-top:15px; margin-right:25px">
+		                    		<h1 style="color:rgb(75, 108, 214); font-size:3em;">W:${lol_wins }</h1>
+		                    	</div>
+		                    	<div style="float:right; margin-top:15px;">
+		                    		<h1 style="color:rgb(237, 81, 81); font-size:3em">L:${lol_losses }</h1>
+		                    	</div>
+		                    	<div>
+		                    		<center><h1 style="color:rgb(81, 237, 177); font-size:3em">${lol_rate }%</h1></center>
+		                    	</div>
+		                    </div>
+            			</div>
 	                    <div style="margin-top:40px;">
-	                    <center><h1 style="color:white">MOST CHAMP</h1></center>
-	                    
+	                    	<center><h1 style="color:white">MOST CHAMP</h1></center>
+	                    	<div style="margin-top:22px; margin-left:125px; float:left;'">
+	                    		<div>
+			                    	<div style="float:left;">
+				                    	<h2 style="font-size:2em; color:rgb(242, 132, 59); font-family:abster;">MOST 1&nbsp;:&nbsp;</h2>
+			                    	</div>
+			                    	<div style="float:left;">
+				                    	<h2 style="font-size:2em; color:rgb(242, 132, 59);"> ${most1 }</h2>
+			                    	</div>
+	                    		</div><br>
+	                    		<div>
+			                    	<div style="float:left;">
+				                    	<h2 style="font-size:2em; color:rgb(242, 132, 59); font-family:abster;">MOST 2&nbsp;:&nbsp;</h2>
+			                    	</div>
+			                    	<div style="float:left;">
+				                    	<h2 style="font-size:2em; color:rgb(242, 132, 59);"> ${most2 }</h2>
+			                    	</div>
+	                    		</div><br>
+	                    		<div>
+			                    	<div style="float:left;">
+				                    	<h2 style="font-size:2em; color:rgb(242, 132, 59); font-family:abster;">MOST 3&nbsp;:&nbsp;</h2>
+			                    	</div>
+			                    	<div style="float:left;">
+				                    	<h2 style="font-size:2em; color:rgb(242, 132, 59);"> ${most3 }</h2>
+			                    	</div>
+	                    		</div>
+		                    </div>
 	                    </div>
-            		</div>
             		</div>
                 </div>
             	<div class="board_header">

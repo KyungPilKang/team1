@@ -60,7 +60,7 @@ public class MypageController {
 		Map<Integer, String> map=new HashMap<>();
 		map=riotapi.mostChampion(riotapi.getIdCode(mem_link_id));
 		System.out.println(map);
-		return champion.getChampionName(Integer.parseInt(map.get(2)));
+		return champion.getChampionName(Integer.parseInt(map.get(0)));
 	}
 	
 	@GetMapping("mypage")
@@ -68,7 +68,8 @@ public class MypageController {
 		ModelAndView mv = new ModelAndView();
 		PageInfo pageInfo = new PageInfo();
 		Member mem=null;
-		Map<String, String> map=new HashMap<>();
+		Map<String, String> tier_map=new HashMap<>();
+		Map<String, String> champ_map=new HashMap<>();
 		try {
 			mem=memberService.selectMemeber_bymno((Integer)session.getAttribute("mem_mno"));
 			mv.addObject("mem", mem);
@@ -81,15 +82,21 @@ public class MypageController {
 			mv.setViewName("mypage/mypage");
 			
 			//롤 티어 정보
-			map=mypageService.selectTier((Integer)session.getAttribute("mem_mno"));
-			mv.addObject("lol_tier", map.get("lol_tier"));
-			mv.addObject("lol_rank", map.get("lol_rank"));
-			mv.addObject("lol_point", map.get("lol_point"));
+			tier_map=mypageService.selectTier((Integer)session.getAttribute("mem_mno"));
+			mv.addObject("lol_tier", tier_map.get("lol_tier"));
+			mv.addObject("lol_rank", tier_map.get("lol_rank"));
+			mv.addObject("lol_point", tier_map.get("lol_point"));
 			
 			//롤 승률 정보
-			mv.addObject("lol_wins", map.get("lol_wins"));
-			mv.addObject("lol_losses", map.get("lol_losses"));
-			mv.addObject("lol_rate", map.get("lol_rate"));
+			mv.addObject("lol_wins", tier_map.get("lol_wins"));
+			mv.addObject("lol_losses", tier_map.get("lol_losses"));
+			mv.addObject("lol_rate", tier_map.get("lol_rate"));
+			
+			//모스트 챔피언 정보
+			champ_map=mypageService.selectChamp((Integer)session.getAttribute("mem_mno"));
+			mv.addObject("most1", champ_map.get("most1"));
+			mv.addObject("most2", champ_map.get("most2"));
+			mv.addObject("most3", champ_map.get("most3"));
 			
 			//롤 판독 티어 정보
 			mv.addObject("mem_score", memberService.selectMem_score((Integer)session.getAttribute("mem_mno")));
