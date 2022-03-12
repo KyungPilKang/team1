@@ -46,7 +46,7 @@
             <div>
                 리플레이 :
                 <c:if test="${article.feedback_replay_fileName!=null }">
-                    <a href="file_down?downFile=${article.feedback_replay_fileName}"> ${article.feedback_replay_fileName} </a>
+                    <a href="replay_file_down?downFile=${article.feedback_replay_fileName}"> ${article.feedback_replay_fileName} </a>
                 </c:if>
             </div>
         </section>

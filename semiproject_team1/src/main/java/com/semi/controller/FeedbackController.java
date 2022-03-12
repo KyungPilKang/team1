@@ -550,7 +550,39 @@ public class FeedbackController {
         return "feedback/feedbackDetail_ajax";
     }
 
-
+    //리플레이 다운로드
+    @GetMapping(value = "/replay_file_down")
+    public void filedownload(@RequestParam(value = "downFile") String filename, HttpServletRequest request,
+                             HttpServletResponse response) {
+        String path = servletContext.getRealPath("/feedback_upload/replay/");
+        File file = new File(path + filename);
+        String sfilename = null;
+        FileInputStream fis = null;
+        try {
+            if (request.getHeader("User-Agent").indexOf("MSIE") > -1) {
+                sfilename = URLEncoder.encode(file.getName(), "utf-8");
+            } else {
+                sfilename = new String(file.getName().getBytes("utf-8"), "ISO-8859-1");
+            }
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("application/octet-stream;charset=utf-8");
+            response.setHeader("Content-Disposition", "attachment; filename=" + sfilename);
+            OutputStream out = response.getOutputStream();
+            fis = new FileInputStream(file);
+            FileCopyUtils.copy(fis, out);
+            out.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
 
     /*------------------------------------ 끝 : 피드백 댓글 ------------------------------------*/
