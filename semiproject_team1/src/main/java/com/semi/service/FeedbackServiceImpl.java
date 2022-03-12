@@ -2,6 +2,9 @@ package com.semi.service;
 
 import java.util.List;
 
+import com.semi.dao.Fd_replyDAO;
+import com.semi.dto.B_reply;
+import com.semi.dto.Fd_reply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +17,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 
 	@Autowired
 	FeedbackDAO feedbackDAO;
+
+    @Autowired
+    Fd_replyDAO fd_replyDAO;
 	
 	@Override
 	public void regFeedback(Feedback feedback) throws Exception {
@@ -160,6 +166,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public void removeFeedback(int feedbackNum) throws Exception {
     	feedbackDAO.deleteFeedback(feedbackNum);
+        fd_replyDAO.deleteReplyWithFeedback(feedbackNum);
     }
     
     @Override
@@ -167,28 +174,62 @@ public class FeedbackServiceImpl implements FeedbackService {
     	feedbackDAO.updateFeedback(feedback);
     }
 
-	@Override
-	public Boolean like_check_mno(int feedbackNum, String mno) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public List<Fd_reply> getReplyList(int feedbackNum) throws Exception {
+        return fd_replyDAO.selectReplyList(feedbackNum);
+    }
 
-	@Override
-	public void like_ins_mno(int feedbackNum, String mno) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public List<Fd_reply> getReplyList_like(int feedbackNum) throws Exception {
+        return fd_replyDAO.selectReplyList_like(feedbackNum);
+    }
 
-	@Override
-	public void like_del_mno(int feedbackNum, String mno) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void regReply(Fd_reply fd_reply) throws Exception {
+        Integer fd_replyNum = fd_replyDAO.selectMaxReplyNum();
+        System.out.println("이전:"+fd_replyNum);
+        if (fd_replyNum == null) fd_replyNum = 1;
+        else fd_replyNum += 1;
+        System.out.println("이후:"+fd_replyNum);
+        fd_reply.setFd_reply_num(fd_replyNum);
+        fd_reply.setFd_reply_likecount(0);
+        fd_reply.setFd_reply_like_member("0");
+        fd_replyDAO.insertReply(fd_reply);
+        feedbackDAO.updateReplyCount(fd_reply.getFd_feedback_num());
+    }
 
-	@Override
-	public void getFeedback_likeCount(int feedbackNum) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-    
+    @Override
+    public void delReply(int fd_reply_num) throws Exception {
+        Fd_reply fd_reply = fd_replyDAO.selectReply(fd_reply_num);
+        fd_replyDAO.deleteReply(fd_reply_num);
+        feedbackDAO.deleteReplyCount(fd_reply.getFd_feedback_num());
+    }
+
+    // 댓글 좋아요 누른 사용자를 DB에 추가
+    @Override
+    public void fd_re_like_ins_mno(int fd_reply_num, String mno) throws Exception {
+        fd_replyDAO.fd_re_insert_like_mno(fd_reply_num,mno);
+        fd_replyDAO.fd_re_update_like_up(fd_reply_num);
+    }
+
+    // 댓글 좋아요 취소한 사용자를 DB에서 제거
+    @Override
+    public void fd_re_like_del_mno(int fd_reply_num, String mno) throws Exception {
+        // 1. DB에서 해당 b_reply_num의 b_reply_like_member 문자열 값을 가져온다
+        Fd_reply reply = fd_replyDAO.selectReply(fd_reply_num);
+        String re_like_mem = reply.getFd_reply_like_member();
+        // 2. 값을 ,로 split 해서 list에 담는다
+        List<String> re_like_mem_arr = new java.util.ArrayList<>(List.of(re_like_mem.split(",")));
+        // 3. 받아온 mno값과 일치하는 데이터를를 list에서 제거한다
+        System.out.println("mno가 제거되기 전 리스트 : "+re_like_mem_arr);
+        re_like_mem_arr.remove(mno);
+        // 4. list를 String으로 형변환 후 괄호 및 공백을 제거해서 변수에 넣어준다
+        // (String으로 변환시 괄호가 추가되므로 필요한 작업, list<String>로 mysql에 데이터를 넘기는 방법을 모르기 때문에 임시방편으로 사용)
+        String result_re_like_mem = String.valueOf(re_like_mem_arr).replace("[","").replace("]","").replace(" ","");
+        System.out.println("mno가 제거된 후 리스트 : " + result_re_like_mem);
+        // 5. 넣고 해당 b_reply_num의 b_reply_like_member에 update 시킨다
+        fd_replyDAO.fd_re_delete_like_mno(fd_reply_num,result_re_like_mem);
+        fd_replyDAO.fd_re_update_like_down(fd_reply_num);
+    }
+
 }

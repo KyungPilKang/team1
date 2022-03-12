@@ -8,7 +8,7 @@
     <c:forEach var="article" items="${articleList }">
         <div class="each_post">
             <div class="each_board_likecount">
-                좋아요수${article.board_likecount }</div>
+                <br>♥<br>${article.board_likecount }</div>
                 <%--                                        <div class="each_board_num">보드넘${article.board_num }</div>--%>
             <div class="each_board_content">
                 <div class="each_board_sub">
@@ -29,7 +29,7 @@
                 <%--                                        <div class="each_board_replycount">--%>
                 <%--                                            리플수${article.board_replycount }</div>--%>
             <div class="each_board_readcount">
-                조회수${article.board_readcount }</div>
+                <br>▲<br>${article.board_readcount }</div>
 
                 <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
 

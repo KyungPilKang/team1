@@ -2,6 +2,8 @@ package com.semi.service;
 
 import java.util.List;
 
+import com.semi.dto.B_reply;
+import com.semi.dto.Fd_reply;
 import com.semi.dto.Feedback;
 import com.semi.dto.PageInfo;
 
@@ -17,10 +19,12 @@ public interface FeedbackService {
 	Feedback getFeedback(int feedbackNum) throws Exception;
 	void removeFeedback(int feedbackNum) throws Exception;
 	void modifyFeedback(Feedback feedback) throws Exception;
-	
-	Boolean like_check_mno(int feedbackNum, String mno) throws Exception;
-	void like_ins_mno(int feedbackNum, String mno) throws Exception;
-	void like_del_mno(int feedbackNum, String mno) throws Exception;
-	void getFeedback_likeCount(int feedbackNum) throws Exception;
-	
+
+	List<Fd_reply> getReplyList(int feedbackNum) throws Exception;
+	List<Fd_reply> getReplyList_like(int feedbackNum) throws Exception;
+	void regReply(Fd_reply fd_reply) throws Exception;
+	void delReply(int fd_reply_num) throws Exception;
+
+	void fd_re_like_ins_mno(int fd_reply_num, String mno) throws Exception;
+	void fd_re_like_del_mno(int fd_reply_num, String mno) throws Exception;
 }
