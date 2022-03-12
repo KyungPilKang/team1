@@ -104,16 +104,17 @@
                         <div class="fd_search_container">
                             <%--action의 경로는 컨트롤러 매핑이랑 같고, 아래 select name의 type은 dto랑 동일해야한다.--%>
                             <form class="search-form" id="boardform" method="get"
-                                  action="/board_search">
+                                  action="/feedback_search">
                                 <select class=""
-                                        name="board_type">
+                                        name="feedback_type">
                                     <option value="1">제목</option>
                                     <option value="2">작성자</option>
                                     <option value="3">내용</option>
                                 </select>
+                                <%-- input값 name도 동일해야한다--%>
                                 <input type="search" class="form-control"
                                        placeholder="Search Here" title="Search here"
-                                       name="board_keyword">
+                                       name="feedback_keyword">
                                 <label for="search_submit" style="cursor: pointer"><i
                                         class="fa-solid fa-magnifying-glass"></i></label>
                                 <input type="submit" id="search_submit"/>
