@@ -1,5 +1,7 @@
 package com.semi.service;
 
+import java.util.List;
+
 import com.semi.dto.Member;
 
 public interface MemberService 
@@ -13,4 +15,5 @@ public interface MemberService
 	public void updateMem_code_confirm(int mno) throws Exception;
 	public void updateMem_code(int mno) throws Exception;
 	public int selectMem_score(int mno) throws Exception;
+	public List<Member> link_member_list() throws Exception;
 }

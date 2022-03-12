@@ -1,5 +1,7 @@
 package com.semi.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +19,8 @@ public interface MemberDAO {
 	public void updateMem_code_confirm(int mno) throws Exception;
 	public void updateMem_code(Member member) throws Exception;
 	public int selectMem_score(int mno) throws Exception;
+	public void idLink(Member mem) throws Exception;
+	public void updateMem_link_confirm(Member mem) throws Exception;
+	public List<Member> link_member_list() throws Exception;
+	public void adminConfirm(int mno) throws Exception;
 }

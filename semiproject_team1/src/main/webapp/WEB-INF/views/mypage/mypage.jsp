@@ -59,14 +59,21 @@
             		<div style="margin-top: 10px;">
 	                    <center><h1 style="color:white">LOLPANG.DOG</h1></center>
 	                    	<c:choose>
-	                    		<c:when test="${mem_score<=100 }">
+	                    		<c:when test="${mem_score<=100 or empty mem_score}">
 				                    <div style="margin-top:65px;">
 	                    			<center><img
 									src="${pageContext.request.contextPath}/resources/asset/image/mypage/dogtier_lv1.png"
 									alt="" width="200" height="200"></center>
 				                    </div>
 				                    <div style="margin-top: 30px;">
-		                    			<center><h2 style="color:white">PANG.DOG LV.1(${mem_score}p)</h2></center>
+				                    	<c:choose>
+					                    	<c:when test="${empty mem_score }">
+					                    		<center><h2 style="color:white">PANG.DOG LV.1(0p)</h2></center>
+					                    	</c:when>
+					                    	<c:otherwise>
+				                    			<center><h2 style="color:white">PANG.DOG LV.1(${mem_score}p)</h2></center>
+					                    	</c:otherwise>
+				                    	</c:choose>
 	                    			</div>
 	                    		</c:when>
 	                    		<c:when test="${mem_score>100&&mem_score<=500}">
@@ -102,8 +109,20 @@
 								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
 								alt="" width="220" height="220"></center>
 			                    </div>
+			                    <center><h3 style="color:white">리그오브레전드 아이디를 연동하세요</h3></center>
 			                    <div class="hero" style="margin-top:15px; margin-left:193px;">
-									<button type="button" onclick="location.href='' ">연동하기</button>
+									<button type="button" onclick="location.href='/idlinkform' ">연동하기</button>
+								</div>
+	                    	</c:when>
+	                    	<c:when test="${mem.mem_link_confirm eq 'ing' }">
+	                    		<div style="margin-top:60px;">
+			                    <center><img
+								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
+								alt="" width="220" height="220"></center>
+			                    </div>
+			                    <center><h3 style="color:white">연동을 위한 코드를 제출하세요</h3></center>
+			                    <div class="hero" style="margin-top:15px; margin-left:193px;">
+									<button type="button" onclick="location.href='/codeconfirmform' ">코드제출</button>
 								</div>
 	                    	</c:when>
 	                    	<c:otherwise>
@@ -227,52 +246,76 @@
             <%-- main 컨테이너 --%>
             <div class="main_container">
             	<div class="mypage_body_status">
-            		<div style="margin-top: 10px;">
-	                    <div style="margin-top: 16px;">
-	                    	<center><h1 style="color:white">LOL STATUS</h1></center>
-		                    <div style="margin-top:35px; margin-left:110px; float:left;'">
-		                    	<center><h1 style="color:white">WIN / LOSE</h1></center>
-		                    	<div style="float:left; margin-top:15px; margin-right:25px">
-		                    		<h1 style="color:rgb(75, 108, 214); font-size:3em;">W:${lol_wins }</h1>
-		                    	</div>
-		                    	<div style="float:right; margin-top:15px;">
-		                    		<h1 style="color:rgb(237, 81, 81); font-size:3em">L:${lol_losses }</h1>
-		                    	</div>
-		                    	<div>
-		                    		<center><h1 style="color:rgb(81, 237, 177); font-size:3em">${lol_rate }%</h1></center>
-		                    	</div>
-		                    </div>
-            			</div>
-	                    <div style="margin-top:40px;">
-	                    	<center><h1 style="color:white">MOST CHAMP</h1></center>
-	                    	<div style="margin-top:22px; margin-left:122px; float:left;'">
-	                    		<div>
-			                    	<div style="float:left;">
-				                    	<h2 style="font-size:2em; color:rgb(242, 132, 59); font-family:abster;">MOST 1&nbsp;:&nbsp;</h2>
-			                    	</div>
-			                    	<div style="float:left;">
-				                    	<h2 style="font-size:2em; color:rgb(242, 132, 59);"> ${most1 }</h2>
-			                    	</div>
-	                    		</div><br>
-	                    		<div>
-			                    	<div style="float:left;">
-				                    	<h2 style="font-size:2em; color:rgb(242, 132, 59); font-family:abster;">MOST 2&nbsp;:&nbsp;</h2>
-			                    	</div>
-			                    	<div style="float:left;">
-				                    	<h2 style="font-size:2em; color:rgb(242, 132, 59);"> ${most2 }</h2>
-			                    	</div>
-	                    		</div><br>
-	                    		<div>
-			                    	<div style="float:left;">
-				                    	<h2 style="font-size:2em; color:rgb(242, 132, 59); font-family:abster;">MOST 3&nbsp;:&nbsp;</h2>
-			                    	</div>
-			                    	<div style="float:left;">
-				                    	<h2 style="font-size:2em; color:rgb(242, 132, 59);"> ${most3 }</h2>
-			                    	</div>
-	                    		</div>
-		                    </div>
-	                    </div>
-            		</div>
+            		<c:choose>
+            			<c:when test="${mem.mem_link_confirm eq 'no'}">
+            				<div style="margin-top: 10px;">
+			                    <div style="margin-top: 16px;">
+            						<center><h1 style="color:white">LOL STATUS</h1></center>
+            					</div>
+            					<div style="margin-top: 100px;">
+            						<center><h2 style="color:white">리그오브레전드 계정 연동을 하시기 바랍니다</h2></center>
+            					</div>
+            				</div>
+            			</c:when>
+            			<c:when test="${mem.mem_link_confirm eq 'ing' }">
+            				<div style="margin-top: 10px;">
+			                    <div style="margin-top: 16px;">
+            						<center><h1 style="color:white">LOL STATUS</h1></center>
+            					</div>
+            					<div style="margin-top: 100px;">
+            						<center><h2 style="color:white">리그오브레전드 계정 연동이 진행중 입니다</h2></center>
+            					</div>
+            				</div>
+            			</c:when>
+            			<c:otherwise>
+		            		<div style="margin-top: 10px;">
+			                    <div style="margin-top: 16px;">
+			                    	<center><h1 style="color:white">LOL STATUS</h1></center>
+				                    <div style="margin-top:35px; margin-left:110px; float:left;'">
+				                    	<center><h1 style="color:white">WIN / LOSE</h1></center>
+				                    	<div style="float:left; margin-top:15px; margin-right:25px">
+				                    		<h1 style="color:rgb(75, 108, 214); font-size:3em;">W:${lol_wins }</h1>
+				                    	</div>
+				                    	<div style="float:right; margin-top:15px;">
+				                    		<h1 style="color:rgb(237, 81, 81); font-size:3em">L:${lol_losses }</h1>
+				                    	</div>
+				                    	<div>
+				                    		<center><h1 style="color:rgb(81, 237, 177); font-size:3em">${lol_rate }%</h1></center>
+				                    	</div>
+				                    </div>
+		            			</div>
+			                    <div style="margin-top:40px;">
+			                    	<center><h1 style="color:white">MOST CHAMP</h1></center>
+			                    	<div style="margin-top:22px; margin-left:122px; float:left;'">
+			                    		<div>
+					                    	<div style="float:left;">
+						                    	<h2 style="font-size:2em; color:rgb(242, 132, 59); font-family:abster;">MOST 1&nbsp;:&nbsp;</h2>
+					                    	</div>
+					                    	<div style="float:left;">
+						                    	<h2 style="font-size:2em; color:rgb(242, 132, 59);"> ${most1 }</h2>
+					                    	</div>
+			                    		</div><br>
+			                    		<div>
+					                    	<div style="float:left;">
+						                    	<h2 style="font-size:2em; color:rgb(242, 132, 59); font-family:abster;">MOST 2&nbsp;:&nbsp;</h2>
+					                    	</div>
+					                    	<div style="float:left;">
+						                    	<h2 style="font-size:2em; color:rgb(242, 132, 59);"> ${most2 }</h2>
+					                    	</div>
+			                    		</div><br>
+			                    		<div>
+					                    	<div style="float:left;">
+						                    	<h2 style="font-size:2em; color:rgb(242, 132, 59); font-family:abster;">MOST 3&nbsp;:&nbsp;</h2>
+					                    	</div>
+					                    	<div style="float:left;">
+						                    	<h2 style="font-size:2em; color:rgb(242, 132, 59);"> ${most3 }</h2>
+					                    	</div>
+			                    		</div>
+				                    </div>
+			                    </div>
+		            		</div>
+            			</c:otherwise>
+            		</c:choose>
                 </div>
             	<div class="board_header">
             		<div style="margin-top: 10px;">
@@ -477,7 +520,7 @@
 
 <%-- 무한스크롤 --%>
 <script>
-    let currentPage = 1;
+    /* let currentPage = 1;
     let isLoading = false;
 
 
@@ -489,7 +532,7 @@
         isLoading = true;
         $(".loading").show();
         setTimeout(loadNewPage, 1400);
-    });
+    }); */
     /* div 내 무한스크롤 끝 */
 
 
@@ -509,7 +552,7 @@
     <%--    }--%>
     <%--});--%>
 
-    function loadNewPage() {
+    /* function loadNewPage() {
         currentPage++;
         console.log("${sort_name}")
         if ("${sort_name}" === "boardlist") {
@@ -539,13 +582,13 @@
                 isLoading = false;
             }
         })
-    }
+    } */
 </script>
 <%-- 끝 : 무한스크롤 --%>
 
 
 <script>
-    $(function () {
+    /* $(function () {
         let fixx = $(".feedback_header").offset().top;
         $(window).scroll(function () {
             let window = $(this).scrollTop() + 80;
@@ -557,7 +600,7 @@
                 $(".feedback_body").removeClass("fixed");
             }
         })
-    });
+    }); */
 </script>
 
 

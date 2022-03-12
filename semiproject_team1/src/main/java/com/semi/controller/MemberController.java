@@ -49,12 +49,19 @@ public class MemberController {
 		try {
 			if(memberService.accessMember(mem.getMem_email_id(), mem.getMem_pw())) {
 				Member result=memberService.selectMemeber(mem.getMem_email_id());
-				if(result.getMem_code_confirm().equals("yes")) {
+				if(result.getMem_type().equals("admin")) {
 					session.setAttribute("mem_mno", result.getMem_mno());
 					session.setAttribute("mem_nickname", result.getMem_nickname());
+					result.setPage("admin");
+					map.put("mem", result);
+				}else {
+					if(result.getMem_code_confirm().equals("yes")) {
+						session.setAttribute("mem_mno", result.getMem_mno());
+						session.setAttribute("mem_nickname", result.getMem_nickname());
+					}
+					result.setPage(mem.getPage());
+					map.put("mem", result);
 				}
-				result.setPage(mem.getPage());
-				map.put("mem", result);
 			}
 		} catch(Exception e){
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);

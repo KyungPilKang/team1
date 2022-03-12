@@ -16,4 +16,9 @@ public class MainpageController {
 	public String main() {
 		return "main/main";
 	}
+	
+	@GetMapping("/main_admin")
+	public String main_admin() {
+		return "main/mainAdmin";
+	}
 }

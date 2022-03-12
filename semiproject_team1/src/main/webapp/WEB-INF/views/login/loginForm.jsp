@@ -167,6 +167,8 @@
 		        				window.location.href="/main";
 							} else if(data.mem.page=="board"){
 								window.location.href="/boardlist";
+							} else if(data.mem.page=="admin"){
+								window.location.href="/main_admin";
 							}
 						}
 					})

@@ -18,9 +18,9 @@
 	<insert id="insertMember" parameterType="Member">
 		<![CDATA[
 			insert into semi.member (mem_email_id, mem_nickname, mem_pw, mem_code, mem_code_confirm, mem_link_id, 
-			mem_link_code, mem_link_confirm, mem_duo_reg_ok, mem_score)
+			mem_link_code, mem_link_confirm, mem_duo_reg_ok, mem_score, mem_type, mem_admin_confirm)
 			values(#{mem_email_id}, #{mem_nickname}, #{mem_pw}, #{mem_code}, #{mem_code_confirm}, #{mem_link_id}, 
-			#{mem_link_code}, #{mem_link_confirm}, #{mem_duo_reg_ok}, #{mem_score})
+			#{mem_link_code}, #{mem_link_confirm}, #{mem_duo_reg_ok}, #{mem_score}, #{mem_type}, #{mem_admin_confirm})
 		]]>
 	</insert>
 	<select id="selelctMember_bymno" resultType="Member" parameterType="Integer">
@@ -43,4 +43,25 @@
 			select mem_score from member where mem_mno=#{mno}
 		]]>
 	</select>
+	<update id="idLink" parameterType="Member">
+		<![CDATA[
+			update member set mem_link_id=#{mem_link_id}, mem_link_code=#{mem_link_code},
+			mem_link_confirm='ing', mem_admin_confirm='no' where mem_mno=#{mem_mno}
+		]]>
+	</update>
+	<update id="updateMem_link_confirm" parameterType="Member">
+		<![CDATA[
+			update member set mem_link_confirm='yes' where mem_mno=#{mem_mno}
+		]]>
+	</update>
+	<select id="link_member_list" resultType="Member">
+		<![CDATA[
+			select * from member where mem_admin_confirm='no'
+		]]>
+	</select>
+	<update id="adminConfirm" parameterType="Integer">
+		<![CDATA[
+			update member set mem_admin_confirm='yes' where mem_mno=#{mno}
+		]]>
+	</update>
 </mapper>
