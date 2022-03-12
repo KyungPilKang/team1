@@ -11,9 +11,17 @@
                 #{feedback_replay_fileName},
                 #{feedback_video_fileName}, now(), #{feedback_readcount}, #{feedback_likecount},
                 #{feedback_vote_member}, #{feedback_vote_top},
-                #{feedback_vote_jungle}, #{feedback_vote_mid}, #{feedback_vote_ad}, #{feedback_vote_support})
+                #{feedback_vote_jungle}, #{feedback_vote_mid}, #{feedback_vote_ad}, #{feedback_vote_support}, #{feedback_thumbnail})
         ]]>
 	</insert>
+
+	<delete id="deleteFeedback" parameterType="int">
+		<![CDATA[
+		delete from feedback where feedback_num=#{feedbackNum}
+		]]>
+	</delete>
+
+
 
 	<select id="selectMaxFeedbackNum" resultType="integer">
 		<![CDATA[
@@ -40,6 +48,12 @@
         ]]>
 	</select>
 
+	<update id="updateFeedback" parameterType="feedback">
+		<![CDATA[
+		update feedback set feedback_subject=#{feedback_subject}, feedback_content=#{feedback_content}
+		where feedback_num=#{feedback_num}
+		]]>
+	</update>
 
 
     <!-- 조회수 -->
@@ -87,20 +101,20 @@
 <!--        ]]>-->
 <!--	</select>-->
 
-<!--    <select id="selectFeedback" resultType="board" parameterType="int">-->
-<!--		<![CDATA[-->
-<!--        select *-->
-<!--        from feedback-->
-<!--        where feedback_num = #{feedbackNum}-->
-<!--        ]]>-->
-<!--	</select>-->
+    <select id="selectFeedback" resultType="feedback" parameterType="int">
+		<![CDATA[
+        select *
+        from feedback
+        where feedback_num = #{feedbackNum}
+        ]]>
+	</select>
 
-<!--    <update id="updateReadCount" parameterType="int">-->
-<!--		<![CDATA[-->
-<!--        update feedback-->
-<!--        set feedback_readcount = feedback_readcount + 1-->
-<!--        where feedback_num = #{feedbackNum}-->
-<!--        ]]>-->
-<!--	</update>-->
+    <update id="updateReadCount" parameterType="int">
+		<![CDATA[
+        update feedback
+        set feedback_readcount = feedback_readcount + 1
+        where feedback_num = #{feedbackNum}
+        ]]>
+	</update>
 
 </mapper>

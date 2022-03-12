@@ -13,7 +13,7 @@ import com.semi.dto.Feedback;
 public interface FeedbackDAO {
 	
 	void insertFeedback(Feedback feedback) throws Exception;
-	void deleteFeedback(int feedback) throws Exception;
+	void deleteFeedback(int feedbackNum) throws Exception;
 	void updateFeedback(Feedback feedback) throws Exception;
 	Integer selectMaxFeedbackNum() throws Exception;
 	

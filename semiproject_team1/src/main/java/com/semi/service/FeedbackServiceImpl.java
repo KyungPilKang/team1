@@ -167,28 +167,6 @@ public class FeedbackServiceImpl implements FeedbackService {
     	feedbackDAO.updateFeedback(feedback);
     }
 
-	@Override
-	public Boolean like_check_mno(int feedbackNum, String mno) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public void like_ins_mno(int feedbackNum, String mno) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void like_del_mno(int feedbackNum, String mno) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void getFeedback_likeCount(int feedbackNum) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-    
 }

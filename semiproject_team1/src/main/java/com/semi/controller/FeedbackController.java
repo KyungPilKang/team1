@@ -1,8 +1,6 @@
 package com.semi.controller;
 
-import com.semi.dto.Board;
-import com.semi.dto.Feedback;
-import com.semi.dto.PageInfo;
+import com.semi.dto.*;
 import com.semi.service.Board_allService;
 import com.semi.service.FeedbackService;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -19,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -96,8 +96,6 @@ public class FeedbackController {
             }
         }
     }
-
-
 
 
     /* 피드백 게시판 조회수순 정렬 */
@@ -227,36 +225,144 @@ public class FeedbackController {
 
 
     /* 게시물 수정 */
-//    @GetMapping(value = "/modifyform")
-//    public ModelAndView modifyform(@RequestParam(value = "board_num") int boardNum,
-//                                   @RequestParam(value = "page") int page) {
-//        ModelAndView mv = new ModelAndView();
-//        try {
-//            Board board = board_allService.getBoard(boardNum);
-//            mv.addObject("article", board);
-//            mv.setViewName("/board/modifyForm");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            mv.addObject("err", e.getMessage());
-//        }
-//        return mv;
-//    }
+    @GetMapping(value = "/fdmodifyform")
+    public ModelAndView fdmodifyform(@RequestParam(value = "feedback_num") int feedbackNum,
+                                   @RequestParam(value = "page") int page) {
+        ModelAndView mv = new ModelAndView();
+        try {
+            Feedback feedback = feedbackService.getFeedback(feedbackNum);
+            mv.addObject("article", feedback);
+            mv.setViewName("/feedback/fdModifyForm");
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
+    }
+
+    @PostMapping(value = "/feedbackmodify")
+    public ModelAndView feedbackmodify(@ModelAttribute Feedback feedback) {
+        ModelAndView mv = new ModelAndView();
+        try {
+            feedbackService.modifyFeedback(feedback);
+            mv.addObject("feedback_num", feedback.getFeedback_num());
+            mv.setViewName("redirect:/feedbackdetail");
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
+    }
+
+    /* 게시물 삭제 */
+    @GetMapping(value = "/feedbackdelete")
+    public ModelAndView feedbackdelete(@RequestParam(value = "feedback_num") int feedbackNum, @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
+        ModelAndView mv = new ModelAndView();
+        try {
+            feedbackService.removeFeedback(feedbackNum);
+            mv.addObject("page", page);
+            mv.setViewName("redirect:/feedback");
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
+    }
+
+
+
+
+    /* 게시물 상세보기 (게시물 클릭시 화면) */
+    @GetMapping(value = "/feedbackdetail")
+    public ModelAndView boardDetail(@RequestParam(value = "feedback_num") int feedbackNum, @RequestParam(value = "page", defaultValue = "1") int page) {
+        ModelAndView mv = new ModelAndView();
+        try {
+            // 세션에서 mno랑 nickname을 일단 받아온다
+            String mno = String.valueOf(session.getAttribute("mem_mno"));
+            String nickname = String.valueOf(session.getAttribute("mem_nickname"));
+            // mv에 넣어주고..?? 넣을 필요가 있나? 어차피 세션이라 이미  mem_mno 이런식으로 jsp에서 불러올 수 있는데?
+            mv.addObject("mno", mno);
+            mv.addObject("nickname", nickname);
+
+            Feedback feedback = feedbackService.getFeedback(feedbackNum);
+
+            /* 날짜 포맷 변경 시작 */
+            // JSTL 날짜 변경 라이브러리를 사용할 경우 아래와 같은 작업이 필요없다.
+            Date date = feedback.getFeedback_date();
+            SimpleDateFormat b_date = new SimpleDateFormat("yyyy년 M월 d일 E요일 a h:mm");
+            mv.addObject("feedback_date", b_date.format(date));
+            /* 날짜 포맷 변경 끝 */
+
+            /* 리플 관련 시작*/
+//            List<Fd_reply> reList = feedbackService.getReplyList(feedbackNum);
 //
-//
-//    @PostMapping(value = "/boardmodify")
-//    public ModelAndView boardmodify(@ModelAttribute Board board) {
-//        ModelAndView mv = new ModelAndView();
-//        try {
-//            board_allService.modifyBoard(board);
-//            mv.addObject("board_num", board.getBoard_num());
-//            mv.setViewName("redirect:/boarddetail");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            mv.addObject("err", e.getMessage());
-//        }
-//        return mv;
-//    }
-//
+//            for (Fd_reply reply : reList) {
+//                System.out.println(reply.getFd_reply_like_member());
+//                List<String> reLikeMem_arr = List.of(reply.getFd_reply_like_member().split(","));
+//                //split해서 배열로 각각 넣은 후 contains
+//                if (mno != null) {
+//                    if (reLikeMem_arr.contains(mno)) {
+//                        reply.setFd_reply_like_ok("true");
+//                        System.out.println("있어요");
+//                    } else {
+//                        reply.setFd_reply_like_ok("false");
+//                        System.out.println("없어요");
+//                    }
+//                }
+//            }
+//            mv.addObject("reList", reList);
+            /* 리플 관련 끝 */
+
+            mv.addObject("article", feedback);
+            mv.addObject("page", page);
+            mv.setViewName("feedback/feedbackDetail");
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
+    }
+
+
+    /* 상세보기시 동영상 출력 */
+    @GetMapping(value = "/fd_video_view/{filename}")
+    public void fd_video_view(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response) {
+        String path = servletContext.getRealPath("/feedback_upload/video/");
+        /* 즉, file은 semiproject_team1/src/main/webapp/board_upload/video/filename */
+        File file = new File(path + filename);
+        String sfilename = null;
+        FileInputStream fis = null;
+
+        try {
+            /* HttpServletRequest request */
+            if (request.getHeader("User-Agent").indexOf("MSIE") > -1) {
+                sfilename = URLEncoder.encode(file.getName(), "utf-8");
+            } else {
+                sfilename = new String(file.getName().getBytes("utf-8"), "ISO-8859-1");
+            }
+            /* HttpServletResponse response */
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("application/octet-stream;charset=utf-8");
+            response.setHeader("Content-Disposition", "attachment; filename=" + sfilename);
+
+            OutputStream out = response.getOutputStream();
+            fis = new FileInputStream(file);
+            FileCopyUtils.copy(fis, out);
+            out.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
 
 
 
