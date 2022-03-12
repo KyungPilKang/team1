@@ -115,6 +115,7 @@
 										alt="" width="260" height="220"></center>
 					                    </div>
 					                    <div style="margin-top: 30px;">
+					                    <center><h2 style="color:white">ID : ${mem.mem_link_id }</h2></center>
 		                    			<center><h2 style="color:white">UNRANK</h2></center>
 	                    			    </div>
 	                    			</c:when>
@@ -125,6 +126,7 @@
 										alt="" width="220" height="220"></center>
 					                    </div>
 					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">ID : ${mem.mem_link_id }</h2></center>
 		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
 	                    				</div>
 	                    			</c:when>
@@ -135,6 +137,7 @@
 										alt="" width="220" height="220"></center>
 					                    </div>
 					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">ID : ${mem.mem_link_id }</h2></center>
 		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
 	                    				</div>
 	                    			</c:when>
@@ -145,6 +148,7 @@
 										alt="" width="220" height="220"></center>
 					                    </div>
 					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">ID : ${mem.mem_link_id }</h2></center>
 		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
 	                    				</div>
 	                    			</c:when>
@@ -165,6 +169,7 @@
 										alt="" width="220" height="220"></center>
 					                    </div>
 					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">ID : ${mem.mem_link_id }</h2></center>
 		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
 	                    				</div>
 	                    			</c:when>
@@ -175,6 +180,7 @@
 										alt="" width="220" height="220"></center>
 					                    </div>
 					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">ID : ${mem.mem_link_id }</h2></center>
 		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
 	                    				</div>
 	                    			</c:when>
@@ -185,6 +191,7 @@
 										alt="" width="220" height="220"></center>
 					                    </div>
 					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">ID : ${mem.mem_link_id }</h2></center>
 		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
 	                    				</div>
 	                    			</c:when>
@@ -195,6 +202,7 @@
 										alt="" width="220" height="220"></center>
 					                    </div>
 					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">ID : ${mem.mem_link_id }</h2></center>
 		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
 	                    				</div>
 	                    			</c:when>
@@ -205,6 +213,7 @@
 										alt="" width="220" height="220"></center>
 					                    </div>
 					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">ID : ${mem.mem_link_id }</h2></center>
 		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
 	                    				</div>
 	                    			</c:when>

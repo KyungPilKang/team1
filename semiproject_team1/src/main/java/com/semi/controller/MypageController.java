@@ -60,21 +60,14 @@ public class MypageController {
 		Map<Integer, String> map=new HashMap<>();
 		map=riotapi.mostChampion(riotapi.getIdCode(mem_link_id));
 		System.out.println(map);
-		return champion.getChampionName(map.get(2));
+		return champion.getChampionName(Integer.parseInt(map.get(2)));
 	}
 	
 	@GetMapping("mypage")
 	public ModelAndView mypage(@RequestParam(value = "page", defaultValue = "1") int page) {
 		ModelAndView mv = new ModelAndView();
 		PageInfo pageInfo = new PageInfo();
-		int mem_score=0;
 		Member mem=null;
-		String lol_tier=null;
-		String lol_rank=null;
-		String lol_point=null;
-		String lol_wins=null;
-		String lol_losses=null;
-		String lol_rate=null;
 		Map<String, String> map=new HashMap<>();
 		try {
 			mem=memberService.selectMemeber_bymno((Integer)session.getAttribute("mem_mno"));
@@ -89,24 +82,17 @@ public class MypageController {
 			
 			//롤 티어 정보
 			map=mypageService.selectTier((Integer)session.getAttribute("mem_mno"));
-			lol_tier=map.get("lol_tier");
-			lol_rank=map.get("lol_rank");
-			lol_point=map.get("lol_point");
-			mv.addObject("lol_tier", lol_tier);
-			mv.addObject("lol_rank", lol_rank);
-			mv.addObject("lol_point", lol_point);
+			mv.addObject("lol_tier", map.get("lol_tier"));
+			mv.addObject("lol_rank", map.get("lol_rank"));
+			mv.addObject("lol_point", map.get("lol_point"));
 			
 			//롤 승률 정보
-			lol_wins=map.get("lol_wins");
-			lol_losses=map.get("lol_losses");
-			lol_rate=map.get("lol_rate");
-			mv.addObject("lol_wins", lol_wins);
-			mv.addObject("lol_losses", lol_losses);
-			mv.addObject("lol_rate", lol_rate);
+			mv.addObject("lol_wins", map.get("lol_wins"));
+			mv.addObject("lol_losses", map.get("lol_losses"));
+			mv.addObject("lol_rate", map.get("lol_rate"));
 			
 			//롤 판독 티어 정보
-			mem_score=memberService.selectMem_score((Integer)session.getAttribute("mem_mno"));
-			mv.addObject("mem_score", mem_score);
+			mv.addObject("mem_score", memberService.selectMem_score((Integer)session.getAttribute("mem_mno")));
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("err", e.getMessage());
