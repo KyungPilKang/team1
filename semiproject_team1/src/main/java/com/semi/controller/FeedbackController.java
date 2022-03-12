@@ -20,6 +20,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class FeedbackController {
@@ -152,6 +153,80 @@ public class FeedbackController {
         return mv;
     }
 
+
+    /* 게시판에서 게시물 검색 */
+//    @GetMapping(value = "board_search")
+//    public ModelAndView board_search(@ModelAttribute Board board, @RequestParam(value = "page", defaultValue = "1") int page) {
+//
+//        ModelAndView mv = new ModelAndView();
+//        PageInfo pageInfo = new PageInfo();
+//        try {
+//            String type = board.getBoard_type();
+//            switch (type) {
+//                case "1": {
+//                    List<Board> articleList = board_allService.getBoardList_search_subject(page, pageInfo, board);
+//                    mv.addObject("articleList", articleList);
+//                    break;
+//                }
+//                case "2": {
+//                    List<Board> articleList = board_allService.getBoardList_search_nickname(page, pageInfo, board);
+//                    mv.addObject("articleList", articleList);
+//                    break;
+//                }
+//                case "3": {
+//                    List<Board> articleList = board_allService.getBoardList_search_content(page, pageInfo, board);
+//                    mv.addObject("articleList", articleList);
+//                    break;
+//                }
+//            }
+//            mv.addObject("pageInfo", pageInfo);
+//            mv.setViewName("board/boardForm_all");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            mv.addObject("err", e.getMessage());
+//        }
+//        return mv;
+//    }
+
+
+
+
+
+
+    /* 게시판 ajax 페이지 (무한스크롤 응답) */
+    @RequestMapping(value = "feedbackForm_ajax", method = {RequestMethod.GET, RequestMethod.POST})
+    public String feedbackForm_ajax(@RequestParam(value = "page", defaultValue = "1") int page,
+                                     @RequestParam(value = "sort") String sort,
+                                     HttpServletRequest request, HttpSession session) {
+        PageInfo pageInfo = new PageInfo();
+        try {
+            if (Objects.equals(sort, "feedbacklist")) {
+                List<Feedback> articleList = feedbackService.getFeedbackList(page,pageInfo);
+                request.setAttribute("articleList", articleList);
+            } else if (Objects.equals(sort, "viewssort")) {
+                List<Feedback> articleList = feedbackService.getFeedbackList_viewSort(page,pageInfo);
+                request.setAttribute("articleList", articleList);
+            } else if (Objects.equals(sort, "replysort")) {
+                List<Feedback> articleList = feedbackService.getFeedbackList_replySort(page,pageInfo);
+                request.setAttribute("articleList", articleList);
+            } else if (Objects.equals(sort, "likesort")) {
+                List<Feedback> articleList = feedbackService.getFeedbackList_likeSort(page,pageInfo);
+                request.setAttribute("articleList", articleList);
+            }
+            request.setAttribute("pageInfo", pageInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("err", e.getMessage());
+        }
+        return "feedback/feedbackForm_ajax";
+    }
+
+
+
+
+
+
+
     /*------------------------------------ 끝 : 피드백 게시판 출력및 정렬 ------------------------------------*/
 
 
@@ -204,7 +279,7 @@ public class FeedbackController {
             /* 리플레이 시작 */
             /* 리플레이 여부, 피드백 게시판은 필수이므로 if문 제거 예정  */
             if (!feedback.getReplay_file().isEmpty()) {
-                String path_replay = servletContext.getRealPath("/feedback_upload/video/");
+                String path_replay = servletContext.getRealPath("/feedback_upload/replay/");
                 File destFile_reply = new File(path_replay + feedback.getReplay_file().getOriginalFilename());
                 feedback.setFeedback_replay_fileName(feedback.getReplay_file().getOriginalFilename());
                 feedback.getReplay_file().transferTo(destFile_reply);
