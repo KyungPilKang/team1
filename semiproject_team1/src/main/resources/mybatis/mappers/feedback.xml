@@ -30,12 +30,45 @@
 		]]>
 	</select>
 
+
+	<!-- ================================= 시작 : selectFeedbackCount 관련 ================================= -->
+
     <select id="selectFeedbackCount" resultType="int">
 		<![CDATA[
         select count(*)
         from feedback
         ]]>
 	</select>
+
+	<select id="selectFeedbackCount_subject" resultType="int" parameterType="string">
+		<![CDATA[
+		select count(*)
+		from feedback where feedback_subject like CONCAT('%',#{feedback_keyword},'%')
+		]]>
+	</select>
+
+	<select id="selectFeedbackCount_nickname" resultType="int" parameterType="string">
+		<![CDATA[
+		select count(*)
+		from feedback where feedback_nickname like CONCAT('%',#{feedback_keyword},'%')
+		]]>
+	</select>
+
+	<select id="selectFeedbackCount_content" resultType="int" parameterType="string">
+		<![CDATA[
+		select count(*)
+		from feedback where feedback_content like CONCAT('%',#{feedback_keyword},'%')
+		]]>
+	</select>
+
+	<!-- ================================= 끝 : selectFeedbackCount 관련 ================================= -->
+
+
+
+
+
+
+
 
     <select id="selectFeedbackList" resultType="feedback"
             parameterType="int">
@@ -143,6 +176,38 @@
 		]]>
 	</update>
 
+
+	<!-- ================================= 시작 : selectFeedbackList 검색 관련 ================================= -->
+	<select id="selectFeedbackList_search_subject" resultType="feedback">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from feedback where feedback_subject like CONCAT('%',#{feedback_keyword},'%') order by feedback_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+
+	<select id="selectFeedbackList_search_nickname" resultType="feedback">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from feedback where feedback_nickname like CONCAT('%',#{feedback_keyword},'%') order by feedback_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+
+	<select id="selectFeedbackList_search_content" resultType="feedback">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from feedback where feedback_content like CONCAT('%',#{feedback_keyword},'%') order by feedback_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- ================================= 끝 : selectFeedbackList 검색 관련 ================================= -->
 
 
 

@@ -155,38 +155,41 @@ public class FeedbackController {
 
 
     /* 게시판에서 게시물 검색 */
-//    @GetMapping(value = "board_search")
-//    public ModelAndView board_search(@ModelAttribute Board board, @RequestParam(value = "page", defaultValue = "1") int page) {
-//
-//        ModelAndView mv = new ModelAndView();
-//        PageInfo pageInfo = new PageInfo();
-//        try {
-//            String type = board.getBoard_type();
-//            switch (type) {
-//                case "1": {
-//                    List<Board> articleList = board_allService.getBoardList_search_subject(page, pageInfo, board);
-//                    mv.addObject("articleList", articleList);
-//                    break;
-//                }
-//                case "2": {
-//                    List<Board> articleList = board_allService.getBoardList_search_nickname(page, pageInfo, board);
-//                    mv.addObject("articleList", articleList);
-//                    break;
-//                }
-//                case "3": {
-//                    List<Board> articleList = board_allService.getBoardList_search_content(page, pageInfo, board);
-//                    mv.addObject("articleList", articleList);
-//                    break;
-//                }
-//            }
-//            mv.addObject("pageInfo", pageInfo);
-//            mv.setViewName("board/boardForm_all");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            mv.addObject("err", e.getMessage());
-//        }
-//        return mv;
-//    }
+    @GetMapping(value = "feedback_search")
+    public ModelAndView feedback_search(@ModelAttribute Feedback feedback, @RequestParam(value = "page", defaultValue = "1") int page) {
+
+        ModelAndView mv = new ModelAndView();
+        PageInfo pageInfo = new PageInfo();
+        try {
+            String type = String.valueOf(feedback.getFeedback_type());
+            switch (type) {
+                case "1": {
+                    List<Feedback> articleList = feedbackService.getFeedbackList_search_subject(page,pageInfo,feedback);
+                    mv.addObject("articleList", articleList);
+                    System.out.println(articleList);
+                    break;
+                }
+                case "2": {
+                    List<Feedback> articleList = feedbackService.getFeedbackList_search_nickname(page,pageInfo,feedback);
+                    mv.addObject("articleList", articleList);
+                    System.out.println("2번 왔다");
+                    break;
+                }
+                case "3": {
+                    List<Feedback> articleList = feedbackService.getFeedbackList_search_content(page,pageInfo,feedback);
+                    mv.addObject("articleList", articleList);
+                    System.out.println("3번 왔다");
+                    break;
+                }
+            }
+            mv.addObject("pageInfo", pageInfo);
+            mv.setViewName("feedback/feedbackForm");
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("err", e.getMessage());
+        }
+        return mv;
+    }
 
 
 

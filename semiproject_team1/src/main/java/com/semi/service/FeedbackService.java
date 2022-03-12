@@ -15,7 +15,7 @@ public interface FeedbackService {
 	List<Feedback> getFeedbackList_likeSort(int page, PageInfo pageInfo) throws Exception;
 	List<Feedback> getFeedbackList_search_nickname(int page, PageInfo pageInfo, Feedback feedback) throws Exception;
 	List<Feedback> getFeedbackList_search_subject(int page, PageInfo pageInfo, Feedback feedback) throws Exception;
-	List<Feedback> getFeedbackList_content(int page, PageInfo pageInfo, Feedback feedback) throws Exception;
+	List<Feedback> getFeedbackList_search_content(int page, PageInfo pageInfo, Feedback feedback) throws Exception;
 	Feedback getFeedback(int feedbackNum) throws Exception;
 	void removeFeedback(int feedbackNum) throws Exception;
 	void modifyFeedback(Feedback feedback) throws Exception;

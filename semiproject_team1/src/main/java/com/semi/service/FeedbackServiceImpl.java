@@ -108,6 +108,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	
 	@Override
 	public List<Feedback> getFeedbackList_search_subject(int page, PageInfo pageInfo, Feedback feedback) throws Exception {
+        System.out.println("야야"+feedback.getFeedback_keyword());
 		int listCount = feedbackDAO.selectFeedbackCount_subject(feedback.getFeedback_keyword());
         int maxPage = (int) Math.ceil((double) listCount / 10);
         int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
@@ -119,12 +120,13 @@ public class FeedbackServiceImpl implements FeedbackService {
         pageInfo.setPage(page);
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
-        System.out.println("listCount : " + listCount);
+        System.out.println("1번 listCount : " + listCount);
         return feedbackDAO.selectFeedbackList_search_subject(startrow, feedback.getFeedback_keyword());
 	}
 	
     @Override
     public List<Feedback> getFeedbackList_search_nickname(int page, PageInfo pageInfo, Feedback feedback) throws Exception {
+        System.out.println("야야"+feedback.getFeedback_keyword());
         int listCount = feedbackDAO.selectFeedbackCount_nickname(feedback.getFeedback_keyword());
         int maxPage = (int) Math.ceil((double) listCount / 10);
         int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
@@ -136,12 +138,13 @@ public class FeedbackServiceImpl implements FeedbackService {
         pageInfo.setPage(page);
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
-        System.out.println("listCount : " + listCount);
+        System.out.println("2번 listCount : " + listCount);
         return feedbackDAO.selectFeedbackList_search_nickname(startrow, feedback.getFeedback_keyword());
     }
     
     @Override
-    public List<Feedback> getFeedbackList_content(int page, PageInfo pageInfo, Feedback feedback) throws Exception {
+    public List<Feedback> getFeedbackList_search_content(int page, PageInfo pageInfo, Feedback feedback) throws Exception {
+        System.out.println("야야"+feedback.getFeedback_keyword());
         int listCount = feedbackDAO.selectFeedbackCount_content(feedback.getFeedback_keyword());
         int maxPage = (int) Math.ceil((double) listCount / 10);
         int startPage = ((int) ((double) page / 10 + 0.9) - 1) * 10 + 1;
@@ -153,7 +156,7 @@ public class FeedbackServiceImpl implements FeedbackService {
         pageInfo.setPage(page);
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
-        System.out.println("listCount : " + listCount);
+        System.out.println("3번 listCount : " + listCount);
         return feedbackDAO.selectFeedbackList_search_content(startrow, feedback.getFeedback_keyword());
     }
     
