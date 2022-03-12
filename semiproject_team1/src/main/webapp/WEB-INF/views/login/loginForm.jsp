@@ -89,7 +89,7 @@
 	<button class="w-7 btn btn-secondary" onclick="kakaoLogout()">로그아웃</button> -->
 	<div id="result"></div>
 		<div class="text-center mt-4 fw-light text-white">
-			롤판.DOG에 처음이세요?&nbsp;&nbsp;&nbsp;<a href="/joinForm1" class="text-white">회원가입</a>
+			롤판.DOG에 처음이세요?&nbsp;&nbsp;&nbsp;<a href="/joinForm" class="text-white">회원가입</a>
 		</div>
 	</main>
 

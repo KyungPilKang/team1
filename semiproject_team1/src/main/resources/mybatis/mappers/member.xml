@@ -18,14 +18,19 @@
 	<insert id="insertMember" parameterType="Member">
 		<![CDATA[
 			insert into semi.member (mem_email_id, mem_nickname, mem_pw, mem_code, mem_code_confirm, mem_link_id, 
-			mem_link_code, mem_link_confirm, mem_duo_reg_ok, mem_score, mem_type, mem_admin_confirm)
+			mem_link_code, mem_link_confirm, mem_duo_reg_ok, mem_score, mem_type, mem_admin_confirm, mem_kakao_id)
 			values(#{mem_email_id}, #{mem_nickname}, #{mem_pw}, #{mem_code}, #{mem_code_confirm}, #{mem_link_id}, 
-			#{mem_link_code}, #{mem_link_confirm}, #{mem_duo_reg_ok}, #{mem_score}, #{mem_type}, #{mem_admin_confirm})
+			#{mem_link_code}, #{mem_link_confirm}, #{mem_duo_reg_ok}, #{mem_score}, #{mem_type}, #{mem_admin_confirm}, #{mem_kakao_id})
 		]]>
 	</insert>
 	<select id="selelctMember_bymno" resultType="Member" parameterType="Integer">
 		<![CDATA[
 			select * from semi.member where mem_mno=#{mno}
+		]]>
+	</select>
+	<select id="selelctMember_bykakao" resultType="Member" parameterType="String">
+		<![CDATA[
+			select * from member where mem_kakao_id=#{id};
 		]]>
 	</select>
 	<update id="updateMem_code_confirm" parameterType="Integer">

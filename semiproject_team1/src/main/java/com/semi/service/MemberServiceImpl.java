@@ -89,6 +89,17 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.insertMember(member);
 		mailService.joinMailSend(member);
 	}
+	
+	@Override
+	public void insertMember_kakao(Member member) throws Exception {
+		member.setMem_code_confirm("yes");
+		member.setMem_link_confirm("no");
+		member.setMem_duo_reg_ok("no");
+		member.setMem_score(0);
+		member.setMem_type("normal");
+		member.setMem_admin_confirm("no");
+		memberDAO.insertMember(member);
+	}
 
 	@Override
 	public Member selectMemeber(String id) throws Exception {
@@ -150,6 +161,13 @@ public class MemberServiceImpl implements MemberService {
 	public List<Member> link_member_list() throws Exception {
 		return memberDAO.link_member_list();
 	}
+
+	@Override
+	public Member selelctMember_bykakao(String id) throws Exception {
+		return memberDAO.selelctMember_bykakao(id);
+	}
+
+	
 	
 	
     

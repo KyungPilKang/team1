@@ -520,7 +520,7 @@
 
 
     /* div 내 무한스크롤 시작 */
-    $(".feedback_body").scroll(function () {
+    /* $(".feedback_body").scroll(function () {
         if ($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
             return;
         }

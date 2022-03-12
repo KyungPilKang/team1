@@ -75,10 +75,10 @@ public class MemberController {
 		Member mem=null;
 		Member result=null;
 		try {
-			mem=memberService.selectMemeber(mem_email_id);
+			mem=memberService.selelctMember_bykakao(mem_email_id);
 			mem.setPage(page);
 			if(mem!=null) {
-				result=memberService.selectMemeber(mem.getMem_email_id());
+				result=memberService.selelctMember_bykakao(mem_email_id);
 				if(result.getMem_type().equals("admin")) {
 					session.setAttribute("mem_mno", result.getMem_mno());
 					session.setAttribute("mem_nickname", result.getMem_nickname());
@@ -97,7 +97,7 @@ public class MemberController {
 			}
 		} catch(Exception e){
 			e.printStackTrace();
-			return "redirect:/joinForm1?kakao=yes";
+			return "redirect:/joinForm1?kakao=yes&id="+mem_email_id;
 		}
 		if(result.getPage().equals("main")) {
 			return "redirect:/main";
@@ -156,6 +156,18 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		mav.setViewName("login/join_certifyForm");
+		return mav;
+	}
+	
+	@PostMapping("join_kakao")
+	public ModelAndView join_kakao(@ModelAttribute Member mem) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			memberService.insertMember_kakao(mem);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("redirect:/loginform?page=main");
 		return mav;
 	}
 	

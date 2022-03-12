@@ -16,6 +16,7 @@ public class Member {
 	String page;
 	String mem_type;
 	String mem_admin_confirm;
+	String mem_kakao_id;
 	
 	public Member() {}
 	
@@ -130,5 +131,15 @@ public class Member {
 	public void setMem_admin_confirm(String mem_admin_confirm) {
 		this.mem_admin_confirm = mem_admin_confirm;
 	}
+
+	public String getMem_kakao_id() {
+		return mem_kakao_id;
+	}
+
+	public void setMem_kakao_id(String mem_kakao_id) {
+		this.mem_kakao_id = mem_kakao_id;
+	}
+	
+
 	
 }

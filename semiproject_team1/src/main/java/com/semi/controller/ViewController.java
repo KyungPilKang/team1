@@ -38,11 +38,22 @@ public class ViewController {
 	@RequestMapping(value = "/kakao")
 	public String join() { return "login/kakao"; }
 	
+	@RequestMapping(value = "/joinForm")
+	public String joinForm() {return "login/joinForm1";}
+	
 	@RequestMapping(value = "/joinForm1")
 	public String join1(@RequestParam(value="kakao", required=false, defaultValue="no")String kakao,
+			@RequestParam(value="id")String id,
 			Model model) {
 		model.addAttribute("kakao", kakao);
-		return "login/joinForm1";
+		model.addAttribute("id", id);
+		return "login/joinForm_kakao";
+	}
+	
+	@GetMapping("/joinform2_kakao")
+	public String join2_kakao(@RequestParam(value="id")String id, Model model) {
+		model.addAttribute("id", id);
+		return "login/joinForm2_kakao";
 	}
 	
 	@RequestMapping(value = "/joinForm2")
