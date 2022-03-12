@@ -58,24 +58,159 @@
     			<div class="mypage_body_tl">
             		<div style="margin-top: 10px;">
 	                    <center><h1 style="color:white">LOLPANG.DOG</h1></center>
-	                    <div style="margin-top:65px;">
-	                    <center><img
-						src="${pageContext.request.contextPath}/resources/asset/image/mypage/dogtier_lv3.png"
-						alt="" width="200" height="200"></center>
-	                    </div>
+	                    	<c:choose>
+	                    		<c:when test="${mem_score<=100 }">
+				                    <div style="margin-top:65px;">
+	                    			<center><img
+									src="${pageContext.request.contextPath}/resources/asset/image/mypage/dogtier_lv1.png"
+									alt="" width="200" height="200"></center>
+				                    </div>
+				                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">PANG.DOG LV.1(${mem_score}p)</h2></center>
+	                    			</div>
+	                    		</c:when>
+	                    		<c:when test="${mem_score>100&&mem_score<=500}">
+	                    			<div style="margin-top:65px;">
+	                    			<center><img
+									src="${pageContext.request.contextPath}/resources/asset/image/mypage/dogtier_lv2.png"
+									alt="" width="200" height="200"></center>
+				                    </div>
+				                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">PANG.DOG LV.2(${mem_score}p)</h2></center>
+	                    			</div>
+	                    		</c:when>
+	                    		<c:otherwise>
+	                    			<div style="margin-top:65px;">
+				                    <center><img
+									src="${pageContext.request.contextPath}/resources/asset/image/mypage/dogtier_lv3.png"
+									alt="" width="200" height="200"></center>
+				                    </div>
+				                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">PANG.DOG LV.3(${mem_score}p)</h2></center>
+	                    			</div>
+	                    		</c:otherwise>
+	                    	</c:choose>
             		</div>
                 </div>
                 <div class="mypage_body_tr">
             		<div style="margin-top: 16px;">
 	                    <center><h1 style="color:white">LOL RANK</h1></center>
-	                    <div style="margin-top:60px;">
-	                    <center><img
-						src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
-						alt="" width="220" height="220"></center>
-	                    </div>
-	                    <div class="hero" style="margin-top:15px; margin-left:193px;">
-							<button type="button" onclick="location.href='' ">연동하기</button>
-						</div>
+	                    <c:choose>
+	                    	<c:when test="${mem.mem_link_confirm eq 'no' }">
+	                    		<div style="margin-top:60px;">
+			                    <center><img
+								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
+								alt="" width="220" height="220"></center>
+			                    </div>
+			                    <div class="hero" style="margin-top:15px; margin-left:193px;">
+									<button type="button" onclick="location.href='' ">연동하기</button>
+								</div>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<c:choose>
+	                    			<c:when test="${lol_tier eq null}">
+	                    				<div style="margin-top:60px;">
+					                    <center><img
+										src="${pageContext.request.contextPath}/resources/asset/image/duo/ul.png"
+										alt="" width="260" height="220"></center>
+					                    </div>
+					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">UNRANK</h2></center>
+	                    			    </div>
+	                    			</c:when>
+	                    			<c:when test="${lol_tier eq 'IRON' }">
+	                    				<div style="margin-top:60px;">
+					                    <center><img
+										src="${pageContext.request.contextPath}/resources/asset/image/duo/i.png"
+										alt="" width="220" height="220"></center>
+					                    </div>
+					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
+	                    				</div>
+	                    			</c:when>
+	                    			<c:when test="${lol_tier eq 'BRONZE' }">
+	                    				<div style="margin-top:60px;">
+					                    <center><img
+										src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png"
+										alt="" width="220" height="220"></center>
+					                    </div>
+					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
+	                    				</div>
+	                    			</c:when>
+	                    			<c:when test="${lol_tier eq 'SILVER' }">
+	                    				<div style="margin-top:60px;">
+					                    <center><img
+										src="${pageContext.request.contextPath}/resources/asset/image/duo/s.png"
+										alt="" width="220" height="220"></center>
+					                    </div>
+					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
+	                    				</div>
+	                    			</c:when>
+	                    			<c:when test="${lol_tier eq 'GOLD' }">
+	                    				<div style="margin-top:60px;">
+					                    <center><img
+										src="${pageContext.request.contextPath}/resources/asset/image/duo/g.png"
+										alt="" width="220" height="220"></center>
+					                    </div>
+					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
+	                    				</div>
+	                    			</c:when>
+	                    			<c:when test="${lol_tier eq 'PLATINUM' }">
+	                    				<div style="margin-top:60px;">
+					                    <center><img
+										src="${pageContext.request.contextPath}/resources/asset/image/duo/p.png"
+										alt="" width="220" height="220"></center>
+					                    </div>
+					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
+	                    				</div>
+	                    			</c:when>
+	                    			<c:when test="${lol_tier eq 'DIAMOND' }">
+	                    				<div style="margin-top:60px;">
+					                    <center><img
+										src="${pageContext.request.contextPath}/resources/asset/image/duo/d.png"
+										alt="" width="220" height="220"></center>
+					                    </div>
+					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
+	                    				</div>
+	                    			</c:when>
+	                    			<c:when test="${lol_tier eq 'MASTER' }">
+	                    				<div style="margin-top:60px;">
+					                    <center><img
+										src="${pageContext.request.contextPath}/resources/asset/image/duo/m.png"
+										alt="" width="220" height="220"></center>
+					                    </div>
+					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
+	                    				</div>
+	                    			</c:when>
+	                    			<c:when test="${lol_tier eq 'GRANDMASTER' }">
+	                    				<div style="margin-top:60px;">
+					                    <center><img
+										src="${pageContext.request.contextPath}/resources/asset/image/duo/gm.png"
+										alt="" width="220" height="220"></center>
+					                    </div>
+					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
+	                    				</div>
+	                    			</c:when>
+	                    			<c:when test="${lol_tier eq 'CHALLENGER' }">
+	                    				<div style="margin-top:60px;">
+					                    <center><img
+										src="${pageContext.request.contextPath}/resources/asset/image/duo/c.png"
+										alt="" width="220" height="220"></center>
+					                    </div>
+					                    <div style="margin-top: 30px;">
+		                    			<center><h2 style="color:white">${lol_tier}&nbsp;${lol_rank }(${lol_point }p)</h2></center>
+	                    				</div>
+	                    			</c:when>
+	                    		</c:choose>
+	                    	</c:otherwise>
+	                    </c:choose>
             		</div>
                 </div>
         <div class="body_feedback_mar">
@@ -86,7 +221,21 @@
             		<div style="margin-top: 10px;">
 	                    <div style="margin-top: 16px;">
 	                    <center><h1 style="color:white">LOL STATUS</h1></center>
-	                    <div style="margin-top:65px;">
+	                    <div style="margin-top:35px; margin-left:110px; float:left;'">
+	                    	<center><h1 style="color:white">WIN / LOSE</h1></center>
+	                    	<div style="float:left; margin-top:15px; margin-right:25px">
+	                    		<h1 style="color:rgb(75, 108, 214); font-size:3em;">W:${lol_wins }</h1>
+	                    	</div>
+	                    	<div style="float:right; margin-top:15px;">
+	                    		<h1 style="color:rgb(237, 81, 81); font-size:3em">L:${lol_losses }</h1>
+	                    	</div>
+	                    	<div>
+	                    		<center><h1 style="color:rgb(81, 237, 177); font-size:3em">${lol_rate }%</h1></center>
+	                    	</div>
+	                    </div>
+	                    <div style="margin-top:40px;">
+	                    <center><h1 style="color:white">MOST CHAMP</h1></center>
+	                    
 	                    </div>
             		</div>
             		</div>

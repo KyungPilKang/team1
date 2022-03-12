@@ -12,6 +12,7 @@ public class Member {
 	String mem_link_code;
 	String mem_link_confirm;
 	String mem_duo_reg_ok;
+	int mem_score;
 	String page;
 	
 	public Member() {}
@@ -103,6 +104,15 @@ public class Member {
 	public void setMem_duo_reg_ok(String mem_duo_reg_ok) {
 		this.mem_duo_reg_ok = mem_duo_reg_ok;
 	}
+
+	public int getMem_score() {
+		return mem_score;
+	}
+
+	public void setMem_score(int mem_score) {
+		this.mem_score = mem_score;
+	}
+	
 	
 	
 }

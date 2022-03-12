@@ -86,7 +86,8 @@ public class RiotAPI {
 			map.put("rank",(String)resultobj.get("rank"));
 			map.put("wins", String.valueOf(resultobj.get("wins")));
 			map.put("losses", String.valueOf(resultobj.get("losses")));
-			
+			map.put("leaguePoints", String.valueOf(resultobj.get("leaguePoints")));
+			System.out.println(response.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -12,4 +12,5 @@ public interface MemberService
 	public Member selectMemeber_bymno(int mno) throws Exception;
 	public void updateMem_code_confirm(int mno) throws Exception;
 	public void updateMem_code(int mno) throws Exception;
+	public int selectMem_score(int mno) throws Exception;
 }

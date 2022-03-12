@@ -82,6 +82,7 @@ public class MemberServiceImpl implements MemberService {
 		member.setMem_link_code(null);
 		member.setMem_link_confirm("no");
 		member.setMem_duo_reg_ok("no");
+		member.setMem_score(0);
 		memberDAO.insertMember(member);
 		mailService.joinMailSend(member);
 	}
@@ -133,6 +134,13 @@ public class MemberServiceImpl implements MemberService {
 		mem.setMem_code(numStr);
 		memberDAO.updateMem_code(mem);
 		mailService.joinMailSend(mem);
+	}
+
+	@Override
+	public int selectMem_score(int mno) throws Exception {
+		int mem_score=0;
+		mem_score=memberDAO.selectMem_score(mno);
+		return mem_score;
 	}
 	
 	

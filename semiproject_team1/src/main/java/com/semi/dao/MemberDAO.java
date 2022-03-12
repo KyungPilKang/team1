@@ -16,4 +16,5 @@ public interface MemberDAO {
 	public Member selelctMember_bymno(int mno) throws Exception;
 	public void updateMem_code_confirm(int mno) throws Exception;
 	public void updateMem_code(Member member) throws Exception;
+	public int selectMem_score(int mno) throws Exception;
 }

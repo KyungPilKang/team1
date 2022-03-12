@@ -18,9 +18,9 @@
 	<insert id="insertMember" parameterType="Member">
 		<![CDATA[
 			insert into semi.member (mem_email_id, mem_nickname, mem_pw, mem_code, mem_code_confirm, mem_link_id, 
-			mem_link_code, mem_link_confirm, mem_duo_reg_ok)
+			mem_link_code, mem_link_confirm, mem_duo_reg_ok, mem_score)
 			values(#{mem_email_id}, #{mem_nickname}, #{mem_pw}, #{mem_code}, #{mem_code_confirm}, #{mem_link_id}, 
-			#{mem_link_code}, #{mem_link_confirm}, #{mem_duo_reg_ok})
+			#{mem_link_code}, #{mem_link_confirm}, #{mem_duo_reg_ok}, #{mem_score})
 		]]>
 	</insert>
 	<select id="selelctMember_bymno" resultType="Member" parameterType="Integer">
@@ -38,4 +38,9 @@
 			update member set mem_code=#{mem_code} where mem_mno=#{mem_mno}
 		]]>
 	</update>
+	<select id="selectMem_score" resultType="Integer" parameterType="Integer">
+		<![CDATA[
+			select mem_score from member where mem_mno=#{mno}
+		]]>
+	</select>
 </mapper>
