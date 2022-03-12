@@ -68,6 +68,45 @@ public class MemberController {
 		}
 		return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
 	}
+	@GetMapping(value="/kakao_login")
+	public String kakao_login(@RequestParam("mem_email_id")String mem_email_id,
+			@RequestParam("page")String page, Model model) {
+		System.out.println(mem_email_id);
+		Member mem=null;
+		Member result=null;
+		try {
+			mem=memberService.selectMemeber(mem_email_id);
+			mem.setPage(page);
+			if(mem!=null) {
+				result=memberService.selectMemeber(mem.getMem_email_id());
+				if(result.getMem_type().equals("admin")) {
+					session.setAttribute("mem_mno", result.getMem_mno());
+					session.setAttribute("mem_nickname", result.getMem_nickname());
+					result.setPage("admin");
+					model.addAttribute("mem", result);
+				}else {
+					if(result.getMem_code_confirm().equals("yes")) {
+						session.setAttribute("mem_mno", result.getMem_mno());
+						session.setAttribute("mem_nickname", result.getMem_nickname());
+						result.setPage(mem.getPage());
+						model.addAttribute("mem", result);
+					} else {
+						
+					}
+				}
+			}
+		} catch(Exception e){
+			e.printStackTrace();
+			return "redirect:/joinForm1?kakao=yes";
+		}
+		if(result.getPage().equals("main")) {
+			return "redirect:/main";
+		} else if(result.getPage().equals("board")) {
+			return "redirect:/boardlist";
+		} else {
+			return "redirect:/feedback";
+		}
+	}
 	
 	@GetMapping(value="/log_out")
 	public ModelAndView logout(@RequestParam("page") String page) {

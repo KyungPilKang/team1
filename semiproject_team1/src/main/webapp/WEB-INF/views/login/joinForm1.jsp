@@ -341,6 +341,7 @@
   </form>
 </main>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
      $('#checkAll').change(function () { 
     	 var checked = $(this).prop('checked'); 
@@ -353,6 +354,23 @@ $('input[name="checkTmp"]').change(function () {
 
 $('#checkAll').change(function () {
     $(this).prop('checked') ? $('#next').removeAttr('disabled'):$('#next').attr('disabled','disabled'); });
+let sweetalert=(icon,title,contents)=>{
+    Swal.fire({
+        icon: icon,
+        title: title,
+        text: contents,
+        confirmButtonText: "확인"
+    })
+	};
+	let kakao="<c:out value='${kakao}'/>";
+	if(kakao=="yes"){
+		Swal.fire({
+			title: "가입 요망",
+			text: "카카오 연동으로 회원가입을 진행합니다",
+			icon: "warning",
+			confirmButtonText: "확인"
+		})
+	}
 </script>
  </body>
 </html>

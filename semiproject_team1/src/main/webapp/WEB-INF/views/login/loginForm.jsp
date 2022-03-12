@@ -79,15 +79,15 @@
 
 		<!-- 카카오 로그인 구현부분  -->
 		<div class="mt-4">
-		<a id="kakao-login-btn"></a>
+		<!-- <a id="kakao-login-btn"></a> -->
 		</div>
-		<!-- <a href="javascript:kakaoLogin();">
+		<a href="javascript:kakaoLogin();">
 		<img src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
     width="222"
-    alt="카카오 로그인 버튼"/></a> -->
+    alt="카카오 로그인 버튼"/></a>
 	<!-- <button class="w-7 btn btn-secondary" onclick="unlinkApp()">앱 탈퇴하기</button>
-	<button class="w-7 btn btn-secondary" onclick="kakaoLogout()">로그아웃</button>
-	<div id="result"></div> -->
+	<button class="w-7 btn btn-secondary" onclick="kakaoLogout()">로그아웃</button> -->
+	<div id="result"></div>
 		<div class="text-center mt-4 fw-light text-white">
 			롤판.DOG에 처음이세요?&nbsp;&nbsp;&nbsp;<a href="/joinForm1" class="text-white">회원가입</a>
 		</div>
@@ -136,6 +136,7 @@
         	return returnArray;
         }
         let formdata=objectifyForm($("#loginForm").serializeArray());
+        console.log(formdata);
         $.ajax({
 			type:"POST",
 			async:true,
@@ -190,25 +191,81 @@
 </script>
 
 <script>
+let data_page="<c:out value='${page}'/>";
 window.Kakao.init('00263ffa1f8a32229866207737b5f29d');
 
 function kakaoLogin(){
 	window.Kakao.Auth.login({
 		scope:'profile_nickname, account_email',
 		success: function(authObj){
-			console.log(authObj);
 			window.Kakao.API.request({
 				url:'/v2/user/me',
 			success:res =>{
-				const kakao_account = res.kakao_account;
-				console.log(kakao_account);
+				let kakao_account = res.kakao_account;
+				console.log("성공");
+				console.log(kakao_account.email);
+				console.log(typeof kakao_account.email);
+				let jsonData={
+						"mem_email_id":kakao_account.email,
+						"page":data_page
+				};
+				console.log(jsonData);
+				window.location.href="/kakao_login?mem_email_id="+kakao_account.email+"&page="+data_page;
+				/*  $.ajax({
+						type:"POST",
+						async:true,
+						url:"http://localhost:8090/kakao_login",
+						contentType:"application/json; charset=utf-8",
+						data:JSON.stringify(jsonData),
+						success: function(data, textStatus){
+							if(data.mem.mem_code_confirm=="no"){
+								Swal.fire({
+									title: "미인증 계정",
+									text: "인증페이지로 이동합니다",
+									icon: "warning",
+									confirmButtonText: "확인"
+								}).then((result)=>{
+									if(result){
+				        				window.location.href="/join_certifyForm?mem_mno="+data.mem.mem_mno;
+									}
+								})
+							} else{
+								Swal.fire({
+									title: "로그인 성공",
+									text: data.mem.mem_nickname+"님 환영합니다",
+									icon: "success",
+									confirmButtonText: "확인"
+								}).then((result)=>{
+									if(result){
+										console.log(data.mem);
+										if(data.mem.page=="main"){
+					        				window.location.href="/main";
+										} else if(data.mem.page=="board"){
+											window.location.href="/boardlist";
+										} else if(data.mem.page=="admin"){
+											window.location.href="/main_admin";
+										}
+									}
+								})
+							}
+						},
+						error: function(data, textStatus){
+							Swal.fire({
+								title: "로그인 실패",
+								text: data.responseText,
+								icon: "error",
+								confirmButtonText: "확인"
+							})
+						},
+					}); */
+				 return false;
 			}
 		});
 		}
-	}
+	})
 }
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 Kakao.init('00263ffa1f8a32229866207737b5f29d');
 console.log(Kakao.isInitialized());
   Kakao.Auth.createLoginButton({
@@ -248,7 +305,7 @@ console.log(Kakao.isInitialized());
     fail: function(err) {
       alert('failed to login: ' + JSON.stringify(err))
     },
-  })
+  }) -->
 </script>
 <script type="text/javascript">
   function kakaoLogout() {
