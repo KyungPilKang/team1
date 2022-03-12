@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -173,11 +174,15 @@ public class MypageController {
 	}
 	
 	@PostMapping("/admin_confirm")
-	public String adminConfirm(@RequestParam("mem_email_id")String mem_email_id) {
-		Member mem;
+	public String adminConfirm(@ModelAttribute Member mem) {
+		Member result;
 		try {
-			mem=memberService.selectMemeber(mem_email_id);
-			mypageService.adminConfirm(mem.getMem_mno());
+			if(mem.getMem_email_id()!=null) {
+				result=memberService.selectMemeber(mem.getMem_email_id());
+			}else {
+				result=memberService.selelctMember_bykakao(mem.getMem_kakao_id());
+			}
+			mypageService.adminConfirm(result.getMem_mno());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

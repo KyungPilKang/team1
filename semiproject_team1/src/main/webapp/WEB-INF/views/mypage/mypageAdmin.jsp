@@ -68,10 +68,20 @@
                                 <section id="listForm">
                                     <c:forEach var="mem" items="${memList }">
                                         <div class="each_post">
-                                            <div class="each_board_likecount">
-                                            	LOLPAN.DOG 아이디<br>
-                                            	${mem.mem_email_id }
-                                            </div>
+                                        	<c:choose>
+                                        		<c:when test="${not empty mem.mem_email_id }">
+		                                            <div class="each_board_likecount">
+		                                            	LOLPAN.DOG 아이디<br>
+		                                            	${mem.mem_email_id}
+		                                            </div>
+                                        		</c:when>
+                                        		<c:otherwise>
+                                        			<div class="each_board_likecount">
+		                                            	LOLPAN.DOG 아이디<br>
+		                                            	${mem.mem_kakao_id}
+		                                            </div>
+                                        		</c:otherwise>
+                                        	</c:choose>
                                             <div class="each_board_likecount">
                                             	리그오브레전드 아이디<br>
                                             	${mem.mem_link_id }
@@ -82,10 +92,20 @@
                                             </div>
                                             <div class="each_board_readcount">
                                             	<div class="hero"">
-                                            		<form action="/admin_confirm" method="post">
-                                            			<input type="hidden" name="mem_email_id" value="${mem.mem_email_id }"/>
-														<button type="submit">확인</button>
-                                            		</form>
+                                            		<c:choose>
+		                                        		<c:when test="${not empty mem.mem_email_id }">
+				                                            <form action="/admin_confirm" method="post">
+		                                            			<input type="hidden" name="mem_email_id" value="${mem.mem_email_id }"/>
+																<button type="submit">확인</button>
+		                                            		</form>
+		                                        		</c:when>
+		                                        		<c:otherwise>
+		                                        			<form action="/admin_confirm" method="post">
+		                                            			<input type="hidden" name="mem_kakao_id" value="${mem.mem_kakao_id }"/>
+																<button type="submit">확인</button>
+		                                            		</form>
+		                                        		</c:otherwise>
+		                                        	</c:choose>
 												</div>
                                             </div>
                                         </div>

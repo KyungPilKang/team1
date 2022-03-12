@@ -85,7 +85,6 @@ public class MemberServiceImpl implements MemberService {
 		member.setMem_duo_reg_ok("no");
 		member.setMem_score(0);
 		member.setMem_type("normal");
-		member.setMem_admin_confirm("no");
 		memberDAO.insertMember(member);
 		mailService.joinMailSend(member);
 	}
@@ -97,7 +96,6 @@ public class MemberServiceImpl implements MemberService {
 		member.setMem_duo_reg_ok("no");
 		member.setMem_score(0);
 		member.setMem_type("normal");
-		member.setMem_admin_confirm("no");
 		memberDAO.insertMember(member);
 	}
 
