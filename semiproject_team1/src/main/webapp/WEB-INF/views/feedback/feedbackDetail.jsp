@@ -28,8 +28,6 @@
             <div class="board_container_bo">
                 <div class="board_date_container">${feedback_date}</div>
                 <div class="board_name_container"> 닉네임 : ${article.feedback_nickname}</div>
-                <%--                <div class="board_like_container"> 좋아요수 : ${article.feedback_likecount}</div>--%>
-                <%--                <div class="board_reply_container"> 댓글수 : ${article.feedback_replycount}</div>--%>
                 <div class="board_readcount_container"> 조회수 : ${article.feedback_readcount}</div>
             </div>
         </div>
@@ -70,7 +68,7 @@
             </c:if>
 
 
-            <div><b>댓글</b> 총 ${article.board_replycount}개</div>
+            <div><b>댓글</b> 총 ${article.feedback_replycount}개</div>
             <div>
                 <%-- 최신순은 페이지 새로고침 해주면 된다 --%>
                 <button onclick="location.reload()">최신순</button>
@@ -85,52 +83,41 @@
                     <c:forEach var="reply" items="${reList }">
                         <tr>
                             <td>
-                                <div class="ddd">${reply.b_reply_num}</div>
+                                <div class="ddd">${reply.fd_reply_num}</div>
                             </td>
                             <td>
-                                <c:choose>
-                                    <c:when test="${reply.b_reply_lev!=0}">
-                                        <c:forEach var="i" begin="0" end="${reply.b_reply_lev*3}">
-                                            &nbsp;
-                                        </c:forEach>
-                                        ▶
-                                    </c:when>
-                                    <c:otherwise>▶</c:otherwise>
-                                </c:choose>
-                                    ${reply.b_reply_content}
+                                    ${reply.fd_reply_content}
                             </td>
-                            <td>${reply.b_reply_nickname }</td>
-                            <td><fmt:formatDate value="${reply.b_reply_date }" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
+                            <td>${reply.fd_reply_nickname }</td>
+                            <td><fmt:formatDate value="${reply.fd_reply_date }" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
 
 
                                 <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
                             <c:if test="${!empty mem_nickname}">
-                                <c:if test="${reply.b_reply_nickname == mem_nickname}">
+                                <c:if test="${reply.fd_reply_nickname == mem_nickname}">
                                     <td>
-                                        <button onclick="removeCheck(${reply.b_reply_num})">삭제</button>
+                                        <button onclick="removeCheck(${reply.fd_reply_num})">삭제</button>
                                     </td>
                                 </c:if>
-
-
                                 <%-- 대댓글 좋아요 시작 --%>
                                 <td>
                                     <div class="re_btn_like">
                                         <c:choose>
                                             <%-- 세션에 있는 유저를 확인해서 해당 댓글에 좋아요 플래그만 내려보내주면 될듯 --%>
-                                            <c:when test="${reply.b_reply_like_ok == true}">
-                                                <div class="re_like_mini${reply.b_reply_num}">
-                                                    <div class="re_heart rh_${reply.b_reply_num}"
-                                                         onclick="re_like_off(${reply.b_reply_num})"></div>
-                                                    <div class="re_heart_off rh_off_${reply.b_reply_num} rh_off_hide"
-                                                         onclick="re_like_on(${reply.b_reply_num})"></div>
+                                            <c:when test="${reply.fd_reply_like_ok == true}">
+                                                <div class="re_like_mini${reply.fd_reply_num}">
+                                                    <div class="re_heart rh_${reply.fd_reply_num}"
+                                                         onclick="re_like_off(${reply.fd_reply_num})"></div>
+                                                    <div class="re_heart_off rh_off_${reply.fd_reply_num} rh_off_hide"
+                                                         onclick="re_like_on(${reply.fd_reply_num})"></div>
                                                 </div>
                                             </c:when>
                                             <c:otherwise>
-                                                <div class="re_like_mini${reply.b_reply_num}">
-                                                    <div class="re_heart_off rh_off_${reply.b_reply_num}"
-                                                         onclick="re_like_on(${reply.b_reply_num})"></div>
-                                                    <div class="re_heart rh_${reply.b_reply_num} rh_hide"
-                                                         onclick="re_like_off(${reply.b_reply_num})"></div>
+                                                <div class="re_like_mini${reply.fd_reply_num}">
+                                                    <div class="re_heart_off rh_off_${reply.fd_reply_num}"
+                                                         onclick="re_like_on(${reply.fd_reply_num})"></div>
+                                                    <div class="re_heart rh_${reply.fd_reply_num} rh_hide"
+                                                         onclick="re_like_off(${reply.fd_reply_num})"></div>
                                                 </div>
                                             </c:otherwise>
                                         </c:choose>
@@ -139,7 +126,7 @@
                             </c:if>
                                 <%-- 좋아요 숫자 표시 --%>
                             <td>
-                                    ${reply.b_reply_likecount}
+                                    ${reply.fd_reply_likecount}
                             </td>
                                 <%-- 대댓글 좋아요 끝--%>
                                 <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
@@ -191,10 +178,10 @@
                     async: true,
                     type: 'POST',
                     data: {
-                        b_board_num: ${article.board_num},
-                        b_reply_content: $(".comment_write_content").val()
+                        feedback_num: ${article.feedback_num},
+                        fd_reply_content: $(".comment_write_content").val()
                     },
-                    url: "http://localhost:8090/regreply",
+                    url: "http://localhost:8090/fd_regreply",
                     success: function (data) {
                         alert("댓글이 등록되었습니다.");
                         location.reload();
@@ -222,9 +209,9 @@
                 async: true,
                 type: 'GET',
                 data: {
-                    b_reply_num: replyNum,
+                    fd_reply_num: replyNum,
                 },
-                url: "http://localhost:8090/replydelete",
+                url: "http://localhost:8090/fd_replydelete",
                 success: function (data) {
                     alert("댓글이 삭제되었습니다.");
                     location.reload();
@@ -236,6 +223,85 @@
         } else {
             return false;
         }
+    }
+</script>
+
+
+<%-- 댓글 좋아요 버튼 자바스크립트 --%>
+<script>
+    function re_like_off(replyNum) {
+        console.log(replyNum + "번 댓글에");
+        console.log(${mem_mno}+"번 유저가 좋아요 취소");
+        console.log(typeof replyNum);
+        console.log(typeof ${mem_mno});
+        /* b_reply_like_member에 mno를 제거 */
+        /* 제거시 b_reply_likecount도 -1 */
+        $(".rh_" + replyNum).hide()
+        $.ajax({
+            async: true,
+            type: 'POST',
+            data: {
+                fd_reply_num: replyNum,
+                mno:${mem_mno}
+            },
+            url: "http://localhost:8090/fd_re_like_off",
+            success: function (data) {
+            },
+            error: function (textStatus) {
+                alert(textStatus);
+            }
+        });
+        /* 빈 하트로 바꾸기 */
+        $(".rh_off_" + replyNum).show()
+        alert(replyNum + "번 댓글에 좋아요를 취소하셨습니다.")
+        location.reload();
+    }
+
+    function re_like_on(replyNum) {
+        console.log(replyNum + "번 댓글에");
+        console.log(${mem_mno}+"번 유저가 좋아요 누름");
+        console.log(typeof replyNum);
+        console.log(typeof ${mem_mno});
+        /* b_reply_like_member에 mno를 추가 */
+        /* 추가시 b_reply_likecount도 +1 */
+        $(".rh_off_" + replyNum).hide()
+        $.ajax({
+            async: true,
+            type: 'POST',
+            data: {
+                fd_reply_num: replyNum,
+                mno:${mem_mno}
+            },
+            url: "http://localhost:8090/fd_re_like_on",
+            success: function (data) {
+            },
+            error: function (textStatus) {
+                alert(textStatus);
+            }
+        });
+        /* 빨간 하트로 바꾸기 */
+        $(".rh_" + replyNum).show()
+        alert(replyNum + "번 댓글에 좋아요를 누르셨습니다.")
+        location.reload();
+    }
+</script>
+
+
+<%-- 댓글 정렬 --%>
+<script>
+    const replyList_sort = () => {
+        $("#listForm").empty();
+        $.ajax({
+            type: "post",
+            async: false,
+            url: "http://localhost:8090/feedbackDetail_ajax",
+            data: {
+                feedback_num: ${article.feedback_num},
+            },
+            success: function (data) {
+                $('.append_replyList').append(data);
+            }
+        })
     }
 </script>
 

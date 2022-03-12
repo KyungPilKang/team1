@@ -294,23 +294,23 @@ public class FeedbackController {
             /* 날짜 포맷 변경 끝 */
 
             /* 리플 관련 시작*/
-//            List<Fd_reply> reList = feedbackService.getReplyList(feedbackNum);
-//
-//            for (Fd_reply reply : reList) {
-//                System.out.println(reply.getFd_reply_like_member());
-//                List<String> reLikeMem_arr = List.of(reply.getFd_reply_like_member().split(","));
-//                //split해서 배열로 각각 넣은 후 contains
-//                if (mno != null) {
-//                    if (reLikeMem_arr.contains(mno)) {
-//                        reply.setFd_reply_like_ok("true");
-//                        System.out.println("있어요");
-//                    } else {
-//                        reply.setFd_reply_like_ok("false");
-//                        System.out.println("없어요");
-//                    }
-//                }
-//            }
-//            mv.addObject("reList", reList);
+            List<Fd_reply> reList = feedbackService.getReplyList(feedbackNum);
+
+            for (Fd_reply reply : reList) {
+                System.out.println(reply.getFd_reply_like_member());
+                List<String> reLikeMem_arr = List.of(reply.getFd_reply_like_member().split(","));
+                //split해서 배열로 각각 넣은 후 contains
+                if (mno != null) {
+                    if (reLikeMem_arr.contains(mno)) {
+                        reply.setFd_reply_like_ok("true");
+                        System.out.println("있어요");
+                    } else {
+                        reply.setFd_reply_like_ok("false");
+                        System.out.println("없어요");
+                    }
+                }
+            }
+            mv.addObject("reList", reList);
             /* 리플 관련 끝 */
 
             mv.addObject("article", feedback);
@@ -368,6 +368,117 @@ public class FeedbackController {
 
 
     /*------------------------------------ 끝 : 게시물 작성, 수정, 삭제, 상세보기 ------------------------------------*/
+
+
+
+    /*------------------------------------ 시작 : 피드백 댓글 ------------------------------------*/
+
+    /* 댓글 작성 */
+    @ResponseBody
+    @RequestMapping(value = "fd_regreply", method = {RequestMethod.GET, RequestMethod.POST})
+    public void fd_regreply(@RequestParam(value = "feedback_num") int feedbackNum,
+                         @RequestParam(value = "fd_reply_content") String fd_reply_content) {
+        Fd_reply fd_reply = new Fd_reply();
+        try {
+
+            String board_nickname = (String) session.getAttribute("mem_nickname");
+            fd_reply.setFd_reply_nickname(board_nickname);
+            fd_reply.setFd_feedback_num(feedbackNum);
+            fd_reply.setFd_reply_content(fd_reply_content);
+            System.out.println("피드백 게시물번호 : "+feedbackNum);
+            System.out.println("피드백 댓글 내용 : "+fd_reply_content);
+            feedbackService.regReply(fd_reply);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /* 댓글 삭제 */
+    @ResponseBody
+    @RequestMapping(value = "fd_replydelete", method = {RequestMethod.GET, RequestMethod.POST})
+    public void fd_replydelete(@RequestParam(value = "fd_reply_num") int fd_reply_num) {
+        try {
+            feedbackService.delReply(fd_reply_num);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* 댓글 좋아요 버튼 on */
+    @ResponseBody
+    @RequestMapping(value = "/fd_re_like_on", method = {RequestMethod.GET, RequestMethod.POST})
+    public void re_regreply(@RequestParam(value = "fd_reply_num") int fd_reply_num,
+                            @RequestParam(value = "mno") String mno) {
+        try {
+            /* b_reply_like_member에 mno를 추가해주는 서비스 */
+            /* 추가시 b_reply_likecount도 +1 */
+            System.out.println("댓글좋아요on ajax 전달 테스트(댓글번호) : " + fd_reply_num);
+            System.out.println("댓글좋아요on ajax 전달 테스트(회원번호) : " + mno);
+            feedbackService.fd_re_like_ins_mno(fd_reply_num,mno);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* 댓글 좋아요 버튼 off */
+    @ResponseBody
+    @RequestMapping(value = "/fd_re_like_off", method = {RequestMethod.GET, RequestMethod.POST})
+    public void re_like_off(@RequestParam(value = "fd_reply_num") int fd_reply_num,
+                            @RequestParam(value = "mno") String mno) {
+        try {
+            /* b_reply_like_member에 mno를 제거해주는 서비스 */
+            /* 제거시 b_reply_likecount도 -1 */
+            System.out.println("댓글좋아요off ajax 전달 테스트(댓글번호) : " + fd_reply_num);
+            System.out.println("댓글좋아요off ajax 전달 테스트(회원번호) : " + mno);
+            feedbackService.fd_re_like_del_mno(fd_reply_num,mno);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+    /* 댓글 ajax 페이지 */
+    @RequestMapping(value = "feedbackDetail_ajax", method = {RequestMethod.GET, RequestMethod.POST})
+    public String feedbackDetail_ajax(@RequestParam(value = "feedback_num") int feedbackNum,
+                                   HttpServletRequest request, HttpSession session) {
+
+        try {
+            // 인기순 정렬로 서비스를 요청해야한다
+            List<Fd_reply> reList = feedbackService.getReplyList_like(feedbackNum);
+            String mno = String.valueOf(session.getAttribute("mem_mno"));
+
+            for(Fd_reply reply :reList) {
+                System.out.println(reply.getFd_reply_like_member());
+                List<String> reLikeMem_arr = List.of(reply.getFd_reply_like_member().split(","));
+                //split해서 배열로 각각 넣은 후 contains
+                if (mno != null) {
+                    if (reLikeMem_arr.contains(mno)) {
+                        reply.setFd_reply_like_ok("true");
+                        System.out.println("mno있어요");
+                    } else {
+                        reply.setFd_reply_like_ok("false");
+                        System.out.println("mno없어요");
+                    }
+                }
+            }
+            request.setAttribute("reList", reList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("err", e.getMessage());
+        }
+        return "feedback/feedbackDetail_ajax";
+    }
+
+
+
+
+    /*------------------------------------ 끝 : 피드백 댓글 ------------------------------------*/
 
 
     @GetMapping("/feedbackform_all")

@@ -1,6 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.semi.dao.Fd_replyDAO">
+
+    <select id="selectReplyList" resultType="fd_reply"
+            parameterType="int">
+		<![CDATA[
+        select *
+        from fd_reply
+        where fd_feedback_num = #{feedbackNum}
+        order by fd_reply_date desc
+        ]]>
+	</select>
+
+	<select id="selectReplyList_like" resultType="fd_reply"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from fd_reply
+		where fd_feedback_num = #{feedbackNum}
+		order by fd_reply_likecount desc
+		]]>
+	</select>
+
+    <select id="selectMaxReplyNum" resultType="integer">
+		<![CDATA[
+        select max(fd_reply_num)
+        from fd_reply
+        ]]>
+	</select>
+
+    <insert id="insertReply" parameterType="fd_reply">
+		<![CDATA[
+        insert into fd_reply
+        values (#{fd_reply_num}, #{fd_reply_nickname}, #{fd_reply_content}, now(), #{fd_reply_likecount},
+                #{fd_reply_like_member}, #{fd_feedback_num})
+        ]]>
+	</insert>
+
+    <delete id="deleteReply" parameterType="int">
+		<![CDATA[
+        delete
+        from fd_reply
+        where fd_reply_num = #{fd_reply_num}
+        ]]>
+	</delete>
+
+    <!-- 피드백 게시물 삭제시 댓글도 삭제 -->
+    <delete id="deleteReplyWithFeedback" parameterType="int">
+		<![CDATA[
+        delete
+        from fd_reply
+        where fd_feedback_num = #{feedbackNum}
+        ]]>
+	</delete>
+
+    <select id="selectReply" resultType="fd_reply" parameterType="int">
+		<![CDATA[
+        select *
+        from fd_reply
+        where fd_reply_num = #{fd_reply_num}
+        ]]>
+	</select>
+
+	<!-- 댓글 좋아요 관련 -->
+	<update id="fd_re_insert_like_mno">
+		<![CDATA[
+		update fd_reply
+		set fd_reply_like_member =concat_ws(',',fd_reply_like_member,#{mno})
+		where fd_reply_num = #{fd_reply_num}
+		]]>
+	</update>
+
+	<update id="fd_re_delete_like_mno">
+		<![CDATA[
+		update fd_reply
+		set fd_reply_like_member = #{fd_reply_like_member}
+		where fd_reply_num = #{fd_reply_num}
+		]]>
+	</update>
+
+	<update id="fd_re_update_like_up" parameterType="int">
+		<![CDATA[
+		update fd_reply
+		set fd_reply_likecount = fd_reply_likecount + 1
+		where fd_reply_num = #{fd_reply_num}
+		]]>
+	</update>
+
+	<update id="fd_re_update_like_down" parameterType="int">
+		<![CDATA[
+		update fd_reply
+		set fd_reply_likecount = fd_reply_likecount - 1
+		where fd_reply_num = #{fd_reply_num}
+		]]>
+	</update>
+
+
+
+
+
 </mapper>

@@ -11,7 +11,7 @@
                 #{feedback_replay_fileName},
                 #{feedback_video_fileName}, now(), #{feedback_readcount}, #{feedback_likecount},
                 #{feedback_vote_member}, #{feedback_vote_top},
-                #{feedback_vote_jungle}, #{feedback_vote_mid}, #{feedback_vote_ad}, #{feedback_vote_support}, #{feedback_thumbnail})
+                #{feedback_vote_jungle}, #{feedback_vote_mid}, #{feedback_vote_ad}, #{feedback_vote_support}, #{feedback_thumbnail}, #{feedback_replycount})
         ]]>
 	</insert>
 
@@ -116,5 +116,27 @@
         where feedback_num = #{feedbackNum}
         ]]>
 	</update>
+
+	<update id="updateReplyCount" parameterType="int">
+		<![CDATA[
+		update feedback
+		set feedback_replycount=feedback_replycount + 1
+		where feedback_num = #{feedbackNum}
+		]]>
+	</update>
+
+	<update id="deleteReplyCount" parameterType="int">
+		<![CDATA[
+		update feedback
+		set feedback_replycount=feedback_replycount - 1
+		where feedback_num = #{feedbackNum}
+		]]>
+	</update>
+
+
+
+
+
+
 
 </mapper>

@@ -20,9 +20,11 @@ public interface FeedbackService {
 	void removeFeedback(int feedbackNum) throws Exception;
 	void modifyFeedback(Feedback feedback) throws Exception;
 
-//	List<Fd_reply> getReplyList(int feedbackNum) throws Exception;
-//	List<Fd_reply> getReplyList_like(int feedbackNum) throws Exception;
-//	void regReply(Fd_reply fd_reply) throws Exception;
-//	void delReply(int fd_reply_num) throws Exception;
+	List<Fd_reply> getReplyList(int feedbackNum) throws Exception;
+	List<Fd_reply> getReplyList_like(int feedbackNum) throws Exception;
+	void regReply(Fd_reply fd_reply) throws Exception;
+	void delReply(int fd_reply_num) throws Exception;
 
+	void fd_re_like_ins_mno(int fd_reply_num, String mno) throws Exception;
+	void fd_re_like_del_mno(int fd_reply_num, String mno) throws Exception;
 }
