@@ -204,7 +204,7 @@ public class FeedbackController {
             /* 리플레이 시작 */
             /* 리플레이 여부, 피드백 게시판은 필수이므로 if문 제거 예정  */
             if (!feedback.getReplay_file().isEmpty()) {
-                String path_replay = servletContext.getRealPath("/feedback_upload/video/");
+                String path_replay = servletContext.getRealPath("/feedback_upload/replay/");
                 File destFile_reply = new File(path_replay + feedback.getReplay_file().getOriginalFilename());
                 feedback.setFeedback_replay_fileName(feedback.getReplay_file().getOriginalFilename());
                 feedback.getReplay_file().transferTo(destFile_reply);

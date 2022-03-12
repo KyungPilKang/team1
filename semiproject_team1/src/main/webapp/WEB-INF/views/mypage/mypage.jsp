@@ -350,11 +350,11 @@
 
                                                 <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
 
-                                            <%-- <c:choose>
-                                                <c:when test="${article.board_thumbnail != null }">
+                                            <c:choose>
+                                                <c:when test="${article_feedback.feedback_thumbnail!=null }">
                                                     <div class="each_board_thumbnail"
                                                          id="each_board_thumbnail"><img
-                                                            src="/thumbnail_view/${article.board_thumbnail}"
+                                                            src="/fd_thumbnail_view/${article_feedback.feedback_thumbnail}"
                                                             alt="thumbnail" class="thumbnail_size"/>
                                                     </div>
                                                 </c:when>
@@ -365,7 +365,7 @@
                                                             alt="thumbnail" class="thumbnail_size"/>
                                                     </div>
                                                 </c:otherwise>
-                                            </c:choose> --%>
+                                            </c:choose>
                                         </div>
                                     </c:forEach>
                                 </section>
