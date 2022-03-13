@@ -15,12 +15,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class RiotAPI {
 	private static String APIKEY = "RGAPI-f07d32e0-99f0-4d62-a323-53d475aadab7";
+	private static String APIURL = "https://na1.api.riotgames.com/lol/";
 	
 	public String getIdCode(String mem_link_id) {
 		String idCode=null;
 		StringBuffer response = new StringBuffer();
 		try {
-			String apiURL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/"+mem_link_id;
+			String apiURL = APIURL+"summoner/v4/summoners/by-name/"+mem_link_id;
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("GET");
@@ -56,7 +57,7 @@ public class RiotAPI {
 		Map<String, String> map=new HashMap<>();
 		StringBuffer response = new StringBuffer();
 		try {
-			String apiURL = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/"+id;
+			String apiURL = APIURL+"league/v4/entries/by-summoner/"+id;
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("GET");
@@ -98,7 +99,7 @@ public class RiotAPI {
 		Map<Integer, String> map=new HashMap<>();
 		StringBuffer response = new StringBuffer();
 		try {
-			String apiURL = "https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/"+id;
+			String apiURL = APIURL+"champion-mastery/v4/champion-masteries/by-summoner/"+id;
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("GET");

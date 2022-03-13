@@ -71,8 +71,6 @@ public class MemberController {
 	@GetMapping(value="/kakao_login")
 	public String kakao_login(@RequestParam("mem_email_id")String mem_email_id,
 			@RequestParam("page")String page, Model model) {
-		System.out.println(mem_email_id);
-		System.out.println(page);
 		Member mem=null;
 		Member result=null;
 		try {
@@ -91,8 +89,6 @@ public class MemberController {
 						session.setAttribute("mem_nickname", result.getMem_nickname());
 						result.setPage(mem.getPage());
 						model.addAttribute("mem", result);
-					} else {
-						
 					}
 				}
 			}

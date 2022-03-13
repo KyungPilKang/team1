@@ -35,7 +35,7 @@
 					<li><a href="/boardlist">자유게시판</a></li>
 					<c:choose>
 						<c:when test="${not empty mem_mno }">
-							<li><a href="">듀오</a></li>
+							<li><a href="/duoform">듀오</a></li>
 							<li><a href="/mypage">마이페이지</a></li>
 							<li><a href="/log_out?page=main">로그아웃</a></li>
 							<li style="color:white;">
@@ -512,6 +512,26 @@
 </div>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+let sweetalert=(icon,title,contents)=>{
+    Swal.fire({
+        icon: icon,
+        title: title,
+        text: contents,
+        confirmButtonText: "확인"
+    })
+	};
+	let ok="<c:out value='${duo_reg_ok}'/>";
+	if(ok=="no"){
+		Swal.fire({
+			title: "미연동 계정",
+			text: "계정 연동 후 듀오 서비스를 제공받을 수 있습니다",
+			icon: "error",
+			confirmButtonText: "확인"
+		})
+	}
+</script>
 
 <%-- 무한스크롤 --%>
 <script>

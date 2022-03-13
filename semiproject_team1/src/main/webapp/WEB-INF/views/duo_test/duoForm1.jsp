@@ -30,8 +30,8 @@
 			</div>
 		</div>
 		<div class="hero" style= "z-index:1;">
-			<h2>DUO</h2>
-			<button type="button" onclick="location.href='/duoform2' ">매칭등록/수정</button>
+			<h2>듀오 매칭</h2>
+			<button type="button" onclick="location.href='/duoform2' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button type="button" onclick="location.href='/duoform1' ">매칭신청/조회</button>
 		</div>
 		<div class="user-container">

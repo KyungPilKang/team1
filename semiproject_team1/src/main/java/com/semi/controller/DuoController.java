@@ -1,38 +1,79 @@
 package com.semi.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.semi.dto.Member;
+import com.semi.service.MemberService;
+import com.semi.service.MypageService;
 
 @Controller
 public class DuoController {
+	@Autowired
+	HttpSession session;
+	
+	@Autowired
+	MemberService memberService;
+	
+	@Autowired
+	MypageService mypageService;
 
-	@GetMapping("/duoform1")
-	public String duoForm1() {
-		return "duo/duoForm1";
-	}
-
-	@GetMapping("/duoform")
+	@GetMapping("duoform")
 	public String duoForm() {
-		return "duo/duoForm";
-	}
-
-	@GetMapping("/duoform2")
-	public String duoForm2() {
-		return "duo/duoForm2";
-	}
-
-	@GetMapping("/duoregform")
-	public String duoRegForm() {
-		return "duo/duoregForm";
-	}
-
-	@GetMapping("/duodetailform")
-	public String duoDetailForm() {
-		return "duo/duodetailForm";
+		Member mem=null;
+		String view=null;
+		try {
+			mem=memberService.selectMemeber_bymno((Integer)session.getAttribute("mem_mno"));
+			if(mem.getMem_link_confirm().equals("no")) {
+				view="redirect:/mypage?duo_reg_ok=no";
+			} else {
+				view="duo/duoForm";
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return view;
 	}
 	
-	@GetMapping("/duoresultform")
-	public String duoresultForm() {
-		return "duo/duoresultForm";
+	@GetMapping("duoregform")
+	public String duoRegForm(Model model) {
+		Member mem=null;
+		Map<String, String> tier_map=new HashMap<>();
+		Map<String, String> champ_map=new HashMap<>();
+		try {
+			mem=memberService.selectMemeber_bymno((Integer)session.getAttribute("mem_mno"));
+			model.addAttribute("mem", mem);
+			
+			if(mem.getMem_link_confirm().equals("yes")) {
+				//롤 티어 정보
+				tier_map=mypageService.selectTier((Integer)session.getAttribute("mem_mno"));
+				model.addAttribute("lol_tier", tier_map.get("lol_tier"));
+				model.addAttribute("lol_rank", tier_map.get("lol_rank"));
+				
+				//롤 승률 정보
+				model.addAttribute("lol_rate", tier_map.get("lol_rate"));
+				
+				//모스트 챔피언 정보
+				champ_map=mypageService.selectChamp((Integer)session.getAttribute("mem_mno"));
+				model.addAttribute("most1", champ_map.get("most1"));
+				model.addAttribute("most2", champ_map.get("most2"));
+				model.addAttribute("most3", champ_map.get("most3"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return "duo/duoregForm";
+	}
+	
+	@GetMapping("duosearchform")
+	public String duoSearchForm() {
+		return "duo/duosearchForm";
 	}
 }

@@ -11,11 +11,11 @@ public class Duo {
 	String duo_position; //탑:1, 정글:2, 미드:3, 원딜:4, 서폿:5
 	String duo_subposition; //탑:1, 정글:2, 미드:3, 원딜:4, 서폿:5
 	String duo_lol_tier;
-	String duo_lol_status;
-	String duo_select_champion;
+	String duo_lol_ratio;
+	String duo_play_type;
 	String duo_mic_ok;
 	String duo_allcham;
-	String duo_detail_modal; //모달창 제어 변수
+	String duo_info;
 	Date duo_date; //등록한 날짜&수정된 날짜&갱신할 날짜 관리 >> 조회 결과 갱신순으로 뿌려주기
 	
 	public Duo() {}
@@ -76,20 +76,20 @@ public class Duo {
 		this.duo_lol_tier = duo_lol_tier;
 	}
 
-	public String getDuo_lol_status() {
-		return duo_lol_status;
+	public String getDuo_lol_ratio() {
+		return duo_lol_ratio;
 	}
 
-	public void setDuo_lol_status(String duo_lol_status) {
-		this.duo_lol_status = duo_lol_status;
+	public void setDuo_lol_ratio(String duo_lol_ratio) {
+		this.duo_lol_ratio = duo_lol_ratio;
 	}
 
-	public String getDuo_select_champion() {
-		return duo_select_champion;
+	public String getDuo_play_type() {
+		return duo_play_type;
 	}
 
-	public void setDuo_select_champion(String duo_select_champion) {
-		this.duo_select_champion = duo_select_champion;
+	public void setDuo_play_type(String duo_play_type) {
+		this.duo_play_type = duo_play_type;
 	}
 
 	public String getDuo_mic_ok() {
@@ -108,12 +108,12 @@ public class Duo {
 		this.duo_allcham = duo_allcham;
 	}
 
-	public String getDuo_detail_modal() {
-		return duo_detail_modal;
+	public String getDuo_info() {
+		return duo_info;
 	}
 
-	public void setDuo_detail_modal(String duo_detail_modal) {
-		this.duo_detail_modal = duo_detail_modal;
+	public void setDuo_info(String duo_info) {
+		this.duo_info = duo_info;
 	}
 
 	public Date getDuo_date() {
@@ -123,5 +123,7 @@ public class Duo {
 	public void setDuo_date(Date duo_date) {
 		this.duo_date = duo_date;
 	}
+
+	
 	
 }

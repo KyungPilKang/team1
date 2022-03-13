@@ -43,24 +43,27 @@
                               alt="" width="60" height="60"> LOLPAN.DOG
             </a>
         </h1>
-        <div class="nav">
-            <div class="nav">
-                <ul>
-                    <li><a href="/feedback">피드백</a></li>
-                    <li><a href="/boardlist">자유게시판</a></li>
-                    <c:choose>
-                        <c:when test="${not empty mem_mno }">
-                            <%--                        <c:when test="${empty mem_mno }">--%>
-                            <li><a href="">DUO</a></li>
-                            <li><a href="/log_out?page=board">로그아웃</a></li>
-                        </c:when>
-                        <c:otherwise>
-                            <li><a href="/loginform?page=board">로그인</a></li>
-                        </c:otherwise>
-                    </c:choose>
-                </ul>
-            </div>
-        </div>
+        	<div class="nav">
+				<ul>
+					<li><a href="/feedback">피드백</a></li>
+					<li><a href="/boardlist">자유게시판</a></li>
+					<c:choose>
+						<c:when test="${not empty mem_mno }">
+							<li><a href="/duoform">듀오</a></li>
+							<li><a href="/mypage">마이페이지</a></li>
+							<li><a href="/log_out?page=main">로그아웃</a></li>
+							<li style="color:white;">
+								<img class="mb-4"
+								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
+								alt="" width="30" height="30">${mem_nickname }님 환영합니다
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="/loginform?page=main">로그인</a></li>	
+						</c:otherwise>
+					</c:choose>
+				</ul>
+			</div>
     </div>
 
     <%-- 바디 영역 --%>

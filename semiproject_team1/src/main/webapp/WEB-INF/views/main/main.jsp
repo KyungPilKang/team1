@@ -27,11 +27,11 @@
 			</h1>
 			<div class="nav">
 				<ul>
-					<li><a href="#">피드백</a></li>
+					<li><a href="/feedback">피드백</a></li>
 					<li><a href="/boardlist">자유게시판</a></li>
 					<c:choose>
 						<c:when test="${not empty mem_mno }">
-							<li><a href="/duoform1">듀오</a></li>
+							<li><a href="/duoform">듀오</a></li>
 							<li><a href="/mypage">마이페이지</a></li>
 							<li><a href="/log_out?page=main">로그아웃</a></li>
 							<li style="color:white;">
