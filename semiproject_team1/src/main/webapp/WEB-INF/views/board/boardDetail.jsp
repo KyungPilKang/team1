@@ -507,6 +507,7 @@
 <script>
     const replyList_sort = () => {
         $("#listForm").empty();
+        $(".append_replyList").empty();
         $.ajax({
             type: "post",
             async: false,

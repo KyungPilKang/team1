@@ -34,5 +34,8 @@ public interface FeedbackDAO {
 	void updateReadCount(int feedbackNum) throws Exception;
 	void updateReplyCount(int feedbackNum) throws Exception;
 	void deleteReplyCount(int feedbackNum) throws Exception;
-
+	void updateAnswerCount(int feedbackNum) throws Exception;
+	void deleteAnswerCount(int feedbackNum) throws Exception;
+	void updateLikeCount(int feedbackNum) throws Exception;
+	void deleteLikeCount(int feedbackNum) throws Exception;
 }

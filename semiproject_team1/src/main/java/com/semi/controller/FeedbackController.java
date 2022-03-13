@@ -166,19 +166,16 @@ public class FeedbackController {
                 case "1": {
                     List<Feedback> articleList = feedbackService.getFeedbackList_search_subject(page,pageInfo,feedback);
                     mv.addObject("articleList", articleList);
-                    System.out.println(articleList);
                     break;
                 }
                 case "2": {
                     List<Feedback> articleList = feedbackService.getFeedbackList_search_nickname(page,pageInfo,feedback);
                     mv.addObject("articleList", articleList);
-                    System.out.println("2번 왔다");
                     break;
                 }
                 case "3": {
                     List<Feedback> articleList = feedbackService.getFeedbackList_search_content(page,pageInfo,feedback);
                     mv.addObject("articleList", articleList);
-                    System.out.println("3번 왔다");
                     break;
                 }
             }
@@ -375,21 +372,39 @@ public class FeedbackController {
             List<Fd_reply> reList = feedbackService.getReplyList(feedbackNum);
 
             for (Fd_reply reply : reList) {
-                System.out.println(reply.getFd_reply_like_member());
+
                 List<String> reLikeMem_arr = List.of(reply.getFd_reply_like_member().split(","));
                 //split해서 배열로 각각 넣은 후 contains
                 if (mno != null) {
                     if (reLikeMem_arr.contains(mno)) {
                         reply.setFd_reply_like_ok("true");
-                        System.out.println("있어요");
                     } else {
                         reply.setFd_reply_like_ok("false");
-                        System.out.println("없어요");
                     }
                 }
             }
             mv.addObject("reList", reList);
             /* 리플 관련 끝 */
+
+            /* 피드백 답변 관련 시작*/
+            List<Fd_answer> anList = feedbackService.getAnswerList(feedbackNum);
+
+            for(Fd_answer answer :anList) {
+
+                List<String> anLikeMem_arr = List.of(answer.getFd_answer_like_member().split(","));
+                //split해서 배열로 각각 넣은 후 contains
+                if (mno != null) {
+                    if (anLikeMem_arr.contains(mno)) {
+                        answer.setFd_answer_like_ok("true");
+                    } else {
+                        answer.setFd_answer_like_ok("false");
+                    }
+                }
+            }
+
+            // 우선 좋아요는 리스트 가져오는거 확인 후 하단에 추가
+            /* 답변 관련 끝 */
+            mv.addObject("anList",anList);
 
             mv.addObject("article", feedback);
             mv.addObject("page", page);
@@ -463,8 +478,7 @@ public class FeedbackController {
             fd_reply.setFd_reply_nickname(board_nickname);
             fd_reply.setFd_feedback_num(feedbackNum);
             fd_reply.setFd_reply_content(fd_reply_content);
-            System.out.println("피드백 게시물번호 : "+feedbackNum);
-            System.out.println("피드백 댓글 내용 : "+fd_reply_content);
+
             feedbackService.regReply(fd_reply);
         } catch (Exception e) {
             e.printStackTrace();
@@ -486,13 +500,12 @@ public class FeedbackController {
     /* 댓글 좋아요 버튼 on */
     @ResponseBody
     @RequestMapping(value = "/fd_re_like_on", method = {RequestMethod.GET, RequestMethod.POST})
-    public void re_regreply(@RequestParam(value = "fd_reply_num") int fd_reply_num,
+    public void fd_re_like_on(@RequestParam(value = "fd_reply_num") int fd_reply_num,
                             @RequestParam(value = "mno") String mno) {
         try {
             /* b_reply_like_member에 mno를 추가해주는 서비스 */
             /* 추가시 b_reply_likecount도 +1 */
-            System.out.println("댓글좋아요on ajax 전달 테스트(댓글번호) : " + fd_reply_num);
-            System.out.println("댓글좋아요on ajax 전달 테스트(회원번호) : " + mno);
+
             feedbackService.fd_re_like_ins_mno(fd_reply_num,mno);
         } catch (Exception e) {
             e.printStackTrace();
@@ -502,21 +515,17 @@ public class FeedbackController {
     /* 댓글 좋아요 버튼 off */
     @ResponseBody
     @RequestMapping(value = "/fd_re_like_off", method = {RequestMethod.GET, RequestMethod.POST})
-    public void re_like_off(@RequestParam(value = "fd_reply_num") int fd_reply_num,
+    public void fd_re_like_off(@RequestParam(value = "fd_reply_num") int fd_reply_num,
                             @RequestParam(value = "mno") String mno) {
         try {
             /* b_reply_like_member에 mno를 제거해주는 서비스 */
             /* 제거시 b_reply_likecount도 -1 */
-            System.out.println("댓글좋아요off ajax 전달 테스트(댓글번호) : " + fd_reply_num);
-            System.out.println("댓글좋아요off ajax 전달 테스트(회원번호) : " + mno);
+
             feedbackService.fd_re_like_del_mno(fd_reply_num,mno);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-
-
 
 
 
@@ -531,16 +540,14 @@ public class FeedbackController {
             String mno = String.valueOf(session.getAttribute("mem_mno"));
 
             for(Fd_reply reply :reList) {
-                System.out.println(reply.getFd_reply_like_member());
+
                 List<String> reLikeMem_arr = List.of(reply.getFd_reply_like_member().split(","));
                 //split해서 배열로 각각 넣은 후 contains
                 if (mno != null) {
                     if (reLikeMem_arr.contains(mno)) {
                         reply.setFd_reply_like_ok("true");
-                        System.out.println("mno있어요");
                     } else {
                         reply.setFd_reply_like_ok("false");
-                        System.out.println("mno없어요");
                     }
                 }
             }
@@ -552,6 +559,131 @@ public class FeedbackController {
         }
         return "feedback/feedbackDetail_ajax";
     }
+
+    /*------------------------------------ 끝 : 피드백 댓글 ------------------------------------*/
+
+
+    /*------------------------------------ 시작 : 피드백 답변 ------------------------------------*/
+    
+    /* 피드백 답변 작성 */
+    @ResponseBody
+    @RequestMapping(value = "fd_reganswer", method = {RequestMethod.GET, RequestMethod.POST})
+    public void fd_reganswer(@RequestParam(value = "feedback_num") int feedbackNum,
+                            @RequestParam(value = "fd_answer_content") String fd_answer_content,
+                             @RequestParam(value = "fd_answer_title") String fd_answer_title) {
+        Fd_answer fd_answer = new Fd_answer();
+        try {
+            String board_nickname = (String) session.getAttribute("mem_nickname");
+            fd_answer.setFd_answer_nickname(board_nickname); //작성자
+            fd_answer.setFd_feedback_num(feedbackNum);
+            fd_answer.setFd_answer_title(fd_answer_title);
+            fd_answer.setFd_answer_content(fd_answer_content);
+
+            feedbackService.regAnswer(fd_answer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* 피드백 답변 삭제 */
+    @ResponseBody
+    @RequestMapping(value = "fd_answerdelete", method = {RequestMethod.GET, RequestMethod.POST})
+    public void fd_answerdelete(@RequestParam(value = "fd_answer_num") int fd_answer_num) {
+        try {
+            feedbackService.delAnswer(fd_answer_num);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /* 피드백 답변 좋아요 버튼 on */
+    @ResponseBody
+    @RequestMapping(value = "/fd_an_like_on", method = {RequestMethod.GET, RequestMethod.POST})
+    public void fd_an_like_on(@RequestParam(value = "feedback_num") int feedbackNum,
+                              @RequestParam(value = "fd_answer_num") int fd_answer_num,
+                            @RequestParam(value = "mno") String mno) {
+        try {
+            feedbackService.fd_an_like_ins_mno(fd_answer_num,mno,feedbackNum);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* 피드백 답변 좋아요 버튼 off */
+    @ResponseBody
+    @RequestMapping(value = "/fd_an_like_off", method = {RequestMethod.GET, RequestMethod.POST})
+    public void fd_an_like_off(@RequestParam(value = "feedback_num") int feedbackNum,
+                               @RequestParam(value = "fd_answer_num") int fd_answer_num,
+                            @RequestParam(value = "mno") String mno) {
+        try {
+
+            feedbackService.fd_an_like_del_mno(fd_answer_num,mno,feedbackNum);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* 피드백 답변 ajax 페이지 */
+    @RequestMapping(value = "feedbackDetail_ajax_answer", method = {RequestMethod.GET, RequestMethod.POST})
+    public String feedbackDetail_ajax_answer(@RequestParam(value = "feedback_num") int feedbackNum,
+                                      HttpServletRequest request, HttpSession session) {
+        try {
+            List<Fd_answer> anList = feedbackService.getAnswerList_latest(feedbackNum);
+            String mno = String.valueOf(session.getAttribute("mem_mno"));
+
+            for(Fd_answer answer :anList) {
+
+                List<String> anLikeMem_arr = List.of(answer.getFd_answer_like_member().split(","));
+                //split해서 배열로 각각 넣은 후 contains
+                if (mno != null) {
+                    if (anLikeMem_arr.contains(mno)) {
+                        answer.setFd_answer_like_ok("true");
+                    } else {
+                        answer.setFd_answer_like_ok("false");
+                    }
+                }
+            }
+            request.setAttribute("anList", anList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("err", e.getMessage());
+        }
+        return "feedback/feedbackDetail_ajax_answer";
+    }
+
+
+
+    /* 피드백 답변 고정 */
+    @ResponseBody
+    @RequestMapping(value = "/fd_an_fixed", method = {RequestMethod.GET, RequestMethod.POST})
+    public void fd_an_fixed(@RequestParam(value = "fd_answer_num") int fd_answer_num,
+                            @RequestParam(value = "feedback_num") int feedbackNum) {
+        try {
+            feedbackService.fd_an_fixed(fd_answer_num,feedbackNum);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* 피드백 답변 고정취소 */
+    @ResponseBody
+    @RequestMapping(value = "/fd_an_fixed_cancel", method = {RequestMethod.GET, RequestMethod.POST})
+    public void fd_an_fixed_cancel(@RequestParam(value = "fd_answer_num") int fd_answer_num,
+                                   @RequestParam(value = "feedback_num") int feedbackNum) {
+        try {
+            feedbackService.fd_an_fixed_cancel(fd_answer_num,feedbackNum);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+    /*------------------------------------ 끝 : 피드백 답변 ------------------------------------*/
+
 
     //리플레이 다운로드
     @GetMapping(value = "/replay_file_down")
@@ -588,16 +720,8 @@ public class FeedbackController {
     }
 
 
-    /*------------------------------------ 끝 : 피드백 댓글 ------------------------------------*/
 
 
-    @GetMapping("/feedbackform_all")
-    public String feedbackform_all() {
-        return "feedbackForm_all";
-    }
 
-//	 @GetMapping("/feedbackwriteform")
-//	 	public String feedbackwriteform() {
-//		 return "feedback/feedbackwriteForm";
-//	 }
+
 }

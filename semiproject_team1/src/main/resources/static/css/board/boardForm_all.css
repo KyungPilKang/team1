@@ -56,19 +56,19 @@
 
 .each_board_cat {
 	background: white;
-	padding: 5px;
+	padding: 3px;
 	font-weight: bold;
 }
 
 .each_board_nickname {
 	background: white;
-	padding: 5px;
+	padding: 3px;
 	font-weight: bold;
 }
 
 .each_board_date {
 	background: white;
-	padding: 5px;
+	padding: 3px;
 	font-weight: bold;
 }
 
