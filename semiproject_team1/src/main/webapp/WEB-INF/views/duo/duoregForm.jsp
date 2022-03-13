@@ -181,7 +181,6 @@ let sweetalert=(icon,title,contents)=>{
 
 	$('#next').click(function(){
 		var duo_position = $('#duo_position').val();
-		
 		if (duo_position==''){
 				Swal.fire({
 					title: "선택 오류",
@@ -231,7 +230,6 @@ let sweetalert=(icon,title,contents)=>{
 			})
 			return false;
     	}
-		
 		 var duo_info = $('#duo_info').val();
        		if(duo_info=='') {
 	        	Swal.fire({
@@ -241,18 +239,7 @@ let sweetalert=(icon,title,contents)=>{
 					confirmButtonText: "확인"
 				})
 				return false;
-        	}else{
-        		if(duo_info.length<10){
-        		Swal.fire({
-					title: "입력 오류",
-					text: "자기소개 내용을 10자 이상 입력해주세요",
-					icon: "error",
-					confirmButtonText: "확인"
-				})
-				
         	}
-        		return false;
-        	}	
 	});
 
 </script>

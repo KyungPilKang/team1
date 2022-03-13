@@ -209,17 +209,6 @@ let sweetalert=(icon,title,contents)=>{
 					confirmButtonText: "확인"
 				})
 				return false;
-        	}else{
-        		if(duo_info.length<10){
-        		Swal.fire({
-					title: "입력 오류",
-					text: "자기소개 내용을 10자 이상 입력해주세요",
-					icon: "error",
-					confirmButtonText: "확인"
-				})
-				
-        	}
-        		return false;
         	}	
 	});
 
