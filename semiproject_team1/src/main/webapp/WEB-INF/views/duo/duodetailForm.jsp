@@ -229,7 +229,23 @@
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">플레이 타입</div>
-				<input type="text" name="duo_link_id" value="${detail.duo_link_id }" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+				<c:choose>
+					<c:when test="${detail.duo_play_type eq '1' }">
+						<input type="text" name="duo_link_id" value="한타 지향" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+					</c:when>
+					<c:when test="${detail.duo_play_type eq '2' }">
+						<input type="text" name="duo_link_id" value="라인전 지향" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+					</c:when>
+					<c:when test="${detail.duo_play_type eq '3' }">
+						<input type="text" name="duo_link_id" value="오브젝트 지향" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+					</c:when>
+					<c:when test="${detail.duo_play_type eq '4' }">
+						<input type="text" name="duo_link_id" value="사이드 운영" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+					</c:when>
+					<c:otherwise>
+						<input type="text" name="duo_link_id" value="로밍 운영" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:73px">자기소개</div>
