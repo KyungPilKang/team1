@@ -46,12 +46,30 @@
 		</div>
 		<div class="hero" style= "z-index:1;">
 			<h2>듀오 매칭</h2>
-			<button type="button" onclick="location.href='/duoregform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button type="button" onclick="location.href='/duosearchform' ">매칭신청/조회</button>
+			<c:choose>
+				<c:when test="${mem_duo_reg_ok eq 'no' }">
+					<button type="button" onclick="location.href='/duoregform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" onclick="location.href='/duoregform?duo_reg_ok=no' ">매칭신청/조회</button>
+				</c:when>
+				<c:otherwise>
+					<button type="button" onclick="location.href='/duoeditform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" onclick="location.href='/duosearchform' ">매칭신청/조회</button>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 		<div class="footer">
-        
-    </div>
+	<div style="margin-left:20px; margin-top:10px">
+       		<ul class="footer-List">
+			<li>© 2022 LOLPAN.DOG LOLPAN.DOG isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</li>
+				<ul class="footer-CSList">
+				<li>고객센터 C/S Center</li>
+				<li>전화: 02.1234.5678</li>
+				<li>이메일: lolpan.dog@gmail.com</li>
+				<li>오전 9시부터 오후 6시까지 상담가능합니다.</li>
+				</ul> 
+			</ul>
+			<br>
+	</div>
 </body>
 </html>

@@ -18,4 +18,5 @@ public interface MemberService
 	public int selectMem_score(int mno) throws Exception;
 	public List<Member> link_member_list() throws Exception;
 	public Member selelctMember_bykakao(String id) throws Exception;
+	public void updateMem_reg_ok(String nickname) throws Exception;
 }

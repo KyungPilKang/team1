@@ -89,4 +89,9 @@
 			select * from board where board_num=#{board_num}
 		]]>
 	</select>
+	<update id="updateMem_reg_ok" parameterType="String">
+		<![CDATA[
+			update member set mem_duo_reg_ok='yes' where mem_nickname=#{nickname}
+		]]>
+	</update>
 </mapper>

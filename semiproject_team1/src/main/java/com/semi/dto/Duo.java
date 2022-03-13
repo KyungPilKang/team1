@@ -12,6 +12,9 @@ public class Duo {
 	String duo_subposition; //탑:1, 정글:2, 미드:3, 원딜:4, 서폿:5
 	String duo_lol_tier;
 	String duo_lol_ratio;
+	String duo_most1;
+	String duo_most2;
+	String duo_most3;
 	String duo_play_type;
 	String duo_mic_ok;
 	String duo_allcham;
@@ -84,6 +87,30 @@ public class Duo {
 		this.duo_lol_ratio = duo_lol_ratio;
 	}
 
+	public String getDuo_most1() {
+		return duo_most1;
+	}
+
+	public void setDuo_most1(String duo_most1) {
+		this.duo_most1 = duo_most1;
+	}
+
+	public String getDuo_most2() {
+		return duo_most2;
+	}
+
+	public void setDuo_most2(String duo_most2) {
+		this.duo_most2 = duo_most2;
+	}
+
+	public String getDuo_most3() {
+		return duo_most3;
+	}
+
+	public void setDuo_most3(String duo_most3) {
+		this.duo_most3 = duo_most3;
+	}
+
 	public String getDuo_play_type() {
 		return duo_play_type;
 	}
@@ -124,6 +151,5 @@ public class Duo {
 		this.duo_date = duo_date;
 	}
 
-	
 	
 }

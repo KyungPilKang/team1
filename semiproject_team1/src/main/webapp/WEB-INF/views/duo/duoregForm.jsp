@@ -47,22 +47,30 @@
 		</div>
 		<div class="hero" style="z-index: 1;">
 			<h2>듀오 매칭</h2>
-			<button type="button" onclick="location.href='/duoregform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button type="button" onclick="location.href='/duosearchform' ">매칭신청/조회</button>
+			<c:choose>
+				<c:when test="${mem_duo_reg_ok eq 'no' }">
+					<button type="button" onclick="location.href='/duoregform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" onclick="location.href='/duoregform?duo_reg_ok=no' ">매칭신청/조회</button>
+				</c:when>
+				<c:otherwise>
+					<button type="button" onclick="location.href='/duoeditform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" onclick="location.href='/duosearchform' ">매칭신청/조회</button>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<form action="/duoreg" method="post">
 		<div class="user-container">
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">닉네임</div>
-				<input type="text" name="duo_nickname" value="${mem.mem_nickname }" readOnly style="height:30px">
+				<input type="text" name="duo_nickname" value="${mem.mem_nickname }" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">롤 아이디</div>
-				<input type="text" name="duo_link_id" value="${mem.mem_link_id }" readOnly style="height:30px">
+				<input type="text" name="duo_link_id" value="${mem.mem_link_id }" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">포지션</div>
-				<select class="form-control" id="duo_position" name="duo_position" style="width:100px; height:30px">
+				<select class="form-control" id="duo_position" name="duo_position" style="height:30px; font-weight:bold; text-align:center; width:120px;">
 					<option value="0" selected>주포지션</option>
                     <option value="1">탑</option>
                     <option value="2">정글</option>
@@ -70,7 +78,7 @@
                     <option value="4">원딜</option>
                     <option value="5">서포터</option>
                 </select>
-                <select class="form-control" id="duo_subposition" name="duo_subposition" style="width:100px; height:30px" disabled>
+                <select class="form-control" id="duo_subposition" name="duo_subposition" style="height:30px; font-weight:bold; text-align:center; width:120px;" disabled>
                     <option value="0" selected>서브포지션</option>
                     <option value="1" id="p1">탑</option>
                     <option value="2" id="p2">정글</option>
@@ -82,21 +90,21 @@
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">티어</div>
-				<input type="text" name="duo_lol_tier" value="${lol_tier }(${lol_rank })" readOnly style="height:30px">
+				<input type="text" name="duo_lol_tier" value="${lol_tier }(${lol_rank })" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">승률</div>
-				<input type="text" name="duo_lol_ratio" value="${lol_rate }"readOnly style="height:30px">
+				<input type="text" name="duo_lol_ratio" value="${lol_rate }" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">모스트 챔피언</div>
-				<input type="text" name="duo_most1" value="${most1 }"readOnly style="height:30px; width:120px;">
-				<input type="text" name="duo_most2" value="${most2 }"readOnly style="height:30px; width:120px;">
-				<input type="text" name="duo_most3" value="${most3 }"readOnly style="height:30px; width:120px;">
+				<input type="text" name="duo_most1" value="${most1 }"readOnly  style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center; width:120px;">
+				<input type="text" name="duo_most2" value="${most2 }"readOnly  style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center; width:120px;">
+				<input type="text" name="duo_most3" value="${most3 }"readOnly  style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center; width:120px;">
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">플레이 타입</div>
-				<select class="form-control" id="duo_play_type" name="duo_play_type" style="width:100px; height:30px">
+				<select class="form-control" id="duo_play_type" name="duo_play_type" style="height:30px; font-weight:bold; text-align:center;">
                   <option value="0">1개 선택</option>
                   <option value="1">한타 지향</option>
                   <option value="2">라인전 지향</option>
@@ -106,12 +114,14 @@
                 </select>
 			</div>
 			<div class="duo_wr_subject">
-				<div style="width:120px; float:left; text-align:center; margin-top:6px">마이크 여부</div>
-				<input type="radio" id="duo_mic_ok" name="duo_mic_ok">
+				<div style="width:120px; float:left; text-align:center; margin-top:4px">마이크 여부</div>
+				&nbsp;&nbsp;<span>Y</span><input type="radio" id="duo_mic_ok" name="duo_mic_ok" value="yes">
+				<span>N</span><input type="radio" id="duo_mic_ok" name="duo_mic_ok" value="no">
 			</div>
 			<div class="duo_wr_subject">
-				<div style="width:120px; float:left; text-align:center; margin-top:6px">올챔 여부</div>
-				<input type="radio" id="duo_allcham" name="duo_allcham">
+				<div style="width:120px; float:left; text-align:center; margin-top:4px">올챔 여부</div>
+				&nbsp;&nbsp;<span>Y</span><input type="radio" id="duo_allcham" name="duo_allcham" value="yes">
+				<span>N</span><input type="radio" id="duo_allcham" name="duo_allcham" value="no">
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:73px">자기소개</div>
@@ -125,9 +135,40 @@
 	</form>
 	</div>
 	<div class="footer">
+	<div style="margin-left:20px; margin-top:10px">
+       		<ul class="footer-List">
+			<li>© 2022 LOLPAN.DOG LOLPAN.DOG isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</li>
+				<ul class="footer-CSList">
+				<li>고객센터 C/S Center</li>
+				<li>전화: 02.1234.5678</li>
+				<li>이메일: lolpan.dog@gmail.com</li>
+				<li>오전 9시부터 오후 6시까지 상담가능합니다.</li>
+				</ul> 
+			</ul>
+			<br>
+	</div>
 	</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
+let sweetalert=(icon,title,contents)=>{
+    Swal.fire({
+        icon: icon,
+        title: title,
+        text: contents,
+        confirmButtonText: "확인"
+    })
+	};
+	let ok="<c:out value='${duo_reg_ok}'/>";
+	if(ok=="no"){
+		Swal.fire({
+			title: "미등록 계정",
+			text: "듀오 등록 후 매칭(조회)서비스가 가능합니다",
+			icon: "error",
+			confirmButtonText: "확인"
+		})
+	}
+
 	$('#duo_position').change(function(){
 		$('#duo_subposition').attr('disabled', false);
 		$('#duo_position>option').attr('disabled', false);
