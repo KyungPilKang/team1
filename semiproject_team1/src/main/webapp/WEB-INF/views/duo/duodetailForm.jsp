@@ -197,7 +197,7 @@
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">승률</div>
-				<input type="text" name="duo_lol_ratio" value="${detail.duo_lol_ratio }" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+				<input type="text" name="duo_lol_ratio" value="${detail.duo_lol_ratio }%" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">모스트 챔피언</div>
