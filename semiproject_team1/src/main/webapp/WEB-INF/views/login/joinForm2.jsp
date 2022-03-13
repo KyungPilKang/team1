@@ -134,7 +134,7 @@
 				success: function(data, textStatus){
 					if(data=="false"){
 						alert("문자 또는 숫자를 다시 확인하세요");
-						$('.captcha').css("display","inline-block");
+						$('.captcha').css("display","");
 						captcha_ok=false;
 					} else {
 						alert("정상입니다");
