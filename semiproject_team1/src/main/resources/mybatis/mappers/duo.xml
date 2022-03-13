@@ -3,41 +3,34 @@
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.semi.dao.DuoDAO">
-
-<select id="queryDuo" resultType="Duo" parameterType="String">
-	
-	<!--resultType은 쿼리의 결과를 패키징할 클래스타입, parameterType은 매개변수 타입-->
-		<!--아래 CDATA로 묶는 이유는 해당 코드가 태그 언어가 아니라는 것을 xml 파일에 알려주는 역할
-		즉, <, > 연산자나 &,% 등 조건문 연산자를 태그 언어에서 CDATA로 파싱하지 않으면 에러가 발생한다.
-		다시말해, 아래의 코드는 태그가 아니라 실제 쿼리에 필요한 코드임을 밝히는 것이다.-->
-		
-		<![CDATA[
-			select * from duo where id=#{id}
-		]]>
-		
-		<!--#{}안에 적히는 변수명은 파라미터로 넘어오는 변수명과 동일해야 한다.-->
-		
-	</select>
-	<select id="duoList" resultType="Duo">
-	
-	<!--실제로 받을 데이터는 배열형태이지만 Account로 마이바티스가 데이터를 내려보내면 List로 받을 수 있다.-->
-	
-		<![CDATA[
-			select * from duo order by id
-		]]>
-	</select>
 	<insert id="insertDuo" parameterType="Duo">
 		<![CDATA[
-			insert into duo values(#{duo_num},#{duo_email_id},#{duo_nickname},#{duo_link_id},#{duo_position},#{duo_subposition},#{duo_lol_tier},#{duo_lol_status})
-			,#{duo_select_champion},#{duo_mic_ok},#{duo_allcham},#{duo_detail_modal},#{duo_date}
+			insert into duo (duo_email_id, duo_nickname, duo_link_id, duo_position, duo_subposition,
+			duo_lol_tier, duo_lol_ratio, duo_most1, duo_most2, duo_most3, duo_play_type, duo_mic_ok, duo_allcham,
+			duo_info, duo_date) values(#{duo_email_id}, #{duo_nickname}, #{duo_link_id}, #{duo_position},
+			#{duo_subposition}, #{duo_lol_tier}, #{duo_lol_ratio}, #{duo_most1}, #{duo_most2}, #{duo_most3},
+			#{duo_play_type}, #{duo_mic_ok}, #{duo_allcham}, #{duo_info}, now())
 		]]>
 	</insert>
 	<update id="updateDuo" parameterType="Duo">
 		<![CDATA[
-			update duo set balance=#{balance} where id=#{id}
+			update duo set duo_position=#{duo_position}, duo_subposition=#{duo_subposition},
+			duo_lol_tier=#{duo_lol_tier}, duo_lol_ratio=#{duo_lol_ratio}, duo_most1=#{duo_most1},
+			duo_most2=#{duo_most2}, duo_most3=#{duo_most3},
+			duo_play_type=#{duo_play_type}, duo_info=#{duo_info}, duo_date=now()
+			where duo_nickname=#{duo_nickname}
 		]]>
 	</update>
-
+	<select id="selectDuoList" resultType="Duo">
+		<![CDATA[
+			select * from duo order by duo_date desc
+		]]>
+	</select>
+	<select id="selectDuo" resultType="Duo" parameterType="String">
+		<![CDATA[
+			select * from duo where duo_nickname=#{nickname}
+		]]>
+	</select>
 </mapper>
 
 

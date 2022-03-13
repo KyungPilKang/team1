@@ -11,6 +11,7 @@
     <meta name="generator" content="Hugo 0.88.1">
     <link rel="shortcut icon" sizes="16x16 32x32 64x64"
 	href="/resources/asset/image/login/dog1.png" />
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <title>이용약관</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
@@ -106,7 +107,15 @@
 </main>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
+<script>
+	let sweetalert=(icon,title,contents)=>{
+    Swal.fire({
+        icon: icon,
+        title: title,
+        text: contents,
+        confirmButtonText: "확인"
+    })
+</script>
 <script>
 
 	let email_ok=false;
@@ -120,34 +129,49 @@
 	}
 	
 <!-- captcha 입력 유효성 체크 -->
-	    $('#captchavalid').click(function () {
-	    	if($('#userin').val()==""){
-				alert("문자 또는 숫자를 입력하세요");
-				return false;
-			} 
-			$.ajax({
-				type:"post",
-				dataType:"text",
-				async:false,
-				url:"http://localhost:8090/captchacheck",
-				data:{userin:$('#userin').val()},
-				success: function(data, textStatus){
-					if(data=="false"){
-						alert("문자 또는 숫자를 다시 확인하세요");
-						$('.captcha').css("display","inline-block");
-						captcha_ok=false;
-					} else {
-						alert("정상입니다");
-						$('.captcha').css("display","none");
-						captcha_ok=true;
-						console.log(captcha_ok);
-						if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
-					    	$('#form_submit').attr('disabled', false);
-					    }
-					}
-				}
-			});
-		});
+$('#captchavalid').click(function () {
+	if($('#userin').val()==""){
+		Swal.fire({
+	        icon: 'error',
+	        title: '입력 오류',
+	        text: '문자 또는 숫자를 다시 확인하세요',
+	        confirmButtonText: "확인"
+	    })
+		return false;
+	} 
+	$.ajax({
+		type:"post",
+		dataType:"text",
+		async:false,
+		url:"http://localhost:8090/captchacheck",
+		data:{userin:$('#userin').val()},
+		success: function(data, textStatus){
+			if(data=="false"){
+				Swal.fire({
+	    	        icon: 'error',
+	    	        title: '입력 오류',
+	    	        text: '문자 또는 숫자를 다시 확인하세요',
+	    	        confirmButtonText: "확인"
+	    	    })
+				$('.captcha').css("display","");
+				captcha_ok=false;
+			} else {
+				Swal.fire({
+	    	        icon: 'success',
+	    	        title: '입력 성공',
+	    	        text: '자동 생성 방지가 완료되었습니다',
+	    	        confirmButtonText: "확인"
+	    	    })
+				$('.captcha').css("display","none");
+				captcha_ok=true;
+				console.log(captcha_ok);
+				if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
+			    	$('#form_submit').attr('disabled', false);
+			    }
+			}
+		}
+	});
+});
 	    
 	    <!-- 이메일 db중복 체크 -->
 	    function emailcheck(){

@@ -29,131 +29,174 @@
 <!-- 
 create database semi;
 
-CREATE TABLE `member` (
-  `mem_mno` int AUTO_INCREMENT not null,
-  `mem_email_id` varchar(30) NOT NULL,
-  `mem_nickname` varchar(30) NOT NULL,
-  `mem_pw` varchar(30) NOT NULL,
-  `mem_code` varchar(30) NOT NULL,
-  `mem_code_confirm` varchar(30) NOT NULL,
-  `mem_link_id` varchar(30) NOT NULL,
-  `mem_link_code` varchar(30) NOT NULL,
-  `mem_link_confirm` varchar(30) NOT NULL,
-  `mem_duo_reg_ok` varchar(30) NOT NULL,
-  PRIMARY KEY (`mem_mno`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `article_like` (
+  `article_like_num` int NOT NULL AUTO_INCREMENT,
+  `mno` varchar(1000) NOT NULL,
+  `board_num` varchar(1000) NOT NULL,
+  PRIMARY KEY (`article_like_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `message` (
-  `no` int AUTO_INCREMENT not null,
-  `to_id` varchar(30) NOT NULL,
-  `from_id` varchar(30) NOT NULL,
-  `msg_title` varchar(30) NOT NULL,
-  `msg_content` varchar(30) NOT NULL,
-  PRIMARY KEY (`no`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-CREATE TABLE `board` (
-  `board_num` int AUTO_INCREMENT not null,
-  `board_nickname` varchar(30) NOT NULL,
-  `board_cat` varchar(30) NOT NULL,
-  `board_subject` varchar(100) NOT NULL,
-  `board_content` mediumtext NOT NULL,
-  `board_fileName` varchar(30) default null,
-  `board_date` datetime NOT NULL,
-  `board_readcount` int NOT NULL,
-  `board_likecount` int NOT NULL,
-  `board_replycount` int NOT NULL,
-  PRIMARY KEY (`board_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `article_ward` (
+  `article_ward_num` int NOT NULL AUTO_INCREMENT,
+  `mno` varchar(1000) NOT NULL,
+  `board_num` varchar(1000) NOT NULL,
+  PRIMARY KEY (`article_ward_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `b_reply` (
-  `b_reply_num` int AUTO_INCREMENT not null,
-  `b_reply_nickname` varchar(30) NOT NULL,
-  `b_board_num` varchar(30) NOT NULL,
+  `b_reply_num` int NOT NULL AUTO_INCREMENT,
+  `b_reply_nickname` varchar(1000) NOT NULL,
+  `b_board_num` varchar(1000) NOT NULL,
   `b_reply_content` mediumtext NOT NULL,
   `b_reply_ref` int NOT NULL,
   `b_reply_lev` int NOT NULL,
   `b_reply_seq` int NOT NULL,
   `b_reply_date` datetime NOT NULL,
   `b_reply_likecount` int NOT NULL,
-  `b_reply_like_member` varchar(1000) default null,
-  `b_reply_edit_controll` varchar(30) NOT NULL,
+  `b_reply_like_member` varchar(1000) NOT NULL,
   PRIMARY KEY (`b_reply_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `article_like` (
- `article_like_num` int AUTO_INCREMENT not null,
- `mno` varchar(30) NOT NULL,
- `board_num` varchar(30) NOT NULL,
- PRIMARY KEY (`article_like_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-​
-CREATE TABLE `article_ward` (
- `article_ward_num` int AUTO_INCREMENT not null,
- `mno` varchar(30) NOT NULL,
- `board_num` varchar(30) NOT NULL,
- PRIMARY KEY (`article_ward_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `board` (
+  `board_num` int NOT NULL AUTO_INCREMENT,
+  `board_nickname` varchar(1000) NOT NULL,
+  `board_cat` varchar(1000) NOT NULL,
+  `board_subject` varchar(1000) NOT NULL,
+  `board_content` mediumtext NOT NULL,
+  `board_fileName` varchar(1000) DEFAULT NULL,
+  `board_date` datetime NOT NULL,
+  `board_readcount` int NOT NULL,
+  `board_likecount` int NOT NULL,
+  `board_replycount` int NOT NULL,
+  `board_thumbnail` mediumtext,
+  PRIMARY KEY (`board_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `duo` (
+  `duo_num` int NOT NULL AUTO_INCREMENT,
+  `duo_email_id` varchar(1000) DEFAULT NULL,
+  `duo_nickname` varchar(1000) NOT NULL,
+  `duo_link_id` varchar(1000) NOT NULL,
+  `duo_position` varchar(1000) NOT NULL,
+  `duo_subposition` varchar(1000) NOT NULL,
+  `duo_lol_tier` varchar(1000) NOT NULL,
+  `duo_lol_ratio` varchar(1000) NOT NULL,
+  `duo_most1` varchar(1000) NOT NULL,
+  `duo_most2` varchar(1000) NOT NULL,
+  `duo_most3` varchar(1000) NOT NULL,
+  `duo_play_type` varchar(1000) NOT NULL,
+  `duo_mic_ok` varchar(1000) DEFAULT NULL,
+  `duo_allcham` varchar(1000) DEFAULT NULL,
+  `duo_info` mediumtext NOT NULL,
+  `duo_date` datetime NOT NULL,
+  PRIMARY KEY (`duo_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `feedback` (
-  `feedback_num` int AUTO_INCREMENT not null,
-  `feedback_nickname` varchar(30) NOT NULL,
-  `feedback_subject` varchar(100) NOT NULL,
+  `feedback_num` int NOT NULL AUTO_INCREMENT,
+  `feedback_nickname` varchar(1000) NOT NULL,
+  `feedback_subject` varchar(1000) NOT NULL,
   `feedback_content` mediumtext NOT NULL,
-  `feedback_replay_fileName` varchar(30) NOT NULL,
-  `feedback_video_fileName` varchar(30) NOT NULL,
+  `feedback_replay_fileName` varchar(1000) NOT NULL,
+  `feedback_video_fileName` varchar(1000) NOT NULL,
   `feedback_date` datetime NOT NULL,
   `feedback_readcount` int NOT NULL,
   `feedback_likecount` int NOT NULL,
-  `feedback_vote_member` varchar(1000) default null,
+  `feedback_vote_member` varchar(1000) DEFAULT NULL,
   `feedback_vote_top` int NOT NULL,
   `feedback_vote_jungle` int NOT NULL,
   `feedback_vote_mid` int NOT NULL,
   `feedback_vote_ad` int NOT NULL,
   `feedback_vote_support` int NOT NULL,
+  `feedback_thumbnail` mediumtext,
+  `feedback_replycount` int NOT NULL,
+  `feedback_answercount` int NOT NULL,
   PRIMARY KEY (`feedback_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `fd_answer` (
-  `fd_answer_num` int AUTO_INCREMENT not null,
-  `fd_answer_nickname` varchar(30) NOT NULL,
-  `fd_answer_title` varchar(30) NOT NULL,
-  `fd_answer_content` mediumtext NOT NULL,
-  `fd_answer_date` datetime NOT NULL,
-  `fd_answer_likecount` int NOT NULL,
-  `fd_answer_like_member` varchar(1000) default null,
-  `fd_answer_fixed` varchar(30) NOT NULL,
-  `fd_answer_edit_controll` varchar(30) NOT NULL,
-  PRIMARY KEY (`fd_answer_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
 CREATE TABLE `fd_reply` (
-  `fd_reply_num` int AUTO_INCREMENT not null,
-  `fd_reply_nickname` varchar(30) NOT NULL,
+  `fd_reply_num` int NOT NULL AUTO_INCREMENT,
+  `fd_reply_nickname` varchar(1000) NOT NULL,
   `fd_reply_content` mediumtext NOT NULL,
   `fd_reply_date` datetime NOT NULL,
   `fd_reply_likecount` int NOT NULL,
-  `fd_reply_like_member` varchar(1000) default null,
-  `fd_reply_edit_controll` varchar(30) NOT NULL,
+  `fd_reply_like_member` varchar(1000) DEFAULT NULL,
+  `fd_feedback_num` varchar(1000) NOT NULL,
   PRIMARY KEY (`fd_reply_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `duo` (
-  `duo_num` int AUTO_INCREMENT not null,
-  `duo_email_id` varchar(30) NOT NULL,
-  `duo_nickname` varchar(30) NOT NULL,
-  `duo_link_id` varchar(30) NOT NULL,
-  `duo_position` varchar(30) NOT NULL,
-  `duo_subposition` varchar(30) NOT NULL,
-  `duo_lol_tier` varchar(30) NOT NULL,
-  `duo_lol_status` varchar(30) NOT NULL,
-  `duo_select_champion` varchar(30) NOT NULL,
-  `duo_mic_ok` varchar(30) NOT NULL,
-  `duo_allcham` varchar(30) NOT NULL,
-  `duo_detail_modal` varchar(30) NOT NULL,
-  `duo_date` datetime NOT NULL,
-  PRIMARY KEY (`duo_num`)
+CREATE TABLE `fd_answer` (
+  `fd_answer_num` int NOT NULL AUTO_INCREMENT,
+  `fd_answer_nickname` varchar(1000) NOT NULL,
+  `fd_answer_title` varchar(1000) NOT NULL,
+  `fd_answer_content` mediumtext NOT NULL,
+  `fd_answer_date` datetime NOT NULL,
+  `fd_answer_likecount` int NOT NULL,
+  `fd_answer_like_member` varchar(1000) DEFAULT NULL,
+  `fd_answer_fixed` varchar(1000) NOT NULL,
+  `fd_feedback_num` varchar(1000) NOT NULL,
+  PRIMARY KEY (`fd_answer_num`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `feedback` (
+  `feedback_num` int NOT NULL AUTO_INCREMENT,
+  `feedback_nickname` varchar(1000) NOT NULL,
+  `feedback_subject` varchar(1000) NOT NULL,
+  `feedback_content` mediumtext NOT NULL,
+  `feedback_replay_fileName` varchar(1000) NOT NULL,
+  `feedback_video_fileName` varchar(1000) NOT NULL,
+  `feedback_date` datetime NOT NULL,
+  `feedback_readcount` int NOT NULL,
+  `feedback_likecount` int NOT NULL,
+  `feedback_vote_member` varchar(1000) DEFAULT NULL,
+  `feedback_vote_top` int NOT NULL,
+  `feedback_vote_jungle` int NOT NULL,
+  `feedback_vote_mid` int NOT NULL,
+  `feedback_vote_ad` int NOT NULL,
+  `feedback_vote_support` int NOT NULL,
+  `feedback_thumbnail` mediumtext,
+  `feedback_replycount` int NOT NULL,
+  `feedback_answercount` int NOT NULL,
+  PRIMARY KEY (`feedback_num`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `member` (
+  `mem_mno` int NOT NULL AUTO_INCREMENT,
+  `mem_email_id` varchar(1000) DEFAULT NULL,
+  `mem_nickname` varchar(1000) NOT NULL,
+  `mem_pw` varchar(1000) DEFAULT NULL,
+  `mem_code` varchar(1000) DEFAULT NULL,
+  `mem_code_confirm` varchar(1000) NOT NULL,
+  `mem_link_id` varchar(1000) DEFAULT NULL,
+  `mem_link_code` varchar(1000) DEFAULT NULL,
+  `mem_link_confirm` varchar(1000) NOT NULL,
+  `mem_duo_reg_ok` varchar(1000) NOT NULL,
+  `mem_score` int DEFAULT NULL,
+  `mem_type` varchar(1000) NOT NULL,
+  `mem_admin_confirm` varchar(1000) DEFAULT NULL,
+  `mem_kakao_id` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`mem_mno`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `message` (
+  `no` int NOT NULL AUTO_INCREMENT,
+  `to_id` varchar(1000) NOT NULL,
+  `from_id` varchar(1000) NOT NULL,
+  `msg_title` varchar(1000) NOT NULL,
+  `msg_content` varchar(1000) NOT NULL,
+  PRIMARY KEY (`no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+ALTER TABLE member AUTO_INCREMENT=1;
+ALTER TABLE message AUTO_INCREMENT=1;
+ALTER TABLE article_like AUTO_INCREMENT=1;
+ALTER TABLE article_ward AUTO_INCREMENT=1;
+ALTER TABLE b_reply AUTO_INCREMENT=1;
+ALTER TABLE board AUTO_INCREMENT=1;
+ALTER TABLE duo AUTO_INCREMENT=1;
+ALTER TABLE fd_answer AUTO_INCREMENT=1;
+ALTER TABLE fd_reply AUTO_INCREMENT=1;
+ALTER TABLE feedback AUTO_INCREMENT=1;
 
  -->
 

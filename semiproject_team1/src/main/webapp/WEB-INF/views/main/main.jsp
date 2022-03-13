@@ -27,11 +27,11 @@
 			</h1>
 			<div class="nav">
 				<ul>
-					<li><a href="#">피드백</a></li>
+					<li><a href="/feedback">피드백</a></li>
 					<li><a href="/boardlist">자유게시판</a></li>
 					<c:choose>
 						<c:when test="${not empty mem_mno }">
-							<li><a href="">듀오</a></li>
+							<li><a href="/duoform">듀오</a></li>
 							<li><a href="/mypage">마이페이지</a></li>
 							<li><a href="/log_out?page=main">로그아웃</a></li>
 							<li style="color:white;">
@@ -69,6 +69,19 @@
 					</ul></li>
 			</ul>
 		</div> -->
+	</div>
+			<div class="footer">
+	<div style="margin-left:20px; margin-top:10px">
+       		<ul class="footer-List">
+			<li>© 2022 LOLPAN.DOG LOLPAN.DOG isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</li>
+				<ul class="footer-CSList">
+				<li>고객센터 C/S Center</li>
+				<li>전화: 02.1234.5678</li>
+				<li>이메일: lolpan.dog@gmail.com</li>
+				<li>오전 9시부터 오후 6시까지 상담가능합니다.</li>
+				</ul> 
+			</ul>
+			<br>
 	</div>
 </body>
 </html>

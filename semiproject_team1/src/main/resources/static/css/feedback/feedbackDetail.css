@@ -263,6 +263,14 @@ body {
 	height: 20px;
 }
 
+.eee {
+	border: 5px solid #b30000;
+	border-radius: 8px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	height: 20px;
+}
+
 /* 댓글 작성 박스*/
 .comment_write_content {
 	border: 2px solid #4169E1;
@@ -271,6 +279,15 @@ body {
 	width: 800px;
 	font-weight: bold;
 }
+
+.answer_write_content {
+	border: 2px solid #4169E1;
+	background-color: rgba(0, 0, 0, 0);
+	height: 100px;
+	width: 800px;
+	font-weight: bold;
+}
+
 
 /* 대댓글 작성창 숨김처리 css */
 .re_comment_write {
@@ -298,6 +315,27 @@ body {
 	display: none;
 }
 
+.an_heart {
+	height: 15px;
+	width: 15px;
+	border-radius: 10px;
+	background: red;
+	cursor: pointer;
+}
+
+.an_heart_off {
+	height: 15px;
+	width: 15px;
+	border-radius: 10px;
+	border: 1px solid black;
+	cursor: pointer;
+}
+
+/* 댓글 좋아요 기능구현에 필수 css*/
+.ah_off_hide, .ah_hide {
+	display: none;
+}
+
 
 /* 0312 추가 (위에 board 기준으로 한거 전부 이름 및 설정 바꿔주긴 해야한다) */
 
@@ -309,15 +347,29 @@ body {
 }
 
 .answer_cont{
-	margin-top:50px;
-	background-color: red;
-	height:5vh;
-	width: 5vw;
+	margin-top: 20px;
+	width: 950px;
+	height: 380px;
+	border: 3px solid #708090;
+	border-radius: 7px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	overflow: scroll;
+	overflow-x: hidden;
+	font-weight: bold;
 }
 
 .reply_cont{
-	margin-top:50px;
-	background-color: red;
-	height:5vh;
-	width: 5vw;
+	margin-top:450px;
+	width: 950px;
+	height: 380px;
+	border: 3px solid #708090;
+	border-radius: 7px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	overflow: scroll;
+	overflow-x: hidden;
+	font-weight: bold;
 }

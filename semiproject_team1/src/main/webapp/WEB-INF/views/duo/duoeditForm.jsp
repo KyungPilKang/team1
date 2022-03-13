@@ -1,334 +1,163 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>duoeditForm</title>
-
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/feather/feather.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/typicons/typicons.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/simple-line-icons/css/simple-line-icons.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/css/vendor.bundle.base.css">
-  <!-- endinject -->
-  <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/select2/select2.min.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/select2-bootstrap-theme/select2-bootstrap.min.css">
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/vertical-layout-light/style.css">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/asset/image/duo/favicon.png" />
-
+<link rel="shortcut icon" sizes="16x16 32x32 64x64"
+	href="/resources/asset/image/login/dog1.png" />
+<title>듀오매칭</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/duo/duoForm2.css">
 </head>
+
 <body>
-
- <div class="container-scroller">
-
-    <div class="col-md-6 grid-margin stretch-card">
-      <div class="card">
-        <div class="card-body">
-   
-          <form class="forms-sample">
-
-            <div class="form-group d-sm-flex d-inline-flex align-items-center">
-              <label for="exampleInputUsername2" class="col-sm-3 col-form-label">닉네임 입력</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" id="exampleInputUsername2" placeholder="닉네임">
-              </div>
+	<div class="container">
+		<div class="header" style="z-index: 2;">
+			<h1>
+				<a href="/main"> <img class="mb-4"
+					src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
+					alt="" width="60" height="60"> LOLPAN.DOG
+				</a>
+			</h1>
+			<div class="nav">
+            <div class="nav">
+                <ul>
+					<li><a href="/feedback">피드백</a></li>
+					<li><a href="/boardlist">자유게시판</a></li>
+					<c:choose>
+						<c:when test="${not empty mem_mno }">
+							<li><a href="/duoform">듀오</a></li>
+							<li><a href="/mypage">마이페이지</a></li>
+							<li><a href="/log_out?page=main">로그아웃</a></li>
+							<li style="color:white;">
+								<img class="mb-4"
+								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
+								alt="" width="30" height="30">${mem_nickname }님 환영합니다
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="/loginform?page=main">로그인</a></li>	
+						</c:otherwise>
+					</c:choose>
+				</ul>
             </div>
-
-            <div class="form-group d-sm-flex d-inline-flex align-items-center">
-              <label for="exampleInputUsername2" class="col-sm-3 col-form-label">롤 아이디 입력</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" id="exampleInputUsername2" placeholder="롤 아이디">
-              </div>
-            </div>
-
-            <div class="form-group d-sm-flex d-inline-flex align-items-center">
-              <label for="positionSelect" class="col-sm-3 col-form-label">포지션(주/서브)</label>
-
-              <div class="align-items-center">
-                <select class="form-control" id="positionSelect">
-                  <option>1개 선택</option>
-                  <option>탑</option>
-                  <option>정글</option>
-                  <option>미드</option>
-                  <option>바텀</option>
-                  <option>서포터</option>
+       		</div>
+		</div>
+		<div class="hero" style="z-index: 1;">
+			<h2>듀오 매칭</h2>
+			<c:choose>
+				<c:when test="${mem_duo_reg_ok eq 'no'	 }">
+					<button type="button" onclick="location.href='/duoregform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" onclick="location.href='/duoregform?duo_reg_ok=no' ">매칭신청/조회</button>
+				</c:when>
+				<c:otherwise>
+					<button type="button" onclick="location.href='/duoeditform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" onclick="location.href='/duosearchform' ">매칭신청/조회</button>
+				</c:otherwise>
+			</c:choose>
+		</div>
+		<form action="/duoupdate" method="post">
+		<div class="user-container">
+			<div style="text-align:center; margin-top:10px; margin-bottom:30px;">
+				<h3>등록 정보를 업데이트 시 전적 정보가 최신 데이터로 갱신됩니다</h3>
+			</div>
+			<div class="duo_wr_subject">
+				<div style="width:120px; float:left; text-align:center; margin-top:13px">닉네임</div>
+				<input type="text" name="duo_nickname" value="${mem.mem_nickname }" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+			</div>
+			<div class="duo_wr_subject">
+				<div style="width:120px; float:left; text-align:center; margin-top:13px">롤 아이디</div>
+				<input type="text" name="duo_link_id" value="${mem.mem_link_id }" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+			</div>
+			<div class="duo_wr_subject">
+				<div style="width:120px; float:left; text-align:center; margin-top:13px">포지션</div>
+				<select class="form-control" id="duo_position" name="duo_position" style="height:30px; font-weight:bold; text-align:center; width:120px;">
+					<option value="0" selected>주포지션</option>
+                    <option value="1">탑</option>
+                    <option value="2">정글</option>
+                    <option value="3">미드</option>
+                    <option value="4">원딜</option>
+                    <option value="5">서포터</option>
                 </select>
-              </div>
-
-              <div class="align-items-center mx-3">
-                <select class="form-control" id="positionSelect2">
-                  <option>1개 선택</option>
-                  <option>탑</option>
-                  <option>정글</option>
-                  <option>미드</option>
-                  <option>바텀</option>
-                  <option>서포터</option>
+                <select class="form-control" id="duo_subposition" name="duo_subposition" style="height:30px; font-weight:bold; text-align:center; width:120px;" disabled>
+                    <option value="0" selected>서브포지션</option>
+                    <option value="1" id="p1">탑</option>
+                    <option value="2" id="p2">정글</option>
+                    <option value="3" id="p3">미드</option>
+                    <option value="4" id="p4">원딜</option>
+                    <option value="5" id="p5">서포터</option>
+                    <option value="6">선택안함</option>
                 </select>
-              </div>
-
-            </div>
-
-            <div class="form-group d-sm-flex d-inline-flex align-items-center">
-              <label for="exampleInputUsername2" class="col-sm-3 col-form-label">티어</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" id="exampleInputUsername2" placeholder="티어 입력">
-              </div>
-            </div>
-
-            <div class="form-group d-sm-flex d-inline-flex align-items-center">
-              <label for="exampleInputUsername2" class="col-sm-3 col-form-label">승률</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control" id="exampleInputUsername2" placeholder="승률 입력">
-              </div>
-            </div>
-
-            <div class="form-group d-sm-flex d-inline-flex align-items-center">
-              <label for="selectChamp" class="col-sm-3 col-form-label">선호 챔피언</label>
-
-              <select class="js-example-basic-single col-sm-4" id="selectChamp">
-                <option value="">챔피언 선택</option>
-                <option value="86">가렌</option>
-                <option value="3">갈리오</option>
-                <option value="41">갱플랭크</option>
-                <option value="79">그라가스</option>
-                <option value="104">그레이브즈</option>
-                <option value="887">그웬</option>
-                <option value="150">나르</option>
-                <option value="267">나미</option>
-                <option value="75">나서스</option>
-                <option value="111">노틸러스</option>
-                <option value="56">녹턴</option>
-                <option value="20">누누와 윌럼프</option>
-                <option value="76">니달리</option>
-                <option value="518">니코</option>
-                <option value="122">다리우스</option>
-                <option value="131">다이애나</option>
-                <option value="119">드레이븐</option>
-                <option value="13">라이즈</option>
-                <option value="497">라칸</option>
-                <option value="33">람머스</option>
-                <option value="99">럭스</option>
-                <option value="68">럼블</option>
-                <option value="">레나타 글라스크</option>
-                <option value="58">레넥톤</option>
-                <option value="89">레오나</option>
-                <option value="421">렉사이</option>
-                <option value="526">렐</option>
-                <option value="107">렝가</option>
-                <option value="236">루시안</option>
-                <option value="117">룰루</option>
-                <option value="7">르블랑</option>
-                <option value="64">리 신</option>
-                <option value="92">리븐</option>
-                <option value="127">리산드라</option>
-                <option value="876">릴리아</option>
-                <option value="11">마스터 이</option>
-                <option value="57">마오카이</option>
-                <option value="90">말자하</option>
-                <option value="54">말파이트</option>
-                <option value="82">모데카이저</option>
-                <option value="25">모르가나</option>
-                <option value="36">문도 박사</option>
-                <option value="21">미스 포츈</option>
-                <option value="432">바드</option>
-                <option value="110">바루스</option>
-                <option value="254">바이</option>
-                <option value="45">베이가</option>
-                <option value="67">베인</option>
-                <option value="711">벡스</option>
-                <option value="161">벨코즈</option>
-                <option value="106">볼리베이</option>
-                <option value="201">브라움</option>
-                <option value="63">브랜드</option>
-                <option value="8">블라디미르</option>
-                <option value="53">블리츠크랭크</option>
-                <option value="234">비에고</option>
-                <option value="112">빅토르</option>
-                <option value="78">뽀삐</option>
-                <option value="360">사미라</option>
-                <option value="14">사이온</option>
-                <option value="517">사일러스</option>
-                <option value="35">샤코</option>
-                <option value="235">세나</option>
-                <option value="147">세라핀</option>
-                <option value="113">세주아니</option>
-                <option value="875">세트</option>
-                <option value="37">소나</option>
-                <option value="16">소라카</option>
-                <option value="98">쉔</option>
-                <option value="102">쉬바나</option>
-                <option value="50">스웨인</option>
-                <option value="72">스카너</option>
-                <option value="15">시비르</option>
-                <option value="5">신 짜오</option>
-                <option value="134">신드라</option>
-                <option value="27">신지드</option>
-                <option value="412">쓰레쉬</option>
-                <option value="103">아리</option>
-                <option value="32">아무무</option>
-                <option value="136">아우렐리온 솔</option>
-                <option value="427">아이번</option>
-                <option value="268">아지르</option>
-                <option value="84">아칼리</option>
-                <option value="166">아크샨</option>
-                <option value="266">아트록스</option>
-                <option value="523">아펠리오스</option>
-                <option value="12">알리스타</option>
-                <option value="1">애니</option>
-                <option value="34">애니비아</option>
-                <option value="22">애쉬</option>
-                <option value="157">야스오</option>
-                <option value="245">에코</option>
-                <option value="60">엘리스</option>
-                <option value="62">오공</option>
-                <option value="516">오른</option>
-                <option value="61">오리아나</option>
-                <option value="2">올라프</option>
-                <option value="777">요네</option>
-                <option value="83">요릭</option>
-                <option value="77">우디르</option>
-                <option value="6">우르곳</option>
-                <option value="19">워웍</option>
-                <option value="350">유미</option>
-                <option value="39">이렐리아</option>
-                <option value="28">이블린</option>
-                <option value="81">이즈리얼</option>
-                <option value="420">일라오이</option>
-                <option value="59">자르반 4세</option>
-                <option value="498">자야</option>
-                <option value="143">자이라</option>
-                <option value="154">자크</option>
-                <option value="40">잔나</option>
-                <option value="24">잭스</option>
-                <option value="238">제드</option>
-                <option value="101">제라스</option>
-                <option value="221">제리</option>
-                <option value="126">제이스</option>
-                <option value="142">조이</option>
-                <option value="115">직스</option>
-                <option value="202">진</option>
-                <option value="26">질리언</option>
-                <option value="222">징크스</option>
-                <option value="31">초가스</option>
-                <option value="43">카르마</option>
-                <option value="164">카밀</option>
-                <option value="38">카사딘</option>
-                <option value="30">카서스</option>
-                <option value="69">카시오페아</option>
-                <option value="145">카이사</option>
-                <option value="121">카직스</option>
-                <option value="55">카타리나</option>
-                <option value="429">칼리스타</option>
-                <option value="85">케넨</option>
-                <option value="51">케이틀린</option>
-                <option value="141">케인</option>
-                <option value="10">케일</option>
-                <option value="96">코그모</option>
-                <option value="42">코르키</option>
-                <option value="133">퀸</option>
-                <option value="240">클레드</option>
-                <option value="246">키아나</option>
-                <option value="203">킨드레드</option>
-                <option value="44">타릭</option>
-                <option value="91">탈론</option>
-                <option value="163">탈리야</option>
-                <option value="223">탐 켄치</option>
-                <option value="48">트런들</option>
-                <option value="18">트리스타나</option>
-                <option value="23">트린다미어</option>
-                <option value="4">트위스티드 페이트</option>
-                <option value="29">트위치</option>
-                <option value="17">티모</option>
-                <option value="555">파이크</option>
-                <option value="80">판테온</option>
-                <option value="9">피들스틱</option>
-                <option value="114">피오라</option>
-                <option value="105">피즈</option>
-                <option value="74">하이머딩거</option>
-                <option value="120">헤카림</option>
-              </select>
-
-            </div>
-
-            <div class="form-group d-sm-flex d-inline-flex align-items-center">
-              <label for="selectMic" class="col-sm-3 col-form-label">마이크 가능 여부</label>
-
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" name="optionsRadios" id="selectMic" value="">
-                </label>
-              </div>
-
-            </div>
-
-            <div class="form-group d-sm-flex d-inline-flex align-items-center">
-              <label for="selectAllChamp" class="col-sm-3 col-form-label">올챔 여부</label>
-
-              <div class="form-check">
-                <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" name="optionsRadios" id="selectAllChamp" value="">
-                </label>
-              </div>
-
-            </div>
-
-            <div class="form-group d-sm-flex d-inline-flex align-items-center">
-              <label for="selectPlayStyle" class="col-sm-3 col-form-label">플레이 방식</label>
-
-              <div class="align-items-center">
-                <select class="form-control" id="selectPlayStyle">
-                  <option>1개 선택</option>
-                  <option>한타 지향</option>
-                  <option>대한타지향</option>
+			</div>
+			<div class="duo_wr_subject">
+				<div style="width:120px; float:left; text-align:center; margin-top:13px">티어</div>
+				<input type="text" name="duo_lol_tier" value="${lol_tier }(${lol_rank })" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+			</div>
+			<div class="duo_wr_subject">
+				<div style="width:120px; float:left; text-align:center; margin-top:13px">승률</div>
+				<input type="text" name="duo_lol_ratio" value="${lol_rate }%" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+			</div>
+			<div class="duo_wr_subject">
+				<div style="width:120px; float:left; text-align:center; margin-top:13px">모스트 챔피언</div>
+				<input type="text" name="duo_most1" value="${most1 }"readOnly  style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center; width:120px;">
+				<input type="text" name="duo_most2" value="${most2 }"readOnly  style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center; width:120px;">
+				<input type="text" name="duo_most3" value="${most3 }"readOnly  style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center; width:120px;">
+			</div>
+			<div class="duo_wr_subject">
+				<div style="width:120px; float:left; text-align:center; margin-top:13px">플레이 타입</div>
+				<select class="form-control" id="duo_play_type" name="duo_play_type" style="height:30px; font-weight:bold; text-align:center;">
+                  <option value="0">1개 선택</option>
+                  <option value="1">한타 지향</option>
+                  <option value="2">라인전 지향</option>
+                  <option value="3">오브젝트 지향</option>
+                  <option value="4">사이드 운영</option>
+                  <option value="5">로밍 운영</option>
                 </select>
-              </div>
+			</div>
+			<div class="duo_wr_subject">
+				<div style="width:120px; float:left; text-align:center; margin-top:73px">자기소개</div>
+				<input type="text" placeholder="내용을 입력해주세요" style="width: 470px; height: 150px;"
+				id="duo_info" name="duo_info">
+			</div>
+		</div>
+		<div class="hero" style="margin-top:900px;">
+			<button type="submit">업데이트</button>
+		</div>
+	</form>
+	</div>
+	<div class="footer">
+		<ul class="footer-List">
+			<li>About LOLPAN.DOG</li>
+			<li>개인정보처리방침</li>
+			<li>도움말</li>
+			<li>문의/피드백</li>
+			<li>광고</li>
+			<li>제휴</li>
+		</ul>
+		<ul class="footer-CSList">
+			<li>고객센터 C/S Center</li>
+			<li>전화: 02.1234.5678</li>
+			<li>팩스: 02.1234.5678</li>
+			<li>이메일: lolpan.dog@gmail.com</li>
+			<li>카카오톡 ID: LOLPANDOG</li>
+			<li>오전 9시부터 오후 6시까지 상담가능합니다.</li>
+		</ul>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+	$('#duo_position').change(function(){
+		$('#duo_subposition').attr('disabled', false);
+		$('#duo_position>option').attr('disabled', false);
+		$('#duo_subposition>option[value='+$("#duo_position").val()+']').attr('disabled', true);
+		$('#duo_subposition').change(function(){
+			$('#duo_subposition>option').attr('disabled', false);
+			$('#duo_position>option[value='+$("#duo_subposition").val()+']').attr('disabled', true);
+		});
+	});
 
-            </div>
-            <div class="form-group">
-              <label for="textarea" class="col-sm-3 col-form-label">소개글</label>
-              <textarea class="form-control h-25" id="textarea" rows="7"></textarea>
-            </div>
 
-  
-            <br />
-            <button type="submit" class="btn btn-primary me-2">돌아가기</button>
-            <button type="submit" class="btn btn-primary me-2">수정</button>
-
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- container-scroller -->
-  <!-- plugins:js -->
-  <script src="${pageContext.request.contextPath}/resources/js/duo/js/vendor.bundle.base.js"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page -->
-  <script src="${pageContext.request.contextPath}/resources/js/duo/typeahead.bundle.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/js/duo/select2/select2.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/js/duo/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-  <!-- End plugin js for this page -->
-  <!-- inject:js -->
-  <script src="${pageContext.request.contextPath}/resources/js/duo/off-canvas.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/js/duo/hoverable-collapse.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/js/duo/template.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/js/duo/settings.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/js/duo/todolist.js"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="${pageContext.request.contextPath}/resources/js/duo/file-upload.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/js/duo/typeahead.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/js/duo/select2.js"></script>
-  <!-- End custom js for this page-->
-
+</script>
 </body>
 </html>

@@ -3,4 +3,150 @@
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.semi.dao.Fd_answerDAO">
+
+	<select id="selectAnswerList" resultType="fd_answer"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from fd_answer
+		where fd_feedback_num = #{feedbackNum}
+		order by fd_answer_fixed desc, fd_answer_likecount desc, fd_answer_date desc
+		]]>
+	</select>
+
+	<select id="selectAnswerList_latest" resultType="fd_answer"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from fd_answer
+		where fd_feedback_num = #{feedbackNum}
+		order by fd_answer_date desc
+		]]>
+	</select>
+
+	<select id="selectMaxAnswerNum" resultType="integer">
+		<![CDATA[
+		select max(fd_answer_num)
+		from fd_answer
+		]]>
+	</select>
+
+	<insert id="insertAnswer" parameterType="fd_answer">
+		<![CDATA[
+		insert into fd_answer
+		values (#{fd_answer_num}, #{fd_answer_nickname},#{fd_answer_title}, #{fd_answer_content}, now(), #{fd_answer_likecount},
+				#{fd_answer_like_member}, #{fd_answer_fixed}, #{fd_feedback_num})
+		]]>
+	</insert>
+
+	<delete id="deleteAnswer" parameterType="int">
+		<![CDATA[
+		delete
+		from fd_answer
+		where fd_answer_num = #{fd_answer_num}
+		]]>
+	</delete>
+
+	<!-- 피드백 게시물 삭제시 답변도 삭제 -->
+	<delete id="deleteAnswerWithFeedback" parameterType="int">
+		<![CDATA[
+		delete
+		from fd_answer
+		where fd_feedback_num = #{feedbackNum}
+		]]>
+	</delete>
+
+	<select id="selectAnswer" resultType="fd_answer" parameterType="int">
+		<![CDATA[
+		select *
+		from fd_answer
+		where fd_answer_num = #{fd_answer_num}
+		]]>
+	</select>
+
+	<!-- 피드백 답변 좋아요 관련 -->
+	<update id="fd_an_insert_like_mno">
+		<![CDATA[
+		update fd_answer
+		set fd_answer_like_member =concat_ws(',',fd_answer_like_member,#{mno})
+		where fd_answer_num = #{fd_answer_num}
+		]]>
+	</update>
+
+	<update id="fd_an_delete_like_mno">
+		<![CDATA[
+		update fd_answer
+		set fd_answer_like_member = #{fd_answer_like_member}
+		where fd_answer_num = #{fd_answer_num}
+		]]>
+	</update>
+
+	<update id="fd_an_update_like_up" parameterType="int">
+		<![CDATA[
+		update fd_answer
+		set fd_answer_likecount = fd_answer_likecount + 1
+		where fd_answer_num = #{fd_answer_num}
+		]]>
+	</update>
+
+	<update id="fd_an_update_like_down" parameterType="int">
+		<![CDATA[
+		update fd_answer
+		set fd_answer_likecount = fd_answer_likecount - 1
+		where fd_answer_num = #{fd_answer_num}
+		]]>
+	</update>
+
+
+	<!-- 피드백 답변 고정 관련 -->
+
+	<update id="fd_an_update_fixed" parameterType="int">
+		<![CDATA[
+		update fd_answer
+		set fd_answer_fixed = "1"
+		where fd_answer_num = #{fd_answer_num}
+		]]>
+	</update>
+
+	<update id="fd_an_update_fixed_cancel" parameterType="int">
+		<![CDATA[
+		update fd_answer
+		set fd_answer_fixed = "0"
+		where fd_feedback_num = #{feedbackNum}
+		]]>
+	</update>
+
+	<!-- 피드백 답변번호에 해당하는 유저 닉네임-->
+	<select id="selectNickname_answerNum" resultType="string" parameterType="int">
+		<![CDATA[
+		select fd_answer_nickname
+		from fd_answer
+		where fd_answer_num = #{fd_answer_num}
+		]]>
+	</select>
+
+	<update id="plusScore" parameterType="member">
+		<![CDATA[
+		update member
+		set mem_score = mem_score + 10
+		where mem_nickname = #{nickName}
+		]]>
+	</update>
+
+	<update id="minusScore" parameterType="member">
+		<![CDATA[
+		update member
+		set mem_score = mem_score - 10
+		where mem_nickname = #{nickName}
+		]]>
+	</update>
+
+	<select id="selectNickname_fixed" resultType="string" parameterType="int">
+		<![CDATA[
+		select fd_answer_nickname
+		from fd_answer
+		where fd_feedback_num = #{feedbackNum} and fd_answer_fixed ="1";
+		]]>
+	</select>
+
 </mapper>

@@ -140,17 +140,23 @@ body {
 
 .container {
 	width: 100%;
-	height: 120vh;
+	height: 100vh;
 	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
 		url(../../asset/image/board/lol4.jpg);
 	background-size: cover;
 }
 
 .fd_footer {
-	background-color: black;
-	border-top: 5px solid #4169E1;
-	width: 100%;
-	height: 140px;
+    background-color: black;
+    border-top: 5px solid #4169E1;
+    width: 100%;
+    height: 100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    left: 0;
+    bottom: 0;
 }
 
 /* 헤더 영역 */
@@ -309,3 +315,28 @@ body {
 .request_btn {
 	background-color: rgba(255, 0, 0, 0.54);
 }
+
+/* 푸터에들어갈내용 */
+.footer-List {
+	color: white;
+	
+}
+
+.footer-List li{
+	text-decoration: none;
+	display: inline-block;
+	margin: 10px;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.footer-CSList li{
+	color: white;
+	text-decoration: none;
+	display: inline-block;
+	margin: 10px;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+/* 푸터 내용 끝 */

@@ -216,7 +216,7 @@ function kakaoLogin(){
 						async:true,
 						url:"http://localhost:8090/kakao_login",
 						contentType:"application/json; charset=utf-8",
-						data:JSON.stringify(jsonData),
+						data:{"key":JSON.stringify(jsonData)}, //테스트 해보기
 						success: function(data, textStatus){
 							if(data.mem.mem_code_confirm=="no"){
 								Swal.fire({
