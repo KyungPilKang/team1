@@ -70,7 +70,7 @@
 			</ul>
 		</div> -->
 	</div>
-	<div class="footer">
+			<div class="footer">
 	<div style="margin-left:20px; margin-top:10px">
        		<ul class="footer-List">
 			<li>© 2022 LOLPAN.DOG LOLPAN.DOG isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</li>
@@ -83,6 +83,5 @@
 			</ul>
 			<br>
 	</div>
-</div>
 </body>
 </html>
