@@ -52,6 +52,7 @@ public class MemberController {
 				if(result.getMem_code_confirm().equals("yes")) {
 					session.setAttribute("mem_mno", result.getMem_mno());
 					session.setAttribute("mem_nickname", result.getMem_nickname());
+					
 				}
 				result.setPage(mem.getPage());
 				map.put("mem", result);
