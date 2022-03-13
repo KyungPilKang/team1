@@ -192,6 +192,21 @@
 		]]>
 	</update>
 
+	<update id="updateLikeCount" parameterType="int">
+		<![CDATA[
+		update feedback
+		set feedback_likecount=feedback_likecount + 1
+		where feedback_num = #{feedbackNum}
+		]]>
+	</update>
+
+	<update id="deleteLikeCount" parameterType="int">
+		<![CDATA[
+		update feedback
+		set feedback_likecount=feedback_likecount - 1
+		where feedback_num = #{feedbackNum}
+		]]>
+	</update>
 
 
 

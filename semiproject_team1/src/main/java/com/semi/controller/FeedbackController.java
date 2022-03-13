@@ -600,10 +600,11 @@ public class FeedbackController {
     /* 피드백 답변 좋아요 버튼 on */
     @ResponseBody
     @RequestMapping(value = "/fd_an_like_on", method = {RequestMethod.GET, RequestMethod.POST})
-    public void fd_an_like_on(@RequestParam(value = "fd_answer_num") int fd_answer_num,
+    public void fd_an_like_on(@RequestParam(value = "feedback_num") int feedbackNum,
+                              @RequestParam(value = "fd_answer_num") int fd_answer_num,
                             @RequestParam(value = "mno") String mno) {
         try {
-            feedbackService.fd_an_like_ins_mno(fd_answer_num,mno);
+            feedbackService.fd_an_like_ins_mno(fd_answer_num,mno,feedbackNum);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -612,11 +613,12 @@ public class FeedbackController {
     /* 피드백 답변 좋아요 버튼 off */
     @ResponseBody
     @RequestMapping(value = "/fd_an_like_off", method = {RequestMethod.GET, RequestMethod.POST})
-    public void fd_an_like_off(@RequestParam(value = "fd_answer_num") int fd_answer_num,
+    public void fd_an_like_off(@RequestParam(value = "feedback_num") int feedbackNum,
+                               @RequestParam(value = "fd_answer_num") int fd_answer_num,
                             @RequestParam(value = "mno") String mno) {
         try {
 
-            feedbackService.fd_an_like_del_mno(fd_answer_num,mno);
+            feedbackService.fd_an_like_del_mno(fd_answer_num,mno,feedbackNum);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -650,6 +652,31 @@ public class FeedbackController {
         return "feedback/feedbackDetail_ajax_answer";
     }
 
+
+
+    /* 피드백 답변 고정 */
+    @ResponseBody
+    @RequestMapping(value = "/fd_an_fixed", method = {RequestMethod.GET, RequestMethod.POST})
+    public void fd_an_fixed(@RequestParam(value = "fd_answer_num") int fd_answer_num,
+                            @RequestParam(value = "feedback_num") int feedbackNum) {
+        try {
+            feedbackService.fd_an_fixed(fd_answer_num,feedbackNum);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* 피드백 답변 고정취소 */
+    @ResponseBody
+    @RequestMapping(value = "/fd_an_fixed_cancel", method = {RequestMethod.GET, RequestMethod.POST})
+    public void fd_an_fixed_cancel(@RequestParam(value = "fd_answer_num") int fd_answer_num,
+                                   @RequestParam(value = "feedback_num") int feedbackNum) {
+        try {
+            feedbackService.fd_an_fixed_cancel(fd_answer_num,feedbackNum);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

@@ -502,6 +502,7 @@
             async: true,
             type: 'POST',
             data: {
+                feedback_num: ${article.feedback_num},
                 fd_answer_num: replyNum,
                 mno:${mem_mno}
             },
@@ -528,6 +529,7 @@
             async: true,
             type: 'POST',
             data: {
+                feedback_num: ${article.feedback_num},
                 fd_answer_num: replyNum,
                 mno:${mem_mno}
             },
@@ -548,15 +550,15 @@
 
 <%-- 피드백 고정 --%>
 <script>
-    function answer_fiexd(answerNum) {
+    function answer_fixed(answerNum) {
         $.ajax({
             async: true,
             type: 'POST',
             data: {
-                fd_reply_num: answerNum,
-                mno:${mem_mno}
+                feedback_num: ${article.feedback_num},
+                fd_answer_num : answerNum
             },
-            url: "http://localhost:8090/fd_re_like_off",
+            url: "http://localhost:8090/fd_an_fixed",
             success: function (data) {
             },
             error: function (textStatus) {
@@ -564,6 +566,26 @@
             }
         });
         alert(answerNum + "번 피드백 답변을 고정하였습니다.")
+        location.reload();
+    }
+
+
+    function answer_fiexd_cancel(answerNum) {
+        $.ajax({
+            async: true,
+            type: 'POST',
+            data: {
+                feedback_num: ${article.feedback_num},
+                fd_answer_num : answerNum
+            },
+            url: "http://localhost:8090/fd_an_fixed_cancel",
+            success: function (data) {
+            },
+            error: function (textStatus) {
+                alert(textStatus);
+            }
+        });
+        alert(answerNum + "번 피드백 답변 고정을 취소하셨습니다.")
         location.reload();
     }
 </script>

@@ -36,9 +36,11 @@ public interface FeedbackService {
 	void regAnswer(Fd_answer fd_answer) throws Exception;
 	void delAnswer(int fd_answer_num) throws Exception;
 	//피드백답변 좋아요
-	void fd_an_like_ins_mno(int fd_reply_num, String mno) throws Exception;
-	void fd_an_like_del_mno(int fd_reply_num, String mno) throws Exception;
+	void fd_an_like_ins_mno(int fd_reply_num, String mno, int feedbackNum) throws Exception;
+	void fd_an_like_del_mno(int fd_reply_num, String mno, int feedbackNum) throws Exception;
+	// 피드백 고정, 고정취소
+	void fd_an_fixed(int fd_answer_num, int feedbackNum) throws Exception;
+	void fd_an_fixed_cancel(int fd_answer_num, int feedbackNum) throws Exception;
 	/* 피드백 답변 끝 */
-
 
 }

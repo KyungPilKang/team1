@@ -97,4 +97,56 @@
 		]]>
 	</update>
 
+
+	<!-- 피드백 답변 고정 관련 -->
+
+	<update id="fd_an_update_fixed" parameterType="int">
+		<![CDATA[
+		update fd_answer
+		set fd_answer_fixed = "1"
+		where fd_answer_num = #{fd_answer_num}
+		]]>
+	</update>
+
+	<update id="fd_an_update_fixed_cancel" parameterType="int">
+		<![CDATA[
+		update fd_answer
+		set fd_answer_fixed = "0"
+		where fd_feedback_num = #{feedbackNum}
+		]]>
+	</update>
+
+	<!-- 피드백 답변번호에 해당하는 유저 닉네임-->
+	<select id="selectNickname_answerNum" resultType="string" parameterType="int">
+		<![CDATA[
+		select fd_answer_nickname
+		from fd_answer
+		where fd_answer_num = #{fd_answer_num}
+		]]>
+	</select>
+
+	<update id="plusScore" parameterType="member">
+		<![CDATA[
+		update member
+		set mem_score = mem_score + 10
+		where mem_nickname = #{nickName}
+		]]>
+	</update>
+
+	<update id="minusScore" parameterType="member">
+		<![CDATA[
+		update member
+		set mem_score = mem_score - 10
+		where mem_nickname = #{nickName}
+		]]>
+	</update>
+
+	<select id="selectNickname_fixed" resultType="string" parameterType="int">
+		<![CDATA[
+		select fd_answer_nickname
+		from fd_answer
+		where fd_feedback_num = #{feedbackNum} and fd_answer_fixed ="1";
+		]]>
+	</select>
+
 </mapper>

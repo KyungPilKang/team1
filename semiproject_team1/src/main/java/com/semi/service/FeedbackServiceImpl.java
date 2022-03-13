@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.semi.dao.Fd_answerDAO;
 import com.semi.dao.Fd_replyDAO;
+import com.semi.dao.MemberDAO;
 import com.semi.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Autowired
     Fd_answerDAO fd_answerDAO;
+
+    @Autowired
+    MemberDAO memberDAO;
 	
 	@Override
 	public void regFeedback(Feedback feedback) throws Exception {
@@ -283,13 +287,15 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    public void fd_an_like_ins_mno(int fd_answer_num, String mno) throws Exception {
+    public void fd_an_like_ins_mno(int fd_answer_num, String mno, int feedbackNum) throws Exception {
         fd_answerDAO.fd_an_insert_like_mno(fd_answer_num,mno);
         fd_answerDAO.fd_an_update_like_up(fd_answer_num);
+        // 여기에.. 피드백의 likeCount를 증가해주는 쿼리문을 넣으면 된다...
+        feedbackDAO.updateLikeCount(feedbackNum);
     }
 
     @Override
-    public void fd_an_like_del_mno(int fd_answer_num, String mno) throws Exception {
+    public void fd_an_like_del_mno(int fd_answer_num, String mno, int feedbackNum) throws Exception {
         // 1. DB에서 해당 b_reply_num의 b_reply_like_member 문자열 값을 가져온다
         Fd_answer answer = fd_answerDAO.selectAnswer(fd_answer_num);
         String an_like_mem = answer.getFd_answer_like_member();
@@ -305,7 +311,36 @@ public class FeedbackServiceImpl implements FeedbackService {
         // 5. 넣고 해당 b_reply_num의 b_reply_like_member에 update 시킨다
         fd_answerDAO.fd_an_delete_like_mno(fd_answer_num,result_an_like_mem);
         fd_answerDAO.fd_an_update_like_down(fd_answer_num);
+        // 여기에 피드백의 likeCount를 감소시키는 쿼리문을 넣으면 된다.
+        feedbackDAO.deleteLikeCount(feedbackNum);
     }
+
+    @Override
+    public void fd_an_fixed(int fd_answer_num, int feedbackNum) throws Exception {
+        // 0. fixed가 1인 유저의 score를 -10 시킴
+        String fixedNickName = fd_answerDAO.selectNickname_fixed(feedbackNum);
+        fd_answerDAO.minusScore(fixedNickName);
+        // 1. 가져온 feedbackNum에 해당하는 fd_answer의 fd_answer_fixed를 0으로 변경
+        fd_answerDAO.fd_an_update_fixed_cancel(feedbackNum);
+        // 2. 가져온 fd_answer_num에 해당하는 fd_answer의 fd_answer_fixed를 1로 변경
+        fd_answerDAO.fd_an_update_fixed(fd_answer_num);
+        // 3. 가져온 fd_answer_num의 mem_nickname에 해당하는 유저의 mem_score에 +10 해준다
+        // 즉, 먼저 fd_answer_num에 해당하는 유저의 fd_answer_nickname을 찾고
+        String nickName = fd_answerDAO.selectNickname_answerNum(fd_answer_num);
+        // fd_answer_nickname을 memberDAO.queryMember_nickname(nickName)을 통해 member를 받아오고,
+        // 그 받아온 member의 mem_score에 +10을 해준다 (DB에서)
+        fd_answerDAO.plusScore(nickName);
+    }
+
+    @Override
+    public void fd_an_fixed_cancel(int fd_answer_num, int feedbackNum) throws Exception {
+        // 1. 가져온 feedbackNum에 해당하는 fd_answer의 fd_answer_fixed를 0으로 변경
+        fd_answerDAO.fd_an_update_fixed_cancel(feedbackNum);
+        // 2. 가져온 fd_answer_num의 mem_nickname에 해당하는 유저의 mem_score에 -10을 해준다
+        String nickName = fd_answerDAO.selectNickname_answerNum(fd_answer_num);
+        fd_answerDAO.minusScore(nickName);
+    }
+
 
     /*------------------------------------------------- 끝 : 피드백 답변 관련 -------------------------------------------------*/
 

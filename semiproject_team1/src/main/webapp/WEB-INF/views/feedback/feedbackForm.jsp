@@ -159,7 +159,7 @@
                                         <div class="each_board_content">
                                             <div class="each_board_sub">
                                                 <a href="./feedbackdetail?feedback_num=${article.feedback_num}&page=${pageInfo.page}">
-                                                        ${article.feedback_subject}&nbsp;댓글수 : [${article.feedback_replycount}]&nbsp;/&nbsp;피드백 답변수 : [${article.feedback_answercount}]
+                                                        ${article.feedback_subject}&nbsp;댓글:[${article.feedback_replycount}]/답변수:[${article.feedback_answercount}]/좋아요수:[${article.feedback_likecount}]
                                                 </a>
                                             </div>
                                             <div class="each_board_sub_bottom">

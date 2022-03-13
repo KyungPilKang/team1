@@ -6,10 +6,23 @@
     <table>
         <c:forEach var="answer" items="${anList }">
             <tr>
+                    <%-- 게시물 작성자만 고정, 고정취소가 가능하도록 --%>
+                <c:if test="${article.feedback_nickname eq mem_nickname}">
+                    <td>
+                        <c:choose>
+                            <c:when test="${answer.fd_answer_fixed == 0}">
+                                <button onclick="answer_fixed(${answer.fd_answer_num})">고정</button>
+                            </c:when>
+                            <c:otherwise>
+                                <button onclick="answer_fiexd_cancel(${answer.fd_answer_num})">고정취소</button>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                </c:if>
+
                 <td>
                     <div class="eee">${answer.fd_answer_num}</div>
                 </td>
-                <td>불리언:${answer.fd_answer_like_ok}</td>
                 <td>닉네임:${answer.fd_answer_nickname}</td>
                 <td>제목:${answer.fd_answer_title}</td>
                 <td>
