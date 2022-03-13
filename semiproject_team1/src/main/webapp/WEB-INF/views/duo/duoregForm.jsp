@@ -107,11 +107,11 @@
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:6px">마이크 여부</div>
-				<input type="radio" id="duo_mic_ok" name="duo_mic_ok">
+				<input type="radio" id="duo_mic_ok" name="duo_mic_ok" value="yes">
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:6px">올챔 여부</div>
-				<input type="radio" id="duo_allcham" name="duo_allcham">
+				<input type="radio" id="duo_allcham" name="duo_allcham" value="yes">
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:73px">자기소개</div>

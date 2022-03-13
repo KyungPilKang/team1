@@ -9,8 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.semi.dto.Duo;
 import com.semi.dto.Member;
+import com.semi.service.DuoService;
 import com.semi.service.MemberService;
 import com.semi.service.MypageService;
 
@@ -24,6 +29,9 @@ public class DuoController {
 	
 	@Autowired
 	MypageService mypageService;
+	
+	@Autowired
+	DuoService duoService;
 
 	@GetMapping("duoform")
 	public String duoForm() {
@@ -75,5 +83,20 @@ public class DuoController {
 	@GetMapping("duosearchform")
 	public String duoSearchForm() {
 		return "duo/duosearchForm";
+	}
+	
+	@PostMapping("duoreg")
+	public ModelAndView duoReg(@ModelAttribute Duo duo) {
+		ModelAndView mav=new ModelAndView();
+		Member mem=null;
+		try {
+			mem=memberService.selectMemeber_bymno((Integer)session.getAttribute("mem_mno"));
+			memberService.updateMem_reg_ok(duo.getDuo_nickname());
+			duoService.insertDuo(duo, mem);
+			mav.setViewName("redirect:/duoform");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
 	}
 }

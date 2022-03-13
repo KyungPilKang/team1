@@ -165,6 +165,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selelctMember_bykakao(id);
 	}
 
+	@Override
+	public void updateMem_reg_ok(String nickname) throws Exception {
+		memberDAO.updateMem_reg_ok(nickname);
+	}
+
 	
 	
 	
