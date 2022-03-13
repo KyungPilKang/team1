@@ -34,4 +34,9 @@ public class DuoServiceImpl implements DuoService{
 		return duoDAO.selectDuoList();
 	}
 
+	@Override
+	public Duo selectDuo(String nickname) throws Exception {
+		return duoDAO.selectDuo(nickname);
+	}
+
 }

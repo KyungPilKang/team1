@@ -26,6 +26,11 @@
 			select * from duo order by duo_date desc
 		]]>
 	</select>
+	<select id="selectDuo" resultType="Duo" parameterType="String">
+		<![CDATA[
+			select * from duo where duo_nickname=#{nickname}
+		]]>
+	</select>
 </mapper>
 
 

@@ -154,4 +154,18 @@ public class DuoController {
 		}
 		return mav;
 	}
+	
+	@GetMapping("/duodetail")
+	public ModelAndView duoDetail(@RequestParam("duo_nickname")String duo_nickname) {
+		ModelAndView mav=new ModelAndView();
+		Duo duo;
+		try {
+			duo=duoService.selectDuo(duo_nickname);
+			mav.addObject("detail", duo);
+			mav.setViewName("duo/duodetailForm");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
 }

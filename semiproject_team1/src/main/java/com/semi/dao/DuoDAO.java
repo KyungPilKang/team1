@@ -13,5 +13,6 @@ public interface DuoDAO {
 	public void insertDuo(Duo duo) throws Exception;
 	public void updateDuo(Duo duo) throws Exception;
 	public List<Duo> selectDuoList() throws Exception;
+	public Duo selectDuo(String nickname) throws Exception;
 }
  
