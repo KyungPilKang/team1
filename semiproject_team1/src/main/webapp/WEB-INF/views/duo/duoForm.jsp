@@ -45,6 +45,7 @@
        		</div>
 		</div>
 		<div class="hero" style= "z-index:1;">
+			<h2>듀오 매칭</h2>
 			<c:choose>
 				<c:when test="${mem_duo_reg_ok eq 'no' }">
 					<button type="button" onclick="location.href='/duoregform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -12,6 +12,20 @@
 			#{duo_play_type}, #{duo_mic_ok}, #{duo_allcham}, #{duo_info}, now())
 		]]>
 	</insert>
+	<update id="updateDuo" parameterType="Duo">
+		<![CDATA[
+			update duo set duo_position=#{duo_position}, duo_subposition=#{duo_subposition},
+			duo_lol_tier=#{duo_lol_tier}, duo_lol_ratio=#{duo_lol_ratio}, duo_most1=#{duo_most1},
+			duo_most2=#{duo_most2}, duo_most3=#{duo_most3},
+			duo_play_type=#{duo_play_type}, duo_info=#{duo_info}, duo_date=now()
+			where duo_nickname=#{duo_nickname}
+		]]>
+	</update>
+	<select id="selectDuoList" resultType="Duo">
+		<![CDATA[
+			
+		]]>
+	</select>
 </mapper>
 
 

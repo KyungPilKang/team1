@@ -1,6 +1,8 @@
 package com.semi.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -115,11 +117,18 @@ public class DuoController {
 	}
 	
 	@GetMapping("duosearchform")
-	public String duoSearchForm() {
+	public String duoSearchForm(Model model) {
+		List<Duo> duoList=new ArrayList<>();
+		try {
+			duoList=duoService.selectDuoList();
+			model.addAttribute("duoList", duoList);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "duo/duosearchForm";
 	}
 	
-	@PostMapping("duoreg")
+	@PostMapping("/duoreg")
 	public ModelAndView duoReg(@ModelAttribute Duo duo) {
 		ModelAndView mav=new ModelAndView();
 		Member mem=null;
@@ -127,6 +136,18 @@ public class DuoController {
 			mem=memberService.selectMemeber_bymno((Integer)session.getAttribute("mem_mno"));
 			memberService.updateMem_reg_ok(duo.getDuo_nickname());
 			duoService.insertDuo(duo, mem);
+			mav.setViewName("redirect:/duoform");
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	
+	@PostMapping("/duoupdate")
+	public ModelAndView duoUpdate(@ModelAttribute Duo duo) {
+		ModelAndView mav=new ModelAndView();
+		try {
+			duoService.updateDuo(duo);
 			mav.setViewName("redirect:/duoform");
 		} catch(Exception e) {
 			e.printStackTrace();
