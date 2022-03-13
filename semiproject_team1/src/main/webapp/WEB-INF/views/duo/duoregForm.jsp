@@ -89,6 +89,10 @@
 				<input type="text" name="duo_lol_ratio" value="${lol_rate }"readOnly style="height:30px">
 			</div>
 			<div class="duo_wr_subject">
+				<div style="width:120px; float:left; text-align:center; margin-top:13px">모스트 챔피언</div>
+				<input type="text" name="duo_most1" value="${most1 }"readOnly style="height:30px; width:120px;">
+				<input type="text" name="duo_most2" value="${most2 }"readOnly style="height:30px; width:120px;">
+				<input type="text" name="duo_most3" value="${most3 }"readOnly style="height:30px; width:120px;">
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">플레이 타입</div>
@@ -115,7 +119,7 @@
 				id="duo_info" name="duo_info">
 			</div>
 		</div>
-		<div class="hero" style="margin-top:840px;">
+		<div class="hero" style="margin-top:900px;">
 			<button type="submit">등록하기</button>
 		</div>
 	</form>
