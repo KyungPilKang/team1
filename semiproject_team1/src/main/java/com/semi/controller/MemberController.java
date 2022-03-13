@@ -72,6 +72,7 @@ public class MemberController {
 	public String kakao_login(@RequestParam("mem_email_id")String mem_email_id,
 			@RequestParam("page")String page, Model model) {
 		System.out.println(mem_email_id);
+		System.out.println(page);
 		Member mem=null;
 		Member result=null;
 		try {
