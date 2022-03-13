@@ -1,186 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>듀오매칭</title>
-
-<!-- plugins:css -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/duo/feather/feather.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/duo/mdi/css/materialdesignicons.min.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/duo/ti-icons/css/themify-icons.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/duo/typicons/typicons.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/duo/simple-line-icons/css/simple-line-icons.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/duo/css/vendor.bundle.base.css">
-<!-- endinject -->
-<!-- Plugin css for this page -->
-<link rel="stylesheet"
-	href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/duo/select.dataTables.min.css">
-<!-- End plugin css for this page -->
-<!-- inject:css -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/duo/vertical-layout-light/style.css">
-<!-- endinject -->
 <link rel="shortcut icon" sizes="16x16 32x32 64x64"
 	href="/resources/asset/image/login/dog1.png" />
-
+<title>듀오매칭</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/duo/duoForm1.css">
 </head>
 <body>
-
-	<div class="container-scroller">
-
-		<nav
-			class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row justify-content-center">
-
-			<div class="navbar-menu-wrapper d-flex align-items-top">
-
-				<div
-					class="d-sm-flex justify-content-center d-inline-flex align-items-center">
-					<div>
-						<h1>
-							<a href="/"> <img class="mb-4"
-								src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
-								alt="" width="60" height="60"> LOLPAN.DOG
-							</a>
-						</h1>
-					</div>
-				</div>
-
-				<ul class="navbar-nav ms-auto">
-
-					<div class="nav-item dropdown">
-						<span class="nav-link count-indicator" id="countDropdown" href="#"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							<div>
-								<img src="images/lol-symbol/gm.png" alt="image"
-									class="img-sm profile-pic">
-							</div> <br />
-							<div>
-								<h4
-									class="preview-subject ellipsis font-weight-medium text-dark">memotome2
-									님 환영합니다.</h4>
-								</divn>
-						</span>
-
-					</div>
-
+	<div class="container">
+		<div class="header" style= "z-index:2;">
+			<h1>
+				<a href="/main"> <img class="mb-4"
+					src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
+					alt="" width="60" height="60"> LOLPAN.DOG
+				</a>
+			</h1>
+			<div class="nav">
+            <div class="nav">
+                <ul>
+					<li><a href="/feedback">피드백</a></li>
+					<li><a href="/boardlist">자유게시판</a></li>
+					<c:choose>
+						<c:when test="${not empty mem_mno }">
+							<li><a href="/duoform">듀오</a></li>
+							<li><a href="/mypage">마이페이지</a></li>
+							<li><a href="/log_out?page=main">로그아웃</a></li>
+							<li style="color:white;">
+								<img class="mb-4"
+								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
+								alt="" width="30" height="30">${mem_nickname }님 환영합니다
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="/loginform?page=main">로그인</a></li>	
+						</c:otherwise>
+					</c:choose>
 				</ul>
-
-			</div>
-		</nav>
-
-		<div
-			class="container-fluid page-body-wrapper justify-content-center bg-white">
-			<div class="main-panel">
-				<div class="content-wrapper bg-white">
-					<!-- 클래스 묶음 -->
-					<div class="row">
-						<!-- 행 -->
-						<div class="col-sm-12">
-							<!-- 홈페이지의 오른쪽 가운데 왼쪽 위치 코드 -->
-							<div class="home-tab">
-								<div
-									class="d-sm-flex align-items-center justify-content-between border-bottom">
-									<!-- d-sm-flex / align-items-center / justify-content-between / border-bottom 따로따로임 -->
-									<!-- justify -content ( 가로축 - 중심축 ) / align-items ( 세로축 - 교차축 ) -->
-
-									<ul class="nav nav-tabs" role="tablist">
-										<li class="nav-item"><a class="nav-link active ps-0"
-											id="home-tab" data-bs-toggle="tab" href="#overview"
-											role="tab" aria-controls="overview" aria-selected="true">피드백</a>
-										</li>
-										<li class="nav-item"><a class="nav-link" id="profile-tab"
-											data-bs-toggle="tab" href="#audiences" role="tab"
-											aria-selected="false">듀오 매칭</a></li>
-										<li class="nav-item"><a class="nav-link" id="contact-tab"
-											data-bs-toggle="tab" href="#demographics" role="tab"
-											aria-selected="false">자유 게시판</a></li>
-										<!-- <li class="nav-item">
-                      <a class="nav-link border-0" id="more-tab" data-bs-toggle="tab" href="#more" role="tab" aria-selected="false">More</a>
-                    </li> -->
-									</ul>
-
-									<div>
-										<div class="btn-wrapper">
-											<a href="#" class="btn btn-otline-dark align-items-center"></i>
-												마이페이지</a> <a href="#" class="btn btn-otline-dark"></i> 로그아웃</a>
-											<!-- <a href="#" class="btn btn-primary text-white me-0"><i class="icon-download"></i> Export</a> -->
-										</div>
-									</div>
-								</div>
-
-								<div class="tab-content tab-content-basic">
-									<div class="tab-pane fade show active" id="overview"
-										role="tabpanel" aria-labelledby="overview">
-										<div class="row">
-											<div class="col-sm-12">
-												<div
-													class="d-sm-flex statistics-details justify-content-center d-inline-flex align-items-center">
-													<!-- div로 감싸고 d-sm-flex로 매칭 등록, 매칭 신청 가운데 정렬  -->
-
-													<div class="d-none d-md-block px-3 btn btn-otline-dark">
-
-														<h3 class="rate-percentage">매칭 등록/수정</h3>
-
-													</div>
-													<div class="d-none d-md-block px-3 btn btn-otline-dark">
-
-														<h3 class="rate-percentage">매칭 신청/조회</h3>
-
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+            </div>
+       		</div>
+		</div>
+		<div class="hero" style= "z-index:1;">
+			<h2>듀오 매칭</h2>
+			<c:choose>
+				<c:when test="${mem_duo_reg_ok eq 'no' }">
+					<button type="button" onclick="location.href='/duoregform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" onclick="location.href='/duoregform?duo_reg_ok=no' ">매칭신청/조회</button>
+				</c:when>
+				<c:otherwise>
+					<button type="button" onclick="location.href='/duoeditform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" onclick="location.href='/duosearchform' ">매칭신청/조회</button>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
-
-	<!-- plugins:js -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/duo/js/vendor.bundle.base.js"></script>
-	<!-- endinject -->
-	<!-- Plugin js for this page -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/duo/chart.js/Chart.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/duo/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/duo/progressbar.js/progressbar.min.js"></script>
-	<!-- End plugin js for this page -->
-	<!-- inject:js -->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/duo/off-canvas.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/duo/hoverable-collapse.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/duo/template.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/duo/settings.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/duo/todolist.js"></script>
-	<!-- endinject -->
-	<!-- Custom js for this page-->
-	<script
-		src="${pageContext.request.contextPath}/resources/js/duo/dashboard.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/resources/js/duo/Chart.roundedBarCharts.js"></script>
-	<!-- End custom js for this page-->
-
+		<div class="footer">
+	<div style="margin-left:20px; margin-top:10px">
+       		<ul class="footer-List">
+			<li>© 2022 LOLPAN.DOG LOLPAN.DOG isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</li>
+				<ul class="footer-CSList">
+				<li>고객센터 C/S Center</li>
+				<li>전화: 02.1234.5678</li>
+				<li>이메일: lolpan.dog@gmail.com</li>
+				<li>오전 9시부터 오후 6시까지 상담가능합니다.</li>
+				</ul> 
+			</ul>
+			<br>
+	</div>
 </body>
 </html>

@@ -30,4 +30,5 @@ public interface MemberDAO {
 	public List<Feedback> selectFeedbackList_mine(Member mem) throws Exception;
 	public List<String> selectBoard_numList_ward(String mno) throws Exception;
 	public Board selectBoard_ward(String board_num) throws Exception;
+	public void updateMem_reg_ok(String nickname) throws Exception;
 }

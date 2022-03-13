@@ -70,12 +70,14 @@ public class MypageController {
 	}
 	
 	@GetMapping("mypage")
-	public ModelAndView mypage(@RequestParam(value = "page", defaultValue = "1") int page) {
+	public ModelAndView mypage(@RequestParam(value = "page", defaultValue = "1") int page,
+			@RequestParam(value="duo_reg_ok", required=false, defaultValue="yes")String duo_reg_ok) {
 		ModelAndView mv = new ModelAndView();
 		PageInfo pageInfo = new PageInfo();
 		Member mem=null;
 		Map<String, String> tier_map=new HashMap<>();
 		Map<String, String> champ_map=new HashMap<>();
+		mv.addObject("duo_reg_ok", duo_reg_ok);
 		try {
 			mem=memberService.selectMemeber_bymno((Integer)session.getAttribute("mem_mno"));
 			mv.addObject("mem", mem);
@@ -107,7 +109,6 @@ public class MypageController {
 			//와드 누른 게시글 리스트
 			List<Board> articleList_ward = mypageService.selectBoardList_ward((Integer)session.getAttribute("mem_mno"));
 			mv.addObject("articleList_ward", articleList_ward);
-			System.out.println(articleList_ward.get(0).getBoard_num());
 			mv.setViewName("mypage/mypage");
 			
 			//내가쓴 피드백 리스트

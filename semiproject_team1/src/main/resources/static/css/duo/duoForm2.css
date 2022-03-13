@@ -13,7 +13,7 @@
 
 .container {
 	width: 100%;
-	height: 120vh;
+	height: 135vh;
 	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
 		url(../../asset/image/duo/duo.jpg);
 	background-size: cover;
@@ -36,7 +36,7 @@
 }
 
 .footer {
-    background-color: black;
+   	background-color: black;
     border-top: 5px solid skyblue;
     width: 100%;
     height: 100px;
@@ -46,11 +46,10 @@
     align-items: center;
     left: 0;
     bottom: 0;
-    box-shadow: 0 2px 3px 0 rgba(255, 255, 255, 0.2);
 }
 
 .container .header h1 a {
-	height: 100px;
+	height: 10px;
 	text-decoration: none;
 	color: white;
 	font-family: abster;
@@ -83,6 +82,7 @@
 .container .hero h2 {
 	font-size: 60px;
 	margin-bottom: 20px;
+	font-weight: bold;
 }
 
 .container .hero button {
@@ -95,10 +95,11 @@
 	outline: none;
 	cursor: pointer;
 	transition: all .4s;
+	font-weight: bold;
 }
 
 .container .hero button:hover {
-	background-color: darkslategray;
+	background-color: rgba(135, 206, 235, 0.4);
 }
 
 /* 유저정보입력 시작 */
@@ -106,18 +107,23 @@
 	position: absolute;
 	left: 30%;
 	top: 30%;
-	background: none;
+	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
 	border: 5px solid skyblue;
 	padding: 15px 20px;
 	margin: 50px;
 	text-align: left;
 	font-weight: bold;
 	color: white;
+	font-size: 18.5px
+	
 }
 
 
-
 .container .user-container .duo_wr_subject input{
+	margin: 10px;
+}
+
+.container .user-container .duo_wr_subject select{
 	margin: 10px;
 }
 /* 유저정보입력 끝 */
@@ -133,3 +139,32 @@
 	cursor: pointer;
 	transition: all .4s;
 }
+
+.duo_wr_subject {
+	margin: 10px 0px;
+}
+
+/* 푸터에들어갈내용 */
+.footer-List {
+	color: white;
+	
+}
+
+.footer-List li{
+	text-decoration: none;
+	display: inline-block;
+	margin: 10px;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.footer-CSList li{
+	color: white;
+	text-decoration: none;
+	display: inline-block;
+	margin: 10px;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+/* 푸터 내용 끝 */
