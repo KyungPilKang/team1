@@ -118,7 +118,6 @@
     align-items: center;
     left: 0;
     bottom: 0;
-    box-shadow: 0 2px 3px 0 rgba(255, 255, 255, 0.2);
 }
 
 .footer-List {
@@ -128,6 +127,7 @@
 
 .footer-List li{
 	text-decoration: none;
+	display: inline-block;
 	margin: 10px;
 	font-weight: bold;
 	font-size: 10px;
