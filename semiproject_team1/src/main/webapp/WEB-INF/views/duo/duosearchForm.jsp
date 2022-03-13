@@ -61,56 +61,56 @@
 				<c:forEach items="${duoList}" var="duo">
 					<div style="width:300px; height:300px; float:left;">
 						<c:choose>
-							<c:when test="${fn:contains(duo.duo_lol_tier, 'iron')}">
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'IRON')}">
 								<div style="margin-left:77px;">
 									<img class="mb-5"
 									src="${pageContext.request.contextPath}/resources/asset/image/duo/i.png"
 									alt="" width="150" height="150">
 								</div>
 							</c:when>
-							<c:when test="${fn:contains(duo.duo_lol_tier, 'bronze')}">
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'BRONZE')}">
 								<div style="margin-left:77px;">
 									<img class="mb-5"
 									src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png"
 									alt="" width="150" height="150">
 								</div>
 							</c:when>
-							<c:when test="${fn:contains(duo.duo_lol_tier, 'silver')}">
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'SILVER')}">
 								<div style="margin-left:77px;">
 									<img class="mb-5"
 									src="${pageContext.request.contextPath}/resources/asset/image/duo/s.png"
 									alt="" width="150" height="150">
 								</div>
 							</c:when>
-							<c:when test="${fn:contains(duo.duo_lol_tier, 'gold')}">
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'GOLD')}">
 								<div style="margin-left:77px;">
 									<img class="mb-5"
 									src="${pageContext.request.contextPath}/resources/asset/image/duo/g.png"
 									alt="" width="150" height="150">
 								</div>
 							</c:when>
-							<c:when test="${fn:contains(duo.duo_lol_tier, 'platinum')}">
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'PLATINUM')}">
 								<div style="margin-left:77px;">
 									<img class="mb-5"
 									src="${pageContext.request.contextPath}/resources/asset/image/duo/p.png"
 									alt="" width="150" height="150">
 								</div>
 							</c:when>
-							<c:when test="${fn:contains(duo.duo_lol_tier, 'diamond')}">
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'DIAMOND')}">
 								<div style="margin-left:77px;">
 									<img class="mb-5"
 									src="${pageContext.request.contextPath}/resources/asset/image/duo/d.png"
 									alt="" width="150" height="150">
 								</div>
 							</c:when>
-							<c:when test="${fn:contains(duo.duo_lol_tier, 'master')}">
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'MASTER')}">
 								<div style="margin-left:77px;">
 									<img class="mb-5"
 									src="${pageContext.request.contextPath}/resources/asset/image/duo/m.png"
 									alt="" width="150" height="150">
 								</div>
 							</c:when>
-							<c:when test="${fn:contains(duo.duo_lol_tier, 'grandmaster')}">
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'GRANDMASTER')}">
 								<div style="margin-left:77px;">
 									<img class="mb-5"
 									src="${pageContext.request.contextPath}/resources/asset/image/duo/gm.png"
