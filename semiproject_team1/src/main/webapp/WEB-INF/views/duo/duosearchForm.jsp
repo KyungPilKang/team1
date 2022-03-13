@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="container">
-		<div class="header" style= "z-index:2;">
+		<div class="header" style="z-index: 2;">
 			<h1>
 				<a href="/main"> <img class="mb-4"
 					src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
@@ -21,32 +21,31 @@
 				</a>
 			</h1>
 			<div class="nav">
-            <div class="nav">
-                <ul>
-					<li><a href="/feedback">피드백</a></li>
-					<li><a href="/boardlist">자유게시판</a></li>
-					<c:choose>
-						<c:when test="${not empty mem_mno }">
-							<li><a href="/duoform">듀오</a></li>
-							<li><a href="/mypage">마이페이지</a></li>
-							<li><a href="/log_out?page=main">로그아웃</a></li>
-							<li style="color:white;">
-								<img class="mb-4"
-								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
-								alt="" width="30" height="30">${mem_nickname }님 환영합니다
-							</li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="/loginform?page=main">로그인</a></li>	
-						</c:otherwise>
-					</c:choose>
-				</ul>
-            </div>
-       		</div>
+				<div class="nav">
+					<ul>
+						<li><a href="/feedback">피드백</a></li>
+						<li><a href="/boardlist">자유게시판</a></li>
+						<c:choose>
+							<c:when test="${not empty mem_mno }">
+								<li><a href="/duoform">듀오</a></li>
+								<li><a href="/mypage">마이페이지</a></li>
+								<li><a href="/log_out?page=main">로그아웃</a></li>
+								<li style="color: white;"><img class="mb-4"
+									src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
+									alt="" width="30" height="30">${mem_nickname }님 환영합니다</li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/loginform?page=main">로그인</a></li>
+							</c:otherwise>
+						</c:choose>
+					</ul>
+				</div>
+			</div>
 		</div>
-		<div class="hero" style= "z-index:1;">
+		<div class="hero" style="z-index: 1;">
 			<h2>듀오 매칭</h2>
-			<button type="button" onclick="location.href='/duoregform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button" onclick="location.href='/duoregform' ">매칭등록/수정</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button type="button" onclick="location.href='/duosearchform' ">매칭신청/조회</button>
 		</div>
 		<div class="user-container">
@@ -99,8 +98,23 @@
 			</ul>
 		</div>
 	</div>
-		<div class="footer">
-        
-    </div>
+	<div class="footer">
+		<ul class="footer-List">
+			<li>About LOLPAN.DOG</li>
+			<li>개인정보처리방침</li>
+			<li>도움말</li>
+			<li>문의/피드백</li>
+			<li>광고</li>
+			<li>제휴</li>
+		</ul>
+		<ul class="footer-CSList">
+			<li>고객센터 C/S Center</li>
+			<li>전화: 02.1234.5678</li>
+			<li>팩스: 02.1234.5678</li>
+			<li>이메일: lolpan.dog@gmail.com</li>
+			<li>카카오톡 ID: LOLPANDOG</li>
+			<li>오전 9시부터 오후 6시까지 상담가능합니다.</li>
+		</ul>
+	</div>
 </body>
 </html>
