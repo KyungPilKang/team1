@@ -508,22 +508,18 @@
     </div>
 </div>
 <div class="footer">
+	<div style="margin-left:20px; margin-top:10px">
        		<ul class="footer-List">
-			<li>About LOLPAN.DOG</li>
-			<li>개인정보처리방침</li>
-			<li>도움말</li>
-			<li>문의/피드백</li>
-			<li>광고</li>
-			<li>제휴</li>
-		</ul>
-		<ul class="footer-CSList">
-			<li>고객센터 C/S Center</li>
-			<li>전화: 02.1234.5678</li>
-			<li>팩스: 02.1234.5678</li>
-			<li>이메일: lolpan.dog@gmail.com</li>
-			<li>카카오톡 ID: LOLPANDOG</li>
-			<li>오전 9시부터 오후 6시까지 상담가능합니다.</li>
-		</ul> 
+			<li>© 2022 LOLPAN.DOG LOLPAN.DOG isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</li>
+				<ul class="footer-CSList">
+				<li>고객센터 C/S Center</li>
+				<li>전화: 02.1234.5678</li>
+				<li>이메일: lolpan.dog@gmail.com</li>
+				<li>오전 9시부터 오후 6시까지 상담가능합니다.</li>
+				</ul> 
+			</ul>
+			<br>
+	</div>
 </div>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
