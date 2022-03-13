@@ -67,16 +67,17 @@
 					placeholder="비밀번호"> <label for="mem_pw">비밀번호</label>
 			</div>
 			<button class="w-100 btn btn-lg btn-secondary" id="next" type="submit">로그인</button>
-		</form>
+		
 		<div class="text-center mt-2 fw-light text-white">
 			<div class="form-check">
 				<label class="form-check-label text-white"> <input
 					type="checkbox" id="remember-me" name="remember-me" class="form-check-input "> 로그인 상태 유지하기
 				</label>
 			</div>
+			
 			<!-- <a href="recoverForm1" class="auth-link text-white">비밀번호 찾기</a> -->
 		</div>
-
+</form>
 		<!-- 카카오 로그인 구현부분  -->
 		<div class="mt-4">
 		<!-- <a id="kakao-login-btn"></a> -->
