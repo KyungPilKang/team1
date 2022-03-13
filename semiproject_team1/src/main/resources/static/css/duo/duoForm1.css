@@ -106,7 +106,7 @@
 .container .user-container {
 	position: absolute;
 	top: 35%;
-	background: none;
+	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
 	border: 5px solid skyblue;
 	padding: 15px 20px;
 	margin: 50px;

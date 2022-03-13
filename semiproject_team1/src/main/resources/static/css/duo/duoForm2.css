@@ -82,6 +82,7 @@
 .container .hero h2 {
 	font-size: 60px;
 	margin-bottom: 20px;
+	font-weight: bold;
 }
 
 .container .hero button {
@@ -94,6 +95,7 @@
 	outline: none;
 	cursor: pointer;
 	transition: all .4s;
+	font-weight: bold;
 }
 
 .container .hero button:hover {
@@ -105,13 +107,14 @@
 	position: absolute;
 	left: 30%;
 	top: 30%;
-	background: none;
+	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
 	border: 5px solid skyblue;
 	padding: 15px 20px;
 	margin: 50px;
 	text-align: left;
 	font-weight: bold;
 	color: white;
+	font-size: 18.5px
 	
 }
 
