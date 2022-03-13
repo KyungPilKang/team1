@@ -13,13 +13,14 @@
 	href="/resources/asset/image/login/dog1.png" />
 <title>메인 페이지</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/main.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/bootstrap.min.css"> --%>
 </head>
 <body>
 	<div class="container">
 		<div class="header">
 			<h1>
-				<a href="/"> <img 
+				<a href="/main"> <img 
 					src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
 					alt="" width="60" height="60"> LOLPAN.DOG
 				</a>
@@ -47,7 +48,7 @@
 			</div>
 		</div>
 		<div class="hero" style="margin-top:100px;">
-			<h2>Today's Feedback</h2>
+			<h2>PAN DOG <span class="material-icons-outlined" style="font-size:1em;">thumb_up</span></h2>
 			<p>Lorem Ipsum</p><br><br>
 			<button type="button" onclick="location.href='#' ">상세보기</button>
 		</div>

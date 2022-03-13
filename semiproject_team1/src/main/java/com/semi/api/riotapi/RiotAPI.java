@@ -20,7 +20,7 @@ public class RiotAPI {
 		String idCode=null;
 		StringBuffer response = new StringBuffer();
 		try {
-			String apiURL = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/"+mem_link_id;
+			String apiURL = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/"+mem_link_id;
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("GET");
@@ -56,7 +56,7 @@ public class RiotAPI {
 		Map<String, String> map=new HashMap<>();
 		StringBuffer response = new StringBuffer();
 		try {
-			String apiURL = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/"+id;
+			String apiURL = "https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/"+id;
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("GET");
@@ -86,7 +86,8 @@ public class RiotAPI {
 			map.put("rank",(String)resultobj.get("rank"));
 			map.put("wins", String.valueOf(resultobj.get("wins")));
 			map.put("losses", String.valueOf(resultobj.get("losses")));
-			
+			map.put("leaguePoints", String.valueOf(resultobj.get("leaguePoints")));
+			System.out.println(response.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -97,7 +98,7 @@ public class RiotAPI {
 		Map<Integer, String> map=new HashMap<>();
 		StringBuffer response = new StringBuffer();
 		try {
-			String apiURL = "https://kr.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/"+id;
+			String apiURL = "https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/"+id;
 			URL url = new URL(apiURL);
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("GET");

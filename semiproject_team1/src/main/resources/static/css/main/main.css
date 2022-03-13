@@ -20,7 +20,7 @@
 }
 
 .container .header {
-	border-bottom: 5px solid #4169E1;
+	border-bottom: 5px solid skyblue;
 	background-color: black;
     /*border: 2px dotted white;*/
     width: 100%;
@@ -53,7 +53,7 @@
 }
 
 .container .nav ul li a:hover {
-	color: #1fdfdf;
+	color: skyblue;
 }
 
 .container .hero {
@@ -69,6 +69,7 @@
 .container .hero h2 {
 	font-size: 60px;
 	margin-bottom: 20px;
+	font-family:abster;
 }
 
 .container .hero p {
@@ -77,7 +78,7 @@
 
 .container .hero button {
 	background: none;
-	border: 5px solid #4169E1;
+	border: 5px solid skyblue;
 	color: white;
 	padding: 15px 20px;
 	border-radius: 20px;
@@ -90,7 +91,7 @@
 }
 
 .container .hero button:hover {
-	background-color: darkslategray;
+	background-color: rgba(135, 206, 235, 0.4);
 }
 
 .card ul li a {
@@ -102,5 +103,5 @@
 }
 
 .card ul li a:hover {
-	color: #1fdfdf;
+	color: skyblue;
 }

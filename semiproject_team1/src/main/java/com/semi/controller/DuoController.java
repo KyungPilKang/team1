@@ -30,4 +30,9 @@ public class DuoController {
 	public String duoDetailForm() {
 		return "duo/duodetailForm";
 	}
+	
+	@GetMapping("/duoresultform")
+	public String duoresultForm() {
+		return "duo/duoresultForm";
+	}
 }

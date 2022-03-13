@@ -52,51 +52,69 @@
 
     <div class="fd_write_body">
         <div class="fd_write_body_inner">
-            <div class="fd_request_btn">
-                <button type="button" onclick="location.href='/feedbackwriteform' ">피드백 요청하기</button>
-            </div>
-            <div class="fd_wr_subject">
-                <span>제목</span><input type="text"></div>
+            <form id="feedbackform" action="" method="post" enctype="multipart/form-data">
+                <div class="fd_request">
+                    <h1>피드백 요청하기</h1>
+                </div>
+                <div class="fd_wr_subject" id="fd_wr_subject">
+                    <span>제목</span><input type="text" name="feedback_subject" id="feedback_subject"></div>
+                <div class="fd_wr_replay">
+                    <label for="fd_replay"> 파일 첨부 </label>
+                    <input name="replay_file" type="file" id="fd_replay"
+                           placeholder=" 파일첨부" class="fd_replay"/>
+                    <input class="upload-name1" value="리플레이" placeholder="리플레이" disabled>
+                </div>
+                <div class="fd_wr_file">
+                    <label for="fd_file"> 영상 첨부 </label>
+                    <input name="video_file" type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" id="fd_file"
+                           placeholder=" 파일첨부" class="fd_file"/>
+                    <input class="upload-name2" value="영상" placeholder="영상" disabled>
+                </div>
 
-            <div class="fd_wr_replay">
-                <label for="fd_replay"> 파일 첨부 </label>
-                <input name="fd_replay" type="file" id="fd_replay"
-                       placeholder=" 파일첨부" class="fd_replay"/>
-                <input class="upload-name1" value="리플레이" placeholder="리플레이" disabled>
-            </div>
-            <div class="fd_wr_file">
-                <label for="fd_file"> 영상 첨부 </label>
-                <input name="fd_file" type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" id="fd_file"
-                       placeholder=" 파일첨부" class="fd_file"/>
-                <input class="upload-name2" value="영상" placeholder="영상" disabled>
-            </div>
+                <%--                <div class-="fd_wr_limit">--%>
+                <%--                    <span>티어제한</span>--%>
+                <%--                    <select name='pwhint' id="pwhint" class="pwhint" size='1' class='select'>--%>
+                <%--                        <option value=''>선택하세요</option>--%>
+                <%--                        <option value='30'>다이아몬드</option>--%>
+                <%--                        <option value='31'>플래티넘</option>--%>
+                <%--                        <option value='32'>골드</option>--%>
+                <%--                        <option value='33'>실버</option>--%>
+                <%--                        <option value='34'>브론즈</option>--%>
+                <%--                        <option value='35'>아이언</option>--%>
+                <%--                    </select>--%>
+                <%--                </div>--%>
 
+                <div class="fd_wr_request">요청사항</div>
+                <input type="hidden" class="feedback_content" id="feedback_content" name="feedback_content" value=""/>
+            </form>
 
-            <div class-="fd_wr_limit">
-                <span>티어제한</span>
-                <select name='pwhint' size='1' class='select'>
-                    <option value=''>선택하세요</option>
-                    <option value='30'>다이아몬드</option>
-                    <option value='31'>플래티넘</option>
-                    <option value='32'>골드</option>
-                    <option value='33'>실버</option>
-                    <option value='34'>브론즈</option>
-                    <option value='35'>아이언</option>
-                </select>
-            </div>
-            <div class="fd_wr_request">요청사항</div>
             <div id="editor" class="editor"></div>
 
             <div>
-                <button>돌아가기</button>
-                <button>요청제출</button>
+                <button class="btn_cc" onclick={history.back()}>돌아가기</button>
+                <button onclick="fd_submit()" class="btn_ok">요청제출</button>
             </div>
-
 
 
         </div>
     </div>
 </div>
+
+
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    function fd_submit() {
+        let content = editor.getHTML();
+        let subject = $('#feedback_subject').val();
+        $("#feedback_content").val(content);
+        if (subject === "") {
+            alert("제목을 입력하세요")
+            $('#feedback_subject').focus()
+            return;
+        }
+    $("#feedbackform").attr("action","./regfeedback").submit();
+    }
+</script>
 
 
 <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
@@ -118,21 +136,18 @@
 </script>
 
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
 <script>
-    $("#fd_replay").on('change',function(){
+    $("#fd_replay").on('change', function () {
         let fileName1 = $(".fd_replay").val();
         $(".upload-name1").val(fileName1);
     });
 </script>
 <script>
-    $("#fd_file").on('change',function(){
+    $("#fd_file").on('change', function () {
         let fileName2 = $("#fd_file").val();
         $(".upload-name2").val(fileName2);
     });
 </script>
-
 
 
 </body>

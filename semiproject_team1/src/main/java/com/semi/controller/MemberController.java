@@ -49,18 +49,63 @@ public class MemberController {
 		try {
 			if(memberService.accessMember(mem.getMem_email_id(), mem.getMem_pw())) {
 				Member result=memberService.selectMemeber(mem.getMem_email_id());
-				if(result.getMem_code_confirm().equals("yes")) {
+				if(result.getMem_type().equals("admin")) {
 					session.setAttribute("mem_mno", result.getMem_mno());
 					session.setAttribute("mem_nickname", result.getMem_nickname());
-					
+					result.setPage("admin");
+					map.put("mem", result);
+				}else {
+					if(result.getMem_code_confirm().equals("yes")) {
+						session.setAttribute("mem_mno", result.getMem_mno());
+						session.setAttribute("mem_nickname", result.getMem_nickname());
+					}
+					result.setPage(mem.getPage());
+					map.put("mem", result);
 				}
-				result.setPage(mem.getPage());
-				map.put("mem", result);
 			}
 		} catch(Exception e){
 			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
+	}
+	@GetMapping(value="/kakao_login")
+	public String kakao_login(@RequestParam("mem_email_id")String mem_email_id,
+			@RequestParam("page")String page, Model model) {
+		System.out.println(mem_email_id);
+		Member mem=null;
+		Member result=null;
+		try {
+			mem=memberService.selelctMember_bykakao(mem_email_id);
+			mem.setPage(page);
+			if(mem!=null) {
+				result=memberService.selelctMember_bykakao(mem_email_id);
+				if(result.getMem_type().equals("admin")) {
+					session.setAttribute("mem_mno", result.getMem_mno());
+					session.setAttribute("mem_nickname", result.getMem_nickname());
+					result.setPage("admin");
+					model.addAttribute("mem", result);
+				}else {
+					if(result.getMem_code_confirm().equals("yes")) {
+						session.setAttribute("mem_mno", result.getMem_mno());
+						session.setAttribute("mem_nickname", result.getMem_nickname());
+						result.setPage(mem.getPage());
+						model.addAttribute("mem", result);
+					} else {
+						
+					}
+				}
+			}
+		} catch(Exception e){
+			e.printStackTrace();
+			return "redirect:/joinForm1?kakao=yes&id="+mem_email_id;
+		}
+		if(result.getPage().equals("main")) {
+			return "redirect:/main";
+		} else if(result.getPage().equals("board")) {
+			return "redirect:/boardlist";
+		} else {
+			return "redirect:/feedback";
+		}
 	}
 	
 	@GetMapping(value="/log_out")
@@ -68,7 +113,7 @@ public class MemberController {
 		ModelAndView mav=new ModelAndView();
 		session.invalidate();
 		if(page.equals("main")) {
-			mav.setViewName("redirect:/");
+			mav.setViewName("redirect:/main");
 		} else if(page.equals("board")) {
 			mav.setViewName("redirect:/boardlist");
 		}
@@ -111,6 +156,18 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		mav.setViewName("login/join_certifyForm");
+		return mav;
+	}
+	
+	@PostMapping("join_kakao")
+	public ModelAndView join_kakao(@ModelAttribute Member mem) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			memberService.insertMember_kakao(mem);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		mav.setViewName("redirect:/loginform?page=main");
 		return mav;
 	}
 	

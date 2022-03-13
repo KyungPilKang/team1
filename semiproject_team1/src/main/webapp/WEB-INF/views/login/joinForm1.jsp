@@ -44,9 +44,9 @@
     
 <main class="form-signin">
   <form>
-    	<img class="mb-4"
+    	<a href="/main"><img class="mb-4"
 			src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
-			alt="" width="80" height="80">
+			alt="" width="80" height="80"></a>
 		<h1 class="h1 mb-3 fw-normal" style="font-family:abster;">LOLPAN.DOG</h1>
     <div class="my-2 d-flex justify-content-between align-items-center">
         <div class="form-check" style="padding:0;">
@@ -341,6 +341,7 @@
   </form>
 </main>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
      $('#checkAll').change(function () { 
     	 var checked = $(this).prop('checked'); 
@@ -353,6 +354,23 @@ $('input[name="checkTmp"]').change(function () {
 
 $('#checkAll').change(function () {
     $(this).prop('checked') ? $('#next').removeAttr('disabled'):$('#next').attr('disabled','disabled'); });
+let sweetalert=(icon,title,contents)=>{
+    Swal.fire({
+        icon: icon,
+        title: title,
+        text: contents,
+        confirmButtonText: "확인"
+    })
+	};
+	let kakao="<c:out value='${kakao}'/>";
+	if(kakao=="yes"){
+		Swal.fire({
+			title: "가입 요망",
+			text: "카카오 연동으로 회원가입을 진행합니다",
+			icon: "warning",
+			confirmButtonText: "확인"
+		})
+	}
 </script>
  </body>
 </html>

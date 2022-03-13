@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="container">
-		<div class="header">
+		<div class="header" style= "z-index:2;">
 			<h1>
 				<a href="#"> <img class="mb-4"
 					src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
@@ -21,18 +21,18 @@
 			</h1>
 			<div class="nav">
 				<ul>
-					<li><a href="#">FEEDBACK</a></li>
-					<li><a href="#">DUOMATCHING</a></li>
-					<li><a href="#">FREEBOARD</a></li>
-					<li><a href="#">MYPAGE</a></li>
-					<li><a href="#">LOGOUT</a></li>
+					<li><a href="#">피드백</a></li>
+					<li><a href="#">듀오매칭</a></li>
+					<li><a href="#">자유게시판</a></li>
+					<li><a href="#">마이페이지</a></li>
+					<li><a href="#">로그아웃</a></li>
 				</ul>
 			</div>
 		</div>
-		<div class="hero">
+		<div class="hero" style= "z-index:1;">
 			<h2>DUO</h2>
-			<button type="button" onclick="location.href='/duoForm2' ">매칭등록/수정</button>
-			<button type="button" onclick="location.href='/feedbackwriteform' ">매칭신청/조회</button>
+			<button type="button" onclick="location.href='/duoform2' ">매칭등록/수정</button>
+			<button type="button" onclick="location.href='/duoform1' ">매칭신청/조회</button>
 		</div>
 		<div class="user-container">
 			<ul>
@@ -87,5 +87,8 @@
 			</ul>
 		</div>
 	</div>
+		<div class="footer">
+        
+    </div>
 </body>
 </html>

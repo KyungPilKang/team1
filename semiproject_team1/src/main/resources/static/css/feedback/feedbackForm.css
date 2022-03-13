@@ -1,300 +1,311 @@
 @charset "UTF-8";
 
 @font-face {
-    font-family: abster;
-    src: url(font/abster-webfont.woff) format('woff');
+	font-family: abster;
+	src: url(font/abster-webfont.woff) format('woff');
 }
-
 
 .fd_hd_list {
-
+	display: flex;
+	list-style-type: none;
 }
 
-.fd_hd_item > a {
-    color: white;
-    text-decoration: none;
+.fd_hd_item>a {
+	text-decoration: none;
+	color: black;
+	margin: 40px;
 }
-
 
 .each_post {
-    background: #ffffff;
-    border: 1px solid black;
-    height: 15vh;
-    width: 60vw;
-    display: flex;
+	background: white;
+	border: 5px solid skyblue;
+	height: 15vh;
+	width: 60vw;
+	display: flex;
+	margin: 10px;
+	font-weight: bold;
+	opacity:0.9;
 }
 
 .each_board_num {
-    margin: 10px;
-    width: 100px;
-    /*height:50px;*/
-    background: #fadfdf;
-
+	margin: 10px;
+	width: 100px;
+	background: white;
+	background: #fadfdf;
 }
 
 .each_board_content {
-    width: 35vw;
-    /*height:50px;*/
-    background: rgba(199, 199, 199, 0.53);
-    display: flex;
-    flex-direction: column;
+	width: 35vw;
+	background: rgba(199, 199, 199, 0.53);
+	display: flex;
+	flex-direction: column;
 }
 
 .each_board_sub_bottom {
-    display: flex;
+	display: flex;
+	background: white;
 }
 
 .each_board_sub {
-    height: 50px;
+	height: 50px;
+	background: white;
 }
 
-
-.each_board_sub > a {
-    color: black;
-    text-decoration: none;
+.each_board_sub>a {
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 30px;
 }
 
 .each_board_cat {
-    background: #7c00ff;
-    padding: 5px;
+	background: #7c00ff;
+	padding: 5px;
 }
 
 .each_board_nickname {
-    background: #fcdc10;
-    padding: 5px;
+	background: white;
+	padding: 5px;
 }
 
 .each_board_date {
-    background: #41fc18;
-    padding: 5px;
+	background: white;
+	padding: 5px;
 }
 
 .each_board_replycount {
-    width: 50px;
-    /*height:50px;*/
-    background: #0739ff;
+	width: 50px;
+	/*height:50px;*/
+	background: white;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 25px;
+	text-align: center;
 }
 
 .each_board_likecount {
-    width: 70px;
-    /*height:50px;*/
-    background: #fc8383;
+	border-right: 5px solid skyblue;
+	border-left: 5px solid skyblue; width : 70px;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 25px;
+	text-align: center;
+	width: 70px;
 }
 
 .each_board_readcount {
-    width: 50px;
-    /*height:50px;*/
-    background: #a54fd9;
+	border-right: 5px solid skyblue;
+	border-left: 5px solid skyblue;
+	width: 55px;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 20px;
+	text-align: center;
 }
 
 #search_submit {
-    display: none;
+	display: none;
 }
 
 .each_board_thumbnail {
-    overflow: hidden;
+	overflow: hidden;
 }
 
 .thumbnail_size {
-    text-align: center;
-    width: 10vw;
-    height: 15vh;
+	text-align: center;
+	width: 10vw;
+	height: 15vh;
 }
 
 .loading {
-    width: 100%;
-    height: 150px;
-    background-color: #ff7171;
-    display: none;
-    font-size: 100px;
-    text-align: center;
+	width: 100%;
+	height: 150px;
+	background-color: #ff7171;
+	display: none;
+	font-size: 100px;
+	text-align: center;
 }
 
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    list-style-type: none;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	list-style-type: none;
 }
 
 body {
-    background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 1));
+	background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.9),
+		rgba(0, 0, 0, 1));
 }
 
 .container {
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url(../../asset/image/board/lol4.jpg);
-    background-size: cover;
+	width: 100%;
+	height: 120vh;
+	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+		url(../../asset/image/board/lol4.jpg);
+	background-size: cover;
+}
+
+.fd_footer {
+	background-color: black;
+	border-top: 5px solid #4169E1;
+	width: 100%;
+	height: 140px;
 }
 
 /* 헤더 영역 */
 .container .header {
-    background-color: black;
-    /*border: 2px dotted white;*/
-    width: 100%;
-    height: 80px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: fixed;
-    left: 0;
-    top: 0;
-    box-shadow: 0 2px 3px 0 rgba(255, 255, 255, 0.2);
+	border-bottom: 5px solid #4169E1;
+	background-color: black;
+	/*border: 2px dotted white;*/
+	width: 100%;
+	height: 80px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	position: fixed;
+	left: 0;
+	top: 0;
+	box-shadow: 0 2px 3px 0 rgba(255, 255, 255, 0.2);
 }
 
-
 .container .header h1 a {
-    text-decoration: none;
-    color: white;
-    font-family: abster;
+	text-decoration: none;
+	color: white;
+	font-family: abster;
 }
 
 .container .nav ul li {
-    display: inline-block;
-    margin: 0 10px;
+	display: inline-block;
+	margin: 0 10px;
 }
 
 .container .nav ul li a {
-    text-decoration: none;
-    color: white;
+	text-decoration: none;
+	color: white;
 }
 
 .container .nav ul li a:hover {
-    color: #1fdfdf;
+	color: #4169E1;
 }
 
-
 /* 바디 영역 */
-
 .body_feedback {
-    margin-top: 80px;
-    display: flex;
-    justify-content: space-between;
-    height: 90vh;
-    flex-wrap: wrap;
+	margin-top: 80px;
+	display: flex;
+	justify-content: space-between;
+	/*height: 90vh;*/
+	flex-wrap: wrap;
 }
 
 .body_feedback_mar {
-    margin-left: 20vw;
-    margin-top: 50px;
-    display: flex;
+	margin-left: 20vw;
+	margin-top: 50px;
+	display: flex;
 }
-
 
 .main_container {
-    /*display: flex;*/
-    flex-direction: column;
-    /*overflow: hidden;*/
+	/*display: flex;*/
+	flex-direction: column;
+	/*overflow: hidden;*/
 }
 
-
 .feedback_header {
-    display: flex;
-    background-color: black;
-    width: 60vw;
-    border-top: 1px solid #5b5b5b;
-    border-radius: 2px;
-    /*box-shadow: 1px 2px 3px 1px rgba(255, 255, 255, 0.1);*/
+	display: flex;
+	background-color: none;
+	width: 60vw;
+	border-top: 1px solid #5b5b5b;
+	border-radius: 2px;
+	/*box-shadow: 1px 2px 3px 1px rgba(255, 255, 255, 0.1);*/
+	border: 5px solid #4169E1;
 }
 
 .feedback_header.fixed {
-    background-color: black;
-    box-shadow: 1px 2px 3px 1px rgba(255, 255, 255, 0.2);
-    position: fixed;
-    margin-top: -50px;
+	background-color: black;
+	box-shadow: 1px 2px 3px 1px rgba(255, 255, 255, 0.2);
+	position: fixed;
+	margin-top: -50px;
 }
-
-
 
 /* div 내 무한스크롤 시작 */
 .feedback_body {
-    width: 60vw;
-    height: 700px;
-    overflow-y: auto;
-    /*background-color: rgba(250, 134, 134, 0);*/
+	width: 60vw;
+	height: 90vh;
+	overflow-y: auto;
+	/*background-color: rgba(250, 134, 134, 0);*/
 }
 
 .feedback_body {
-    -ms-overflow-style: none;
+	-ms-overflow-style: none;
 }
 
 .feedback_body::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 /* div 내 무한스크롤 끝 */
-
-
-
-
-
-
 .feedback_body.fixed {
-    margin-top: 70px;
+	margin-top: 70px;
 }
 
-
-.feedback_header > h1 {
-    text-align: center;
-    color: white;
+.feedback_header>h1 {
+	text-align: center;
+	color: white;
 }
 
-.feedback_header > div > * {
-    color: white;
+.feedback_header>div>* {
+	color: white;
 }
 
 .feedback_header span {
-    color: white;
+	color: white;
 }
 
 .feedback_header ul {
-    display: flex;
+	display: flex;
 }
 
 .feedback_header ul {
-    justify-content: space-evenly;
+	justify-content: space-evenly;
 }
 
 .fd_hd_left {
-    align-self: center;
-    flex-grow: 3;
+	align-self: center;
+	flex-grow: 3;
 }
 
 .fd_hd_right {
-    flex-grow: 1;
-    display: flex;
-    justify-content: space-evenly;
+	flex-grow: 1;
+	display: flex;
+	justify-content: space-evenly;
 }
 
 .fd_search_container {
-    align-self: center;
-    display: flex;
+	align-self: center;
+	display: flex;
 }
 
 .search-form {
-
+	
 }
 
 .request_btn {
-    align-self: center;
+	align-self: center;
 }
 
 .request_btn {
-    align-self: center;
-    background: none;
-    border: 2px solid #ffffff;
-    color: white;
-    padding: 15px 20px;
-    border-radius: 20px;
-    margin: 10px;
-    outline: none;
-    cursor: pointer;
-    transition: all .4s;
+	align-self: center;
+	background: none;
+	border: 2px solid #ffffff;
+	color: white;
+	padding: 15px 20px;
+	border-radius: 20px;
+	margin: 10px;
+	outline: none;
+	cursor: pointer;
+	transition: all .4s;
 }
 
 .request_btn {
-    background-color: rgba(255, 0, 0, 0.54);
+	background-color: rgba(255, 0, 0, 0.54);
 }

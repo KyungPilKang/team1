@@ -1,5 +1,6 @@
 package com.semi.service;
 
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,8 +83,20 @@ public class MemberServiceImpl implements MemberService {
 		member.setMem_link_code(null);
 		member.setMem_link_confirm("no");
 		member.setMem_duo_reg_ok("no");
+		member.setMem_score(0);
+		member.setMem_type("normal");
 		memberDAO.insertMember(member);
 		mailService.joinMailSend(member);
+	}
+	
+	@Override
+	public void insertMember_kakao(Member member) throws Exception {
+		member.setMem_code_confirm("yes");
+		member.setMem_link_confirm("no");
+		member.setMem_duo_reg_ok("no");
+		member.setMem_score(0);
+		member.setMem_type("normal");
+		memberDAO.insertMember(member);
 	}
 
 	@Override
@@ -132,7 +145,27 @@ public class MemberServiceImpl implements MemberService {
         }
 		mem.setMem_code(numStr);
 		memberDAO.updateMem_code(mem);
+		mailService.joinMailSend(mem);
 	}
+
+	@Override
+	public int selectMem_score(int mno) throws Exception {
+		int mem_score=0;
+		mem_score=memberDAO.selectMem_score(mno);
+		return mem_score;
+	}
+
+	@Override
+	public List<Member> link_member_list() throws Exception {
+		return memberDAO.link_member_list();
+	}
+
+	@Override
+	public Member selelctMember_bykakao(String id) throws Exception {
+		return memberDAO.selelctMember_bykakao(id);
+	}
+
+	
 	
 	
     
