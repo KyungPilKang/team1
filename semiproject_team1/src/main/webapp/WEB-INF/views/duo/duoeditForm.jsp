@@ -48,7 +48,7 @@
 		<div class="hero" style="z-index: 1;">
 			<h2>듀오 매칭</h2>
 			<c:choose>
-				<c:when test="${mem_duo_reg_ok eq 'no' }">
+				<c:when test="${mem_duo_reg_ok eq 'no'	 }">
 					<button type="button" onclick="location.href='/duoregform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" onclick="location.href='/duoregform?duo_reg_ok=no' ">매칭신청/조회</button>
 				</c:when>
@@ -128,7 +128,7 @@
 			</div>
 		</div>
 		<div class="hero" style="margin-top:900px;">
-			<button type="submit">등록하기</button>
+			<button type="submit">업데이트</button>
 		</div>
 	</form>
 	</div>
@@ -151,26 +151,7 @@
 		</ul>
 	</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-let sweetalert=(icon,title,contents)=>{
-    Swal.fire({
-        icon: icon,
-        title: title,
-        text: contents,
-        confirmButtonText: "확인"
-    })
-	};
-	let ok="<c:out value='${duo_reg_ok}'/>";
-	if(ok=="no"){
-		Swal.fire({
-			title: "미등록 계정",
-			text: "듀오 등록 후 매칭(조회)서비스가 가능합니다",
-			icon: "error",
-			confirmButtonText: "확인"
-		})
-	}
-
 	$('#duo_position').change(function(){
 		$('#duo_subposition').attr('disabled', false);
 		$('#duo_position>option').attr('disabled', false);

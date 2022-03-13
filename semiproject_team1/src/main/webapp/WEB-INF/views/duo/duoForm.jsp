@@ -45,9 +45,16 @@
        		</div>
 		</div>
 		<div class="hero" style= "z-index:1;">
-			<h2>듀오 매칭</h2>
-			<button type="button" onclick="location.href='/duoregform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button type="button" onclick="location.href='/duosearchform' ">매칭신청/조회</button>
+			<c:choose>
+				<c:when test="${mem_duo_reg_ok eq 'no' }">
+					<button type="button" onclick="location.href='/duoregform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" onclick="location.href='/duoregform?duo_reg_ok=no' ">매칭신청/조회</button>
+				</c:when>
+				<c:otherwise>
+					<button type="button" onclick="location.href='/duoeditform' ">매칭등록/수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" onclick="location.href='/duosearchform' ">매칭신청/조회</button>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 		<div class="footer">
