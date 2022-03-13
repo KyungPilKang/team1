@@ -23,7 +23,7 @@
 	</update>
 	<select id="selectDuoList" resultType="Duo">
 		<![CDATA[
-			
+			select * from duo order by duo_date desc
 		]]>
 	</select>
 </mapper>

@@ -14,3 +14,4 @@ public interface DuoDAO {
 	public void updateDuo(Duo duo) throws Exception;
 	public List<Duo> selectDuoList() throws Exception;
 }
+ 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,12 +58,97 @@
 		</div>
 		<div class="user-container">
 			<ul>
-				<li><a href="#">&nbsp&nbsp&nbsp <img class="mb-5"
-						src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png"
-						alt="" width="150" height="150"> <br>넌죽었다 [포지션]
-				</a><br>
-					<button type="button" onclick="location.href='/duoForm2' ">상세보기</button>
-				<li><a href="#">&nbsp&nbsp&nbsp <img class="mb-5"
+				<c:forEach items="${duoList}" var="duo">
+					<div style="width:300px; height:300px; float:left;">
+						<c:choose>
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'iron')}">
+								<div style="margin-left:77px;">
+									<img class="mb-5"
+									src="${pageContext.request.contextPath}/resources/asset/image/duo/i.png"
+									alt="" width="150" height="150">
+								</div>
+							</c:when>
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'bronze')}">
+								<div style="margin-left:77px;">
+									<img class="mb-5"
+									src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png"
+									alt="" width="150" height="150">
+								</div>
+							</c:when>
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'silver')}">
+								<div style="margin-left:77px;">
+									<img class="mb-5"
+									src="${pageContext.request.contextPath}/resources/asset/image/duo/s.png"
+									alt="" width="150" height="150">
+								</div>
+							</c:when>
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'gold')}">
+								<div style="margin-left:77px;">
+									<img class="mb-5"
+									src="${pageContext.request.contextPath}/resources/asset/image/duo/g.png"
+									alt="" width="150" height="150">
+								</div>
+							</c:when>
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'platinum')}">
+								<div style="margin-left:77px;">
+									<img class="mb-5"
+									src="${pageContext.request.contextPath}/resources/asset/image/duo/p.png"
+									alt="" width="150" height="150">
+								</div>
+							</c:when>
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'diamond')}">
+								<div style="margin-left:77px;">
+									<img class="mb-5"
+									src="${pageContext.request.contextPath}/resources/asset/image/duo/d.png"
+									alt="" width="150" height="150">
+								</div>
+							</c:when>
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'master')}">
+								<div style="margin-left:77px;">
+									<img class="mb-5"
+									src="${pageContext.request.contextPath}/resources/asset/image/duo/m.png"
+									alt="" width="150" height="150">
+								</div>
+							</c:when>
+							<c:when test="${fn:contains(duo.duo_lol_tier, 'grandmaster')}">
+								<div style="margin-left:77px;">
+									<img class="mb-5"
+									src="${pageContext.request.contextPath}/resources/asset/image/duo/gm.png"
+									alt="" width="150" height="150">
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div style="margin-left:77px;">
+									<img class="mb-5"
+									src="${pageContext.request.contextPath}/resources/asset/image/duo/c.png"
+									alt="" width="150" height="150">
+								</div>
+							</c:otherwise>
+						</c:choose>
+						<div style="color:white; font-weight:bold; text-align:center; font-size:1.5em;">
+							${duo.duo_link_id }
+							<c:choose>
+								<c:when test="${duo.duo_position eq 1 }">
+									[탑]	
+								</c:when>
+								<c:when test="${duo.duo_position eq 2 }">
+									[정글]
+								</c:when>
+								<c:when test="${duo.duo_position eq 3 }">
+									[미드]
+								</c:when>
+								<c:when test="${duo.duo_position eq 4 }">
+									[원딜]
+								</c:when>
+								<c:otherwise>
+									[서폿]
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<button type="button" onclick="location.href='/duodetail?duo_nickname=${duo.duo_nickname}' ">상세보기</button>
+					</div>
+				</c:forEach>
+				<%-- <li><a href="#">&nbsp&nbsp&nbsp <img class="mb-5"
 						src="${pageContext.request.contextPath}/resources/asset/image/duo/c.png"
 						alt="" width="150" height="150"> <br>아이킬유 [포지션]
 				</a><br>
@@ -101,7 +187,7 @@
 						src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png"
 						alt="" width="150" height="150"> <br>아이킬유 [포지션]
 				</a><br>
-					<button type="button" onclick="location.href='/duoForm2' ">상세보기</button>
+					<button type="button" onclick="location.href='/duoForm2' ">상세보기</button> --%>
 			</ul>
 		</div>
 	</div>
