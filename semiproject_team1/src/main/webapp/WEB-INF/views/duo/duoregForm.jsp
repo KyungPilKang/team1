@@ -71,7 +71,7 @@
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">포지션</div>
 				<select class="form-control" id="duo_position" name="duo_position" style="height:30px; font-weight:bold; text-align:center; width:120px;">
-					<option value="0" selected>주포지션</option>
+					<option value="" selected>주포지션</option>
                     <option value="1">탑</option>
                     <option value="2">정글</option>
                     <option value="3">미드</option>
@@ -79,7 +79,7 @@
                     <option value="5">서포터</option>
                 </select>
                 <select class="form-control" id="duo_subposition" name="duo_subposition" style="height:30px; font-weight:bold; text-align:center; width:120px;" disabled>
-                    <option value="0" selected>서브포지션</option>
+                    <option value="" selected>서브포지션</option>
                     <option value="1" id="p1">탑</option>
                     <option value="2" id="p2">정글</option>
                     <option value="3" id="p3">미드</option>
@@ -105,7 +105,7 @@
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">플레이 타입</div>
 				<select class="form-control" id="duo_play_type" name="duo_play_type" style="height:30px; font-weight:bold; text-align:center;">
-                  <option value="0">1개 선택</option>
+                  <option value="">1개 선택</option>
                   <option value="1">한타 지향</option>
                   <option value="2">라인전 지향</option>
                   <option value="3">오브젝트 지향</option>
@@ -130,7 +130,7 @@
 			</div>
 		</div>
 		<div class="hero" style="margin-top:900px;">
-			<button type="submit">등록하기</button>
+			<button id="next" type="submit">등록하기</button>
 		</div>
 	</form>
 	</div>
@@ -179,6 +179,81 @@ let sweetalert=(icon,title,contents)=>{
 		});
 	});
 
+	$('#next').click(function(){
+		var duo_position = $('#duo_position').val();
+		
+		if (duo_position==''){
+				Swal.fire({
+					title: "선택 오류",
+					text: "주포지션을 선택하세요",
+					icon: "error",
+					confirmButtonText: "확인"
+				})
+			return false;
+		}
+		var duo_subposition = $('#duo_subposition').val();
+		if(duo_subposition==''){
+	        	Swal.fire({
+					title: "선택 오류",
+					text: "서브포지션을 선택하세요",
+					icon: "error",
+					confirmButtonText: "확인"
+				})
+				return false;
+        	}
+		var duo_play_type = $('#duo_play_type').val();
+		if(duo_play_type==''){
+	        	Swal.fire({
+					title: "선택 오류",
+					text: "플레이 타입을 선택하세요",
+					icon: "error",
+					confirmButtonText: "확인"
+				})
+				return false;
+        	}
+		
+		if(!$('input:radio[name=duo_mic_ok]').is(":checked")){
+        	Swal.fire({
+				title: "체크 오류",
+				text: "마이크 여부를 체크하세요",
+				icon: "error",
+				confirmButtonText: "확인"
+			})
+			return false;
+    	}
+		
+		if(!$('input:radio[name=duo_allcham]').is(":checked")){
+        	Swal.fire({
+				title: "체크 오류",
+				text: "올챔 여부를 체크하세요",
+				icon: "error",
+				confirmButtonText: "확인"
+			})
+			return false;
+    	}
+		
+		 var duo_info = $('#duo_info').val();
+       		if(duo_info=='') {
+	        	Swal.fire({
+					title: "입력 오류",
+					text: "자기소개 내용을 입력해주세요",
+					icon: "error",
+					confirmButtonText: "확인"
+				})
+				return false;
+        	}else{
+        		if(duo_info.length<10){
+        		Swal.fire({
+					title: "입력 오류",
+					text: "자기소개 내용을 10자 이상 입력해주세요",
+					icon: "error",
+					confirmButtonText: "확인"
+				})
+				
+        	}
+        		return false;
+        	}	
+	});
 
 </script>
 </body>
