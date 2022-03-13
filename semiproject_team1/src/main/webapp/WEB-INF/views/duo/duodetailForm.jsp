@@ -58,74 +58,205 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<form action="/duoupdate" method="post">
+		<form>
 		<div class="user-container">
 			<div style="text-align:center; margin-top:10px; margin-bottom:30px;">
 				<h3>등록 정보를 업데이트 시 전적 정보가 최신 데이터로 갱신됩니다</h3>
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">닉네임</div>
-				<input type="text" name="duo_nickname" value="${mem.mem_nickname }" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+				<input type="text" name="duo_nickname" value="${detail.duo_nickname}" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">롤 아이디</div>
-				<input type="text" name="duo_link_id" value="${mem.mem_link_id }" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+				<input type="text" name="duo_link_id" value="${detail.duo_link_id }" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">포지션</div>
-				<select class="form-control" id="duo_position" name="duo_position" style="height:30px; font-weight:bold; text-align:center; width:120px;">
-					<option value="0" selected>주포지션</option>
-                    <option value="1">탑</option>
-                    <option value="2">정글</option>
-                    <option value="3">미드</option>
-                    <option value="4">원딜</option>
-                    <option value="5">서포터</option>
-                </select>
-                <select class="form-control" id="duo_subposition" name="duo_subposition" style="height:30px; font-weight:bold; text-align:center; width:120px;" disabled>
-                    <option value="0" selected>서브포지션</option>
-                    <option value="1" id="p1">탑</option>
-                    <option value="2" id="p2">정글</option>
-                    <option value="3" id="p3">미드</option>
-                    <option value="4" id="p4">원딜</option>
-                    <option value="5" id="p5">서포터</option>
-                    <option value="6">선택안함</option>
-                </select>
+				<c:choose>
+					<c:when test="${detail.duo_position eq '1' }">
+						<input type="text" name="duo_link_id" value="주포 : 탑" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+						<c:choose>
+							<c:when test="${detail.duo_subposition eq '1' }">
+								<input type="text" name="duo_link_id" value="서브 : 탑" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '2' }">
+								<input type="text" name="duo_link_id" value="서브 : 정글" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '3' }">
+								<input type="text" name="duo_link_id" value="서브 : 미드" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '4' }">
+								<input type="text" name="duo_link_id" value="서브 : 원딜" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '5' }">
+								<input type="text" name="duo_link_id" value="서브 : 서폿" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:otherwise>
+								<input type="text" name="duo_link_id" value="서브 포지션 없음" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+					<c:when test="${detail.duo_position eq '2' }">
+						<input type="text" name="duo_link_id" value="주포 : 정글" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+						<c:choose>
+							<c:when test="${detail.duo_subposition eq '1' }">
+								<input type="text" name="duo_link_id" value="서브 : 탑" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '2' }">
+								<input type="text" name="duo_link_id" value="서브 : 정글" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '3' }">
+								<input type="text" name="duo_link_id" value="서브 : 미드" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '4' }">
+								<input type="text" name="duo_link_id" value="서브 : 원딜" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '5' }">
+								<input type="text" name="duo_link_id" value="서브 : 서폿" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:otherwise>
+								<input type="text" name="duo_link_id" value="서브 포지션 없음" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+					<c:when test="${detail.duo_position eq '3' }">
+						<input type="text" name="duo_link_id" value="주포 : 미드" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+						<c:choose>
+							<c:when test="${detail.duo_subposition eq '1' }">
+								<input type="text" name="duo_link_id" value="서브 : 탑" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '2' }">
+								<input type="text" name="duo_link_id" value="서브 : 정글" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '3' }">
+								<input type="text" name="duo_link_id" value="서브 : 미드" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '4' }">
+								<input type="text" name="duo_link_id" value="서브 : 원딜" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '5' }">
+								<input type="text" name="duo_link_id" value="서브 : 서폿" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:otherwise>
+								<input type="text" name="duo_link_id" value="서브 포지션 없음" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:otherwise>
+						</c:choose>	
+					</c:when>
+					<c:when test="${detail.duo_position eq '4' }">
+						<input type="text" name="duo_link_id" value="주포 : 원딜" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+						<c:choose>
+							<c:when test="${detail.duo_subposition eq '1' }">
+								<input type="text" name="duo_link_id" value="서브 : 탑" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '2' }">
+								<input type="text" name="duo_link_id" value="서브 : 정글" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '3' }">
+								<input type="text" name="duo_link_id" value="서브 : 미드" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '4' }">
+								<input type="text" name="duo_link_id" value="서브 : 원딜" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '5' }">
+								<input type="text" name="duo_link_id" value="서브 : 서폿" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:otherwise>
+								<input type="text" name="duo_link_id" value="서브 포지션 없음" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+					<c:otherwise>
+						<input type="text" name="duo_link_id" value="주포 : 서폿" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+						<c:choose>
+							<c:when test="${detail.duo_subposition eq '1' }">
+								<input type="text" name="duo_link_id" value="서브 : 탑" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '2' }">
+								<input type="text" name="duo_link_id" value="서브 : 정글" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '3' }">
+								<input type="text" name="duo_link_id" value="서브 : 미드" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '4' }">
+								<input type="text" name="duo_link_id" value="서브 : 원딜" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:when test="${detail.duo_subposition eq '5' }">
+								<input type="text" name="duo_link_id" value="서브 : 서폿" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:when>
+							<c:otherwise>
+								<input type="text" name="duo_link_id" value="서브 포지션 없음" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+							</c:otherwise>
+						</c:choose>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">티어</div>
-				<input type="text" name="duo_lol_tier" value="${lol_tier }(${lol_rank })" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+				<input type="text" name="duo_lol_tier" value="${detail.duo_lol_tier }" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">승률</div>
-				<input type="text" name="duo_lol_ratio" value="${lol_rate }" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+				<input type="text" name="duo_lol_ratio" value="${detail.duo_lol_ratio }%" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">모스트 챔피언</div>
-				<input type="text" name="duo_most1" value="${most1 }"readOnly  style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center; width:120px;">
-				<input type="text" name="duo_most2" value="${most2 }"readOnly  style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center; width:120px;">
-				<input type="text" name="duo_most3" value="${most3 }"readOnly  style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center; width:120px;">
+				<input type="text" name="duo_most1" value="${detail.duo_most1 }"readOnly  style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center; width:120px;">
+				<input type="text" name="duo_most2" value="${detail.duo_most2 }"readOnly  style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center; width:120px;">
+				<input type="text" name="duo_most3" value="${detail.duo_most3 }"readOnly  style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center; width:120px;">
+			</div>
+			<div class="duo_wr_subject">
+				<div style="width:120px; float:left; text-align:center; margin-top:13px">마이크 여부</div>
+				<c:choose>
+					<c:when test="${detail.duo_mic_ok eq 'yes' }">
+						<input type="text" name="duo_lol_tier" value="가능" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+					</c:when>
+					<c:otherwise>
+						<input type="text" name="duo_lol_tier" value="불가능" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+					</c:otherwise>
+				</c:choose>
+			</div>
+			<div class="duo_wr_subject">
+				<div style="width:120px; float:left; text-align:center; margin-top:13px">올챔 여부</div>
+				<c:choose>
+					<c:when test="${detail.duo_allcham eq 'yes' }">
+						<input type="text" name="duo_lol_tier" value="가능" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+					</c:when>
+					<c:otherwise>
+						<input type="text" name="duo_lol_tier" value="불가능" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">플레이 타입</div>
-				<select class="form-control" id="duo_play_type" name="duo_play_type" style="height:30px; font-weight:bold; text-align:center;">
-                  <option value="0">1개 선택</option>
-                  <option value="1">한타 지향</option>
-                  <option value="2">라인전 지향</option>
-                  <option value="3">오브젝트 지향</option>
-                  <option value="4">사이드 운영</option>
-                  <option value="5">로밍 운영</option>
-                </select>
+				<c:choose>
+					<c:when test="${detail.duo_play_type eq '1' }">
+						<input type="text" name="duo_link_id" value="한타 지향" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+					</c:when>
+					<c:when test="${detail.duo_play_type eq '2' }">
+						<input type="text" name="duo_link_id" value="라인전 지향" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+					</c:when>
+					<c:when test="${detail.duo_play_type eq '3' }">
+						<input type="text" name="duo_link_id" value="오브젝트 지향" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+					</c:when>
+					<c:when test="${detail.duo_play_type eq '4' }">
+						<input type="text" name="duo_link_id" value="사이드 운영" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+					</c:when>
+					<c:otherwise>
+						<input type="text" name="duo_link_id" value="로밍 운영" readOnly style="background-color: rgba(80,80,80,0.5); height:30px; color:white; font-weight:bold; text-align:center;">
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:73px">자기소개</div>
-				<input type="text" placeholder="내용을 입력해주세요" style="width: 470px; height: 150px;"
-				id="duo_info" name="duo_info">
+				<input type="text" placeholder="내용을 입력해주세요" style="width: 470px; height: 150px; background-color: rgba(80,80,80,0.5); color:white; font-weight:bold; text-align:center;"
+				id="duo_info" name="duo_info" readOnly value="${detail.duo_info }">
 			</div>
 		</div>
-		<div class="hero" style="margin-top:900px;">
-			<button type="submit">업데이트</button>
-		</div>
 	</form>
+		<div class="hero" style="margin-top:990px;">
+			<button onclick="history.back()">돌아가기</button>
+		</div>
 	</div>
 	<div class="footer">
 		<ul class="footer-List">

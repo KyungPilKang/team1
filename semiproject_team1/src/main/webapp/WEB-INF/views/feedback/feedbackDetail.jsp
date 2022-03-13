@@ -55,8 +55,108 @@
             ${article.feedback_content }
         </div>
 
+
+        <%-- 투표 삽입부 --%>
         <div class="vote_cont">vote_cont</div>
-        <div class="answer_cont">answer_cont</div>
+
+
+        <%-- 피드백 답변 삽입 컨테이너 --%>
+        <div class="answer_cont ">
+
+            <div><b>피드백 답변</b> 총 ${article.feedback_answercount}개</div>
+            <div>
+                <%-- 정렬 순서는 고정 > 인기순 > 최신순 --%>
+                <button onclick="location.reload()">고정 > 인기순 > 최신순</button>
+                <button onclick="answerList_sort()">고정 > 최신순 > 인기순</button>
+            </div>
+
+            <div class="append_answerList"></div>
+            <%-- 답변리스트 삽입부 시작--%>
+            <section id="an_listForm">
+                <table>
+                    <c:forEach var="answer" items="${anList }">
+                        <tr>
+                                <%-- 게시물 작성자만 고정, 고정취소가 가능하도록 --%>
+                            <c:if test="${article.feedback_nickname eq mem_nickname}">
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${answer.fd_answer_fixed == 0}">
+                                            <button onclick="answer_fixed(${answer.fd_answer_num})">고정</button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <button onclick="answer_fiexd_cancel(${answer.fd_answer_num})">고정취소</button>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
+                            </c:if>
+
+                            <td>
+                                <div class="eee">${answer.fd_answer_num}</div>
+                            </td>
+                            <td>닉네임:${answer.fd_answer_nickname}</td>
+                            <td>제목:${answer.fd_answer_title}</td>
+                            <td>
+                                내용:${answer.fd_answer_content}
+                            </td>
+                            <td><fmt:formatDate value="${answer.fd_answer_date}" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
+
+
+                                <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
+                            <c:if test="${!empty mem_nickname}">
+                                <c:if test="${answer.fd_answer_nickname == mem_nickname}">
+                                    <td>
+                                        <button onclick="an_removeCheck(${answer.fd_answer_num})">삭제</button>
+                                    </td>
+                                </c:if>
+                                <%-- 피드백 답변 좋아요 시작 --%>
+                                <td>
+                                    <div class="re_btn_like">
+                                        <c:choose>
+                                            <%-- 세션에 있는 유저를 확인해서 해당 댓글에 좋아요 플래그만 내려보내주면 될듯 --%>
+                                            <c:when test="${answer.fd_answer_like_ok == true}">
+                                                <div class="an_like_mini${answer.fd_answer_num}">
+                                                    <div class="an_heart ah_${answer.fd_answer_num}"
+                                                         onclick="an_like_off(${answer.fd_answer_num})"></div>
+                                                    <div class="an_heart_off ah_off_${answer.fd_answer_num} ah_off_hide"
+                                                         onclick="an_like_on(${answer.fd_answer_num})"></div>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="an_like_mini${answer.fd_answer_num}">
+                                                    <div class="an_heart_off ah_off_${answer.fd_answer_num}"
+                                                         onclick="an_like_on(${answer.fd_answer_num})"></div>
+                                                    <div class="an_heart ah_${answer.fd_answer_num} ah_hide"
+                                                         onclick="an_like_off(${answer.fd_answer_num})"></div>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                </td>
+                            </c:if>
+                                <%-- 좋아요 숫자 표시 --%>
+                            <td>
+                                    ${answer.fd_answer_likecount}
+                            </td>
+                                <%-- 피드백 답변 좋아요 끝--%>
+                                <%-------------------------------------- 세션이 있을경우 끝 --------------------------------------%>
+                        </tr>
+
+                    </c:forEach>
+                </table>
+            </section>
+            <%-- 답변리스트 삽입부 끝--%>
+            <div>
+                <c:if test="${!empty mem_nickname}">
+                    <form>
+                        <input type="text" class="answer_write_title" placeholder="제목">
+                        <textarea class="answer_write_content" maxlength="1000"
+                                  placeholder="피드백 답변을 적는 공간"></textarea>
+                        <button class="answer_submits" type="button">피드백 답변달기</button>
+                    </form>
+                </c:if>
+            </div>
+        </div>
+
         <div class="reply_cont">
             <%-- 세션의 회원번호(mno)가 존재할 때 댓글쓰기 가능 --%>
             <c:if test="${!empty mem_nickname}">
@@ -78,7 +178,7 @@
 
             <div class="append_replyList"></div>
             <%-- 댓글 삽입부 시작--%>
-            <section id="listForm">
+            <section id="re_listForm">
                 <table>
                     <c:forEach var="reply" items="${reList }">
                         <tr>
@@ -96,7 +196,7 @@
                             <c:if test="${!empty mem_nickname}">
                                 <c:if test="${reply.fd_reply_nickname == mem_nickname}">
                                     <td>
-                                        <button onclick="removeCheck(${reply.fd_reply_num})">삭제</button>
+                                        <button onclick="re_removeCheck(${reply.fd_reply_num})">삭제</button>
                                     </td>
                                 </c:if>
                                 <%-- 대댓글 좋아요 시작 --%>
@@ -203,7 +303,7 @@
 
 <%-- 댓글삭제 --%>
 <script>
-    function removeCheck(replyNum) {
+    function re_removeCheck(replyNum) {
         if (confirm("정말 삭제하시겠습니까??") == true) {
             $.ajax({
                 async: true,
@@ -286,11 +386,11 @@
     }
 </script>
 
-
 <%-- 댓글 정렬 --%>
 <script>
     const replyList_sort = () => {
-        $("#listForm").empty();
+        $("#re_listForm").empty();
+        $(".append_replyList").empty();
         $.ajax({
             type: "post",
             async: false,
@@ -305,6 +405,193 @@
     }
 </script>
 
+
+<%--------------------------------- 시작 : 피드백 답변 관련 ---------------------------------%>
+
+
+<%-- 피드백 답변 정렬 --%>
+<script>
+    const answerList_sort = () => {
+        $("#an_listForm").empty();
+        $(".append_answerList").empty();
+        $.ajax({
+            type: "post",
+            async: false,
+            // ajax 페이지를 피드백 답글을 내려주는 바꿔줘야한다.
+            url: "http://localhost:8090/feedbackDetail_ajax_answer",
+            data: {
+                feedback_num: ${article.feedback_num},
+            },
+            success: function (data) {
+                $('.append_answerList').append(data);
+            }
+        })
+    }
+</script>
+
+
+<%-- 피드백 답변 작성 ajax --%>
+<script>
+    $(function () {
+        $(".answer_submits").click(function () {
+            if ($(".answer_write_content").val() !== "") {
+                $.ajax({
+                    async: true,
+                    type: 'POST',
+                    data: {
+                        feedback_num: ${article.feedback_num},
+                        fd_answer_content: $(".answer_write_content").val(),
+                        fd_answer_title: $(".answer_write_title").val()
+                    },
+                    url: "http://localhost:8090/fd_reganswer",
+                    success: function (data) {
+                        alert("피드백 답변이 등록되었습니다.");
+                        location.reload();
+                    },
+                    error: function (textStatus) {
+                        alert(textStatus);
+                        console.log(textStatus);
+                        console.log(JSON.stringify(textStatus));
+                    }
+                });
+            } else {
+                alert("피드백 답변 내용을 입력하세요")
+                $(".comment_write_content").focus()
+            }
+        })
+    })
+</script>
+
+
+<%-- 피드백 답변삭제 --%>
+<script>
+    function an_removeCheck(replyNum) {
+        if (confirm("정말 삭제하시겠습니까??") == true) {
+            $.ajax({
+                async: true,
+                type: 'GET',
+                data: {
+                    fd_answer_num: replyNum,
+                },
+                // url 컨트롤러 만들어야함
+                url: "http://localhost:8090/fd_answerdelete",
+                success: function (data) {
+                    alert("피드백 답변이 삭제되었습니다.");
+                    location.reload();
+                },
+                error: function (textStatus) {
+                    alert(textStatus);
+                }
+            });
+        } else {
+            return false;
+        }
+    }
+</script>
+
+
+<%-- 피드백 답변 좋아요 버튼 자바스크립트 --%>
+<script>
+    function an_like_off(replyNum) {
+        console.log(replyNum + "번 피드백 답변에");
+        console.log(${mem_mno}+"번 유저가 좋아요 취소");
+        /* b_reply_like_member에 mno를 제거 */
+        /* 제거시 b_reply_likecount도 -1 */
+        $(".ah_" + replyNum).hide()
+        $.ajax({
+            async: true,
+            type: 'POST',
+            data: {
+                feedback_num: ${article.feedback_num},
+                fd_answer_num: replyNum,
+                mno:${mem_mno}
+            },
+            url: "http://localhost:8090/fd_an_like_off",
+            success: function (data) {
+            },
+            error: function (textStatus) {
+                alert(textStatus);
+            }
+        });
+        /* 빈 하트로 바꾸기 */
+        $(".ah_off_" + replyNum).show()
+        alert(replyNum + "번 댓글에 좋아요를 취소하셨습니다.")
+        location.reload();
+    }
+
+    function an_like_on(replyNum) {
+        console.log(replyNum + "번 피드백 답변에");
+        console.log(${mem_mno}+"번 유저가 좋아요 누름");
+        /* b_reply_like_member에 mno를 추가 */
+        /* 추가시 b_reply_likecount도 +1 */
+        $(".ah_off_" + replyNum).hide()
+        $.ajax({
+            async: true,
+            type: 'POST',
+            data: {
+                feedback_num: ${article.feedback_num},
+                fd_answer_num: replyNum,
+                mno:${mem_mno}
+            },
+            url: "http://localhost:8090/fd_an_like_on",
+            success: function (data) {
+            },
+            error: function (textStatus) {
+                alert(textStatus);
+            }
+        });
+        /* 빨간 하트로 바꾸기 */
+        $(".ah_" + replyNum).show()
+        alert(replyNum + "번 댓글에 좋아요를 누르셨습니다.")
+        location.reload();
+    }
+</script>
+
+
+<%-- 피드백 고정 --%>
+<script>
+    function answer_fixed(answerNum) {
+        $.ajax({
+            async: true,
+            type: 'POST',
+            data: {
+                feedback_num: ${article.feedback_num},
+                fd_answer_num : answerNum
+            },
+            url: "http://localhost:8090/fd_an_fixed",
+            success: function (data) {
+            },
+            error: function (textStatus) {
+                alert(textStatus);
+            }
+        });
+        alert(answerNum + "번 피드백 답변을 고정하였습니다.")
+        location.reload();
+    }
+
+
+    function answer_fiexd_cancel(answerNum) {
+        $.ajax({
+            async: true,
+            type: 'POST',
+            data: {
+                feedback_num: ${article.feedback_num},
+                fd_answer_num : answerNum
+            },
+            url: "http://localhost:8090/fd_an_fixed_cancel",
+            success: function (data) {
+            },
+            error: function (textStatus) {
+                alert(textStatus);
+            }
+        });
+        alert(answerNum + "번 피드백 답변 고정을 취소하셨습니다.")
+        location.reload();
+    }
+</script>
+
+
+<%--------------------------------- 끝 : 피드백 답변 관련 ---------------------------------%>
 
 </body>
 </html>

@@ -11,7 +11,7 @@
                 #{feedback_replay_fileName},
                 #{feedback_video_fileName}, now(), #{feedback_readcount}, #{feedback_likecount},
                 #{feedback_vote_member}, #{feedback_vote_top},
-                #{feedback_vote_jungle}, #{feedback_vote_mid}, #{feedback_vote_ad}, #{feedback_vote_support}, #{feedback_thumbnail}, #{feedback_replycount})
+                #{feedback_vote_jungle}, #{feedback_vote_mid}, #{feedback_vote_ad}, #{feedback_vote_support}, #{feedback_thumbnail}, #{feedback_replycount}, #{feedback_answercount})
         ]]>
 	</insert>
 
@@ -175,6 +175,41 @@
 		where feedback_num = #{feedbackNum}
 		]]>
 	</update>
+
+	<update id="updateAnswerCount" parameterType="int">
+		<![CDATA[
+		update feedback
+		set feedback_answercount=feedback_answercount + 1
+		where feedback_num = #{feedbackNum}
+		]]>
+	</update>
+
+	<update id="deleteAnswerCount" parameterType="int">
+		<![CDATA[
+		update feedback
+		set feedback_answercount=feedback_answercount - 1
+		where feedback_num = #{feedbackNum}
+		]]>
+	</update>
+
+	<update id="updateLikeCount" parameterType="int">
+		<![CDATA[
+		update feedback
+		set feedback_likecount=feedback_likecount + 1
+		where feedback_num = #{feedbackNum}
+		]]>
+	</update>
+
+	<update id="deleteLikeCount" parameterType="int">
+		<![CDATA[
+		update feedback
+		set feedback_likecount=feedback_likecount - 1
+		where feedback_num = #{feedbackNum}
+		]]>
+	</update>
+
+
+
 
 
 	<!-- ================================= 시작 : selectFeedbackList 검색 관련 ================================= -->
