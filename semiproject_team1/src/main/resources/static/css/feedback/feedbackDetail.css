@@ -152,6 +152,7 @@ body {
 	border-radius: 7px;
 }
 .feedback_container_answer_write_flex textarea {
+	margin: 10px;
 	background-color: white;
 }
 .each_answer_content_inner{
