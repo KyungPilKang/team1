@@ -28,14 +28,27 @@
 
         <section id="commandList">
             <%-- 세션과 게시물 작성자가 동일하면 수정, 삭제를 출력--%>
-            <c:if test="${mem_nickname == article.board_nickname}">
+            <c:choose>
+            	<c:when test="${mem_nickname == article.board_nickname}">
+            		<button class="btn_modify"
+                        onclick="location.href='modifyform?board_num=${article.board_num}&page=${page}'">
+	                    수정
+	                </button>
+	                <button class="btn_del">삭제</button>
+	                <button class="btn_del" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
+            	</c:when>
+            	<c:otherwise>
+            		<button class="btn_del" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
+            	</c:otherwise>
+            </c:choose>
+            <%-- <c:if test="${mem_nickname == article.board_nickname}">
                 <button class="btn_modify"
                         onclick="location.href='modifyform?board_num=${article.board_num}&page=${page}'">
                     수정
                 </button>
                 <button class="btn_del">삭제</button>
                 <button class="btn_del" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
-            </c:if>
+            </c:if> --%>
             <div>
                 첨부파일 :
                 <c:if test="${article.board_fileName!=null }">
