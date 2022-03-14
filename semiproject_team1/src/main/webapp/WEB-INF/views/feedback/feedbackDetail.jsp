@@ -82,7 +82,7 @@
                     <tbody>
 
                     <c:forEach var="answer" items="${anList }">
-                        <tr class="each_answer">
+                        <tr class="each_answer" onclick="content_pop(${answer.fd_answer_num})">
                                 <%-- 게시물 작성자만 고정, 고정취소가 가능하도록 --%>
                             <c:if test="${article.feedback_nickname eq mem_nickname}">
                                 <td>
@@ -98,9 +98,9 @@
                             </c:if>
 
                             <td>닉네임:${answer.fd_answer_nickname}</td>
-                            <td>제목:${answer.fd_answer_title}</td>
-                            <td class="each_answer_content" onclick="content_pop(${answer.fd_answer_num})">
-                                내용:${answer.fd_answer_content}
+                            <td class="each_answer_subject">제목:${answer.fd_answer_title}</td>
+                            <td class="each_answer_content">
+                               내용<div class="each_answer_content_inner">${answer.fd_answer_content}</div>
                             </td>
                             <td><fmt:formatDate value="${answer.fd_answer_date}" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
 
@@ -145,7 +145,10 @@
                                 <%-------------------------------------- 세션이 있을경우 끝 --------------------------------------%>
                         </tr>
                         <tr class="each_answer_content_detail${answer.fd_answer_num} each_answer_content_detail">
-                            <td colspan="8" class="each_answer_content_detail_content">내용<br>${answer.fd_answer_content}</td>
+                            <td colspan="8" class="each_answer_content_detail_content">
+                                <div class="each_answer_content_detail_content_inner">${answer.fd_answer_content}<br></div>
+                            </td>
+
                         </tr>
                     </c:forEach>
                     </tbody>
