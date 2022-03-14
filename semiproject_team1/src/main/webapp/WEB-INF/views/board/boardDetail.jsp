@@ -30,17 +30,17 @@
         <section id="commandList">
             <%-- 세션과 게시물 작성자가 동일하면 수정, 삭제를 출력--%>
             <c:choose>
-                <c:when test="${mem_nickname == article.board_nickname}">
-                    <button class="btn_modify"
-                            onclick="location.href='modifyform?board_num=${article.board_num}&page=${page}'">
-                        수정
-                    </button>
-                    <button class="btn_del">삭제</button>
-                    <button class="btn_list" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
-                </c:when>
-                <c:otherwise>
-                    <button class="btn_list" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
-                </c:otherwise>
+            	<c:when test="${mem_nickname == article.board_nickname}">
+            		<button class="btn_modify"
+                        onclick="location.href='modifyform?board_num=${article.board_num}&page=${page}'">
+	                    수정
+	                </button>
+	                <button class="btn_del">삭제</button>
+	                <button class="btn_list" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
+            	</c:when>
+            	<c:otherwise>
+            		<button class="btn_list" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
+            	</c:otherwise>
             </c:choose>
             <%-- <c:if test="${mem_nickname == article.board_nickname}">
                 <button class="btn_modify"
@@ -70,25 +70,25 @@
         </div>
 
         <section id="board_middle">
-            <c:if test="${not empty mem_nickname}">
-                <div style="width:200px; height:15px; margin-left:340px; font-weight:bold">
-                    좋아요
-                    <span class="material-icons-outlined">
+            <div style="width:200px; height:15px; margin-left:340px; font-weight:bold">
+            좋아요
+            <span class="material-icons-outlined">
 			favorite_border
 			</span>
-                    &nbsp;&nbsp;&nbsp;
-                    와드박기
-                    <span class="material-icons-outlined">
+			&nbsp;&nbsp;&nbsp;
+			와드박기
+			<span class="material-icons-outlined">
 			bookmark_border
 			</span>
-                </div>
+            </div>
+            <c:if test="${not empty mem_nickname}">
                 <div class="like_and_ward">
                     <div class="btn_like">
                         <c:choose>
                             <c:when test="${like_ok==true}">
                                 <div class="like_mini">
                                     <div class="heart" onclick="like_off()">
-                                    </div>
+									</div>
                                 </div>
                             </c:when>
                             <c:otherwise>
@@ -128,8 +128,7 @@
             </c:if>
 
 
-            <div style="font-size:20px;"><b>댓글</b> 총 ${article.board_replycount}개</div>
-            <br>
+            <div style="font-size:20px;"><b>댓글</b> 총 ${article.board_replycount}개</div><br>
             <div class="sort_button">
                 <%-- 최신순은 페이지 새로고침 해주면 된다 --%>
                 <button onclick="location.reload()">최신순</button>
@@ -138,107 +137,97 @@
             </div>
 
             <div class="append_replyList"></div>
-            <c:choose>
+            <%-- 댓글 삽입부 시작--%>
+            <section id="listForm">
+                <table>
+                    <c:forEach var="reply" items="${reList }">
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${reply.b_reply_lev!=0}">
+                                        <c:forEach var="i" begin="0" end="${reply.b_reply_lev*3}">
+                                            &nbsp;
+                                        </c:forEach>
+                                        ▶
+                                    </c:when>
+                                    <c:otherwise>▶</c:otherwise>
+                                </c:choose>
+                                    ${reply.b_reply_content}
+                            </td>
+                            <td>${reply.b_reply_nickname }</td>
+                            <td><fmt:formatDate value="${reply.b_reply_date }" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
 
-                <c:when test="${reList!=[] }">
-                    <%-- 댓글 삽입부 시작--%>
-                    <section id="listForm">
-                        <table>
-                            <c:forEach var="reply" items="${reList }">
-                                <tr>
+
+                                <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
+                            <c:if test="${!empty mem_nickname}">
+                                <%-- 대댓글 까지만 답글이 가능하도록 제한한다 --%>
+                                <c:if test="${reply.b_reply_lev == '0'}">
                                     <td>
+                                        <button onclick="reply_show(${reply.b_reply_num})">답글</button>
+                                            <%-- 누르면 아래에 --%>
                                     </td>
+                                </c:if>
+                                <c:if test="${reply.b_reply_nickname == mem_nickname}">
                                     <td>
-                                        <c:choose>
-                                            <c:when test="${reply.b_reply_lev!=0}">
-                                                <c:forEach var="i" begin="0" end="${reply.b_reply_lev*3}">
-                                                    &nbsp;
-                                                </c:forEach>
-                                                ▶
-                                            </c:when>
-                                            <c:otherwise>▶</c:otherwise>
-                                        </c:choose>
-                                            ${reply.b_reply_content}
+                                        <button onclick="removeCheck(${reply.b_reply_num})">삭제</button>
                                     </td>
-                                    <td>${reply.b_reply_nickname }</td>
-                                    <td><fmt:formatDate value="${reply.b_reply_date }"
-                                                        pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
-
-
-                                        <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
-                                    <c:if test="${!empty mem_nickname}">
-                                        <%-- 대댓글 까지만 답글이 가능하도록 제한한다 --%>
-                                        <c:if test="${reply.b_reply_lev == '0'}">
-                                            <td>
-                                                <button onclick="reply_show(${reply.b_reply_num})">답글</button>
-                                                    <%-- 누르면 아래에 --%>
-                                            </td>
-                                        </c:if>
-                                        <c:if test="${reply.b_reply_nickname == mem_nickname}">
-                                            <td>
-                                                <button onclick="removeCheck(${reply.b_reply_num})">삭제</button>
-                                            </td>
-                                        </c:if>
-                                        <td>
-                                                <%-- 오류 발생 이유 : form tag를 사용했더니 onclick시 boarddetail?로 이동, div로 변경하니까 정상작동.. --%>
-                                                <%-- 해결 : form tag 내부에 button을 넣어둔게 문제의 원인이었다 --%>
-                                            <div id="re_comment_write${reply.b_reply_num}" class="re_comment_write">
+                                </c:if>
+                                <td>
+                                        <%-- 오류 발생 이유 : form tag를 사용했더니 onclick시 boarddetail?로 이동, div로 변경하니까 정상작동.. --%>
+                                        <%-- 해결 : form tag 내부에 button을 넣어둔게 문제의 원인이었다 --%>
+                                    <div id="re_comment_write${reply.b_reply_num}" class="re_comment_write">
                                     <textarea class="re_comment_write_content" id="re${reply.b_reply_num}"
                                               maxlength="1000"
                                               placeholder="대댓글을 적어주세요:)"></textarea>
-                                                <button type="submit"
-                                                        onclick="re_reply_submit(${reply.b_reply_num},(document.getElementById('re${reply.b_reply_num}').value))">
-                                                    작성
-                                                </button>
-                                            </div>
-                                        </td>
+                                        <button type="submit"
+                                                onclick="re_reply_submit(${reply.b_reply_num},(document.getElementById('re${reply.b_reply_num}').value))">
+                                            작성
+                                        </button>
+                                    </div>
+                                </td>
 
-                                        <%-- 댓글 좋아요 시작 --%>
-                                        <%-- 대댓글은 좋아요 못누르게 처리 --%>
-                                        <c:if test="${reply.b_reply_lev == '0'}">
-                                            <td>
-                                                <div class="re_btn_like">
-                                                    <c:choose>
-                                                        <%-- 세션에 있는 유저를 확인해서 해당 댓글에 좋아요 플래그만 내려보내주면 될듯 --%>
-                                                        <c:when test="${reply.b_reply_like_ok == true}">
-                                                            <div class="re_like_mini${reply.b_reply_num}">
-                                                                <div class="re_heart rh_${reply.b_reply_num}"
-                                                                     onclick="re_like_off(${reply.b_reply_num})"></div>
-                                                                <div class="re_heart_off rh_off_${reply.b_reply_num} rh_off_hide"
-                                                                     onclick="re_like_on(${reply.b_reply_num})"></div>
-                                                            </div>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <div class="re_like_mini${reply.b_reply_num}">
-                                                                <div class="re_heart_off rh_off_${reply.b_reply_num}"
-                                                                     onclick="re_like_on(${reply.b_reply_num})"></div>
-                                                                <div class="re_heart rh_${reply.b_reply_num} rh_hide"
-                                                                     onclick="re_like_off(${reply.b_reply_num})"></div>
-                                                            </div>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </div>
-                                            </td>
-                                        </c:if>
-                                    </c:if>
-                                        <%-- 댓글만 좋아요 숫자 표시 --%>
-                                    <c:if test="${reply.b_reply_lev == '0'}">
-                                        <td>
-                                            (${reply.b_reply_likecount})
-                                        </td>
-                                    </c:if>
-                                        <%-- 댓글 좋아요 끝--%>
-                                        <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
-                                </tr>
-                            </c:forEach>
-                        </table>
-                    </section>
-                    <%-- 댓글 삽입부 끝--%>
-                </c:when>
-                <c:otherwise>
-                    <div class="emptyReply" style=""><h3>등록된 댓글이 없습니다.</h3></div>
-                </c:otherwise>
-            </c:choose>
+                                <%-- 댓글 좋아요 시작 --%>
+                                <%-- 대댓글은 좋아요 못누르게 처리 --%>
+                                <c:if test="${reply.b_reply_lev == '0'}">
+                                    <td>
+                                        <div class="re_btn_like">
+                                            <c:choose>
+                                                <%-- 세션에 있는 유저를 확인해서 해당 댓글에 좋아요 플래그만 내려보내주면 될듯 --%>
+                                                <c:when test="${reply.b_reply_like_ok == true}">
+                                                    <div class="re_like_mini${reply.b_reply_num}">
+                                                        <div class="re_heart rh_${reply.b_reply_num}"
+                                                             onclick="re_like_off(${reply.b_reply_num})"></div>
+                                                        <div class="re_heart_off rh_off_${reply.b_reply_num} rh_off_hide"
+                                                             onclick="re_like_on(${reply.b_reply_num})"></div>
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="re_like_mini${reply.b_reply_num}">
+                                                        <div class="re_heart_off rh_off_${reply.b_reply_num}"
+                                                             onclick="re_like_on(${reply.b_reply_num})"></div>
+                                                        <div class="re_heart rh_${reply.b_reply_num} rh_hide"
+                                                             onclick="re_like_off(${reply.b_reply_num})"></div>
+                                                    </div>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </div>
+                                    </td>
+                                </c:if>
+                            </c:if>
+                                    <%-- 좋아요 숫자 표시 --%>
+                                    <td>
+                                            ${reply.b_reply_likecount}
+                                    </td>
+                                <%-- 댓글 좋아요 끝--%>
+                                <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </section>
+            <%-- 댓글 삽입부 끝--%>
+
         </div>
 
     </div>
@@ -275,11 +264,11 @@
         /* 빈 하트로 바꾸기 */
         $(".like_mini").append("<div class='heart_off' onclick='like_on()''></div>");
         Swal.fire({
-            title: "취소 완료",
-            text: "좋아요를 취소하셨습니다",
-            icon: "success",
-            confirmButtonText: "확인"
-        });
+			title: "취소 완료",
+			text: "좋아요를 취소하셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		});
         //alert("좋아요를 취소하셨습니다") 스윗알럿으로 바꿈
         // 동영상 재생시 reload를 할 경우 영상도 reload 되므로 X
         // location.reload();
@@ -305,11 +294,11 @@
         /* 빨간 하트로 바꾸기 */
         $(".like_mini").append("<div class='heart' onclick='like_off()''></div>");
         Swal.fire({
-            title: "등록 완료",
-            text: "좋아요를 누르셨습니다",
-            icon: "success",
-            confirmButtonText: "확인"
-        });
+			title: "등록 완료",
+			text: "좋아요를 누르셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		});
         //alert("좋아요를 누르셨습니다")
         // location.reload();
     }
@@ -347,11 +336,11 @@
         });
         $(".ward_mini").append("<div class='bookmark_off' onclick='ward_on()''></div>");
         Swal.fire({
-            title: "취소 완료",
-            text: "와드를 취소하셨습니다",
-            icon: "success",
-            confirmButtonText: "확인"
-        });
+			title: "취소 완료",
+			text: "와드를 취소하셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		});
         //alert("와드를 취소하셨습니다")
         // location.reload();
     }
@@ -374,11 +363,11 @@
         });
         $(".ward_mini").append("<div class='bookmark' onclick='ward_off()''></div>");
         Swal.fire({
-            title: "등록 완료",
-            text: "와드를 누르셨습니다",
-            icon: "success",
-            confirmButtonText: "확인"
-        });
+			title: "등록 완료",
+			text: "와드를 누르셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		});
         //alert("와드를 누르셨습니다")
         // location.reload();
     }
@@ -387,25 +376,25 @@
 
 <%-- 모달 --%>
 <script>
-    $(function () {
+	$(function () {
         $(".btn_del").click(function () {
-            Swal.fire({
-                title: "게시글 삭제",
-                text: "확인을 누르면 게시글이 삭제됩니다",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "확인",
-                cancelButtonText: "취소",
-                cancelButtonColor: '#d33'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    location.href = 'boarddelete?board_num=${article.board_num}&page=${page}'
-                } else if (result.isDismissed) {
-                    location.reload();
-                } else {
-                    location.reload();
-                }
-            })
+        	Swal.fire({
+    			title: "게시글 삭제",
+    			text: "확인을 누르면 게시글이 삭제됩니다",
+    			icon: "warning",
+    			showCancelButton: true,
+    			confirmButtonText: "확인",
+    			cancelButtonText : "취소",
+    			cancelButtonColor: '#d33'
+    		}).then((result)=>{
+    			if(result.isConfirmed){
+    				location.href='boarddelete?board_num=${article.board_num}&page=${page}'
+    			}else if(result.isDismissed){
+	    			location.reload();
+    			}else{
+    				location.reload();
+    			}
+			})
         });
     });
     /* $(function () {
@@ -436,14 +425,14 @@
                     },
                     url: "http://localhost:8090/regreply",
                     success: function (data) {
-                        Swal.fire({
-                            title: "등록 완료",
-                            text: "댓글이 등록되었습니다",
-                            icon: "success",
-                            confirmButtonText: "확인"
-                        }).then((result) => {
-                            location.reload();
-                        })
+                    	Swal.fire({
+                			title: "등록 완료",
+                			text: "댓글이 등록되었습니다",
+                			icon: "success",
+                			confirmButtonText: "확인"
+                		}).then((result)=>{
+                			location.reload();
+    					})
                     },
                     error: function (textStatus) {
                         alert(textStatus);
@@ -463,14 +452,14 @@
 <%-- 댓글삭제 --%>
 <script>
 
-    function removeCheck(replyNum) {
-        Swal.fire({
-            title: "댓글 삭제",
-            text: "확인을 누르면 삭제됩니다",
-            icon: "warning",
-            confirmButtonText: "확인"
-        }).then((result) => {
-            $.ajax({
+     function removeCheck(replyNum) {
+		Swal.fire({
+			title: "댓글 삭제",
+			text: "확인을 누르면 삭제됩니다",
+			icon: "warning",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			$.ajax({
                 async: true,
                 type: 'GET',
                 data: {
@@ -478,20 +467,20 @@
                 },
                 url: "http://localhost:8090/replydelete",
                 success: function (data) {
-                    Swal.fire({
-                        title: "삭제 완료",
-                        text: "댓글이 삭제되었습니다",
-                        icon: "success",
-                        confirmButtonText: "확인"
-                    }).then((result) => {
-                        location.reload();
-                    })
+                	Swal.fire({
+            			title: "삭제 완료",
+            			text: "댓글이 삭제되었습니다",
+            			icon: "success",
+            			confirmButtonText: "확인"
+            		}).then((result)=>{
+            			location.reload();
+					})
                 },
                 error: function (textStatus) {
                     alert(textStatus);
                 }
             });
-        })
+		})
     }
 </script>
 
@@ -525,13 +514,13 @@
                 success: function (data) {
                     console.log(data);
                     Swal.fire({
-                        title: "등록 완료",
-                        text: "대댓글이 등록되었습니다",
-                        icon: "success",
-                        confirmButtonText: "확인"
-                    }).then((result) => {
-                        location.reload();
-                    })
+            			title: "등록 완료",
+            			text: "대댓글이 등록되었습니다",
+            			icon: "success",
+            			confirmButtonText: "확인"
+            		}).then((result)=>{
+            			location.reload();
+					})
                 },
                 error: function (textStatus) {
                     console.log("에러 : " + textStatus)
@@ -582,7 +571,7 @@
 			location.reload();
 		});
         //alert(replyNum + "번 댓글에 좋아요를 취소하셨습니다")
-
+        
     }
 
     function re_like_on(replyNum) {
