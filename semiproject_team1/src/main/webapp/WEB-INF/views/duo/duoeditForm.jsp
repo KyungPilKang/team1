@@ -10,6 +10,7 @@
 <title>듀오매칭</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/duo/duoForm2.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body>
@@ -32,9 +33,66 @@
 							<li><a href="/mypage">마이페이지</a></li>
 							<li><a href="/log_out?page=main">로그아웃</a></li>
 							<li style="color:white;">
-								<img class="mb-4"
-								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
-								alt="" width="30" height="30">${mem_nickname }님 환영합니다
+								<c:choose>
+									<c:when test="${my_tier eq 'none' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+										
+									</c:when>
+									<c:when test="${my_tier eq null }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/ul.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+										
+									</c:when>
+									<c:when test="${my_tier eq 'IRON' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/i.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+										
+									</c:when>
+									<c:when test="${my_tier eq 'BRONZE' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'SILVER' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/s.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'GOLD' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/g.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'PLATINUM' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/p.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'DIAMOND' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/d.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'MASTER' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/m.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'GRANDMASTER' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/gm.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:otherwise>
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/c.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:otherwise>
+								</c:choose>
 							</li>
 						</c:when>
 						<c:otherwise>
@@ -74,7 +132,7 @@
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">포지션</div>
 				<select class="form-control" id="duo_position" name="duo_position" style="height:30px; font-weight:bold; text-align:center; width:120px;">
-					<option value="0" selected>주포지션</option>
+					<option value="">주포지션</option>
                     <option value="1">탑</option>
                     <option value="2">정글</option>
                     <option value="3">미드</option>
@@ -82,7 +140,7 @@
                     <option value="5">서포터</option>
                 </select>
                 <select class="form-control" id="duo_subposition" name="duo_subposition" style="height:30px; font-weight:bold; text-align:center; width:120px;" disabled>
-                    <option value="0" selected>서브포지션</option>
+                    <option value="">서브포지션</option>
                     <option value="1" id="p1">탑</option>
                     <option value="2" id="p2">정글</option>
                     <option value="3" id="p3">미드</option>
@@ -108,7 +166,7 @@
 			<div class="duo_wr_subject">
 				<div style="width:120px; float:left; text-align:center; margin-top:13px">플레이 타입</div>
 				<select class="form-control" id="duo_play_type" name="duo_play_type" style="height:30px; font-weight:bold; text-align:center;">
-                  <option value="0">1개 선택</option>
+                  <option value="">1개 선택</option>
                   <option value="1">한타 지향</option>
                   <option value="2">라인전 지향</option>
                   <option value="3">오브젝트 지향</option>
@@ -123,30 +181,35 @@
 			</div>
 		</div>
 		<div class="hero" style="margin-top:900px;">
-			<button type="submit">업데이트</button>
+			<button type="submit" id="next">업데이트</button>
 		</div>
 	</form>
 	</div>
 	<div class="footer">
-		<ul class="footer-List">
-			<li>About LOLPAN.DOG</li>
-			<li>개인정보처리방침</li>
-			<li>도움말</li>
-			<li>문의/피드백</li>
-			<li>광고</li>
-			<li>제휴</li>
-		</ul>
-		<ul class="footer-CSList">
-			<li>고객센터 C/S Center</li>
-			<li>전화: 02.1234.5678</li>
-			<li>팩스: 02.1234.5678</li>
-			<li>이메일: lolpan.dog@gmail.com</li>
-			<li>카카오톡 ID: LOLPANDOG</li>
-			<li>오전 9시부터 오후 6시까지 상담가능합니다.</li>
-		</ul>
+	<div style="margin-left:20px; margin-top:10px">
+       		<ul class="footer-List">
+			<li>© 2022 LOLPAN.DOG LOLPAN.DOG isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</li>
+				<ul class="footer-CSList">
+				<li>고객센터 C/S Center</li>
+				<li>전화: 02.1234.5678</li>
+				<li>이메일: lolpan.dog@gmail.com</li>
+				<li>오전 9시부터 오후 6시까지 상담가능합니다.</li>
+				</ul> 
+			</ul>
+			<br>
+	</div>
 	</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
+let sweetalert=(icon,title,contents)=>{
+    Swal.fire({
+        icon: icon,
+        title: title,
+        text: contents,
+        confirmButtonText: "확인"
+    })
+};
+	
 	$('#duo_position').change(function(){
 		$('#duo_subposition').attr('disabled', false);
 		$('#duo_position>option').attr('disabled', false);
@@ -157,6 +220,50 @@
 		});
 	});
 
+	$('#next').click(function(){
+		var duo_position = $('#duo_position').val();
+		
+		if (duo_position==''){
+				Swal.fire({
+					title: "선택 오류",
+					text: "주포지션을 선택하세요",
+					icon: "error",
+					confirmButtonText: "확인"
+				})
+			return false;
+		}
+		var duo_subposition = $('#duo_subposition').val();
+		if(duo_subposition==''){
+	        	Swal.fire({
+					title: "선택 오류",
+					text: "서브포지션을 선택하세요",
+					icon: "error",
+					confirmButtonText: "확인"
+				})
+				return false;
+        	}
+		var duo_play_type = $('#duo_play_type').val();
+		if(duo_play_type==''){
+	        	Swal.fire({
+					title: "선택 오류",
+					text: "플레이 타입을 선택하세요",
+					icon: "error",
+					confirmButtonText: "확인"
+				})
+				return false;
+        	}
+		
+		 var duo_info = $('#duo_info').val();
+       		if(duo_info=='') {
+	        	Swal.fire({
+					title: "입력 오류",
+					text: "자기소개 내용을 입력해주세요",
+					icon: "error",
+					confirmButtonText: "확인"
+				})
+				return false;
+        	}	
+	});
 
 </script>
 </body>

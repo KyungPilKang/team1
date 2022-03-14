@@ -1,13 +1,17 @@
 body {
-	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-		url(../../asset/image/board/lol4.jpg);
-	background-size: cover;
+	/*background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),*/
+	/*	url(../../asset/image/board/lol4.jpg);*/
+	/*background-size: cover;*/
 }
 
-.board_container {
+
+
+.feedback_container{
+	display: flex;
+	flex-direction: column;
 	background: white;
-	width: 1000px;
-	height: 2500px;
+	/*width: 1000px;*/
+	/*height: 2500px;*/
 	border: 5px solid #4169E1;
 	position: absolute;
 	left: 50%;
@@ -18,104 +22,255 @@ body {
 	outline: none;
 }
 
-.board_subject_container {
-	padding-left: 20px;
-	font-weight: bold;
-	font-size: 40px;
-	width: 980px;
-	height: 55px;
-	color: black;
-	border: 6px solid #708090;
-	border-radius: 30px;
+/* 헤더부 */
+.feedback_container_header{
+	display: flex;
+	flex-direction: column;
+	background-color: red;
 }
 
-.board_container_bo {
-	margin-top: 20px;
-	text-align: center;
-	font-weight: bold;
+.feedback_subject_container{
+	background-color: #a3abf6;
 }
 
-.board_category_container {
+/* 날짜 닉네임 조회수 댓글 추천 컨테이너*/
+.feedback_container_bo{
+	display: flex;
+	background-color: #0dcaf0;
+}
+
+/* 왼쪽 : 날짜 닉네임 */
+.feedback_container_bo_left{
+	display: flex;
+	background-color: #88a5d0;
+}
+/* 우측 : 조회수 댓글 추천*/
+.feedback_container_bo_right{
+	display: flex;
+	background-color: #7cc7a4;
+}
+
+/*리플레이*/
+.feedback_container_replay{
+	background-color: #867f7f;
+}
+
+/* 목록 수정 삭제 버튼*/
+.feedback_container_modDel{
+ background-color: #97a0a1;
+}
+
+/* 동영상 */
+.feedback_container_video{
+
+}
+
+/* 내용 */
+.feedback_container_content{
+	background-color: #adeeea;
+}
+
+
+.feedback_container_answer{
+	background-color: #ccd4fa;
+	/*display: flex;*/
+	/*flex-direction: column;*/
+	margin-top:50px;
+}
+
+
+.btn_an_listForm_fixed{
+	background-color: #1fbeff;
+}
+
+.btn_feedback_container_answer_write{
+	background-color: #1deec4;
+}
+
+.an_listForm_table{
+	/* 답글 세로사이즈*/
+	width: 50vw;
+}
+
+.each_answer{
+	/* 답글 세로사이즈*/
+	height:10vh;
+	background-color: #7b9dab;
+}
+
+.each_answer_content{
+	display: flex;
+}
+
+.each_answer_content_inner{
+	width: 5vw;
+	overflow: hidden;
+	height:5vh;
+}
+.each_answer_content_detail{
+	display: none;
+}
+
+
+.each_answer_subject{
+	height:5vh;
+	width:10vw;
+	word-break:break-all;
+}
+
+
+/* 내용 누르면 나타나는 상세보기 박스*/
+.each_answer_content_detail_content{
+	background-color: #8786ec;
+	height: 20vh;
+	width: 50vw;
+	word-break:break-all;
+	overflow-y: scroll;
+}
+
+.each_answer_content_detail_content_inner{
+	height: 20vh;
+	width: 50vw;
+}
+
+/* 피드백 답변 작성폼 */
+.feedback_container_answer_write{
+	background-color: #b6fc9c;
+	display: none;
+}
+
+.feedback_container_answer_write_flex{
+	display: flex;
+	flex-direction: column;
+}
+
+.replyfeedback_container_reply{
+	background-color: #cecdcd;
+	margin-top: 50px;
+}
+
+.re_listForm{
+	background-color: #2b4cda;
+}
+
+.re_listForm_table{
+	/* 댓글 가로사이즈*/
+	width: 50vw;
+}
+
+
+.each_reply{
+	/*댓글 세로사이즈*/
+	height: 10vh;
+	background-color: #d9f5fa;
+	border: 2px solid black;
+}
+
+
+
+.re_listForm_date{
 	width: 100px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: left;
 }
 
-.board_date_container {
-	width: 300px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: left;
-}
+/*.board_subject_container {*/
+/*	padding-left: 20px;*/
+/*	font-weight: bold;*/
+/*	font-size: 40px;*/
+/*	width: 980px;*/
+/*	height: 55px;*/
+/*	color: black;*/
+/*	border: 6px solid #708090;*/
+/*	border-radius: 30px;*/
+/*}*/
 
-.board_name_container {
-	width: 100px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: left;
-}
+/*.board_container_bo {*/
+/*	margin-top: 20px;*/
+/*	text-align: center;*/
+/*	font-weight: bold;*/
+/*}*/
 
-.board_readcount_container {
-	width: 100px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: right;
-}
+/*.board_category_container {*/
+/*	width: 100px;*/
+/*	height: 40px;*/
+/*	!*border: 1px solid black;*!*/
+/*	float: left;*/
+/*}*/
 
-.board_reply_container {
-	width: 100px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: right;
-}
+/*.board_date_container {*/
+/*	width: 300px;*/
+/*	height: 40px;*/
+/*	!*border: 1px solid black;*!*/
+/*	float: left;*/
+/*}*/
 
-.board_like_container {
-	width: 100px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: right;
-}
+/*.board_name_container {*/
+/*	width: 100px;*/
+/*	height: 40px;*/
+/*	!*border: 1px solid black;*!*/
+/*	float: left;*/
+/*}*/
 
-.board_content_container {
-	margin-top: 20px;
-	width: 950px;
-	height: 380px;
-	border: 3px solid #708090;
-	border-radius: 7px;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	overflow: scroll;
-	overflow-x: hidden;
-	font-weight: bold;
-}
+/*.board_readcount_container {*/
+/*	width: 100px;*/
+/*	height: 40px;*/
+/*	!*border: 1px solid black;*!*/
+/*	float: right;*/
+/*}*/
 
-.board_content_container img {
-	width: 880px;
-	/*height: 400px;*/
-	object-fit: cover;
-}
+/*.board_reply_container {*/
+/*	width: 100px;*/
+/*	height: 40px;*/
+/*	!*border: 1px solid black;*!*/
+/*	float: right;*/
+/*}*/
 
-#board_middle {
-	margin-top: 620px;
-	width: 900px;
-	height: 70px;
-	/*border:1px solid black;*/
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-}
+/*.board_like_container {*/
+/*	width: 100px;*/
+/*	height: 40px;*/
+/*	!*border: 1px solid black;*!*/
+/*	float: right;*/
+/*}*/
 
-#commandList {
-	margin-top: 100px;
-	margin-left: 20px;
-}
+/*.board_content_container {*/
+/*	margin-top: 20px;*/
+/*	width: 950px;*/
+/*	height: 380px;*/
+/*	border: 3px solid #708090;*/
+/*	border-radius: 7px;*/
+/*	position: absolute;*/
+/*	left: 50%;*/
+/*	transform: translateX(-50%);*/
+/*	overflow: scroll;*/
+/*	overflow-x: hidden;*/
+/*	font-weight: bold;*/
+/*}*/
 
-#commandList button a {
-	text-decoration: none;
-	color: black;
-}
+/*.board_content_container img {*/
+/*	width: 880px;*/
+/*	!*height: 400px;*!*/
+/*	object-fit: cover;*/
+/*}*/
+
+/*#commandList {*/
+/*	margin-top: 100px;*/
+/*	margin-left: 20px;*/
+/*}*/
+
+/*#commandList button a {*/
+/*	text-decoration: none;*/
+/*	color: black;*/
+/*}*/
+
+
+
+
+
+
+
+
+
+
+
 
 .like_and_ward {
 	display: flex;
@@ -124,7 +279,7 @@ body {
 	transform: translateX(-50%);
 }
 
-.btn_reply {
+.btn_mok {
 	border: 5px solid skyblue;
 	border-radius: 30px;
 	background-color: rgba(0, 0, 0, 0);
@@ -164,6 +319,16 @@ body {
 	cursor: pointer;
 }
 
+.btn_del {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	width: 120px;
+	height: 48px;
+	font-size: 15px;
+	cursor: pointer;
+}
 .btn_list {
 	margin-top: 100px;
 	border: none;
@@ -175,16 +340,6 @@ body {
 	cursor: pointer;
 }
 
-.btn_del {
-	border: 5px solid skyblue;
-	border-radius: 30px;
-	background-color: rgba(0, 0, 0, 0);
-	font-weight: bold;
-	width: 120px;
-	height: 48px;
-	font-size: 15px;
-	cursor: pointer;
-}
 
 .reply_container {
 	border: 5px solid #708090;
@@ -254,22 +409,7 @@ body {
 	cursor: pointer;
 }
 
-/* 댓글 css 테스트용 */
-.ddd {
-	border: 5px solid skyblue;
-	border-radius: 8px;
-	background-color: rgba(0, 0, 0, 0);
-	font-weight: bold;
-	height: 20px;
-}
 
-.eee {
-	border: 5px solid #b30000;
-	border-radius: 8px;
-	background-color: rgba(0, 0, 0, 0);
-	font-weight: bold;
-	height: 20px;
-}
 
 /* 댓글 작성 박스*/
 .comment_write_content {
@@ -337,39 +477,32 @@ body {
 }
 
 
-/* 0312 추가 (위에 board 기준으로 한거 전부 이름 및 설정 바꿔주긴 해야한다) */
 
-.vote_cont{
-	margin-top:450px;
-	background-color: red;
-	height:5vh;
-	width: 5vw;
-}
 
-.answer_cont{
-	margin-top: 20px;
-	width: 950px;
-	height: 380px;
-	border: 3px solid #708090;
-	border-radius: 7px;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	overflow: scroll;
-	overflow-x: hidden;
-	font-weight: bold;
-}
+/*.answer_cont{*/
+/*	margin-top: 20px;*/
+/*	width: 950px;*/
+/*	height: 380px;*/
+/*	border: 3px solid #708090;*/
+/*	border-radius: 7px;*/
+/*	position: absolute;*/
+/*	left: 50%;*/
+/*	transform: translateX(-50%);*/
+/*	overflow: scroll;*/
+/*	overflow-x: hidden;*/
+/*	font-weight: bold;*/
+/*}*/
 
-.reply_cont{
-	margin-top:450px;
-	width: 950px;
-	height: 380px;
-	border: 3px solid #708090;
-	border-radius: 7px;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	overflow: scroll;
-	overflow-x: hidden;
-	font-weight: bold;
-}
+/*.reply_cont{*/
+/*	margin-top:450px;*/
+/*	width: 950px;*/
+/*	height: 380px;*/
+/*	border: 3px solid #708090;*/
+/*	border-radius: 7px;*/
+/*	position: absolute;*/
+/*	left: 50%;*/
+/*	transform: translateX(-50%);*/
+/*	overflow: scroll;*/
+/*	overflow-x: hidden;*/
+/*	font-weight: bold;*/
+/*}*/

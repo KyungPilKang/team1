@@ -624,33 +624,37 @@ public class FeedbackController {
         }
     }
 
+
+
+    /* ajax로 넘어갔을 때 고정 버튼 이상으로 보류하기로 결정 */
+
     /* 피드백 답변 ajax 페이지 */
-    @RequestMapping(value = "feedbackDetail_ajax_answer", method = {RequestMethod.GET, RequestMethod.POST})
-    public String feedbackDetail_ajax_answer(@RequestParam(value = "feedback_num") int feedbackNum,
-                                      HttpServletRequest request, HttpSession session) {
-        try {
-            List<Fd_answer> anList = feedbackService.getAnswerList_latest(feedbackNum);
-            String mno = String.valueOf(session.getAttribute("mem_mno"));
-
-            for(Fd_answer answer :anList) {
-
-                List<String> anLikeMem_arr = List.of(answer.getFd_answer_like_member().split(","));
-                //split해서 배열로 각각 넣은 후 contains
-                if (mno != null) {
-                    if (anLikeMem_arr.contains(mno)) {
-                        answer.setFd_answer_like_ok("true");
-                    } else {
-                        answer.setFd_answer_like_ok("false");
-                    }
-                }
-            }
-            request.setAttribute("anList", anList);
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("err", e.getMessage());
-        }
-        return "feedback/feedbackDetail_ajax_answer";
-    }
+//    @RequestMapping(value = "feedbackDetail_ajax_answer", method = {RequestMethod.GET, RequestMethod.POST})
+//    public String feedbackDetail_ajax_answer(@RequestParam(value = "feedback_num") int feedbackNum,
+//                                      HttpServletRequest request, HttpSession session) {
+//        try {
+//            List<Fd_answer> anList = feedbackService.getAnswerList_latest(feedbackNum);
+//            String mno = String.valueOf(session.getAttribute("mem_mno"));
+//
+//            for(Fd_answer answer :anList) {
+//
+//                List<String> anLikeMem_arr = List.of(answer.getFd_answer_like_member().split(","));
+//                //split해서 배열로 각각 넣은 후 contains
+//                if (mno != null) {
+//                    if (anLikeMem_arr.contains(mno)) {
+//                        answer.setFd_answer_like_ok("true");
+//                    } else {
+//                        answer.setFd_answer_like_ok("false");
+//                    }
+//                }
+//            }
+//            request.setAttribute("anList", anList);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            request.setAttribute("err", e.getMessage());
+//        }
+//        return "feedback/feedbackDetail_ajax_answer";
+//    }
 
 
 

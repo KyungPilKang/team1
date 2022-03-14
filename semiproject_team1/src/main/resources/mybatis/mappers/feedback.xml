@@ -9,29 +9,29 @@
         insert into feedback
         values (#{feedback_num}, #{feedback_nickname}, #{feedback_subject}, #{feedback_content},
                 #{feedback_replay_fileName},
-                #{feedback_video_fileName}, now(), #{feedback_readcount}, #{feedback_likecount},
-                #{feedback_vote_member}, #{feedback_vote_top},
-                #{feedback_vote_jungle}, #{feedback_vote_mid}, #{feedback_vote_ad}, #{feedback_vote_support}, #{feedback_thumbnail}, #{feedback_replycount}, #{feedback_answercount})
+                #{feedback_video_fileName}, now(), #{feedback_readcount}, #{feedback_likecount}, #{feedback_thumbnail},
+                #{feedback_replycount}, #{feedback_answercount})
         ]]>
 	</insert>
 
-	<delete id="deleteFeedback" parameterType="int">
+    <delete id="deleteFeedback" parameterType="int">
 		<![CDATA[
-		delete from feedback where feedback_num=#{feedbackNum}
-		]]>
+        delete
+        from feedback
+        where feedback_num = #{feedbackNum}
+        ]]>
 	</delete>
 
 
-
-	<select id="selectMaxFeedbackNum" resultType="integer">
+    <select id="selectMaxFeedbackNum" resultType="integer">
 		<![CDATA[
-		select max(feedback_num)
-		from feedback
-		]]>
+        select max(feedback_num)
+        from feedback
+        ]]>
 	</select>
 
 
-	<!-- ================================= 시작 : selectFeedbackCount 관련 ================================= -->
+    <!-- ================================= 시작 : selectFeedbackCount 관련 ================================= -->
 
     <select id="selectFeedbackCount" resultType="int">
 		<![CDATA[
@@ -40,34 +40,31 @@
         ]]>
 	</select>
 
-	<select id="selectFeedbackCount_subject" resultType="int" parameterType="string">
+    <select id="selectFeedbackCount_subject" resultType="int" parameterType="string">
 		<![CDATA[
-		select count(*)
-		from feedback where feedback_subject like CONCAT('%',#{feedback_keyword},'%')
-		]]>
+        select count(*)
+        from feedback
+        where feedback_subject like CONCAT('%', #{feedback_keyword}, '%')
+        ]]>
 	</select>
 
-	<select id="selectFeedbackCount_nickname" resultType="int" parameterType="string">
+    <select id="selectFeedbackCount_nickname" resultType="int" parameterType="string">
 		<![CDATA[
-		select count(*)
-		from feedback where feedback_nickname like CONCAT('%',#{feedback_keyword},'%')
-		]]>
+        select count(*)
+        from feedback
+        where feedback_nickname like CONCAT('%', #{feedback_keyword}, '%')
+        ]]>
 	</select>
 
-	<select id="selectFeedbackCount_content" resultType="int" parameterType="string">
+    <select id="selectFeedbackCount_content" resultType="int" parameterType="string">
 		<![CDATA[
-		select count(*)
-		from feedback where feedback_content like CONCAT('%',#{feedback_keyword},'%')
-		]]>
+        select count(*)
+        from feedback
+        where feedback_content like CONCAT('%', #{feedback_keyword}, '%')
+        ]]>
 	</select>
 
-	<!-- ================================= 끝 : selectFeedbackCount 관련 ================================= -->
-
-
-
-
-
-
+    <!-- ================================= 끝 : selectFeedbackCount 관련 ================================= -->
 
 
     <select id="selectFeedbackList" resultType="feedback"
@@ -81,14 +78,14 @@
         ]]>
 	</select>
 
-	<update id="updateFeedback" parameterType="feedback">
+    <update id="updateFeedback" parameterType="feedback">
 		<![CDATA[
-		update feedback set feedback_subject=#{feedback_subject}, feedback_content=#{feedback_content}
-		where feedback_num=#{feedback_num}
-		]]>
+        update feedback
+        set feedback_subject=#{feedback_subject},
+            feedback_content=#{feedback_content}
+        where feedback_num = #{feedback_num}
+        ]]>
 	</update>
-
-
 
 
     <!-- 조회수 -->
@@ -126,22 +123,18 @@
 	</select>
 
 
-
     <!-- 답변수 -->
 
-<!--    <select id="selectFeedbackList_answersort" resultType="feedback"-->
-<!--            parameterType="int">-->
-<!--		<![CDATA[-->
-<!--        select *-->
-<!--        from (select @rownum:=@rownum+1 rnum, tot.*-->
-<!--              from (select * from fd_answer order by fd desc, fd_answer_num desc) tot,-->
-<!--                  (select @rownum := 0) temp) sub-->
-<!--        where rnum between #{startrow} and #{startrow} + 9-->
-<!--        ]]>-->
-<!--	</select>-->
-
-
-
+    <!--    <select id="selectFeedbackList_answersort" resultType="feedback"-->
+    <!--            parameterType="int">-->
+    <!--		<![CDATA[-->
+    <!--        select *-->
+    <!--        from (select @rownum:=@rownum+1 rnum, tot.*-->
+    <!--              from (select * from fd_answer order by fd desc, fd_answer_num desc) tot,-->
+    <!--                  (select @rownum := 0) temp) sub-->
+    <!--        where rnum between #{startrow} and #{startrow} + 9-->
+    <!--        ]]>-->
+    <!--	</select>-->
 
 
     <select id="selectFeedback" resultType="feedback" parameterType="int">
@@ -160,93 +153,96 @@
         ]]>
 	</update>
 
-	<update id="updateReplyCount" parameterType="int">
+    <update id="updateReplyCount" parameterType="int">
 		<![CDATA[
-		update feedback
-		set feedback_replycount=feedback_replycount + 1
-		where feedback_num = #{feedbackNum}
-		]]>
+        update feedback
+        set feedback_replycount=feedback_replycount + 1
+        where feedback_num = #{feedbackNum}
+        ]]>
 	</update>
 
-	<update id="deleteReplyCount" parameterType="int">
+    <update id="deleteReplyCount" parameterType="int">
 		<![CDATA[
-		update feedback
-		set feedback_replycount=feedback_replycount - 1
-		where feedback_num = #{feedbackNum}
-		]]>
+        update feedback
+        set feedback_replycount=feedback_replycount - 1
+        where feedback_num = #{feedbackNum}
+        ]]>
 	</update>
 
-	<update id="updateAnswerCount" parameterType="int">
+    <update id="updateAnswerCount" parameterType="int">
 		<![CDATA[
-		update feedback
-		set feedback_answercount=feedback_answercount + 1
-		where feedback_num = #{feedbackNum}
-		]]>
+        update feedback
+        set feedback_answercount=feedback_answercount + 1
+        where feedback_num = #{feedbackNum}
+        ]]>
 	</update>
 
-	<update id="deleteAnswerCount" parameterType="int">
+    <update id="deleteAnswerCount" parameterType="int">
 		<![CDATA[
-		update feedback
-		set feedback_answercount=feedback_answercount - 1
-		where feedback_num = #{feedbackNum}
-		]]>
+        update feedback
+        set feedback_answercount=feedback_answercount - 1
+        where feedback_num = #{feedbackNum}
+        ]]>
 	</update>
 
-	<update id="updateLikeCount" parameterType="int">
+    <update id="updateLikeCount" parameterType="int">
 		<![CDATA[
-		update feedback
-		set feedback_likecount=feedback_likecount + 1
-		where feedback_num = #{feedbackNum}
-		]]>
+        update feedback
+        set feedback_likecount=feedback_likecount + 1
+        where feedback_num = #{feedbackNum}
+        ]]>
 	</update>
 
-	<update id="deleteLikeCount" parameterType="int">
+    <update id="deleteLikeCount" parameterType="int">
 		<![CDATA[
-		update feedback
-		set feedback_likecount=feedback_likecount - 1
-		where feedback_num = #{feedbackNum}
-		]]>
+        update feedback
+        set feedback_likecount=feedback_likecount - 1
+        where feedback_num = #{feedbackNum}
+        ]]>
 	</update>
 
 
-
-
-
-	<!-- ================================= 시작 : selectFeedbackList 검색 관련 ================================= -->
-	<select id="selectFeedbackList_search_subject" resultType="feedback">
+    <!-- ================================= 시작 : selectFeedbackList 검색 관련 ================================= -->
+    <select id="selectFeedbackList_search_subject" resultType="feedback">
 		<![CDATA[
-		select *
-		from (select @rownum:=@rownum+1 rnum, tot.*
-			  from (select * from feedback where feedback_subject like CONCAT('%',#{feedback_keyword},'%') order by feedback_date desc) tot,
-				  (select @rownum := 0) temp) sub
-		where rnum between #{startrow} and #{startrow} + 9
-		]]>
+        select *
+        from (select @rownum:=@rownum+1 rnum, tot.*
+              from (select * from feedback where feedback_subject like CONCAT('%', #{feedback_keyword}, '%') order by feedback_date desc) tot,
+                  (select @rownum := 0) temp) sub
+        where rnum between #{startrow} and #{startrow} + 9
+        ]]>
 	</select>
 
-	<select id="selectFeedbackList_search_nickname" resultType="feedback">
+    <select id="selectFeedbackList_search_nickname" resultType="feedback">
 		<![CDATA[
-		select *
-		from (select @rownum:=@rownum+1 rnum, tot.*
-			  from (select * from feedback where feedback_nickname like CONCAT('%',#{feedback_keyword},'%') order by feedback_date desc) tot,
-				  (select @rownum := 0) temp) sub
-		where rnum between #{startrow} and #{startrow} + 9
-		]]>
+        select *
+        from (select @rownum:=@rownum+1 rnum, tot.*
+              from (select * from feedback where feedback_nickname like CONCAT('%', #{feedback_keyword}, '%') order by feedback_date desc) tot,
+                  (select @rownum := 0) temp) sub
+        where rnum between #{startrow} and #{startrow} + 9
+        ]]>
 	</select>
 
-	<select id="selectFeedbackList_search_content" resultType="feedback">
+    <select id="selectFeedbackList_search_content" resultType="feedback">
 		<![CDATA[
-		select *
-		from (select @rownum:=@rownum+1 rnum, tot.*
-			  from (select * from feedback where feedback_content like CONCAT('%',#{feedback_keyword},'%') order by feedback_date desc) tot,
-				  (select @rownum := 0) temp) sub
-		where rnum between #{startrow} and #{startrow} + 9
-		]]>
+        select *
+        from (select @rownum:=@rownum+1 rnum, tot.*
+              from (select * from feedback where feedback_content like CONCAT('%', #{feedback_keyword}, '%') order by feedback_date desc) tot,
+                  (select @rownum := 0) temp) sub
+        where rnum between #{startrow} and #{startrow} + 9
+        ]]>
 	</select>
-	<!-- ================================= 끝 : selectFeedbackList 검색 관련 ================================= -->
+    <!-- ================================= 끝 : selectFeedbackList 검색 관련 ================================= -->
 
 
-
-
+    <!-- 메인 화면에 출력할 피드백 -->
+    <select id="selectFeedback_bestlike" resultType="feedback">
+		<![CDATA[
+        select *
+        from feedback
+        order by feedback_likecount desc limit 1
+        ]]>
+	</select>
 
 
 </mapper>

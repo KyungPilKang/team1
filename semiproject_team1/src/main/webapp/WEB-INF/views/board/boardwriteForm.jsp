@@ -27,8 +27,8 @@
     <div class="background_main">
         <div class="wf_container">
 
-
-            <h1>WRITING</h1>
+			<br><br>
+            <h1>게시판 글쓰기</h1>
 
 
             <%--웹에디터를 통해 입력하는 텍스트 해당 값은 textarea를 hidden 속성을 추가하여 입력된 값을 복사하여 서버로 전송--%>

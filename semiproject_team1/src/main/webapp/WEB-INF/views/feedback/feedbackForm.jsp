@@ -18,6 +18,7 @@
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedback/feedbackForm.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
 <div class="container">
@@ -51,15 +52,72 @@
 						<c:when test="${not empty mem_mno }">
 							<li><a href="/duoform">듀오</a></li>
 							<li><a href="/mypage">마이페이지</a></li>
-							<li><a href="/log_out?page=main">로그아웃</a></li>
+							<li><a href="/log_out?page=feedback">로그아웃</a></li>
 							<li style="color:white;">
-								<img class="mb-4"
-								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
-								alt="" width="30" height="30">${mem_nickname }님 환영합니다
+								<c:choose>
+									<c:when test="${my_tier eq 'none' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+										
+									</c:when>
+									<c:when test="${my_tier eq null }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/ul.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+										
+									</c:when>
+									<c:when test="${my_tier eq 'IRON' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/i.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+										
+									</c:when>
+									<c:when test="${my_tier eq 'BRONZE' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'SILVER' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/s.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'GOLD' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/g.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'PLATINUM' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/p.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'DIAMOND' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/d.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'MASTER' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/m.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'GRANDMASTER' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/gm.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:otherwise>
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/c.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:otherwise>
+								</c:choose>
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="/loginform?page=main">로그인</a></li>	
+							<li><a href="/loginform?page=feedback">로그인</a></li>	
 						</c:otherwise>
 					</c:choose>
 				</ul>
@@ -79,7 +137,7 @@
                         <ul class="fd_hd_list">
                             <li class="fd_hd_item">
                                 <a href="/feedback">
-                                    <img src="https://talk.op.gg/images/icon-new@2x.png" width="24"
+                                    <img src="https://talk.op.gg/images/icon-new-on@2x.png" width="24"
                                          alt=""><span>최신</span>
                                 </a>
                             </li>
@@ -91,13 +149,13 @@
                             </li>
                             <li class="fd_hd_item">
                                 <a href="/feedback_replysort">
-                                    <img src="https://talk.op.gg/images/icon-top@2x.png" width="24"
+                                    <img src="https://talk.op.gg/images/icon-top-on@2x.png" width="24"
                                          alt=""><span>댓글</span>
                                 </a>
                             </li>
                             <li class="fd_hd_item">
                                 <a href="feedback_likesort">
-                                    <img src="https://talk.op.gg/images/icon-boost@2x.png" width="24"
+                                    <img src="https://talk.op.gg/images/icon-boost-on@2x.png" width="24"
                                          alt=""><span>좋아요</span>
                                 </a>
                             </li>
@@ -123,11 +181,19 @@
                                 <input type="submit" id="search_submit"/>
                             </form>
                         </div>
-                        <c:if test="${not empty mem_mno }">
-                        <button type="button" class="request_btn" onclick="location.href='/feedbackwriteform' ">
-                            REQUEST
-                        </button>
-                        </c:if>
+                        <c:choose>
+                            <c:when test="${not empty mem_mno }">
+                                <button type="button" class="request_btn" onclick="location.href='/feedbackwriteform' ">
+                                    <div style="font-weight:bold; font-size:1.2em;">피드백 요청</div>
+                                </button>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="button" class="request_btn" onclick="loginalert()">
+                                    <div style="font-weight:bold; font-size:1.2em;">피드백 요청</div>
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
+
                     </div>
                 </div>
                 <%-- main 컨테이너의 아래쪽 (게시판이 들어갈 공간) --%>
@@ -136,48 +202,48 @@
                     <c:choose>
                         <c:when test="${articleList!=null && pageInfo.listCount>0 }">
                             <section id="listForm">
-                                <c:forEach var="article" items="${articleList }">
-                                    <div class="each_post">
-                                        <c:choose>
-                                            <c:when test="${article.feedback_thumbnail != null }">
-                                                <div class="each_board_thumbnail"
-                                                     id="each_board_thumbnail"><img
-                                                        src="/fd_thumbnail_view/${article.feedback_thumbnail}"
-                                                        alt="thumbnail" class="thumbnail_size"/>
+                                <c:forEach var="article" items="${articleList}">
+                                        <div class="each_post">
+                                            <div class="each_board_likecount">
+                                              <br>♥<br>${article.feedback_likecount }</div>
+                                            <div class="each_board_content">
+                                                <div class="each_board_sub">
+                                                    <a href="./feedbackdetail?feedback_num=${article.feedback_num}">
+                                                            ${article.feedback_subject}&nbsp;[${article.feedback_answercount}]
+                                                    </a>
                                                 </div>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <div class="each_board_thumbnail"
-                                                     id="each_board_thumbnail"><img
-                                                        src="https://talk.op.gg/images/thumbnail/post_hidden.png"
-                                                        alt="thumbnail" class="thumbnail_size"/>
+                                                <div class="each_board_sub_bottom">
+                                                    <div class="each_board_date"><br><fmt:formatDate
+                                                            value="${article.feedback_date }"
+                                                            pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
+                                                    <div class="each_board_nickname"><br>
+                                                        § 닉네임 : ${article.feedback_nickname }</div>
                                                 </div>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <div class="each_board_likecount"><br>
-                                            ♥<br>${article.feedback_likecount }</div>
-                                        <div class="each_board_content">
-                                            <div class="each_board_sub">
-                                                <a href="./feedbackdetail?feedback_num=${article.feedback_num}&page=${pageInfo.page}">
-                                                        ${article.feedback_subject}&nbsp;댓글:[${article.feedback_replycount}]/답변수:[${article.feedback_answercount}]/좋아요수:[${article.feedback_likecount}]
-                                                </a>
                                             </div>
-                                            <div class="each_board_sub_bottom">
-                                                <div class="each_board_date"><br><br><br><fmt:formatDate
-                                                        value="${article.feedback_date }"
-                                                        pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
-                                                <div class="each_board_nickname"><br><br><br>
-                                                    닉네임${article.feedback_nickname }</div>
-                                            </div>
+
+                                            <div class="each_board_readcount">
+                                                <br>▲<br>${article.feedback_readcount }</div>
+
+                                                <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
+
+                                            <c:choose>
+                                                <c:when test="${article.feedback_thumbnail!=null }">
+                                                    <div class="each_board_thumbnail"
+                                                         id="each_board_thumbnail"><img
+                                                            src="/fd_thumbnail_view/${article.feedback_thumbnail}"
+                                                            alt="thumbnail" class="thumbnail_size"/>
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="each_board_thumbnail"
+                                                         id="each_board_thumbnail"><img
+                                                            src="${pageContext.request.contextPath}/resources/asset/image/every/noimage.png"
+                                                            alt="thumbnail" class="thumbnail_size"/>
+                                                    </div>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
-
-                                        <div class="each_board_readcount">
-                                           <br>▲<br>${article.feedback_readcount }</div>
-
-                                            <%-- base64가 아니라 image file이므로 컨트롤러에서 받아오도록 바꿔줘야 한다.--%>
-
-                                    </div>
-                                </c:forEach>
+                                    </c:forEach>
                             </section>
 
                             <div class="attach_ajax_list"></div>
@@ -210,9 +276,19 @@
 
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <%-- 무한스크롤 --%>
 <script>
+	function loginalert(){
+		Swal.fire({
+			title: "권한 없음",
+			text: "로그인이 필요합니다.",
+			icon: "error",
+			confirmButtonText: "확인"
+		})
+		
+	}
+
     let currentPage = 1;
     let isLoading = false;
 

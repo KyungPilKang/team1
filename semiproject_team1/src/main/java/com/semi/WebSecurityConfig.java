@@ -10,18 +10,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-   @Bean
+	
+	
+
+	@Bean
    public PasswordEncoder getPasswordEncoder() {
       return new BCryptPasswordEncoder();
    }
 
    @Override
    protected void configure(HttpSecurity http) throws Exception {
-      http.cors().disable()
-         .csrf().disable()
-         .formLogin().disable()
-         .headers().frameOptions().disable();
-      
+	   http.cors().disable()
+       .csrf().disable()
+       .formLogin().disable()
+       .headers().frameOptions().disable();
+         
+   
+
       
    }
    

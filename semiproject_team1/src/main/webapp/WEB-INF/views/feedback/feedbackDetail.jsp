@@ -8,12 +8,53 @@
     <meta charset="UTF-8">
     <title>롤판.DOG</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedback/feedbackDetail.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body>
 <div class="container">
-    <div class="board_container">
-        <div>
+
+    <div class="feedback_container">
+
+
+        <div class="feedback_container_header">
+
+            <div class="feedback_subject_container">${article.feedback_subject }</div>
+            <div class="feedback_container_bo">
+
+                <div class="feedback_container_bo_left">
+                    <div class="feedback_date_container">${feedback_date}</div>
+                    <div class=feedback_name_container"> 닉네임 : ${article.feedback_nickname}</div>
+                </div>
+
+                <div class="feedback_container_bo_right">
+                    <div class=feedback_readcount_container"> 조회수 : ${article.feedback_readcount}</div>
+                    <div class=feedback_readcount_container"> 댓글 : ${article.feedback_replycount}</div>
+                    <div class=feedback_readcount_container"> 추천 : ${article.feedback_likecount}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="feedback_container_replay">
+            리플레이 :
+            <c:if test="${article.feedback_replay_fileName!=null }">
+                <a href="replay_file_down?downFile=${article.feedback_replay_fileName}"> ${article.feedback_replay_fileName} </a>
+            </c:if>
+        </div>
+        <div class="feedback_container_modDel" id="commandList">
+            <%-- 세션과 게시물 작성자가 동일하면 수정, 삭제를 출력--%>
+            <c:if test="${mem_nickname eq article.feedback_nickname}">
+                <button class="btn_modify"
+                        onclick="location.href='fdmodifyform?feedback_num=${article.feedback_num}&page=${page}'">
+                    수정
+                </button>
+                <button class="btn_del">삭제</button>
+            </c:if>
+            <button class="btn_mok" onclick="location.href='./feedback?page=${page}'"> 목록(임시)</button>
+        </div>
+
+
+        <div class="feedback_container_video">
             <%-- 영상 출력은 컨트롤러 이식 후 주석해제 --%>
             <c:if test="${article.feedback_video_fileName != null }">
                 <video controls="controls" poster="" width="900" height="600">
@@ -23,59 +64,26 @@
             </c:if>
         </div>
 
-        <div class="board_container_header">
-            <div class="board_subject_container">${article.feedback_subject }</div>
-            <div class="board_container_bo">
-                <div class="board_date_container">${feedback_date}</div>
-                <div class="board_name_container"> 닉네임 : ${article.feedback_nickname}</div>
-                <div class="board_readcount_container"> 조회수 : ${article.feedback_readcount}</div>
-            </div>
-        </div>
 
-        <section id="commandList">
-            <%-- 세션과 게시물 작성자가 동일하면 수정, 삭제를 출력--%>
-            <c:if test="${mem_nickname eq article.feedback_nickname}">
-                <button class="btn_modify"
-                        onclick="location.href='fdmodifyform?feedback_num=${article.feedback_num}&page=${page}'">
-                    수정
-                </button>
-                <button class="btn_del">삭제</button>
-            </c:if>
-            <button class="btn_reply" onclick="location.href='./feedback?page=${page}'"> 목록(임시)</button>
-
-            <div>
-                리플레이 :
-                <c:if test="${article.feedback_replay_fileName!=null }">
-                    <a href="replay_file_down?downFile=${article.feedback_replay_fileName}"> ${article.feedback_replay_fileName} </a>
-                </c:if>
-            </div>
-        </section>
-
-        <div class="board_content_container">
+        <div class="feedback_container_content">
             ${article.feedback_content }
         </div>
 
 
-        <%-- 투표 삽입부 --%>
-        <div class="vote_cont">vote_cont</div>
-
-
         <%-- 피드백 답변 삽입 컨테이너 --%>
-        <div class="answer_cont ">
+        <div class="feedback_container_answer ">
 
             <div><b>피드백 답변</b> 총 ${article.feedback_answercount}개</div>
-            <div>
-                <%-- 정렬 순서는 고정 > 인기순 > 최신순 --%>
-                <button onclick="location.reload()">고정 > 인기순 > 최신순</button>
-                <button onclick="answerList_sort()">고정 > 최신순 > 인기순</button>
-            </div>
 
             <div class="append_answerList"></div>
             <%-- 답변리스트 삽입부 시작--%>
             <section id="an_listForm">
-                <table>
+
+                <table class="an_listForm_table">
+                    <tbody>
+
                     <c:forEach var="answer" items="${anList }">
-                        <tr>
+                        <tr class="each_answer">
                                 <%-- 게시물 작성자만 고정, 고정취소가 가능하도록 --%>
                             <c:if test="${article.feedback_nickname eq mem_nickname}">
                                 <td>
@@ -90,24 +98,17 @@
                                 </td>
                             </c:if>
 
-                            <td>
-                                <div class="eee">${answer.fd_answer_num}</div>
-                            </td>
                             <td>닉네임:${answer.fd_answer_nickname}</td>
-                            <td>제목:${answer.fd_answer_title}</td>
-                            <td>
-                                내용:${answer.fd_answer_content}
+                            <td class="each_answer_subject">제목:${answer.fd_answer_title}</td>
+                            <td class="each_answer_content"  onclick="content_pop(${answer.fd_answer_num})">
+                               내용<div class="each_answer_content_inner">${answer.fd_answer_content}</div>
                             </td>
                             <td><fmt:formatDate value="${answer.fd_answer_date}" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
 
 
                                 <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
                             <c:if test="${!empty mem_nickname}">
-                                <c:if test="${answer.fd_answer_nickname == mem_nickname}">
-                                    <td>
-                                        <button onclick="an_removeCheck(${answer.fd_answer_num})">삭제</button>
-                                    </td>
-                                </c:if>
+
                                 <%-- 피드백 답변 좋아요 시작 --%>
                                 <td>
                                     <div class="re_btn_like">
@@ -137,27 +138,51 @@
                             <td>
                                     ${answer.fd_answer_likecount}
                             </td>
+                                    <c:if test="${answer.fd_answer_nickname == mem_nickname}">
+                                        <td>
+                                            <button onclick="an_removeCheck(${answer.fd_answer_num})">삭제</button>
+                                        </td>
+                                    </c:if>
                                 <%-- 피드백 답변 좋아요 끝--%>
                                 <%-------------------------------------- 세션이 있을경우 끝 --------------------------------------%>
                         </tr>
+                        <tr class="each_answer_content_detail${answer.fd_answer_num} each_answer_content_detail">
+                            <td colspan="8" class="each_answer_content_detail_content">
+                                <div class="each_answer_content_detail_content_inner">${answer.fd_answer_content}<br></div>
+                            </td>
 
+                        </tr>
                     </c:forEach>
+                    </tbody>
                 </table>
             </section>
+
             <%-- 답변리스트 삽입부 끝--%>
-            <div>
+            <c:if test="${!empty mem_nickname}">
+            <div class="btn_feedback_container_answer_write">
+                <button onclick="answer_show()"> 피드백 답변 작성 ( 이거 누르면 아래 연두색 작성폼 나옴 )</button>
+            </div>
+            </c:if>
+            <%-- 시작 : 작성폼 --%>
+            <div class="feedback_container_answer_write">
                 <c:if test="${!empty mem_nickname}">
-                    <form>
-                        <input type="text" class="answer_write_title" placeholder="제목">
-                        <textarea class="answer_write_content" maxlength="1000"
-                                  placeholder="피드백 답변을 적는 공간"></textarea>
-                        <button class="answer_submits" type="button">피드백 답변달기</button>
-                    </form>
+                    <div class="feedback_container_answer_write_flex">
+                        <form>
+                            <div><input type="text" class="answer_write_title" placeholder="제목"></div>
+                            <div><textarea class="answer_write_content" maxlength="1000"
+                                           placeholder="피드백 답변을 적는 공간"></textarea></div>
+                            <div>
+                                <button class="answer_submits" type="button">피드백 답변달기</button>
+                            </div>
+                        </form>
+                    </div>
                 </c:if>
             </div>
+            <%-- 끝 : 작성폼 --%>
+
         </div>
 
-        <div class="reply_cont">
+        <div class="replyfeedback_container_reply">
             <%-- 세션의 회원번호(mno)가 존재할 때 댓글쓰기 가능 --%>
             <c:if test="${!empty mem_nickname}">
                 <form>
@@ -179,27 +204,26 @@
             <div class="append_replyList"></div>
             <%-- 댓글 삽입부 시작--%>
             <section id="re_listForm">
-                <table>
+                <table class="re_listForm_table">
                     <c:forEach var="reply" items="${reList }">
-                        <tr>
-                            <td>
-                                <div class="ddd">${reply.fd_reply_num}</div>
-                            </td>
-                            <td>
+                        <tr class="each_reply">
+
+                            <td colspan="8">
                                     ${reply.fd_reply_content}
                             </td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                             <td>${reply.fd_reply_nickname }</td>
                             <td><fmt:formatDate value="${reply.fd_reply_date }" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
 
 
                                 <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
                             <c:if test="${!empty mem_nickname}">
-                                <c:if test="${reply.fd_reply_nickname == mem_nickname}">
-                                    <td>
-                                        <button onclick="re_removeCheck(${reply.fd_reply_num})">삭제</button>
-                                    </td>
-                                </c:if>
-                                <%-- 대댓글 좋아요 시작 --%>
+
+                                <%-- 댓글 좋아요 시작 --%>
                                 <td>
                                     <div class="re_btn_like">
                                         <c:choose>
@@ -228,7 +252,12 @@
                             <td>
                                     ${reply.fd_reply_likecount}
                             </td>
-                                <%-- 대댓글 좋아요 끝--%>
+                            <c:if test="${reply.fd_reply_nickname == mem_nickname}">
+                                <td>
+                                    <button onclick="re_removeCheck(${reply.fd_reply_num})">삭제</button>
+                                </td>
+                            </c:if>
+                                <%-- 댓글 좋아요 끝--%>
                                 <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
                         </tr>
                     </c:forEach>
@@ -239,7 +268,7 @@
     </div>
 
 
-    <div class="modal">
+    <%-- <div class="modal">
         <div class="modal_content"
              title="클릭하면 창이 닫힙니다.">
             게시물을 삭제하시겠습니까?<br>
@@ -247,7 +276,7 @@
             </button>
             <button class="modal_cancel">취소</button>
         </div>
-    </div>
+    </div> --%>
 
 </div>
 
@@ -255,17 +284,27 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <%-- 모달 --%>
 <script>
-    $(function () {
-        $(".btn_del").click(function () {
-            $(".modal").fadeIn();
-            // 모달시 스크롤을 막는다
-            $("body").css("overflow", "hidden");
-        });
-        $(".modal_cancel").click(function () {
-            $(".modal").fadeOut();
-            $("body").css("overflow", "auto");
-        });
+$(function () {
+    $(".btn_del").click(function () {
+    	Swal.fire({
+			title: "게시글 삭제",
+			text: "확인을 누르면 게시글이 삭제됩니다",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonText: "확인",
+			cancelButtonText : "취소",
+			cancelButtonColor: '#d33'
+		}).then((result)=>{
+			if(result.isConfirmed){
+				location.href='feedbackdelete?feedback_num=${article.feedback_num}&page=${page}'
+			}else if(result.isDismissed){
+    			location.reload();
+			}else{
+				location.reload();
+			}
+		})
     });
+});
 </script>
 
 
@@ -283,8 +322,15 @@
                     },
                     url: "http://localhost:8090/fd_regreply",
                     success: function (data) {
-                        alert("댓글이 등록되었습니다.");
-                        location.reload();
+                    	Swal.fire({
+    						title: "등록 완료",
+    						text: "댓글이 등록되었습니다.",
+    						icon: "success",
+    						confirmButtonText: "확인"
+    					}).then((result)=>{
+    							location.reload();
+    						
+    					})
                     },
                     error: function (textStatus) {
                         alert(textStatus);
@@ -293,8 +339,14 @@
                     }
                 });
             } else {
-                alert("댓글 내용을 입력하세요")
-                $(".comment_write_content").focus()
+            	Swal.fire({
+					title: "입력 오류",
+					text: "댓글 내용을 입력하세요.",
+					icon: "waring",
+					confirmButtonText: "확인"
+				}).then((result)=>{
+					 $(".comment_write_content").focus();
+				})
             }
         })
     })
@@ -304,7 +356,12 @@
 <%-- 댓글삭제 --%>
 <script>
     function re_removeCheck(replyNum) {
-        if (confirm("정말 삭제하시겠습니까??") == true) {
+    	Swal.fire({
+			title: "댓글 삭제",
+			text: "확인을 누르면 삭제됩니다",
+			icon: "warning",
+			confirmButtonText: "확인"
+		}).then((result)=>{
             $.ajax({
                 async: true,
                 type: 'GET',
@@ -313,16 +370,20 @@
                 },
                 url: "http://localhost:8090/fd_replydelete",
                 success: function (data) {
-                    alert("댓글이 삭제되었습니다.");
-                    location.reload();
+                	Swal.fire({
+            			title: "삭제 완료",
+            			text: "댓글이 삭제되었습니다",
+            			icon: "success",
+            			confirmButtonText: "확인"
+            		}).then((result)=>{
+            			location.reload();
+					})
                 },
                 error: function (textStatus) {
                     alert(textStatus);
                 }
             });
-        } else {
-            return false;
-        }
+        })
     }
 </script>
 
@@ -353,8 +414,15 @@
         });
         /* 빈 하트로 바꾸기 */
         $(".rh_off_" + replyNum).show()
-        alert(replyNum + "번 댓글에 좋아요를 취소하셨습니다.")
-        location.reload();
+        Swal.fire({
+			title: "취소 완료",
+			text: replyNum + "번 댓글에 좋아요를 취소하셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			location.reload();
+		})
+        
     }
 
     function re_like_on(replyNum) {
@@ -381,8 +449,15 @@
         });
         /* 빨간 하트로 바꾸기 */
         $(".rh_" + replyNum).show()
-        alert(replyNum + "번 댓글에 좋아요를 누르셨습니다.")
-        location.reload();
+           Swal.fire({
+			title: "등록 완료",
+			text: replyNum + "번 댓글에 좋아요를 누르셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			location.reload();
+		})
+        
     }
 </script>
 
@@ -410,24 +485,26 @@
 
 
 <%-- 피드백 답변 정렬 --%>
-<script>
-    const answerList_sort = () => {
-        $("#an_listForm").empty();
-        $(".append_answerList").empty();
-        $.ajax({
-            type: "post",
-            async: false,
-            // ajax 페이지를 피드백 답글을 내려주는 바꿔줘야한다.
-            url: "http://localhost:8090/feedbackDetail_ajax_answer",
-            data: {
-                feedback_num: ${article.feedback_num},
-            },
-            success: function (data) {
-                $('.append_answerList').append(data);
-            }
-        })
-    }
-</script>
+<%-- ajax로 넘어갔을 때 고정 버튼 이상으로 보류하기로 결정 --%>
+<%--<script>--%>
+<%--    const answerList_sort = () => {--%>
+<%--        $("#an_listForm").empty();--%>
+<%--        $(".append_answerList").empty();--%>
+<%--        $.ajax({--%>
+<%--            type: "post",--%>
+<%--            async: false,--%>
+<%--            // ajax 페이지를 피드백 답글을 내려주는 바꿔줘야한다.--%>
+<%--            url: "http://localhost:8090/feedbackDetail_ajax_answer",--%>
+<%--            data: {--%>
+<%--                feedback_num: ${article.feedback_num},--%>
+<%--                &lt;%&ndash;fd_answer_nickname : ${article.feedback_nickname}&ndash;%&gt;--%>
+<%--            },--%>
+<%--            success: function (data) {--%>
+<%--                $('.append_answerList').append(data);--%>
+<%--            }--%>
+<%--        })--%>
+<%--    }--%>
+<%--</script>--%>
 
 
 <%-- 피드백 답변 작성 ajax --%>
@@ -445,8 +522,14 @@
                     },
                     url: "http://localhost:8090/fd_reganswer",
                     success: function (data) {
-                        alert("피드백 답변이 등록되었습니다.");
-                        location.reload();
+                    	Swal.fire({
+                			title: "등록 완료",
+                			text: "피드백 답변이 등록되었습니다.",
+                			icon: "success",
+                			confirmButtonText: "확인"
+                		}).then((result)=>{
+                			location.reload();
+                		})
                     },
                     error: function (textStatus) {
                         alert(textStatus);
@@ -455,8 +538,14 @@
                     }
                 });
             } else {
-                alert("피드백 답변 내용을 입력하세요")
-                $(".comment_write_content").focus()
+            	Swal.fire({
+        			title: "입력 오류",
+        			text: "피드백 답변 내용을 입력하세요.",
+        			icon: "waring",
+        			confirmButtonText: "확인"
+        		}).then((result)=>{
+        			 $(".comment_write_content").focus();
+        		})  
             }
         })
     })
@@ -466,8 +555,13 @@
 <%-- 피드백 답변삭제 --%>
 <script>
     function an_removeCheck(replyNum) {
-        if (confirm("정말 삭제하시겠습니까??") == true) {
-            $.ajax({
+    	Swal.fire({
+			title: "답변 삭제",
+			text: "확인을 누르면 삭제됩니다",
+			icon: "warning",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			$.ajax({
                 async: true,
                 type: 'GET',
                 data: {
@@ -476,16 +570,21 @@
                 // url 컨트롤러 만들어야함
                 url: "http://localhost:8090/fd_answerdelete",
                 success: function (data) {
-                    alert("피드백 답변이 삭제되었습니다.");
-                    location.reload();
+                	Swal.fire({
+            			title: "삭제 완료",
+            			text: "피드백 답변이 삭제되었습니다",
+            			icon: "success",
+            			confirmButtonText: "확인"
+            		}).then((result)=>{
+            			location.reload();
+					})
+                	
                 },
                 error: function (textStatus) {
                     alert(textStatus);
-                }
-            });
-        } else {
-            return false;
-        }
+		}
+			});
+        })
     }
 </script>
 
@@ -515,8 +614,14 @@
         });
         /* 빈 하트로 바꾸기 */
         $(".ah_off_" + replyNum).show()
-        alert(replyNum + "번 댓글에 좋아요를 취소하셨습니다.")
-        location.reload();
+        Swal.fire({
+			title: "취소 완료",
+			text: replyNum + "번 피드백에 좋아요를 취소하셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			location.reload();
+		})
     }
 
     function an_like_on(replyNum) {
@@ -542,8 +647,14 @@
         });
         /* 빨간 하트로 바꾸기 */
         $(".ah_" + replyNum).show()
-        alert(replyNum + "번 댓글에 좋아요를 누르셨습니다.")
-        location.reload();
+        Swal.fire({
+			title: "등록 완료",
+			text: replyNum + "번 피드백에 좋아요를 누르셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			location.reload();
+		});
     }
 </script>
 
@@ -556,7 +667,7 @@
             type: 'POST',
             data: {
                 feedback_num: ${article.feedback_num},
-                fd_answer_num : answerNum
+                fd_answer_num: answerNum
             },
             url: "http://localhost:8090/fd_an_fixed",
             success: function (data) {
@@ -565,8 +676,14 @@
                 alert(textStatus);
             }
         });
-        alert(answerNum + "번 피드백 답변을 고정하였습니다.")
-        location.reload();
+        Swal.fire({
+			title: "고정 완료",
+			text: answerNum + "번 피드백 답변을 고정하였습니다.",
+			icon: "success",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			location.reload();
+		})
     }
 
 
@@ -576,7 +693,7 @@
             type: 'POST',
             data: {
                 feedback_num: ${article.feedback_num},
-                fd_answer_num : answerNum
+                fd_answer_num: answerNum
             },
             url: "http://localhost:8090/fd_an_fixed_cancel",
             success: function (data) {
@@ -585,13 +702,46 @@
                 alert(textStatus);
             }
         });
-        alert(answerNum + "번 피드백 답변 고정을 취소하셨습니다.")
-        location.reload();
+        Swal.fire({
+			title: "취소 완료",
+			text: answerNum + "번 피드백 답변 고정을 취소하셨습니다.",
+			icon: "success",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			location.reload();
+		})
     }
 </script>
 
 
 <%--------------------------------- 끝 : 피드백 답변 관련 ---------------------------------%>
+
+
+<%-- 작성폼 버튼 --%>
+<script>
+    answer_show = () => {
+        if ($(".feedback_container_answer_write").css("display") == "none") {
+            $(".feedback_container_answer_write").show()
+        } else {
+            $(".feedback_container_answer_write").hide()
+        }
+    }
+</script>
+
+<%-- 피드백 답변 내용 팝업 --%>
+<script>
+    content_pop = (answerNum) => {
+        if ($(".each_answer_content_detail" + answerNum).css("display") == "none") {
+            $(".each_answer_content_detail").hide() // class로 다 닫아버리고
+            $(".each_answer_content_detail" + answerNum).show() // 해당 id만 열어준다
+        } else {
+            $(".each_answer_content_detail" + answerNum).hide()
+        }
+    }
+</script>
+
+
+
 
 </body>
 </html>

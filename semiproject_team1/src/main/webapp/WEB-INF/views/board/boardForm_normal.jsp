@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" sizes="16x16 32x32 64x64"
           href="/resources/asset/image/login/dog1.png"/>
-    <title>전체 게시판 - 롤판.DOG</title>
+    <title>자유 게시판 - 롤판.DOG</title>
 
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
@@ -26,8 +26,8 @@
     <div class="header" style="z-index: 2;">
         <h1>
             <a href="/main"> <img class="mb-4"
-                              src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
-                              alt="" width="60" height="60"> LOLPAN.DOG
+                                  src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
+                                  alt="" width="60" height="60"> LOLPAN.DOG
             </a>
         </h1>
         <div class="nav">
@@ -59,66 +59,66 @@
                     <c:if test="${not empty mem_mno }">
                         <div class="user_info_box">
                             <div class="user_welcome">
-                            <c:choose>
-									<c:when test="${my_tier eq 'none' }">
-										<img 
-											src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
-											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
-										
-									</c:when>
-									<c:when test="${my_tier eq null }">
-										<img 
-											src="${pageContext.request.contextPath}/resources/asset/image/duo/ul.png"
-											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
-										
-									</c:when>
-									<c:when test="${my_tier eq 'IRON' }">
-										<img 
-											src="${pageContext.request.contextPath}/resources/asset/image/duo/i.png"
-											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
-										
-									</c:when>
-									<c:when test="${my_tier eq 'BRONZE' }">
-										<img 
-											src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png"
-											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
-									</c:when>
-									<c:when test="${my_tier eq 'SILVER' }">
-										<img 
-											src="${pageContext.request.contextPath}/resources/asset/image/duo/s.png"
-											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
-									</c:when>
-									<c:when test="${my_tier eq 'GOLD' }">
-										<img 
-											src="${pageContext.request.contextPath}/resources/asset/image/duo/g.png"
-											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
-									</c:when>
-									<c:when test="${my_tier eq 'PLATINUM' }">
-										<img 
-											src="${pageContext.request.contextPath}/resources/asset/image/duo/p.png"
-											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
-									</c:when>
-									<c:when test="${my_tier eq 'DIAMOND' }">
-										<img 
-											src="${pageContext.request.contextPath}/resources/asset/image/duo/d.png"
-											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
-									</c:when>
-									<c:when test="${my_tier eq 'MASTER' }">
-										<img 
-											src="${pageContext.request.contextPath}/resources/asset/image/duo/m.png"
-											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
-									</c:when>
-									<c:when test="${my_tier eq 'GRANDMASTER' }">
-										<img 
-											src="${pageContext.request.contextPath}/resources/asset/image/duo/gm.png"
-											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
-									</c:when>
-									<c:otherwise>
-										<img 
-											src="${pageContext.request.contextPath}/resources/asset/image/duo/c.png"
-											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
-									</c:otherwise>
-								</c:choose>
+                                <c:choose>
+                                    <c:when test="${my_tier eq 'none' }">
+                                        <img
+                                                src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
+                                                alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
+
+                                    </c:when>
+                                    <c:when test="${my_tier eq null }">
+                                        <img
+                                                src="${pageContext.request.contextPath}/resources/asset/image/duo/ul.png"
+                                                alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
+
+                                    </c:when>
+                                    <c:when test="${my_tier eq 'IRON' }">
+                                        <img
+                                                src="${pageContext.request.contextPath}/resources/asset/image/duo/i.png"
+                                                alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
+
+                                    </c:when>
+                                    <c:when test="${my_tier eq 'BRONZE' }">
+                                        <img
+                                                src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png"
+                                                alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
+                                    </c:when>
+                                    <c:when test="${my_tier eq 'SILVER' }">
+                                        <img
+                                                src="${pageContext.request.contextPath}/resources/asset/image/duo/s.png"
+                                                alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
+                                    </c:when>
+                                    <c:when test="${my_tier eq 'GOLD' }">
+                                        <img
+                                                src="${pageContext.request.contextPath}/resources/asset/image/duo/g.png"
+                                                alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
+                                    </c:when>
+                                    <c:when test="${my_tier eq 'PLATINUM' }">
+                                        <img
+                                                src="${pageContext.request.contextPath}/resources/asset/image/duo/p.png"
+                                                alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
+                                    </c:when>
+                                    <c:when test="${my_tier eq 'DIAMOND' }">
+                                        <img
+                                                src="${pageContext.request.contextPath}/resources/asset/image/duo/d.png"
+                                                alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
+                                    </c:when>
+                                    <c:when test="${my_tier eq 'MASTER' }">
+                                        <img
+                                                src="${pageContext.request.contextPath}/resources/asset/image/duo/m.png"
+                                                alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
+                                    </c:when>
+                                    <c:when test="${my_tier eq 'GRANDMASTER' }">
+                                        <img
+                                                src="${pageContext.request.contextPath}/resources/asset/image/duo/gm.png"
+                                                alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img
+                                                src="${pageContext.request.contextPath}/resources/asset/image/duo/c.png"
+                                                alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                             <div class="info_nav">
                                 <ul>
@@ -129,28 +129,28 @@
                             </div>
                         </div>
                     </c:if>
-                    <div class="card">
-                        <ul class="list">
-                            <li><h6>HOME</h6>
-                                <ul class="list">
-                                    <li><a href="/boardlist" style="color:#06e4f5">전체</a></li>
-                                </ul>
+                        <div class="card">
+                            <ul class="list">
+                                <li><h6>HOME</h6>
+                                    <ul class="list">
+                                        <li><a href="/boardlist">전체</a></li>
+                                    </ul>
+                                    <hr>
+                                </li>
+                                <li><h6>LOL</h6>
+                                    <ul class="list">
+                                        <li><a href="/boardlist_highlight">하이라이트</a></li>
+                                        <li><a href="/boardlist_tip">팁&노하우</a></li>
+                                    </ul>
+                                </li>
                                 <hr>
-                            </li>
-                            <li><h6>LOL</h6>
-                                <ul class="list">
-                                    <li><a href="/boardlist_highlight">하이라이트</a></li>
-                                    <li><a href="/boardlist_tip">팁&노하우</a></li>
-                                </ul>
-                            </li>
-                            <hr>
-                            <li><h6>COMMUNITY</h6>
-                                <ul class="list">
-                                    <li><a href="/boardlist_normal">자유</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                                <li><h6>COMMUNITY</h6>
+                                    <ul class="list">
+                                        <li><a href="/boardlist_normal" style="color:#06e4f5">자유</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                 </div>
             </div>
 
@@ -163,25 +163,25 @@
                     <div class="sub-link" id="sub-menu">
                         <ul class="sub-link__list">
                             <li class="sub-link__item ">
-                                <a href="/boardlist">
+                                <a href="/boardlist_normal">
                                     <img src="https://talk.op.gg/images/icon-new-on@2x.png" width="24"
                                          alt=""> <span>최신</span>
                                 </a>
                             </li>
                             <li class="sub-link__item sub-link__item--active">
-                                <a href="/board_all_viewssort">
+                                <a href="/board_normal_viewssort">
                                     <img src="https://talk.op.gg/images/icon-hot-on@2x.png" width="24"
                                          alt=""> <span>조회수</span>
                                 </a>
                             </li>
                             <li class="sub-link__item ">
-                                <a href="/board_all_replysort">
+                                <a href="/board_normal_replysort">
                                     <img src="https://talk.op.gg/images/icon-top-on@2x.png" width="24"
                                          alt=""> <span>댓글</span>
                                 </a>
                             </li>
                             <li class="sub-link__item ">
-                                <a href="board_all_likesort">
+                                <a href="board_normal_likesort">
                                     <img src="https://talk.op.gg/images/icon-boost-on@2x.png" width="24"
                                          alt=""> <span>좋아요</span>
                                 </a>
@@ -190,7 +190,7 @@
                             <li class="board_search_form">
                                 <div class="board_search_container">
                                     <form class="search-form" id="boardform" method="get"
-                                          action="/board_search">
+                                          action="/board_normal_search">
                                         <select class=""
                                                 name="board_type">
                                             <option value="1">제목</option>
@@ -227,12 +227,12 @@
                                                 </a>
                                             </div>
                                             <div class="each_board_sub_bottom">
-                                                <div class="each_board_cat"><br>카테고리 : ${article.board_cat } §</div>
+                                                <div class="each_board_cat"><br>${article.board_cat }</div>
                                                 <div class="each_board_date"><br><fmt:formatDate
                                                         value="${article.board_date }"
                                                         pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
                                                 <div class="each_board_nickname"><br>
-                                                    § 닉네임 : ${article.board_nickname }</div>
+                                                        ${article.board_nickname }</div>
                                             </div>
                                         </div>
 
@@ -252,7 +252,7 @@
                                             <c:otherwise>
                                                 <div class="each_board_thumbnail"
                                                      id="each_board_thumbnail"><img
-                                                        src="${pageContext.request.contextPath}/resources/asset/image/every/noimage.png"
+                                                        src="https://talk.op.gg/images/thumbnail/post_hidden.png"
                                                         alt="thumbnail" class="thumbnail_size"/>
                                                 </div>
                                             </c:otherwise>
@@ -266,7 +266,7 @@
 
                         </c:when>
                         <c:otherwise>
-                            <section id="emptyArea" style="color:white; margin-left:350px; margin-top:100px;"><h3>등록된 글이 없습니다.</h3></section>
+                            <section id="emptyArea">등록된 글이 없습니다.</section>
                         </c:otherwise>
                     </c:choose>
                 </div>
@@ -279,18 +279,18 @@
     </div>
 </div>
 <div class="footer">
-	<div style="margin-left:20px; margin-top:10px">
-       		<ul class="footer-List">
-			<li>© 2022 LOLPAN.DOG LOLPAN.DOG isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</li>
-				<ul class="footer-CSList">
-				<li>고객센터 C/S Center</li>
-				<li>전화: 02.1234.5678</li>
-				<li>이메일: lolpan.dog@gmail.com</li>
-				<li>오전 9시부터 오후 6시까지 상담가능합니다.</li>
-				</ul> 
-			</ul>
-			<br>
-	</div>
+    <div style="margin-left:20px; margin-top:10px">
+        <ul class="footer-List">
+            <li>© 2022 LOLPAN.DOG LOLPAN.DOG isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.</li>
+            <ul class="footer-CSList">
+                <li>고객센터 C/S Center</li>
+                <li>전화: 02.1234.5678</li>
+                <li>이메일: lolpan.dog@gmail.com</li>
+                <li>오전 9시부터 오후 6시까지 상담가능합니다.</li>
+            </ul>
+        </ul>
+        <br>
+    </div>
 </div>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>

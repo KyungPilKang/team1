@@ -8,6 +8,8 @@
     <meta charset="UTF-8">
     <title>롤판.DOG</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/boardDetail.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body>
@@ -27,13 +29,27 @@
 
         <section id="commandList">
             <%-- 세션과 게시물 작성자가 동일하면 수정, 삭제를 출력--%>
-            <c:if test="${mem_nickname == article.board_nickname}">
+            <c:choose>
+            	<c:when test="${mem_nickname == article.board_nickname}">
+            		<button class="btn_modify"
+                        onclick="location.href='modifyform?board_num=${article.board_num}&page=${page}'">
+	                    수정
+	                </button>
+	                <button class="btn_del">삭제</button>
+	                <button class="btn_list" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
+            	</c:when>
+            	<c:otherwise>
+            		<button class="btn_list" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
+            	</c:otherwise>
+            </c:choose>
+            <%-- <c:if test="${mem_nickname == article.board_nickname}">
                 <button class="btn_modify"
                         onclick="location.href='modifyform?board_num=${article.board_num}&page=${page}'">
                     수정
                 </button>
                 <button class="btn_del">삭제</button>
-            </c:if>
+                <button class="btn_del" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
+            </c:if> --%>
             <div>
                 첨부파일 :
                 <c:if test="${article.board_fileName!=null }">
@@ -54,20 +70,31 @@
         </div>
 
         <section id="board_middle">
-
-            <button class="btn_reply" onclick="location.href='./boardlist?page=${page}'"> 목록(임시)</button>
+            <div style="width:200px; height:15px; margin-left:340px; font-weight:bold">
+            좋아요
+            <span class="material-icons-outlined">
+			favorite_border
+			</span>
+			&nbsp;&nbsp;&nbsp;
+			와드박기
+			<span class="material-icons-outlined">
+			bookmark_border
+			</span>
+            </div>
             <c:if test="${not empty mem_nickname}">
                 <div class="like_and_ward">
                     <div class="btn_like">
                         <c:choose>
                             <c:when test="${like_ok==true}">
                                 <div class="like_mini">
-                                    <div class="heart" onclick="like_off()"></div>
+                                    <div class="heart" onclick="like_off()">
+									</div>
                                 </div>
                             </c:when>
                             <c:otherwise>
                                 <div class="like_mini">
-                                    <div class="heart_off" onclick="like_on()"></div>
+                                    <div class="heart_off" onclick="like_on()">
+                                    </div>
                                 </div>
                             </c:otherwise>
                         </c:choose>
@@ -95,7 +122,7 @@
             <c:if test="${!empty mem_nickname}">
                 <form>
             <textarea class="comment_write_content" maxlength="1000"
-                      placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."></textarea>
+                      placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다"></textarea>
                     <button class="comment_submits" type="button">댓글 달기</button>
                 </form>
             </c:if>
@@ -206,14 +233,14 @@
 
     </div>
 
-    <div class="modal">
+    <%-- <div class="modal">
         <div class="modal_content"
-             title="클릭하면 창이 닫힙니다.">
+             title="클릭하면 창이 닫힙니다">
             게시물을 삭제하시겠습니까?<br>
             <button onclick="location.href='boarddelete?board_num=${article.board_num}&page=${page}'"> 확인</button>
             <button class="modal_cancel">취소</button>
         </div>
-    </div>
+    </div> --%>
 </div>
 <%-- 좋아요 버튼 자바스크립트 --%>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -237,7 +264,13 @@
         });
         /* 빈 하트로 바꾸기 */
         $(".like_mini").append("<div class='heart_off' onclick='like_on()''></div>");
-        alert("좋아요를 취소하셨습니다.")
+        Swal.fire({
+			title: "취소 완료",
+			text: "좋아요를 취소하셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		});
+        //alert("좋아요를 취소하셨습니다") 스윗알럿으로 바꿈
         // 동영상 재생시 reload를 할 경우 영상도 reload 되므로 X
         // location.reload();
     }
@@ -261,7 +294,13 @@
         });
         /* 빨간 하트로 바꾸기 */
         $(".like_mini").append("<div class='heart' onclick='like_off()''></div>");
-        alert("좋아요를 누르셨습니다.")
+        Swal.fire({
+			title: "등록 완료",
+			text: "좋아요를 누르셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		});
+        //alert("좋아요를 누르셨습니다")
         // location.reload();
     }
 </script>
@@ -297,7 +336,13 @@
             }
         });
         $(".ward_mini").append("<div class='bookmark_off' onclick='ward_on()''></div>");
-        alert("와드를 취소하셨습니다.")
+        Swal.fire({
+			title: "취소 완료",
+			text: "와드를 취소하셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		});
+        //alert("와드를 취소하셨습니다")
         // location.reload();
     }
 
@@ -318,7 +363,13 @@
             }
         });
         $(".ward_mini").append("<div class='bookmark' onclick='ward_off()''></div>");
-        alert("와드를 누르셨습니다.")
+        Swal.fire({
+			title: "등록 완료",
+			text: "와드를 누르셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		});
+        //alert("와드를 누르셨습니다")
         // location.reload();
     }
 </script>
@@ -326,7 +377,28 @@
 
 <%-- 모달 --%>
 <script>
-    $(function () {
+	$(function () {
+        $(".btn_del").click(function () {
+        	Swal.fire({
+    			title: "게시글 삭제",
+    			text: "확인을 누르면 게시글이 삭제됩니다",
+    			icon: "warning",
+    			showCancelButton: true,
+    			confirmButtonText: "확인",
+    			cancelButtonText : "취소",
+    			cancelButtonColor: '#d33'
+    		}).then((result)=>{
+    			if(result.isConfirmed){
+    				location.href='boarddelete?board_num=${article.board_num}&page=${page}'
+    			}else if(result.isDismissed){
+	    			location.reload();
+    			}else{
+    				location.reload();
+    			}
+			})
+        });
+    });
+    /* $(function () {
         $(".btn_del").click(function () {
             $(".modal").fadeIn();
             // 모달시 스크롤을 막는다
@@ -336,7 +408,7 @@
             $(".modal").fadeOut();
             $("body").css("overflow", "auto");
         });
-    });
+    }); */
 </script>
 
 
@@ -354,8 +426,14 @@
                     },
                     url: "http://localhost:8090/regreply",
                     success: function (data) {
-                        alert("댓글이 등록되었습니다.");
-                        location.reload();
+                    	Swal.fire({
+                			title: "등록 완료",
+                			text: "댓글이 등록되었습니다",
+                			icon: "success",
+                			confirmButtonText: "확인"
+                		}).then((result)=>{
+                			location.reload();
+    					})
                     },
                     error: function (textStatus) {
                         alert(textStatus);
@@ -374,9 +452,15 @@
 
 <%-- 댓글삭제 --%>
 <script>
-    function removeCheck(replyNum) {
-        if (confirm("정말 삭제하시겠습니까??") == true) {
-            $.ajax({
+
+     function removeCheck(replyNum) {
+		Swal.fire({
+			title: "댓글 삭제",
+			text: "확인을 누르면 삭제됩니다",
+			icon: "warning",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			$.ajax({
                 async: true,
                 type: 'GET',
                 data: {
@@ -384,16 +468,20 @@
                 },
                 url: "http://localhost:8090/replydelete",
                 success: function (data) {
-                    alert("댓글이 삭제되었습니다.");
-                    location.reload();
+                	Swal.fire({
+            			title: "삭제 완료",
+            			text: "댓글이 삭제되었습니다",
+            			icon: "success",
+            			confirmButtonText: "확인"
+            		}).then((result)=>{
+            			location.reload();
+					})
                 },
                 error: function (textStatus) {
                     alert(textStatus);
                 }
             });
-        } else {
-            return false;
-        }
+		})
     }
 </script>
 
@@ -426,7 +514,13 @@
                 url: "http://localhost:8090/re_regreply",
                 success: function (data) {
                     console.log(data);
-                    alert("답글이 등록되었습니다.");
+                    Swal.fire({
+            			title: "등록 완료",
+            			text: "답글이 등록되었습니다",
+            			icon: "success",
+            			confirmButtonText: "확인"
+            		});
+                    //alert("답글이 등록되었습니다");
                     location.reload();
                 },
                 error: function (textStatus) {
@@ -469,8 +563,16 @@
         });
         /* 빈 하트로 바꾸기 */
         $(".rh_off_" + replyNum).show()
-        alert(replyNum + "번 댓글에 좋아요를 취소하셨습니다.")
-        location.reload();
+        Swal.fire({
+			title: "취소 완료",
+			text: replyNum + "번 댓글에 좋아요를 취소하셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			location.reload();
+		});
+        //alert(replyNum + "번 댓글에 좋아요를 취소하셨습니다")
+        
     }
 
     function re_like_on(replyNum) {
@@ -497,7 +599,13 @@
         });
         /* 빨간 하트로 바꾸기 */
         $(".rh_" + replyNum).show()
-        alert(replyNum + "번 댓글에 좋아요를 누르셨습니다.")
+        Swal.fire({
+			title: "등록 완료",
+			text: replyNum + "번 댓글에 좋아요를 누르셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		});
+        //alert(replyNum + "번 댓글에 좋아요를 누르셨습니다")
         location.reload();
     }
 </script>

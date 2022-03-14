@@ -38,13 +38,6 @@ public class FeedbackServiceImpl implements FeedbackService {
 		feedback.setFeedback_likecount(0);
 		feedback.setFeedback_replycount(0);
         feedback.setFeedback_answercount(0);
-        // not null이라 0 넣어준다
-        feedback.setFeedback_vote_member("0");
-        feedback.setFeedback_vote_top(0);
-        feedback.setFeedback_vote_jungle(0);
-        feedback.setFeedback_vote_mid(0);
-        feedback.setFeedback_vote_ad(0);
-        feedback.setFeedback_vote_support(0);
 		feedbackDAO.insertFeedback(feedback);
 	}
 	
@@ -340,6 +333,11 @@ public class FeedbackServiceImpl implements FeedbackService {
         String nickName = fd_answerDAO.selectNickname_answerNum(fd_answer_num);
         fd_answerDAO.minusScore(nickName);
     }
+
+	@Override
+	public Feedback selectFeedback_bestlike() throws Exception {
+		return feedbackDAO.selectFeedback_bestlike();
+	}
 
 
     /*------------------------------------------------- 끝 : 피드백 답변 관련 -------------------------------------------------*/
