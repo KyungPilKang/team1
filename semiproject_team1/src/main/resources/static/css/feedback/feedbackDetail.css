@@ -98,16 +98,40 @@ body {
 	background-color: #7b9dab;
 }
 
+.each_answer_content{
+	display: flex;
+}
+
+.each_answer_content_inner{
+	width: 5vw;
+	overflow: hidden;
+	height:5vh;
+}
 .each_answer_content_detail{
 	display: none;
 }
+
+
+.each_answer_subject{
+	height:5vh;
+	width:10vw;
+	word-break:break-all;
+}
+
 
 /* 내용 누르면 나타나는 상세보기 박스*/
 .each_answer_content_detail_content{
 	background-color: #8786ec;
 	height: 20vh;
+	width: 50vw;
+	word-break:break-all;
+	overflow-y: scroll;
 }
 
+.each_answer_content_detail_content_inner{
+	height: 20vh;
+	width: 50vw;
+}
 
 /* 피드백 답변 작성폼 */
 .feedback_container_answer_write{

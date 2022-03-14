@@ -26,13 +26,6 @@ public class Feedback {
     String feedback_vote_member; //투표한 회원의 고유번호 관리
 
 
-    //이하는 각 라인에 대한 투표수
-    int feedback_vote_top;
-    int feedback_vote_jungle;
-    int feedback_vote_mid;
-    int feedback_vote_ad;
-    int feedback_vote_support;
-
     public Feedback() {
     }
 
@@ -146,46 +139,6 @@ public class Feedback {
 
     public void setFeedback_vote_member(String feedback_vote_member) {
         this.feedback_vote_member = feedback_vote_member;
-    }
-
-    public int getFeedback_vote_top() {
-        return feedback_vote_top;
-    }
-
-    public void setFeedback_vote_top(int feedback_vote_top) {
-        this.feedback_vote_top = feedback_vote_top;
-    }
-
-    public int getFeedback_vote_jungle() {
-        return feedback_vote_jungle;
-    }
-
-    public void setFeedback_vote_jungle(int feedback_vote_jungle) {
-        this.feedback_vote_jungle = feedback_vote_jungle;
-    }
-
-    public int getFeedback_vote_mid() {
-        return feedback_vote_mid;
-    }
-
-    public void setFeedback_vote_mid(int feedback_vote_mid) {
-        this.feedback_vote_mid = feedback_vote_mid;
-    }
-
-    public int getFeedback_vote_ad() {
-        return feedback_vote_ad;
-    }
-
-    public void setFeedback_vote_ad(int feedback_vote_ad) {
-        this.feedback_vote_ad = feedback_vote_ad;
-    }
-
-    public int getFeedback_vote_support() {
-        return feedback_vote_support;
-    }
-
-    public void setFeedback_vote_support(int feedback_vote_support) {
-        this.feedback_vote_support = feedback_vote_support;
     }
 
     public int getFeedback_replycount() {
