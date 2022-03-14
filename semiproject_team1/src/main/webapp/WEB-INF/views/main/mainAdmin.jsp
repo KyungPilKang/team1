@@ -47,14 +47,13 @@
 		<div class="hero">
 			<h2>PAN DOG <span class="material-icons-outlined" style="font-size:1em;">thumb_up</span></h2>
 		</div>
-		<div class="hero2" style="margin-top:300px;">
+		<div class="hero2" style="margin-top:258px;">
 			<div>
 				<video controls="controls" poster="" width="900" height="600">
 	            	<source src="/fd_video_view/${article.feedback_video_fileName}" type="video/mp4">
 	            </video>
 			</div>
 			<br>
-			<button type="button" onclick="location.href='/feedbackdetail?feedback_num=${article.feedback_num}&page=${pageInfo.page}' ">상세보기</button>
 		</div>
 		<!-- <div class="card">
 			<ul class="list">

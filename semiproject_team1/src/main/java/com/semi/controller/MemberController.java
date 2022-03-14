@@ -58,6 +58,7 @@ public class MemberController {
 			if(memberService.accessMember(mem.getMem_email_id(), mem.getMem_pw())) {
 				Member result=memberService.selectMemeber(mem.getMem_email_id());
 				if(result.getMem_type().equals("admin")) {
+					System.out.println("여기로 왔음");
 					session.setAttribute("mem_mno", result.getMem_mno());
 					session.setAttribute("mem_nickname", result.getMem_nickname());
 					result.setPage("admin");

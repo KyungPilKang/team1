@@ -29,7 +29,12 @@ public class MainpageController {
 	}
 	
 	@GetMapping("/main_admin")
-	public String main_admin() {
+	public String main_admin(Model model) {
+		try {
+			model.addAttribute("article", feedbackService.selectFeedback_bestlike());
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		return "main/mainAdmin";
 	}
 }
