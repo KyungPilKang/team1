@@ -79,15 +79,22 @@
 
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     function fd_submit() {
         let content = editor.getHTML();
         let subject = $('#feedback_subject').val();
         $("#feedback_content").val(content);
         if (subject === "") {
-            alert("제목을 입력하세요")
+        	Swal.fire({
+    			title: "입력 오류",
+    			text: "제목을 입력하세요",
+    			icon: "error",
+    			confirmButtonText: "확인"
+    		})
+        	//alert("제목을 입력하세요")
             $('#feedback_subject').focus()
-            return;
+            return false;
         }
         $("#feedbackform").attr("action","./feedbackmodify").submit();
     }

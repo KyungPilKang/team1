@@ -70,6 +70,7 @@
     </div>
 </div>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     function fake_submit() {
         let content = editor.getHTML(); // editor.getHTML(); : String
@@ -79,12 +80,24 @@
         $("#board_content").val(content);
         if (!(cat === "" || cat === "none")) {
             if (subject === "") {
-                alert("제목을 입력하세요")
+            	Swal.fire({
+        			title: "입력 오류",
+        			text: "제목을 입력하세요",
+        			icon: "error",
+        			confirmButtonText: "확인"
+        		})
+                //alert("제목을 입력하세요")
                 $('#board_subject').focus()
                 return;
             }
         } else {
-            alert("카테고리를 선택하세요")
+        	Swal.fire({
+    			title: "선택 오류",
+    			text: "카테고리를 선택하세요",
+    			icon: "error",
+    			confirmButtonText: "확인"
+    		})
+        	//alert("카테고리를 선택하세요")
             $('.board_cat').focus()
             return;
         }

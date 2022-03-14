@@ -294,9 +294,16 @@
 
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     function fake_submit() {
-        alert("검색 완료")
+    	Swal.fire({
+			title: "검색완료",
+			text: "",
+			icon: "success",
+			confirmButtonText: "확인"
+		})
+    	//alert("검색 완료")
         $("#boardform").attr("action", "./board_highlight_search").submit();
     }
 </script>

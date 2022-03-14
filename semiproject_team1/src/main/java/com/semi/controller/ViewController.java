@@ -80,11 +80,11 @@ public class ViewController {
 		}
 		return "mypage/codeConfirmForm";
 	}
-	@RequestMapping(value = "/duotest")
-	public String test22() {return "duo/duoForm";}
+	@RequestMapping(value = "/test5")
+	public String test22() {return "feedback/feedbackwriteForm";}
 	
-	@RequestMapping(value = "/duoregform")
-	public String test11() {return "duo/duoregForm";}
+	@RequestMapping(value = "/test22")
+	public String test11() {return "board/boardDetail";}
 	
 	@RequestMapping(value = "/duoedit")
 	public String test111() {return "duo/duoeditForm";}
