@@ -363,3 +363,11 @@ td > button {
 	margin-left: 5px;
 	text-align: center;
 }
+
+.emptyReply{
+	/*font-size:20px;*/
+	height:10vh;
+	padding:20px;
+	margin-top:3vh;
+	text-align: center;
+}

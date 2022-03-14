@@ -117,12 +117,14 @@
 }
 
 .loading {
-	width: 100%;
+	margin-left:12vw;
+	width: 40vw;
 	height: 150px;
-	background-color: #ff7171;
+	background-color: rgba(248, 81, 81, 0);
 	display: none;
-	font-size: 100px;
+	font-size: 50px;
 	text-align: center;
+	color: #00ffbd;
 }
 
 * {
@@ -236,9 +238,9 @@ body {
 /* div 내 무한스크롤 시작 */
 .feedback_body {
 	width: 60vw;
-	height: 90vh;
+	height: 87vh;
 	overflow-y: auto;
-	/*background-color: rgba(250, 134, 134, 0);*/
+	/*background-color: red;*/
 }
 
 .feedback_body {
