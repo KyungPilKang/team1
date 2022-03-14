@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>롤판.DOG</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/boardDetail.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 </head>
 
 <body>
@@ -27,13 +28,27 @@
 
         <section id="commandList">
             <%-- 세션과 게시물 작성자가 동일하면 수정, 삭제를 출력--%>
-            <c:if test="${mem_nickname == article.board_nickname}">
+            <c:choose>
+            	<c:when test="${mem_nickname == article.board_nickname}">
+            		<button class="btn_modify"
+                        onclick="location.href='modifyform?board_num=${article.board_num}&page=${page}'">
+	                    수정
+	                </button>
+	                <button class="btn_del">삭제</button>
+	                <button class="btn_del" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
+            	</c:when>
+            	<c:otherwise>
+            		<button class="btn_del" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
+            	</c:otherwise>
+            </c:choose>
+            <%-- <c:if test="${mem_nickname == article.board_nickname}">
                 <button class="btn_modify"
                         onclick="location.href='modifyform?board_num=${article.board_num}&page=${page}'">
                     수정
                 </button>
                 <button class="btn_del">삭제</button>
-            </c:if>
+                <button class="btn_del" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
+            </c:if> --%>
             <div>
                 첨부파일 :
                 <c:if test="${article.board_fileName!=null }">
@@ -54,20 +69,31 @@
         </div>
 
         <section id="board_middle">
-
-            <button class="btn_reply" onclick="location.href='./boardlist?page=${page}'"> 목록(임시)</button>
+            <div style="width:200px; height:15px; margin-left:340px; font-weight:bold">
+            좋아요
+            <span class="material-icons-outlined">
+			favorite_border
+			</span>
+			&nbsp;&nbsp;&nbsp;
+			와드박기
+			<span class="material-icons-outlined">
+			bookmark_border
+			</span>
+            </div>
             <c:if test="${not empty mem_nickname}">
                 <div class="like_and_ward">
                     <div class="btn_like">
                         <c:choose>
                             <c:when test="${like_ok==true}">
                                 <div class="like_mini">
-                                    <div class="heart" onclick="like_off()"></div>
+                                    <div class="heart" onclick="like_off()">
+									</div>
                                 </div>
                             </c:when>
                             <c:otherwise>
                                 <div class="like_mini">
-                                    <div class="heart_off" onclick="like_on()"></div>
+                                    <div class="heart_off" onclick="like_on()">
+                                    </div>
                                 </div>
                             </c:otherwise>
                         </c:choose>

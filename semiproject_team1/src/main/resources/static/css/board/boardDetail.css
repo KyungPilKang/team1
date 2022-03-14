@@ -199,31 +199,31 @@ body {
 }
 
 .heart {
-	height: 50px;
-	width: 50px;
+	height: 30px;
+	width: 30px;
 	border-radius: 20px;
-	background: red;
+	background: rgb(255, 197, 207);
 }
 
 .heart_off {
-	height: 50px;
-	width: 50px;
+	height: 30px;
+	width: 30px;
 	border-radius: 20px;
-	border: 1px solid black;
+	border: 1px solid pink;
 }
 
 .bookmark {
-	height: 50px;
-	width: 50px;
+	height: 30px;
+	width: 30px;
 	border-radius: 20px;
-	background: #008293;
+	background: rgb(150, 248, 150);
 }
 
 .bookmark_off {
-	height: 50px;
-	width: 50px;
+	height: 30px;
+	width: 30px;
 	border-radius: 20px;
-	border: 1px solid black;
+	border: 1px solid green;
 }
 
 /*모달  css*/
