@@ -62,6 +62,14 @@ h1 {
 	font-size: 14px;
 }
 
+#feedback_subject{
+	padding-left: 10px;
+	border: 1px solid darkgray;
+	height: 40px;
+	width: 693px;
+	margin: 8px 0;
+	font-size: 14px;
+}
 
 .board_file_cont .upload-name1{
 	display: inline-block;
