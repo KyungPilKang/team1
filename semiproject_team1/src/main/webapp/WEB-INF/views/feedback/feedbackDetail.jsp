@@ -78,7 +78,7 @@
         <%-- 피드백 답변 삽입 컨테이너 --%>
         <div class="feedback_container_answer ">
 
-            <div><b>피드백 답변</b> 총 ${article.feedback_answercount}개</div>
+            <div class="rrrr"><b>피드백 답변</b> 총 ${article.feedback_answercount}개</div>
 
             <div class="append_answerList"></div>
             <%-- 답변리스트 삽입부 시작--%>
@@ -198,7 +198,7 @@
             </c:if>
 
 
-            <div class="rrrr"><b>댓글</b> 총 ${article.feedback_replycount}개</div>
+            <div class="rrrr"><b>&nbsp;&nbsp;댓글</b> 총 ${article.feedback_replycount}개</div>
             <div>
                 <%-- 최신순은 페이지 새로고침 해주면 된다 --%>
                 <button onclick="location.reload()">최신순</button>
