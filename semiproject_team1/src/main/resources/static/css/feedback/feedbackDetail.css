@@ -45,8 +45,6 @@ body {
 	width: 980px;
 	height: 55px;
 	color: black;
-	border: 6px solid #708090;
-	border-radius: 30px;
 }
 
 /* 날짜 닉네임 조회수 댓글 추천 컨테이너*/
@@ -108,7 +106,7 @@ body {
 
 
 .feedback_container_answer{
-	background-color: #cecdcd;
+	background-color: rgba(135, 135, 135, 0.3);
 	/*display: flex;*/
 	/*flex-direction: column;*/
 	margin-top:50px;
@@ -229,7 +227,7 @@ body {
 .replyfeedback_container_reply{
 	border: 3px solid #708090;
 	border-radius: 7px;
-	background-color: #cecdcd;
+	background-color: rgba(135, 135, 135, 0.3);
 	margin-top: 50px;
 }
 
