@@ -1,13 +1,17 @@
+
+
 body {
 	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
 		url(../../asset/image/board/lol4.jpg);
 	background-size: cover;
 }
 
-.board_container {
+
+
+.board_container{
+	display: flex;
+	flex-direction: column;
 	background: white;
-	width: 1000px;
-	height: 1400px;
 	border: 5px solid #4169E1;
 	position: absolute;
 	left: 50%;
@@ -18,131 +22,191 @@ body {
 	outline: none;
 }
 
+
 .board_subject_container {
-	padding-left: 20px;
-	font-weight: bold;
-	font-size: 40px;
-	width: 980px;
-	height: 55px;
-	color: black;
-	border: 6px solid #708090;
-	border-radius: 30px;
+	background-color: #a3abf6;
+	/*padding-left: 20px;*/
+	/*font-weight: bold;*/
+	/*font-size: 40px;*/
+	/*width: 980px;*/
+	/*height: 55px;*/
+	/*color: black;*/
+	/*border: 6px solid #708090;*/
+	/*border-radius: 30px;*/
 }
 
 .board_container_bo {
-	margin-top: 20px;
-	text-align: center;
-	font-weight: bold;
+	display: flex;
+	background-color: #0dcaf0;
+	/*margin-top: 20px;*/
+	/*text-align: center;*/
+	/*font-weight: bold;*/
+}
+
+.board_container_bo_left{
+	display: flex;
+	background-color: #88a5d0;
+}
+
+.board_container_bo_right{
+	display: flex;
+	background-color: #7cc7a4;
 }
 
 .board_category_container {
-	width: 100px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: left;
+	/*width: 100px;*/
+	/*height: 40px;*/
+	/*!*border: 1px solid black;*!*/
+	/*float: left;*/
 }
 
 .board_date_container {
-	width: 300px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: left;
+	/*width: 300px;*/
+	/*height: 40px;*/
+	/*!*border: 1px solid black;*!*/
+	/*float: left;*/
 }
 
 .board_name_container {
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: left;
+	/*height: 40px;*/
+	/*!*border: 1px solid black;*!*/
+	/*float: left;*/
 }
 
 .board_readcount_container {
-	width: 100px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: right;
+	/*width: 100px;*/
+	/*height: 40px;*/
+	/*!*border: 1px solid black;*!*/
+	/*float: right;*/
 }
 
 .board_reply_container {
-	width: 100px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: right;
+	/*width: 100px;*/
+	/*height: 40px;*/
+	/*!*border: 1px solid black;*!*/
+	/*float: right;*/
 }
 
 .board_like_container {
-	width: 100px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: right;
+	/*width: 100px;*/
+	/*height: 40px;*/
+	/*!*border: 1px solid black;*!*/
+	/*float: right;*/
 }
 
 .board_content_container {
-	margin-top: 20px;
-	width: 950px;
-	height: 580px;
-	border: 3px solid #708090;
-	border-radius: 7px;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	overflow: scroll;
-	overflow-x: hidden;
-	font-weight: bold;
+	background-color: #adeeea;
+	/*margin-top: 20px;*/
+	/*width: 950px;*/
+	/*height: 580px;*/
+	/*border: 3px solid #708090;*/
+	/*border-radius: 7px;*/
+	/*position: absolute;*/
+	/*left: 50%;*/
+	/*transform: translateX(-50%);*/
+	/*overflow: scroll;*/
+	/*overflow-x: hidden;*/
+	/*font-weight: bold;*/
 }
 
 .Attachments {
-	margin-top: 15px;
-	margin-left: 15px;
-	font-weight: bold;
+	background-color : red;
+	/*margin-top: 15px;*/
+	/*margin-left: 15px;*/
+	/*font-weight: bold;*/
 }
 
 .board_content_container img {
-	width: 880px;
-	/*height: 400px;*/
-	object-fit: cover;
+	/*width: 880px;*/
+	/*!*height: 400px;*!*/
+	/*object-fit: cover;*/
 }
-
+.board_middle{
+	height: 100px;
+	background-color: #2e383e;
+}
 #board_middle {
-	margin-top: 620px;
-	width: 900px;
-	height: 70px;
-	/*border:1px solid black;*/
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+	/*margin-top: 620px;*/
+	/*width: 900px;*/
+	/*height: 70px;*/
+	/*!*border:1px solid black;*!*/
+	/*position: absolute;*/
+	/*left: 50%;*/
+	/*transform: translateX(-50%);*/
 }
 
-#commandList {
-	display: inline-block;
+
+
+.re_comment_write_content{
+	margin-top:5px;
+	border :2px solid;
+	width: 50vw;
+	height: 7vh;
+	margin-bottom: 10px;
+}
+.reply_reply_write{
+	background-color: #4169E1;
+	height: 1px;
 }
 
-#commandList button {
-	margin-top: 0px;
+.reddd{
 }
 
-#commandList button a {
-	text-decoration: none;
-	color: black;
+.btn_re_comment_write_content{
+	float:right;
+	margin-right:20px;
+	background-color: white;
+	border: 5px solid skyblue;
+	border-radius: 10px;
+	width: 50px;
+	height: 40px;
+	font-weight: bold;
+	margin-bottom:10px;
 }
+
+
+.rerebox{
+	width: 4vw;
+	height:5vh;
+}
+
+.listForm_table{
+	/* 댓글 세로사이즈*/
+	width: 50vw;
+	/*background-color: #7b9dab;*/
+}
+/*#commandList {*/
+/*	display: inline-block;*/
+/*}*/
+
+/*#commandList button {*/
+/*	margin-top: 0px;*/
+/*}*/
+
+/*#commandList button a {*/
+/*	text-decoration: none;*/
+/*	color: black;*/
+/*}*/
 
 .like_and_ward {
 	display: flex;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
+
 }
 
 .btn_reply {
-	border: 5px solid skyblue;
-	border-radius: 30px;
-	background-color: rgba(0, 0, 0, 0);
-	font-weight: bold;
-	width: 120px;
-	height: 48px;
-	float: left;
-	font-size: 15px;
-	cursor: pointer;
-	font-weight: bold;
+	/*border: 5px solid skyblue;*/
+	/*border-radius: 30px;*/
+	/*background-color: rgba(0, 0, 0, 0);*/
+	/*font-weight: bold;*/
+	/*width: 120px;*/
+	/*height: 48px;*/
+	/*float: left;*/
+	/*font-size: 15px;*/
+	/*cursor: pointer;*/
+	/*font-weight: bold;*/
 }
 
 .btn_like {
@@ -173,14 +237,14 @@ body {
 }
 
 .btn_list {
-	margin-top: 100px;
-	border: none;
-	border-radius: 4px;
-	width: 120px;
-	height: 48px;
-	background: darkgray;
-	font-size: 15px;
-	cursor: pointer;
+	/*margin-top: 100px;*/
+	/*border: none;*/
+	/*border-radius: 4px;*/
+	/*width: 120px;*/
+	/*height: 48px;*/
+	/*background: darkgray;*/
+	/*font-size: 15px;*/
+	/*cursor: pointer;*/
 }
 
 .btn_del {
@@ -206,15 +270,15 @@ body {
 }
 
 .reply_container {
-	border: 5px solid #708090;
-	border-radius: 8px;
-	background-color: rgba(0, 0, 0, 0);
-	width: 50vw;
-	font-weight: bold;
-	margin-top: 750px;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+	/*border: 5px solid #708090;*/
+	/*border-radius: 8px;*/
+	/*background-color: rgba(0, 0, 0, 0);*/
+	/*width: 50vw;*/
+	/*font-weight: bold;*/
+	/*margin-top: 750px;*/
+	/*position: absolute;*/
+	/*left: 50%;*/
+	/*transform: translateX(-50%);*/
 }
 
 .heart {
@@ -257,33 +321,22 @@ body {
 }
 
 .modal_content {
-	width: 400px;
-	height: 200px;
-	background: #fff;
-	border-radius: 10px;
-	position: relative;
-	top: 50%;
-	left: 50%;
-	margin-top: -100px;
-	margin-left: -200px;
-	text-align: center;
-	box-sizing: border-box;
-	padding: 74px 0;
-	line-height: 23px;
-	cursor: pointer;
+	/*width: 400px;*/
+	/*height: 200px;*/
+	/*background: #fff;*/
+	/*border-radius: 10px;*/
+	/*position: relative;*/
+	/*top: 50%;*/
+	/*left: 50%;*/
+	/*margin-top: -100px;*/
+	/*margin-left: -200px;*/
+	/*text-align: center;*/
+	/*box-sizing: border-box;*/
+	/*padding: 74px 0;*/
+	/*line-height: 23px;*/
+	/*cursor: pointer;*/
 }
 
-/* 댓글 css 테스트용 */
-.ddd {
-	margin-left: 20px;	
-	border-radius: 8px;
-	background-color: black;
-	font-weight: bold;
-	height: 17px;
-	width: 17px;
-	text-align: center;
-	font-size: 13.5px;
-}
 
 /* 댓글 작성 박스*/
 .comment_write_content {
