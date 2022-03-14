@@ -18,7 +18,7 @@
 </head>
 <body>
 	<div class="container">
-		<div class="header">
+		<div class="header" style="z-index: 2;">
 			<h1>
 				<a href="/main"> <img class="mb-4"
                               src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
