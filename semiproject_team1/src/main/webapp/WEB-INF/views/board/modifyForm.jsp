@@ -17,42 +17,41 @@
 </head>
 <body>
 
+<div class="background">
+    <div class="background_main">
+        <div class="wf_container">
 
-<div class="wf_container">
+			<br><br>
+           	<h1>글 수정</h1>
 
-    <h2>수정</h2>
+            <%--웹에디터를 통해 입력하는 텍스트 해당 값은 textarea를 hidden 속성을 추가하여 입력된 값을 복사하여 서버로 전송--%>
+            <form id="modifyform" action="" method="post" enctype="multipart/form-data">
 
-    <form id="modifyform" action="" method="post" enctype="multipart/form-data">
+                <%-- form이 submit시 selected된 value값을 갖고 넘어간다. --%>
+                <select name="board_cat" id="board_cat" class="board_cat">
+                    <option value="none">== 카테고리 ==</option>
+                    <option value="highlight">하이라이트</option>
+                    <option value="tip">팁과노하우</option>
+                    <option value="normal">자유</option>
+                </select>
+                <%-- 카테고리 유효성 체크 출력용 --%>
+                <input type="hidden" id="board_num" name="board_num" value="${article.board_num}"/>
+		        <input type="hidden" id="board_content" name="board_content"/>
+		
+		        <div class="board_subject_cont">
+		            <input name="board_subject" type="text" id="board_subject" placeholder=" 제목" value="${article.board_subject}"/><br>
+		        </div>
+            </form>
 
-        <select name="board_cat" id="board_cat" class="board_cat">
-            <option value="none">== 카테고리 ==</option>
-            <option value="highlight">하이라이트</option>
-            <option value="tip">팁과노하우</option>
-            <option value="normal">자유</option>
-        </select>
-        <%--write와 다르게 modify의 경우 board_num을 컨트롤러에 넘겨줘야된다. --%>
-        <input type="hidden" id="board_num" name="board_num" value="${article.board_num}"/>
-        <input type="hidden" id="board_content" name="board_content"/>
+            <div id="editor">${article.board_content}</div>
+    		<br>
 
-        <%-- 글쓴이는 EL언어 표기법 value = "${session.board_name}" 이런식으로 가져오면 된다. hidden --%>
-        <%--                    <label for="board_nickname">글쓴이</label>--%>
-        <%--        <input type="hidden" name="board_nickname" id="board_nickname" value="mno"/><br>--%>
-        <div class="board_subject_cont">
-            <input name="board_subject" type="text" id="board_subject" placeholder=" 제목" value="${article.board_subject}"/><br>
+            <button class="btn_cc" onclick={history.back()}>취소</button>
+            <button onclick="modify_submit()" class="btn_ok">작성완료</button>
         </div>
-<%--        <div class="board_file_cont">--%>
-<%--            <label for="board_file" class="btn_file"> 파일 첨부 </label>--%>
-<%--            <input name="file" type="file" id="board_file" placeholder=" 파일첨부"/>--%>
-<%--        </div>--%>
-    </form>
-
-    <div id="editor">${article.board_content}</div>
-    <br>
-
-    <button class="btn_cc" onclick={history.back()}>취소</button>
-    <button onclick="modify_submit()" class="btn_ok">작성완료</button>
-
+    </div>
 </div>
+
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
@@ -98,6 +97,11 @@
 <script>
     let select_cat = "${article.board_cat}";
     $(".board_cat").val(select_cat).prop("selected", true);
+    
+    $("#board_file").on('change', function () {
+        let fileName = $(".board_file").val();
+        $(".upload-name").val(fileName);
+    });
 </script>
 
 
