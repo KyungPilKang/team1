@@ -26,58 +26,92 @@ body {
 .feedback_container_header{
 	display: flex;
 	flex-direction: column;
-	background-color: red;
+	background-color: white;
 }
 
 .feedback_subject_container{
-	background-color: #a3abf6;
+    padding-left: 20px;
+	font-weight: bold;
+	font-size: 40px;
+	width: 980px;
+	height: 55px;
+	color: black;
+	border: 6px solid #708090;
+	border-radius: 30px;
 }
 
 /* 날짜 닉네임 조회수 댓글 추천 컨테이너*/
 .feedback_container_bo{
 	display: flex;
-	background-color: #0dcaf0;
+	background-color: white;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 20px;
+	margin: 10px;
 }
 
 /* 왼쪽 : 날짜 닉네임 */
 .feedback_container_bo_left{
+	margin: 10px;
+	width: 650px;
+	height: 10px;
 	display: flex;
-	background-color: #88a5d0;
+	background-color: white;
 }
 /* 우측 : 조회수 댓글 추천*/
 .feedback_container_bo_right{
 	display: flex;
-	background-color: #7cc7a4;
+	background-color: white;
+	margin: 10px;
+}
+
+.feedback_readcount_container{
+    margin: 5px;
 }
 
 /*리플레이*/
 .feedback_container_replay{
-	background-color: #867f7f;
+	background-color: white;
+	font-weight: bold;
+	margin-bottom: 15px;
+	margin-left: 15px;
 }
 
 /* 목록 수정 삭제 버튼*/
 .feedback_container_modDel{
- background-color: #97a0a1;
+	background-color: white;
+ 	font-weight: bold;
+ 	margin-bottom: 15px;
 }
 
 /* 동영상 */
-.feedback_container_video{
 
+.feedback_container_video{
+	border: 3px solid #708090;
+	border-radius: 7px;
 }
 
 /* 내용 */
 .feedback_container_content{
-	background-color: #adeeea;
+	background-color: white;
+	font-weight: bold;
 }
 
 
 .feedback_container_answer{
-	background-color: #ccd4fa;
+	background-color: white;
 	/*display: flex;*/
 	/*flex-direction: column;*/
 	margin-top:50px;
+	border: 3px solid #708090;
+	border-radius: 7px;
+	font-weight: bold;
 }
 
+.feedback_container_answer div{
+	font-size: 20px;
+	margin-left: 10px;
+}
 
 .btn_an_listForm_fixed{
 	background-color: #1fbeff;
@@ -96,6 +130,7 @@ body {
 	/* 답글 세로사이즈*/
 	height:10vh;
 	background-color: #7b9dab;
+	border: 5px solid skyblue;
 }
 
 .each_answer_content{
@@ -110,7 +145,6 @@ body {
 .each_answer_content_detail{
 	display: none;
 }
-
 
 .each_answer_subject{
 	height:5vh;
