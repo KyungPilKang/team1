@@ -425,6 +425,15 @@
     $(function () {
         $(".comment_submits").click(function () {
             if ($(".comment_write_content").val() !== "") {
+            	if($(".comment_write_content").val().length>50){
+                	Swal.fire({
+                        title: "입력 오류",
+                        text: "50자 이내로 댓글을 작성하세요",
+                        icon: "error",
+                        confirmButtonText: "확인"
+                   })
+                   return false
+                }
                 $.ajax({
                     async: true,
                     type: 'POST',
@@ -450,8 +459,13 @@
                     }
                 });
             } else {
-                alert("댓글 내용을 입력하세요")
-                $(".comment_write_content").focus()
+                Swal.fire({
+                            title: "입력 오류",
+                            text: "댓글 내용을 입력하세요",
+                            icon: "error",
+                            confirmButtonText: "확인"
+               })
+               return false
             }
         })
     })
