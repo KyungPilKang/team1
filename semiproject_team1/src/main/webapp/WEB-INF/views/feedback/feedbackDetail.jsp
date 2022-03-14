@@ -45,14 +45,19 @@
         </div>
         <div class="feedback_container_modDel" id="commandList">
             <%-- 세션과 게시물 작성자가 동일하면 수정, 삭제를 출력--%>
-            <c:if test="${mem_nickname eq article.feedback_nickname}">
-                <button class="btn_modify"
+            <c:choose>
+                <c:when test="${mem_nickname eq article.feedback_nickname}">
+                    <button class="btn_modify"
                         onclick="location.href='fdmodifyform?feedback_num=${article.feedback_num}&page=${page}'">
                     수정
-                </button>
-                <button class="btn_del">삭제</button>
-            </c:if>
-            <button class="btn_mok" onclick="location.href='./feedback?page=${page}'"> 목록(임시)</button>
+               		</button>
+                    <button class="btn_del">삭제</button>
+                    <button class="btn_list" onclick="location.href='./feedback?page=${page}'"> 목록</button>
+                </c:when>
+                <c:otherwise>
+                    <button class="btn_list" onclick="location.href='./feedback?page=${page}'"> 목록</button>
+                </c:otherwise>
+            </c:choose>
         </div>
 
         <div class="feedback_container_video">
