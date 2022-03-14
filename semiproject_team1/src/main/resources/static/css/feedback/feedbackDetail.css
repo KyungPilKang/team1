@@ -1,7 +1,7 @@
 body {
-	/*background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),*/
-	/*	url(../../asset/image/board/lol4.jpg);*/
-	/*background-size: cover;*/
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+		url(../../asset/image/board/lol4.jpg);
+	background-size: cover; 
 }
 
 

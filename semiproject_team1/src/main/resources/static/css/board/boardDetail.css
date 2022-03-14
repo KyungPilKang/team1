@@ -50,7 +50,6 @@ body {
 }
 
 .board_name_container {
-	width: 100px;
 	height: 40px;
 	/*border: 1px solid black;*/
 	float: left;
@@ -108,8 +107,11 @@ body {
 }
 
 #commandList {
-	margin-top: 100px;
-	margin-left: 20px;
+	display: inline-block;
+}
+
+#commandList button {
+	margin-top: 0px;
 }
 
 #commandList button a {
@@ -267,11 +269,14 @@ body {
 
 /* 댓글 css 테스트용 */
 .ddd {
-	border: 5px solid skyblue;
+	margin-left: 20px;	
 	border-radius: 8px;
-	background-color: rgba(0, 0, 0, 0);
+	background-color: black;
 	font-weight: bold;
-	height: 20px;
+	height: 17px;
+	width: 17px;
+	text-align: center;
+	font-size: 13.5px;
 }
 
 /* 댓글 작성 박스*/
@@ -279,8 +284,39 @@ body {
 	border: 2px solid #4169E1;
 	background-color: rgba(0, 0, 0, 0);
 	height: 100px;
-	width: 800px;
+	width: 932px;
 	font-weight: bold;
+	margin: 10px;
+}
+
+.comment_submits {
+	float: right;
+	margin-right: 10px;
+    border: 5px solid #4169E1;
+	border-radius: 30px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	width: 90px;
+	height: 40px;
+	font-size: 15px;
+	cursor: pointer;	
+}
+
+div > b {
+	margin-left: 29px;
+	font-size: 20px;
+}
+
+.sort_button button {
+    border: 5px solid #4169E1;
+	border-radius: 30px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	width: 90px;
+	height: 40px;
+	font-size: 15px;
+	cursor: pointer;
+	margin-left: 10px;
 }
 
 /* 대댓글 작성창 숨김처리 css */
@@ -307,4 +343,17 @@ body {
 /* 댓글 좋아요 기능구현에 필수 css*/
 .rh_off_hide, .rh_hide {
 	display: none;
+}
+
+td > button {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	width: 60px;
+	height: 35px;
+	font-size: 15px;
+	cursor: pointer;
+	margin-left: 5px;
+	text-align: center;
 }

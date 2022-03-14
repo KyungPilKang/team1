@@ -128,8 +128,8 @@
             </c:if>
 
 
-            <div><b>댓글</b> 총 ${article.board_replycount}개</div>
-            <div>
+            <div style="font-size:20px;"><b>댓글</b> 총 ${article.board_replycount}개</div><br>
+            <div class="sort_button">
                 <%-- 최신순은 페이지 새로고침 해주면 된다 --%>
                 <button onclick="location.reload()">최신순</button>
                 <%-- 인기순은 버튼을 누르면 아래 댓글 삽입부를 ajax로 다 날리고 인기순 정렬한 댓글창을 삽입하면 된다 --%>
@@ -166,7 +166,7 @@
                                 <%-- 대댓글 까지만 답글이 가능하도록 제한한다 --%>
                                 <c:if test="${reply.b_reply_lev == '0'}">
                                     <td>
-                                        <button onclick="reply_show(${reply.b_reply_num})">답글 쓰기</button>
+                                        <button onclick="reply_show(${reply.b_reply_num})">답글</button>
                                             <%-- 누르면 아래에 --%>
                                     </td>
                                 </c:if>
