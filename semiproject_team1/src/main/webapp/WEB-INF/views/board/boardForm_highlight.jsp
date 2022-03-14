@@ -138,13 +138,13 @@
                             <li><h6>LOL</h6>
                                 <ul class="list">
                                     <li><a href="/boardlist_highlight" style="color:#06e4f5;">하이라이트</a></li>
-                                    <li><a href="#">팁&노하우</a></li>
+                                    <li><a href="/boardlist_tip">팁&노하우</a></li>
                                 </ul>
                             </li>
                             <hr>
                             <li><h6>COMMUNITY</h6>
                                 <ul class="list">
-                                    <li><a href="#">자유</a></li>
+                                    <li><a href="/boardlist_normal">자유</a></li>
                                 </ul>
                             </li>
                         </ul>

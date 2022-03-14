@@ -27,7 +27,7 @@ public class Board_highlightController {
 
 
     @GetMapping(value="board_highlight_search")
-    public ModelAndView board_search(@ModelAttribute Board board,
+    public ModelAndView board_highlight_search(@ModelAttribute Board board,
                                      @RequestParam(value = "page", defaultValue = "1") int page) {
 
         System.out.println(board.getBoard_keyword());

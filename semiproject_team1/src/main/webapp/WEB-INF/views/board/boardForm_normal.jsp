@@ -163,25 +163,25 @@
                     <div class="sub-link" id="sub-menu">
                         <ul class="sub-link__list">
                             <li class="sub-link__item ">
-                                <a href="/boardlist">
+                                <a href="/boardlist_normal">
                                     <img src="https://talk.op.gg/images/icon-new-on@2x.png" width="24"
                                          alt=""> <span>최신</span>
                                 </a>
                             </li>
                             <li class="sub-link__item sub-link__item--active">
-                                <a href="/board_all_viewssort">
+                                <a href="/board_normal_viewssort">
                                     <img src="https://talk.op.gg/images/icon-hot-on@2x.png" width="24"
                                          alt=""> <span>조회수</span>
                                 </a>
                             </li>
                             <li class="sub-link__item ">
-                                <a href="/board_all_replysort">
+                                <a href="/board_normal_replysort">
                                     <img src="https://talk.op.gg/images/icon-top-on@2x.png" width="24"
                                          alt=""> <span>댓글</span>
                                 </a>
                             </li>
                             <li class="sub-link__item ">
-                                <a href="board_all_likesort">
+                                <a href="board_normal_likesort">
                                     <img src="https://talk.op.gg/images/icon-boost-on@2x.png" width="24"
                                          alt=""> <span>좋아요</span>
                                 </a>
@@ -190,7 +190,7 @@
                             <li class="board_search_form">
                                 <div class="board_search_container">
                                     <form class="search-form" id="boardform" method="get"
-                                          action="/board_search">
+                                          action="/board_normal_search">
                                         <select class=""
                                                 name="board_type">
                                             <option value="1">제목</option>
