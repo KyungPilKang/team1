@@ -42,5 +42,7 @@ public interface FeedbackService {
 	void fd_an_fixed(int fd_answer_num, int feedbackNum) throws Exception;
 	void fd_an_fixed_cancel(int fd_answer_num, int feedbackNum) throws Exception;
 	/* 피드백 답변 끝 */
+	
+	Feedback selectFeedback_bestlike() throws Exception;
 
 }

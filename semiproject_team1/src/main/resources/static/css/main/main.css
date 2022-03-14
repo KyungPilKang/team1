@@ -59,6 +59,16 @@
 .container .hero {
 	position: absolute;
 	left: 50%;
+	top: 17%;
+	transform: translate(-50%, -50%);
+	color: white;
+	text-align: center;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.container .hero2 {
+	position: absolute;
+	left: 50%;
 	top: 25%;
 	transform: translate(-50%, -50%);
 	color: white;
@@ -76,7 +86,7 @@
 	font-size: 22px;
 }
 
-.container .hero button {
+.container .hero2 button {
 	background: none;
 	border: 5px solid skyblue;
 	color: white;
@@ -90,7 +100,7 @@
 	font-size: 18px;
 }
 
-.container .hero button:hover {
+.container .hero2 button:hover {
 	background-color: rgba(135, 206, 235, 0.4);
 }
 

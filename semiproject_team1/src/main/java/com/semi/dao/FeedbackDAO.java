@@ -38,4 +38,6 @@ public interface FeedbackDAO {
 	void deleteAnswerCount(int feedbackNum) throws Exception;
 	void updateLikeCount(int feedbackNum) throws Exception;
 	void deleteLikeCount(int feedbackNum) throws Exception;
+	
+	Feedback selectFeedback_bestlike() throws Exception;
 }

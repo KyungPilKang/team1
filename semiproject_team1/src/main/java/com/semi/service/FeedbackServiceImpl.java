@@ -341,6 +341,11 @@ public class FeedbackServiceImpl implements FeedbackService {
         fd_answerDAO.minusScore(nickName);
     }
 
+	@Override
+	public Feedback selectFeedback_bestlike() throws Exception {
+		return feedbackDAO.selectFeedback_bestlike();
+	}
+
 
     /*------------------------------------------------- 끝 : 피드백 답변 관련 -------------------------------------------------*/
 
