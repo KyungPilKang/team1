@@ -3,6 +3,7 @@ package com.semi.controller;
 import com.semi.dto.Board;
 import com.semi.dto.PageInfo;
 import com.semi.service.Board_highlightService;
+import com.semi.service.Board_tipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +16,9 @@ import java.util.List;
 @Controller
 public class Board_tipController {
 
+
     @Autowired
-    private Board_highlightService board_highlightService;
+    private Board_tipService board_tipService;
 
     @Autowired
     private ServletContext servletContext;
@@ -39,18 +41,18 @@ public class Board_tipController {
             String type = board.getBoard_type();
             switch (type) {
                 case "1": {
-                    List<Board> articleList = board_highlightService.getBoardList_search_subject(page, pageInfo, board);
+                    List<Board> articleList = board_tipService.getBoardList_search_subject(page, pageInfo, board);
                     mv.addObject("articleList", articleList);
                     System.out.println(articleList);
                     break;
                 }
                 case "2": {
-                    List<Board> articleList = board_highlightService.getBoardList_search_nickname(page, pageInfo, board);
+                    List<Board> articleList = board_tipService.getBoardList_search_nickname(page, pageInfo, board);
                     mv.addObject("articleList", articleList);
                     break;
                 }
                 case "3": {
-                    List<Board> articleList = board_highlightService.getBoardList_search_content(page, pageInfo, board);
+                    List<Board> articleList = board_tipService.getBoardList_search_content(page, pageInfo, board);
                     mv.addObject("articleList", articleList);
                     break;
                 }
@@ -72,7 +74,7 @@ public class Board_tipController {
         ModelAndView mv = new ModelAndView();
         PageInfo pageInfo = new PageInfo();
         try {
-            List<Board> articleList = board_highlightService.getBoardList(page, pageInfo);
+            List<Board> articleList = board_tipService.getBoardList(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
             mv.addObject("sort_name", "boardlist");
@@ -91,7 +93,7 @@ public class Board_tipController {
         ModelAndView mv = new ModelAndView();
         PageInfo pageInfo = new PageInfo();
         try {
-            List<Board> articleList = board_highlightService.getBoardList_viewsSort(page, pageInfo);
+            List<Board> articleList = board_tipService.getBoardList_viewsSort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
             mv.addObject("sort_name", "viewssort");
@@ -110,7 +112,7 @@ public class Board_tipController {
         ModelAndView mv = new ModelAndView();
         PageInfo pageInfo = new PageInfo();
         try {
-            List<Board> articleList = board_highlightService.getBoardList_replySort(page, pageInfo);
+            List<Board> articleList = board_tipService.getBoardList_replySort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
             mv.addObject("sort_name", "replysort");
@@ -131,7 +133,7 @@ public class Board_tipController {
         ModelAndView mv = new ModelAndView();
         PageInfo pageInfo = new PageInfo();
         try {
-            List<Board> articleList = board_highlightService.getBoardList_likeSort(page, pageInfo);
+            List<Board> articleList = board_tipService.getBoardList_likeSort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
             mv.addObject("sort_name", "likesort");
