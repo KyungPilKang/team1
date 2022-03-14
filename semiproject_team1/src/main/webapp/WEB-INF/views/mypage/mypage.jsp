@@ -21,7 +21,7 @@
 <body>
 <div class="container" style="background-attachment: fixed;">
     <%-- 헤더 영역--%>
-    <div class="header">
+    <div class="header" style="z-index: 2;">
         <h1>
             <a href="/main"> <img class="mb-4"
                               src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
@@ -390,7 +390,7 @@
                                             <div class="each_board_content">
                                                 <div class="each_board_sub">
                                                     <a href="./feedbackdetail?feedback_num=${article_feedback.feedback_num}">
-                                                            ${article_feedback.feedback_subject}
+                                                            ${article_feedback.feedback_subject}&nbsp;[${article_feedback.feedback_answercount}]
                                                     </a>
                                                 </div>
                                                 <div class="each_board_sub_bottom">
@@ -398,7 +398,7 @@
                                                             value="${article_feedback.feedback_date }"
                                                             pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
                                                     <div class="each_board_nickname"><br>
-                                                        닉네임 : ${article_feedback.feedback_nickname }</div>
+                                                        § 닉네임 : ${article_feedback.feedback_nickname }</div>
                                                 </div>
                                             </div>
 
@@ -428,7 +428,7 @@
                                 </section>
                             </c:when>
                             <c:otherwise>
-                                <section id="emptyArea">등록된 글이 없습니다.</section>
+                                <section id="emptyArea" style="color:white; text-align: center; margin-top:100px;"><h3>등록된 글이 없습니다.</h3></section>
                             </c:otherwise>
                         </c:choose>
                 </div><br><br><br>
@@ -452,12 +452,12 @@
                                                     </a>
                                                 </div>
                                                 <div class="each_board_sub_bottom">
-                                                    <div class="each_board_cat"><br>카테고리 : ${article.board_cat }</div>
+                                                    <div class="each_board_cat"><br>카테고리 : ${article.board_cat } §</div>
                                                     <div class="each_board_date"><br><fmt:formatDate
                                                             value="${article.board_date }"
                                                             pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
                                                     <div class="each_board_nickname"><br>
-                                                        닉네임 : ${article.board_nickname }</div>
+                                                        § 닉네임 : ${article.board_nickname }</div>
                                                 </div>
                                             </div>
 
@@ -492,7 +492,7 @@
 
                             </c:when>
                             <c:otherwise>
-                                <section id="emptyArea">등록된 글이 없습니다.</section>
+                                <section id="emptyArea" style="color:white; text-align: center; margin-top:100px;"><h3>등록된 글이 없습니다.</h3></section>
                             </c:otherwise>
                         </c:choose>
                 </div><br><br><br>
@@ -516,12 +516,12 @@
                                                     </a>
                                                 </div>
                                                 <div class="each_board_sub_bottom">
-                                                    <div class="each_board_cat"><br>카테고리 : ${article_ward.board_cat }</div>
+                                                    <div class="each_board_cat"><br>카테고리 : ${article_ward.board_cat } §</div>
                                                     <div class="each_board_date"><br><fmt:formatDate
                                                             value="${article_ward.board_date }"
                                                             pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
                                                     <div class="each_board_nickname"><br>
-                                                        닉네임 : ${article_ward.board_nickname }</div>
+                                                        § 닉네임 : ${article_ward.board_nickname }</div>
                                                 </div>
                                             </div>
 
@@ -556,7 +556,7 @@
 
                             </c:when>
                             <c:otherwise>
-                                <section id="emptyArea">등록된 글이 없습니다.</section>
+                                <section id="emptyArea" style="color:white; text-align: center; margin-top:100px;"><h3>등록된 글이 없습니다.</h3></section>
                             </c:otherwise>
                         </c:choose>
                 </div><br><br><br>

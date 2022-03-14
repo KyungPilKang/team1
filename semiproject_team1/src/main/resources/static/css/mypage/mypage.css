@@ -19,6 +19,7 @@
     width: 45vw;
     display: flex;
     margin: 10px;
+    opacity: 0.9;
 }
 
 .each_board_num {

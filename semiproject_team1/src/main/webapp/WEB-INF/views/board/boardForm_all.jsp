@@ -227,12 +227,12 @@
                                                 </a>
                                             </div>
                                             <div class="each_board_sub_bottom">
-                                                <div class="each_board_cat"><br>${article.board_cat }</div>
+                                                <div class="each_board_cat"><br>카테고리 : ${article.board_cat } §</div>
                                                 <div class="each_board_date"><br><fmt:formatDate
                                                         value="${article.board_date }"
                                                         pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
                                                 <div class="each_board_nickname"><br>
-                                                    ${article.board_nickname }</div>
+                                                    § 닉네임 : ${article.board_nickname }</div>
                                             </div>
                                         </div>
 
@@ -252,7 +252,7 @@
                                             <c:otherwise>
                                                 <div class="each_board_thumbnail"
                                                      id="each_board_thumbnail"><img
-                                                        src="https://talk.op.gg/images/thumbnail/post_hidden.png"
+                                                        src="${pageContext.request.contextPath}/resources/asset/image/every/noimage.png"
                                                         alt="thumbnail" class="thumbnail_size"/>
                                                 </div>
                                             </c:otherwise>
