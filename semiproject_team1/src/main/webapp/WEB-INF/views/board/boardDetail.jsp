@@ -141,7 +141,7 @@
             <c:if test="${!empty mem_nickname}">
                 <form>
             <textarea class="comment_write_content" maxlength="1000"
-                      placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다"></textarea>
+                      placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."></textarea>
                     <button class="comment_submits" type="button">댓글 달기</button>
                 </form>
             </c:if>

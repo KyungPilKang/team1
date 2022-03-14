@@ -180,7 +180,7 @@
                         <form>
                             <div><input type="text" class="answer_write_title" placeholder="제목"></div>
                             <div><textarea class="answer_write_content" maxlength="1000"
-                                           placeholder="피드백 답변을 적는 공간"></textarea></div>
+                                           placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."></textarea></div>
                             <div>
                                 <button class="answer_submits" type="button">피드백 답변달기</button>
                             </div>
@@ -197,7 +197,7 @@
             <c:if test="${!empty mem_nickname}">
                 <form>
             <textarea class="comment_write_content" maxlength="1000"
-                      placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다"></textarea>
+                      placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."></textarea>
                     <button class="comment_submits" type="button">댓글 달기</button>
                 </form>
             </c:if>
