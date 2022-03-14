@@ -163,7 +163,7 @@
                             <div class="pencil"><a href="/boardwriteform"><i class="fa-solid fa-pencil"></i></a></div>
                         </c:when>
                         <c:otherwise>
-                            <div class="pencil"><a href="void(0)" onclick='pencilClick()'><i class="fa-solid fa-pencil"></i></a></div>
+                            <div class="pencil"><a href="void(0)" onclick="alert('로그인이 필요합니다:)');return false;"><i class="fa-solid fa-pencil"></i></a></div>
                         </c:otherwise>
                     </c:choose>
                     </div>
@@ -297,18 +297,9 @@
 </div>
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <%-- 무한스크롤 --%>
 <script>
-//pencil버튼 온클릭 이벤트
-function pencilClick(){
-Swal.fire({
-icon: 'error',
-title: '권한 없음',
-text: '로그인이 필요합니다.',
-confirmButtonText: "확인"
-});
-}
     let currentPage = 1;
     let isLoading = false;
 

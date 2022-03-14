@@ -301,8 +301,15 @@
                     },
                     url: "http://localhost:8090/fd_regreply",
                     success: function (data) {
-                        alert("댓글이 등록되었습니다.");
-                        location.reload();
+                    	Swal.fire({
+    						title: "등록 완료",
+    						text: "댓글이 등록되었습니다.",
+    						icon: "success",
+    						confirmButtonText: "확인"
+    					}).then((result)=>{
+    							location.reload();
+    						
+    					})
                     },
                     error: function (textStatus) {
                         alert(textStatus);
@@ -311,8 +318,15 @@
                     }
                 });
             } else {
-                alert("댓글 내용을 입력하세요")
-                $(".comment_write_content").focus()
+            	Swal.fire({
+					title: "입력 오류",
+					text: "댓글 내용을 입력하세요.",
+					icon: "waring",
+					confirmButtonText: "확인"
+				}).then((result)=>{
+					 $(".comment_write_content").focus();
+					
+				})
             }
         })
     })

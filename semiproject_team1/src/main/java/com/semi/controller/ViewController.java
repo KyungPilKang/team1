@@ -63,7 +63,7 @@ public class ViewController {
 	public String recoverForm1() {return "login/recoverForm1";}
 	
 	@RequestMapping(value = "/test2")
-	public String test() {return "login/test2";}
+	public String test() {return "feedback/feedbackDetail";}
 	
 	@GetMapping("idlinkform")
 	public String idLink() {
@@ -80,11 +80,11 @@ public class ViewController {
 		}
 		return "mypage/codeConfirmForm";
 	}
-	@RequestMapping(value = "/test5")
-	public String test22() {return "feedback/feedbackwriteForm";}
+	@RequestMapping(value = "/duotest")
+	public String test22() {return "duo/duoForm";}
 	
-	@RequestMapping(value = "/test22")
-	public String test11() {return "board/boardDetail";}
+	@RequestMapping(value = "/duoregform")
+	public String test11() {return "duo/duoregForm";}
 	
 	@RequestMapping(value = "/duoedit")
 	public String test111() {return "duo/duoeditForm";}
