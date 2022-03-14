@@ -23,7 +23,17 @@
             <div class="board_subject_container">${article.board_subject }</div>
             <div class="board_container_bo">
                 <div class="board_container_bo_left">
-                    <div class="board_category_container">${article.board_cat}&nbsp;§&nbsp;</div>
+                    <div class="board_category_container">  <c:choose>
+                        <c:when test="${article.board_cat eq 'highlight'}">
+                            하이라이트
+                        </c:when>
+                        <c:when test="${article.board_cat eq 'tip'}">
+                            팁
+                        </c:when>
+                        <c:otherwise>
+                            자유
+                        </c:otherwise>
+                    </c:choose>&nbsp;§&nbsp;</div>
                     <div class="board_date_container">${board_date}&nbsp;§&nbsp;</div>
                     <div class="board_name_container">${article.board_nickname}</div>
                 </div>
@@ -79,7 +89,7 @@
 
         <c:if test="${not empty mem_nickname}">
             <section class="board_middle" id="board_middle">
-                <div style="width:200px; height:15px; margin-left:340px; font-weight:bold">
+                <div class="btn_text">
                     좋아요
                     <span class="material-icons-outlined">
 			favorite_border
@@ -146,6 +156,8 @@
             </div>
 
             <div class="append_replyList"></div>
+                <c:choose>
+                <c:when test="${reList!=[]}">
             <%-- 댓글 삽입부 시작--%>
             <section id="listForm">
                 <table class="listForm_table">
@@ -236,6 +248,11 @@
                 </table>
             </section>
             <%-- 댓글 삽입부 끝--%>
+                </c:when>
+            <c:otherwise>
+                <section class="emptyReply">등록된 댓글이 없습니다.</section>
+            </c:otherwise>
+                </c:choose>
 
         </div>
 
