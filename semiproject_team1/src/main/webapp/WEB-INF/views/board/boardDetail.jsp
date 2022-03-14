@@ -143,7 +143,6 @@
                     <c:forEach var="reply" items="${reList }">
                         <tr>
                             <td>
-                                <div class="ddd">${reply.b_reply_num}</div>
                             </td>
                             <td>
                                 <c:choose>
@@ -516,12 +515,12 @@
                     console.log(data);
                     Swal.fire({
             			title: "등록 완료",
-            			text: "답글이 등록되었습니다",
+            			text: "대댓글이 등록되었습니다",
             			icon: "success",
             			confirmButtonText: "확인"
-            		});
-                    //alert("답글이 등록되었습니다");
-                    location.reload();
+            		}).then((result)=>{
+            			location.reload();
+					})
                 },
                 error: function (textStatus) {
                     console.log("에러 : " + textStatus)
