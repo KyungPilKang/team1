@@ -155,10 +155,12 @@ body {
 .answer_submits {
 	border: 3px solid #4169E1;
 	border-radius: 7px;
+	margin-bottom: 10px;
 }
 .answer_write_title {
 	border: 3px solid #4169E1;
 	border-radius: 7px;
+	margin-top: 10px;
 }
 .feedback_container_answer_write_flex textarea {
 	margin: 10px;
@@ -214,6 +216,7 @@ body {
 	border: 3px solid #4169E1;
 	border-radius: 7px;
 	cursor: pointer;
+	margin-bottom: 10px;
 }
 
 
