@@ -9,7 +9,6 @@
         <div class="each_post">
             <div class="each_board_likecount">
                 <br>♥<br>${article.board_likecount }</div>
-                <%--                                        <div class="each_board_num">보드넘${article.board_num }</div>--%>
             <div class="each_board_content">
                 <div class="each_board_sub">
                     <a href="./boarddetail?board_num=${article.board_num}&page=${pageInfo.page}">
@@ -17,17 +16,15 @@
                     </a>
                 </div>
                 <div class="each_board_sub_bottom">
-                    <div class="each_board_cat">${article.board_cat }</div>
-                    <div class="each_board_date"><fmt:formatDate
+                    <div class="each_board_cat"><br>${article.board_cat } §</div>
+                    <div class="each_board_date"><br><fmt:formatDate
                             value="${article.board_date }"
                             pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
-                    <div class="each_board_nickname">
-                        닉네임${article.board_nickname }</div>
+                    <div class="each_board_nickname"><br>
+                        § 닉네임 : ${article.board_nickname }</div>
                 </div>
             </div>
 
-                <%--                                        <div class="each_board_replycount">--%>
-                <%--                                            리플수${article.board_replycount }</div>--%>
             <div class="each_board_readcount">
                 <br>▲<br>${article.board_readcount }</div>
 
@@ -44,7 +41,7 @@
                 <c:otherwise>
                     <div class="each_board_thumbnail"
                          id="each_board_thumbnail"><img
-                            src="https://talk.op.gg/images/thumbnail/post_hidden.png"
+                            src="${pageContext.request.contextPath}/resources/asset/image/every/noimage.png"
                             alt="thumbnail" class="thumbnail_size"/>
                     </div>
                 </c:otherwise>

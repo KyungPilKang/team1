@@ -227,7 +227,7 @@
                                                 </a>
                                             </div>
                                             <div class="each_board_sub_bottom">
-                                                <div class="each_board_cat"><br>카테고리 : ${article.board_cat } §</div>
+                                                <div class="each_board_cat"><br>${article.board_cat } §</div>
                                                 <div class="each_board_date"><br><fmt:formatDate
                                                         value="${article.board_date }"
                                                         pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
