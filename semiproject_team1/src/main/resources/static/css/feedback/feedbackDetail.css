@@ -157,13 +157,20 @@ body {
 	/* 댓글 가로사이즈*/
 	width: 50vw;
 }
+
+
 .each_reply{
 	/*댓글 세로사이즈*/
 	height: 10vh;
-	background-color: #0dcaf0;
+	background-color: #d9f5fa;
+	border: 2px solid black;
 }
 
 
+
+.re_listForm_date{
+	width: 100px;
+}
 
 /*.board_subject_container {*/
 /*	padding-left: 20px;*/

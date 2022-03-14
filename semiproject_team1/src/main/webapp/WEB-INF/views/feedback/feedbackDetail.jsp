@@ -108,11 +108,7 @@
 
                                 <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
                             <c:if test="${!empty mem_nickname}">
-                                <c:if test="${answer.fd_answer_nickname == mem_nickname}">
-                                    <td>
-                                        <button onclick="an_removeCheck(${answer.fd_answer_num})">삭제</button>
-                                    </td>
-                                </c:if>
+
                                 <%-- 피드백 답변 좋아요 시작 --%>
                                 <td>
                                     <div class="re_btn_like">
@@ -142,6 +138,11 @@
                             <td>
                                     ${answer.fd_answer_likecount}
                             </td>
+                                    <c:if test="${answer.fd_answer_nickname == mem_nickname}">
+                                        <td>
+                                            <button onclick="an_removeCheck(${answer.fd_answer_num})">삭제</button>
+                                        </td>
+                                    </c:if>
                                 <%-- 피드백 답변 좋아요 끝--%>
                                 <%-------------------------------------- 세션이 있을경우 끝 --------------------------------------%>
                         </tr>
@@ -207,20 +208,21 @@
                     <c:forEach var="reply" items="${reList }">
                         <tr class="each_reply">
 
-                            <td>
+                            <td colspan="8">
                                     ${reply.fd_reply_content}
                             </td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                             <td>${reply.fd_reply_nickname }</td>
                             <td><fmt:formatDate value="${reply.fd_reply_date }" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
 
 
                                 <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
                             <c:if test="${!empty mem_nickname}">
-                                <c:if test="${reply.fd_reply_nickname == mem_nickname}">
-                                    <td>
-                                        <button onclick="re_removeCheck(${reply.fd_reply_num})">삭제</button>
-                                    </td>
-                                </c:if>
+
                                 <%-- 댓글 좋아요 시작 --%>
                                 <td>
                                     <div class="re_btn_like">
@@ -250,6 +252,11 @@
                             <td>
                                     ${reply.fd_reply_likecount}
                             </td>
+                            <c:if test="${reply.fd_reply_nickname == mem_nickname}">
+                                <td>
+                                    <button onclick="re_removeCheck(${reply.fd_reply_num})">삭제</button>
+                                </td>
+                            </c:if>
                                 <%-- 댓글 좋아요 끝--%>
                                 <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
                         </tr>
