@@ -98,7 +98,15 @@ body {
 	background-color: #7b9dab;
 }
 
+.each_answer_content_detail{
+	display: none;
+}
 
+/* 내용 누르면 나타나는 상세보기 박스*/
+.each_answer_content_detail_content{
+	background-color: #8786ec;
+	height: 20vh;
+}
 
 
 /* 피드백 답변 작성폼 */

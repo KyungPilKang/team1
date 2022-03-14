@@ -77,7 +77,10 @@
             <div class="append_answerList"></div>
             <%-- 답변리스트 삽입부 시작--%>
             <section id="an_listForm">
+
                 <table class="an_listForm_table">
+                    <tbody>
+
                     <c:forEach var="answer" items="${anList }">
                         <tr class="each_answer">
                                 <%-- 게시물 작성자만 고정, 고정취소가 가능하도록 --%>
@@ -141,8 +144,11 @@
                                 <%-- 피드백 답변 좋아요 끝--%>
                                 <%-------------------------------------- 세션이 있을경우 끝 --------------------------------------%>
                         </tr>
-
+                        <tr class="each_answer_content_detail${answer.fd_answer_num} each_answer_content_detail">
+                            <td colspan="8" class="each_answer_content_detail_content">내용<br>${answer.fd_answer_content}</td>
+                        </tr>
                     </c:forEach>
+                    </tbody>
                 </table>
             </section>
 
@@ -619,15 +625,14 @@
     }
 </script>
 
-<%-- 답글쓰기 버튼 --%>
+<%-- 피드백 답변 내용 팝업 --%>
 <script>
     content_pop = (answerNum) => {
-        alert(answerNum+"번 답변의 내용");
-        if ($("#re_comment_write" + answerNum).css("display") == "none") {
-            $(".re_comment_write").hide() // class로 다 닫아버리고
-            $("#re_comment_write" + answerNum).show() // 해당 id만 열어준다
+        if ($(".each_answer_content_detail" + answerNum).css("display") == "none") {
+            $(".each_answer_content_detail").hide() // class로 다 닫아버리고
+            $(".each_answer_content_detail" + answerNum).show() // 해당 id만 열어준다
         } else {
-            $("#re_comment_write" + answerNum).hide()
+            $(".each_answer_content_detail" + answerNum).hide()
         }
     }
 </script>
