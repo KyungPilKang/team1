@@ -191,7 +191,7 @@ body {
 	color: white;
 }
 
-.container .info_nav ul li a:hover {
+.container .nav ul li a:hover {
 	color: #4169E1;
 }
 
@@ -209,10 +209,9 @@ body {
 	color: white;
 }
 
-.container .info_nav ul li a:hover {
-	color: #06e4f5;
+.container .nav ul li a:hover {
+	color: #4169E1;
 }
-
 
 
 
@@ -384,8 +383,8 @@ body {
 	margin-left: 20px;
 }
 
-.card ul li a:hover {
-	color: #1fdfdf;
+.container .nav ul li a:hover {
+	color: #4169E1;
 }
 
 .card ul li h6 {

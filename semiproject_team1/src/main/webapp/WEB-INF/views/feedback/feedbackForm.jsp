@@ -52,7 +52,7 @@
 						<c:when test="${not empty mem_mno }">
 							<li><a href="/duoform">듀오</a></li>
 							<li><a href="/mypage">마이페이지</a></li>
-							<li><a href="/log_out?page=main">로그아웃</a></li>
+							<li><a href="/log_out?page=feedback">로그아웃</a></li>
 							<li style="color:white;">
 								<c:choose>
 									<c:when test="${my_tier eq 'none' }">
@@ -117,7 +117,7 @@
 							</li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="/loginform?page=main">로그인</a></li>	
+							<li><a href="/loginform?page=feedback">로그인</a></li>	
 						</c:otherwise>
 					</c:choose>
 				</ul>

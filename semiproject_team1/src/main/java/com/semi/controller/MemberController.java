@@ -135,6 +135,8 @@ public class MemberController {
 			mav.setViewName("redirect:/main");
 		} else if(page.equals("board")) {
 			mav.setViewName("redirect:/boardlist");
+		} else {
+			mav.setViewName("redirect:/feedback");
 		}
 		return mav;
 	}

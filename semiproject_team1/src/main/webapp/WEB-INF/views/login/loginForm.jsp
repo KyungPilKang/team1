@@ -168,6 +168,8 @@
 								window.location.href="/boardlist";
 							} else if(data.mem.page=="admin"){
 								window.location.href="/main_admin";
+							} else {
+								window.location.href="/feedback";
 							}
 						}
 					})
