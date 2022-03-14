@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" sizes="16x16 32x32 64x64"
           href="/resources/asset/image/login/dog1.png"/>
-    <title>하이라이트 게시판 - 롤판.DOG</title>
+    <title>자유 게시판 - 롤판.DOG</title>
 
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
@@ -37,6 +37,7 @@
                     <li><a href="/boardlist">자유게시판</a></li>
                     <c:choose>
                         <c:when test="${not empty mem_mno }">
+                            <%--                        <c:when test="${empty mem_mno }">--%>
                             <li><a href="/duoform">듀오</a></li>
                         </c:when>
                         <c:otherwise>
@@ -54,6 +55,7 @@
             <%-- 좌측 메뉴 --%>
             <div class="card_left">
                 <div class="card_outline">
+                    <%--                    <c:if test="${not empty mem_mno }">--%>
                     <c:if test="${not empty mem_mno }">
                         <div class="user_info_box">
                             <div class="user_welcome">
@@ -127,28 +129,28 @@
                             </div>
                         </div>
                     </c:if>
-                    <div class="card">
-                        <ul class="list">
-                            <li><h6>HOME</h6>
-                                <ul class="list">
-                                    <li><a href="/boardlist">전체</a></li>
-                                </ul>
+                        <div class="card">
+                            <ul class="list">
+                                <li><h6>HOME</h6>
+                                    <ul class="list">
+                                        <li><a href="/boardlist">전체</a></li>
+                                    </ul>
+                                    <hr>
+                                </li>
+                                <li><h6>LOL</h6>
+                                    <ul class="list">
+                                        <li><a href="/boardlist_highlight">하이라이트</a></li>
+                                        <li><a href="/boardlist_tip">팁&노하우</a></li>
+                                    </ul>
+                                </li>
                                 <hr>
-                            </li>
-                            <li><h6>LOL</h6>
-                                <ul class="list">
-                                    <li><a href="/boardlist_highlight" style="color:#06e4f5;">하이라이트</a></li>
-                                    <li><a href="/boardlist_tip">팁&노하우</a></li>
-                                </ul>
-                            </li>
-                            <hr>
-                            <li><h6>COMMUNITY</h6>
-                                <ul class="list">
-                                    <li><a href="/boardlist_normal">자유</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                                <li><h6>COMMUNITY</h6>
+                                    <ul class="list">
+                                        <li><a href="/boardlist_normal" style="color:#06e4f5">자유</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                 </div>
             </div>
 
@@ -161,25 +163,25 @@
                     <div class="sub-link" id="sub-menu">
                         <ul class="sub-link__list">
                             <li class="sub-link__item ">
-                                <a href="/boardlist_highlight">
+                                <a href="/boardlist_normal">
                                     <img src="https://talk.op.gg/images/icon-new-on@2x.png" width="24"
                                          alt=""> <span>최신</span>
                                 </a>
                             </li>
                             <li class="sub-link__item sub-link__item--active">
-                                <a href="/board_highlight_viewssort">
+                                <a href="/board_normal_viewssort">
                                     <img src="https://talk.op.gg/images/icon-hot-on@2x.png" width="24"
                                          alt=""> <span>조회수</span>
                                 </a>
                             </li>
                             <li class="sub-link__item ">
-                                <a href="/board_highlight_replysort">
+                                <a href="/board_normal_replysort">
                                     <img src="https://talk.op.gg/images/icon-top-on@2x.png" width="24"
                                          alt=""> <span>댓글</span>
                                 </a>
                             </li>
                             <li class="sub-link__item ">
-                                <a href="board_highlight_likesort">
+                                <a href="board_normal_likesort">
                                     <img src="https://talk.op.gg/images/icon-boost-on@2x.png" width="24"
                                          alt=""> <span>좋아요</span>
                                 </a>
@@ -188,7 +190,7 @@
                             <li class="board_search_form">
                                 <div class="board_search_container">
                                     <form class="search-form" id="boardform" method="get"
-                                          action="/board_highlight_search">
+                                          action="/board_normal_search">
                                         <select class=""
                                                 name="board_type">
                                             <option value="1">제목</option>
