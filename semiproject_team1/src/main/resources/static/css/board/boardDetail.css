@@ -115,7 +115,7 @@ body {
 	/*background-color : red;*/
 	margin-top: 15px;
 	/*margin-left: 15px;*/
-	/*font-weight: bold;*/
+	font-weight: bold;
 }
 
 .board_content_container img {
@@ -215,6 +215,7 @@ body {
 .btn_text{
 	margin-left:19vw;
 	margin-bottom: -10px;
+	font-weight: bold;
 }
 
 .btn_like {
