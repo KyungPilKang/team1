@@ -328,7 +328,6 @@
 					confirmButtonText: "확인"
 				}).then((result)=>{
 					 $(".comment_write_content").focus();
-					
 				})
             }
         })
@@ -339,7 +338,12 @@
 <%-- 댓글삭제 --%>
 <script>
     function re_removeCheck(replyNum) {
-        if (confirm("정말 삭제하시겠습니까??") == true) {
+    	Swal.fire({
+			title: "댓글 삭제",
+			text: "확인을 누르면 삭제됩니다",
+			icon: "warning",
+			confirmButtonText: "확인"
+		}).then((result)=>{
             $.ajax({
                 async: true,
                 type: 'GET',
@@ -348,8 +352,14 @@
                 },
                 url: "http://localhost:8090/fd_replydelete",
                 success: function (data) {
-                    alert("댓글이 삭제되었습니다.");
-                    location.reload();
+                	Swal.fire({
+            			title: "삭제 완료",
+            			text: "댓글이 삭제되었습니다",
+            			icon: "success",
+            			confirmButtonText: "확인"
+            		}).then((result)=>{
+            			location.reload();
+					})
                 },
                 error: function (textStatus) {
                     alert(textStatus);
@@ -388,8 +398,15 @@
         });
         /* 빈 하트로 바꾸기 */
         $(".rh_off_" + replyNum).show()
-        alert(replyNum + "번 댓글에 좋아요를 취소하셨습니다.")
-        location.reload();
+        Swal.fire({
+			title: "취소 완료",
+			text: replyNum + "번 댓글에 좋아요를 취소하셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			location.reload();
+		})
+        
     }
 
     function re_like_on(replyNum) {
@@ -416,8 +433,15 @@
         });
         /* 빨간 하트로 바꾸기 */
         $(".rh_" + replyNum).show()
-        alert(replyNum + "번 댓글에 좋아요를 누르셨습니다.")
-        location.reload();
+           Swal.fire({
+			title: "등록 완료",
+			text: replyNum + "번 댓글에 좋아요를 누르셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			location.reload();
+		})
+        
     }
 </script>
 
@@ -482,8 +506,14 @@
                     },
                     url: "http://localhost:8090/fd_reganswer",
                     success: function (data) {
-                        alert("피드백 답변이 등록되었습니다.");
-                        location.reload();
+                    	Swal.fire({
+                			title: "등록 완료",
+                			text: "피드백 답변이 등록되었습니다.",
+                			icon: "success",
+                			confirmButtonText: "확인"
+                		}).then((result)=>{
+                			location.reload();
+                		})
                     },
                     error: function (textStatus) {
                         alert(textStatus);
@@ -492,8 +522,14 @@
                     }
                 });
             } else {
-                alert("피드백 답변 내용을 입력하세요")
-                $(".comment_write_content").focus()
+            	Swal.fire({
+        			title: "입력 오류",
+        			text: "피드백 답변 내용을 입력하세요.",
+        			icon: "waring",
+        			confirmButtonText: "확인"
+        		}).then((result)=>{
+        			 $(".comment_write_content").focus();
+        		})  
             }
         })
     })
@@ -503,8 +539,13 @@
 <%-- 피드백 답변삭제 --%>
 <script>
     function an_removeCheck(replyNum) {
-        if (confirm("정말 삭제하시겠습니까??") == true) {
-            $.ajax({
+    	Swal.fire({
+			title: "답변 삭제",
+			text: "확인을 누르면 삭제됩니다",
+			icon: "waring",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			$.ajax({
                 async: true,
                 type: 'GET',
                 data: {
@@ -513,16 +554,21 @@
                 // url 컨트롤러 만들어야함
                 url: "http://localhost:8090/fd_answerdelete",
                 success: function (data) {
-                    alert("피드백 답변이 삭제되었습니다.");
-                    location.reload();
+                	Swal.fire({
+            			title: "삭제 완료",
+            			text: "피드백 답변이 삭제되었습니다",
+            			icon: "success",
+            			confirmButtonText: "확인"
+            		}).then((result)=>{
+            			location.reload();
+					})
+                	
                 },
                 error: function (textStatus) {
                     alert(textStatus);
-                }
-            });
-        } else {
-            return false;
-        }
+		}
+			});
+        })
     }
 </script>
 
@@ -552,7 +598,12 @@
         });
         /* 빈 하트로 바꾸기 */
         $(".ah_off_" + replyNum).show()
-        alert(replyNum + "번 댓글에 좋아요를 취소하셨습니다.")
+        Swal.fire({
+			title: "취소 완료",
+			text: replyNum + "번 댓글에 좋아요를 취소하셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		});
         location.reload();
     }
 
@@ -579,7 +630,12 @@
         });
         /* 빨간 하트로 바꾸기 */
         $(".ah_" + replyNum).show()
-        alert(replyNum + "번 댓글에 좋아요를 누르셨습니다.")
+        Swal.fire({
+			title: "등록 완료",
+			text: replyNum + "번 댓글에 좋아요를 누르셨습니다",
+			icon: "success",
+			confirmButtonText: "확인"
+		});
         location.reload();
     }
 </script>
@@ -602,8 +658,14 @@
                 alert(textStatus);
             }
         });
-        alert(answerNum + "번 피드백 답변을 고정하였습니다.")
-        location.reload();
+        Swal.fire({
+			title: "고정 완료",
+			text: answerNum + "번 피드백 답변을 고정하였습니다.",
+			icon: "success",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			location.reload();
+		})
     }
 
 
@@ -622,8 +684,14 @@
                 alert(textStatus);
             }
         });
-        alert(answerNum + "번 피드백 답변 고정을 취소하셨습니다.")
-        location.reload();
+        Swal.fire({
+			title: "취소 완료",
+			text: answerNum + "번 피드백 답변 고정을 취소하셨습니다.",
+			icon: "success",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			location.reload();
+		})
     }
 </script>
 

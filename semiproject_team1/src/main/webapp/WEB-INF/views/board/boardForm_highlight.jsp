@@ -296,7 +296,12 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
     function fake_submit() {
-        alert("검색 완료")
+    	Swal.fire({
+			title: "요청 완료",
+			text: "검색이 완료되었습니다.",
+			icon: "success",
+			confirmButtonText: "확인"
+		})
         $("#boardform").attr("action", "./board_highlight_search").submit();
     }
 </script>

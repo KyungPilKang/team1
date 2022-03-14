@@ -404,43 +404,7 @@
 
 <%-- 댓글삭제 --%>
 <script>
-//confirm sweetalert으로 변환중
-/* function removeCheck(replyNum) {
-	Swal.fire({
-	    title: "삭제 확인",
-	    text: "정말삭제하시겠습니까?",
-	    icon: "waring",
-	    showCancelButton: true,
-	    confirmButtonText: '네',
-	    cancelButtonText: '아니오',
-	}).then(result => {
-	    if (result.isConfirmed) {
-        $.ajax({
-            async: true,
-            type: 'GET',
-            data: {
-                b_reply_num: replyNum,
-            },
-            url: "http://localhost:8090/replydelete",
-            success: function (data) {
-            	Swal.fire({
-        			title: "삭제 완료",
-        			text: "댓글이 삭제되었습니다",
-        			icon: "success",
-        			confirmButtonText: "확인"
-        		});
-            	//alert("댓글이 삭제되었습니다");
-                location.reload();
-            },
-            error: function (textStatus) {
-                alert(textStatus);
-            }
-        });
-    } else {
-        return false;
-    }
-} 
-} */
+
      function removeCheck(replyNum) {
 		Swal.fire({
 			title: "댓글 삭제",
@@ -470,31 +434,6 @@
                 }
             });
 		})
-        /* if (confirm("정말 삭제하시겠습니까?") == true) {
-            $.ajax({
-                async: true,
-                type: 'GET',
-                data: {
-                    b_reply_num: replyNum,
-                },
-                url: "http://localhost:8090/replydelete",
-                success: function (data) {
-                	Swal.fire({
-            			title: "삭제 완료",
-            			text: "댓글이 삭제되었습니다",
-            			icon: "success",
-            			confirmButtonText: "확인"
-            		}).then((result)=>{
-            			location.reload();
-					})
-                },
-                error: function (textStatus) {
-                    alert(textStatus);
-                }
-            });
-        } else {
-            return false;
-        } */
     }
 </script>
 
@@ -581,9 +520,11 @@
 			text: replyNum + "번 댓글에 좋아요를 취소하셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
+		}).then((result)=>{
+			location.reload();
 		});
         //alert(replyNum + "번 댓글에 좋아요를 취소하셨습니다")
-        location.reload();
+        
     }
 
     function re_like_on(replyNum) {
@@ -616,7 +557,7 @@
 			icon: "success",
 			confirmButtonText: "확인"
 		});
-        alert(replyNum + "번 댓글에 좋아요를 누르셨습니다")
+        //alert(replyNum + "번 댓글에 좋아요를 누르셨습니다")
         location.reload();
     }
 </script>

@@ -187,7 +187,7 @@
                                 </button>
                             </c:when>
                             <c:otherwise>
-                                <button type="button" class="request_btn" onclick="alert('로그인이 필요합니다:)')">
+                                <button type="button" class="request_btn" onclick="loginalert()">
                                     REQUEST
                                 </button>
                             </c:otherwise>
@@ -275,9 +275,19 @@
 
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <%-- 무한스크롤 --%>
 <script>
+	function loginalert(){
+		Swal.fire({
+			title: "권한 없음",
+			text: "로그인이 필요합니다.",
+			icon: "waring",
+			confirmButtonText: "확인"
+		})
+		
+	}
+
     let currentPage = 1;
     let isLoading = false;
 

@@ -63,7 +63,7 @@ public class ViewController {
 	public String recoverForm1() {return "login/recoverForm1";}
 	
 	@RequestMapping(value = "/test2")
-	public String test() {return "feedback/feedbackDetail";}
+	public String test() {return "feedback/feedbackForm";}
 	
 	@GetMapping("idlinkform")
 	public String idLink() {
