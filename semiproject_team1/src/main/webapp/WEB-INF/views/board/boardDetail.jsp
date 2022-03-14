@@ -23,14 +23,14 @@
             <div class="board_subject_container">${article.board_subject }</div>
             <div class="board_container_bo">
                 <div class="board_container_bo_left">
-                    <div class="board_category_container">${article.board_cat}</div>
-                    <div class="board_date_container">${board_date}</div>
-                    <div class="board_name_container"> 닉네임 : ${article.board_nickname}</div>
+                    <div class="board_category_container">${article.board_cat}&nbsp;§&nbsp;</div>
+                    <div class="board_date_container">${board_date}&nbsp;§&nbsp;</div>
+                    <div class="board_name_container">${article.board_nickname}</div>
                 </div>
                 <div class="board_container_bo_right">
-                    <div class="board_like_container"> 좋아요수 : ${article.board_likecount}</div>
-                    <div class="board_reply_container"> 댓글수 : ${article.board_replycount}</div>
-                    <div class="board_readcount_container"> 조회수 : ${article.board_readcount}</div>
+                    <div class="board_like_container"> 좋아요 ${article.board_likecount} §</div>
+                    <div class="board_reply_container">&nbsp;댓글 ${article.board_replycount} §</div>
+                    <div class="board_readcount_container">&nbsp; 조회수 ${article.board_readcount}</div>
                 </div>
             </div>
         </div>
@@ -151,7 +151,7 @@
                 <table class="listForm_table">
                     <c:forEach var="reply" items="${reList }">
                         <tr>
-                            <td>
+                            <td class="list_nick">
                                 <c:choose>
                                     <c:when test="${reply.b_reply_lev!=0}">
                                         <c:forEach var="i" begin="0" end="${reply.b_reply_lev*3}">
@@ -159,11 +159,11 @@
                                         </c:forEach>
                                         ㄴ
                                     </c:when>
-                                    <c:otherwise>■</c:otherwise>
+                                    <c:otherwise>&nbsp;■</c:otherwise>
                                 </c:choose>
                                     ${reply.b_reply_nickname }
                             </td>
-                            <td>${reply.b_reply_content}</td>
+                            <td class="list_conta">${reply.b_reply_content}</td>
                             <td><fmt:formatDate value="${reply.b_reply_date }" pattern="M월 d일 H시"/></td>
 
 
