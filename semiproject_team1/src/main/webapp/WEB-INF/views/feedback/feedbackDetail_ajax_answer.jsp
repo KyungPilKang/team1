@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<%--------------------------------------------- 보류 페이지 ---------------------------------------------%>
+
+
 <section id="an_listForm">
     <table>
         <c:forEach var="answer" items="${anList }">

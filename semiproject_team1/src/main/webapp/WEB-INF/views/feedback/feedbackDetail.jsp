@@ -64,11 +64,11 @@
         <div class="answer_cont ">
 
             <div><b>피드백 답변</b> 총 ${article.feedback_answercount}개</div>
-            <div>
-                <%-- 정렬 순서는 고정 > 인기순 > 최신순 --%>
-                <button onclick="location.reload()">고정 > 인기순 > 최신순</button>
-                <button onclick="answerList_sort()">고정 > 최신순 > 인기순</button>
-            </div>
+<%--            <div>--%>
+<%--                &lt;%&ndash; 정렬 순서는 고정 > 인기순 > 최신순 &ndash;%&gt;--%>
+<%--                <button onclick="location.reload()">고정 > 인기순 > 최신순</button>--%>
+<%--                <button onclick="answerList_sort()">고정 > 최신순 > 인기순</button>--%>
+<%--            </div>--%>
 
             <div class="append_answerList"></div>
             <%-- 답변리스트 삽입부 시작--%>
@@ -77,7 +77,7 @@
                     <c:forEach var="answer" items="${anList }">
                         <tr>
                                 <%-- 게시물 작성자만 고정, 고정취소가 가능하도록 --%>
-                            <c:if test="${article.feedback_nickname eq mem_nickname}">
+                                <c:if test="${article.feedback_nickname eq mem_nickname}">
                                 <td>
                                     <c:choose>
                                         <c:when test="${answer.fd_answer_fixed == 0}">
@@ -410,24 +410,26 @@
 
 
 <%-- 피드백 답변 정렬 --%>
-<script>
-    const answerList_sort = () => {
-        $("#an_listForm").empty();
-        $(".append_answerList").empty();
-        $.ajax({
-            type: "post",
-            async: false,
-            // ajax 페이지를 피드백 답글을 내려주는 바꿔줘야한다.
-            url: "http://localhost:8090/feedbackDetail_ajax_answer",
-            data: {
-                feedback_num: ${article.feedback_num},
-            },
-            success: function (data) {
-                $('.append_answerList').append(data);
-            }
-        })
-    }
-</script>
+<%-- ajax로 넘어갔을 때 고정 버튼 이상으로 보류하기로 결정 --%>
+<%--<script>--%>
+<%--    const answerList_sort = () => {--%>
+<%--        $("#an_listForm").empty();--%>
+<%--        $(".append_answerList").empty();--%>
+<%--        $.ajax({--%>
+<%--            type: "post",--%>
+<%--            async: false,--%>
+<%--            // ajax 페이지를 피드백 답글을 내려주는 바꿔줘야한다.--%>
+<%--            url: "http://localhost:8090/feedbackDetail_ajax_answer",--%>
+<%--            data: {--%>
+<%--                feedback_num: ${article.feedback_num},--%>
+<%--                &lt;%&ndash;fd_answer_nickname : ${article.feedback_nickname}&ndash;%&gt;--%>
+<%--            },--%>
+<%--            success: function (data) {--%>
+<%--                $('.append_answerList').append(data);--%>
+<%--            }--%>
+<%--        })--%>
+<%--    }--%>
+<%--</script>--%>
 
 
 <%-- 피드백 답변 작성 ajax --%>
