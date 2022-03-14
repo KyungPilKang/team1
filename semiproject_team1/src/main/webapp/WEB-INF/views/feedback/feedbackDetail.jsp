@@ -104,7 +104,7 @@
                             </c:if>
 
                             <td>${answer.fd_answer_nickname}</td>
-                            <td class="each_answer_subject">${answer.fd_answer_title}</td>
+                            <td class="each_answer_subject">제목 : ${answer.fd_answer_title}</td>
                             <td class="each_answer_content"  onclick="content_pop(${answer.fd_answer_num})">
                              <div class="each_answer_content_inner">피드백 내용 보기</div>
                             </td>

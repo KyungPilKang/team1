@@ -381,7 +381,7 @@
                 </div>
                 <div class="feedback_body">
                     <c:choose>
-                            <c:when test="${articleList_feedback!=null}">
+                            <c:when test="${not empty articleList_feedback}">
                                 <section id="listForm">
                                     <c:forEach var="article_feedback" items="${articleList_feedback }">
                                         <div class="each_post">
@@ -428,7 +428,7 @@
                                 </section>
                             </c:when>
                             <c:otherwise>
-                                <section id="emptyArea" style="color:white; text-align: center; margin-top:100px;"><h3>등록된 글이 없습니다.</h3></section>
+                                <section id="emptyArea" style="color:white; text-align: center; margin-top:100px;"><h3>요청한 피드백이 없습니다.</h3></section>
                             </c:otherwise>
                         </c:choose>
                 </div><br><br><br>
@@ -439,7 +439,7 @@
                 </div>
                 <div class="feedback_body">
                     <c:choose>
-                            <c:when test="${articleList!=null}">
+                            <c:when test="${not empty articleList}">
                                 <section id="listForm">
                                     <c:forEach var="article" items="${articleList }">
                                         <div class="each_post">
@@ -502,7 +502,7 @@
 
                             </c:when>
                             <c:otherwise>
-                                <section id="emptyArea" style="color:white; text-align: center; margin-top:100px;"><h3>등록된 글이 없습니다.</h3></section>
+                                <section id="emptyArea" style="color:white; text-align: center; margin-top:100px;"><h3>작성한 글이 없습니다.</h3></section>
                             </c:otherwise>
                         </c:choose>
                 </div><br><br><br>
@@ -513,7 +513,7 @@
                 </div>
                 <div class="feedback_body">
                     <c:choose>
-                            <c:when test="${articleList_ward!=null}">
+                            <c:when test="${not empty articleList_ward}">
                                 <section id="listForm">
                                     <c:forEach var="article_ward" items="${articleList_ward }">
                                         <div class="each_post">
@@ -570,13 +570,9 @@
                                         </div>
                                     </c:forEach>
                                 </section>
-
-                                <div class="attach_ajax_list"></div>
-                                <div class="loading"> 로 딩 중 . . .</div>
-
                             </c:when>
                             <c:otherwise>
-                                <section id="emptyArea" style="color:white; text-align: center; margin-top:100px;"><h3>등록된 글이 없습니다.</h3></section>
+                                <section id="emptyArea" style="color:white; text-align: center; margin-top:100px;"><h3>와드박은 글이 없습니다.</h3></section>
                             </c:otherwise>
                         </c:choose>
                 </div><br><br><br>
