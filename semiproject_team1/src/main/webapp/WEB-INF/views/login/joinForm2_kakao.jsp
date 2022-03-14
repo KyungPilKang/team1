@@ -150,7 +150,7 @@ $('#captchavalid').click(function () {
 				$('.captcha').css("display","none");
 				captcha_ok=true;
 				console.log(captcha_ok);
-				if(captcha_ok==true&&email_ok==true&&nickname_ok==true){
+				if(captcha_ok==true&&nickname_ok==true){
 			    	$('#form_submit').attr('disabled', false);
 			    }
 			}
