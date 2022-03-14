@@ -50,7 +50,7 @@
                 <button class="btn_del">삭제</button>
                 <button class="btn_del" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
             </c:if> --%>
-            <div>
+            <div class="Attachments">
                 첨부파일 :
                 <c:if test="${article.board_fileName!=null }">
                     <a href="file_down?downFile=${article.board_fileName}"> ${article.board_fileName} </a>
