@@ -95,7 +95,7 @@
             <c:if test="${!empty mem_nickname}">
                 <form>
             <textarea class="comment_write_content" maxlength="1000"
-                      placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."></textarea>
+                      placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다"></textarea>
                     <button class="comment_submits" type="button">댓글 달기</button>
                 </form>
             </c:if>
@@ -208,7 +208,7 @@
 
     <div class="modal">
         <div class="modal_content"
-             title="클릭하면 창이 닫힙니다.">
+             title="클릭하면 창이 닫힙니다">
             게시물을 삭제하시겠습니까?<br>
             <button onclick="location.href='boarddelete?board_num=${article.board_num}&page=${page}'"> 확인</button>
             <button class="modal_cancel">취소</button>
@@ -249,11 +249,11 @@ let sweetalert=(icon,title,contents)=>{
         $(".like_mini").append("<div class='heart_off' onclick='like_on()''></div>");
         Swal.fire({
 			title: "취소 완료",
-			text: "좋아요를 취소하셧습니다.",
+			text: "좋아요를 취소하셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		});
-        //alert("좋아요를 취소하셨습니다.") 스윗알럿으로 바꿈
+        //alert("좋아요를 취소하셨습니다") 스윗알럿으로 바꿈
         // 동영상 재생시 reload를 할 경우 영상도 reload 되므로 X
         // location.reload();
     }
@@ -279,11 +279,11 @@ let sweetalert=(icon,title,contents)=>{
         $(".like_mini").append("<div class='heart' onclick='like_off()''></div>");
         Swal.fire({
 			title: "등록 완료",
-			text: "좋아요를 누르셨습니다.",
+			text: "좋아요를 누르셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		});
-        //alert("좋아요를 누르셨습니다.")
+        //alert("좋아요를 누르셨습니다")
         // location.reload();
     }
 </script>
@@ -321,11 +321,11 @@ let sweetalert=(icon,title,contents)=>{
         $(".ward_mini").append("<div class='bookmark_off' onclick='ward_on()''></div>");
         Swal.fire({
 			title: "취소 완료",
-			text: "와드를 취소하셧습니다.",
+			text: "와드를 취소하셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		});
-        //alert("와드를 취소하셨습니다.")
+        //alert("와드를 취소하셨습니다")
         // location.reload();
     }
 
@@ -348,11 +348,11 @@ let sweetalert=(icon,title,contents)=>{
         $(".ward_mini").append("<div class='bookmark' onclick='ward_off()''></div>");
         Swal.fire({
 			title: "등록 완료",
-			text: "와드를 누르셧습니다.",
+			text: "와드를 누르셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		});
-        //alert("와드를 누르셨습니다.")
+        //alert("와드를 누르셨습니다")
         // location.reload();
     }
 </script>
@@ -390,12 +390,12 @@ let sweetalert=(icon,title,contents)=>{
                     success: function (data) {
                     	Swal.fire({
                 			title: "등록 완료",
-                			text: "댓글이 등록되었습니다.",
+                			text: "댓글이 등록되었습니다",
                 			icon: "success",
                 			confirmButtonText: "확인"
-                		});
-                    	//alert("댓글이 등록되었습니다.");
-                        location.reload();
+                		}).then((result)=>{
+                			location.reload();
+    					})
                     },
                     error: function (textStatus) {
                         alert(textStatus);
@@ -441,11 +441,11 @@ let sweetalert=(icon,title,contents)=>{
             success: function (data) {
             	Swal.fire({
         			title: "삭제 완료",
-        			text: "댓글이 삭제되었습니다.",
+        			text: "댓글이 삭제되었습니다",
         			icon: "success",
         			confirmButtonText: "확인"
         		});
-            	//alert("댓글이 삭제되었습니다.");
+            	//alert("댓글이 삭제되었습니다");
                 location.reload();
             },
             error: function (textStatus) {
@@ -458,7 +458,35 @@ let sweetalert=(icon,title,contents)=>{
 } 
 } */
      function removeCheck(replyNum) {
-        if (confirm("정말 삭제하시겠습니까?") == true) {
+		Swal.fire({
+			title: "댓글 삭제",
+			text: "확인을 누르면 삭제됩니다",
+			icon: "warning",
+			confirmButtonText: "확인"
+		}).then((result)=>{
+			$.ajax({
+                async: true,
+                type: 'GET',
+                data: {
+                    b_reply_num: replyNum,
+                },
+                url: "http://localhost:8090/replydelete",
+                success: function (data) {
+                	Swal.fire({
+            			title: "삭제 완료",
+            			text: "댓글이 삭제되었습니다",
+            			icon: "success",
+            			confirmButtonText: "확인"
+            		}).then((result)=>{
+            			location.reload();
+					})
+                },
+                error: function (textStatus) {
+                    alert(textStatus);
+                }
+            });
+		})
+        /* if (confirm("정말 삭제하시겠습니까?") == true) {
             $.ajax({
                 async: true,
                 type: 'GET',
@@ -469,12 +497,12 @@ let sweetalert=(icon,title,contents)=>{
                 success: function (data) {
                 	Swal.fire({
             			title: "삭제 완료",
-            			text: "댓글이 삭제되었습니다.",
+            			text: "댓글이 삭제되었습니다",
             			icon: "success",
             			confirmButtonText: "확인"
-            		});
-                	//alert("댓글이 삭제되었습니다.");
-                    location.reload();
+            		}).then((result)=>{
+            			location.reload();
+					})
                 },
                 error: function (textStatus) {
                     alert(textStatus);
@@ -482,7 +510,7 @@ let sweetalert=(icon,title,contents)=>{
             });
         } else {
             return false;
-        }
+        } */
     }
 </script>
 
@@ -517,11 +545,11 @@ let sweetalert=(icon,title,contents)=>{
                     console.log(data);
                     Swal.fire({
             			title: "등록 완료",
-            			text: "답글이 등록되었습니다.",
+            			text: "답글이 등록되었습니다",
             			icon: "success",
             			confirmButtonText: "확인"
             		});
-                    //alert("답글이 등록되었습니다.");
+                    //alert("답글이 등록되었습니다");
                     location.reload();
                 },
                 error: function (textStatus) {
@@ -572,11 +600,11 @@ let sweetalert=(icon,title,contents)=>{
         $(".rh_off_" + replyNum).show()
         Swal.fire({
 			title: "취소 완료",
-			text: replyNum + "번 댓글에 좋아요를 취소하셨습니다.",
+			text: replyNum + "번 댓글에 좋아요를 취소하셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		});
-        //alert(replyNum + "번 댓글에 좋아요를 취소하셨습니다.")
+        //alert(replyNum + "번 댓글에 좋아요를 취소하셨습니다")
         location.reload();
     }
 
@@ -606,11 +634,11 @@ let sweetalert=(icon,title,contents)=>{
         $(".rh_" + replyNum).show()
         Swal.fire({
 			title: "등록 완료",
-			text: replyNum + "번 댓글에 좋아요를 누르셨습니다.",
+			text: replyNum + "번 댓글에 좋아요를 누르셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		});
-        alert(replyNum + "번 댓글에 좋아요를 누르셨습니다.")
+        alert(replyNum + "번 댓글에 좋아요를 누르셨습니다")
         location.reload();
     }
 </script>
