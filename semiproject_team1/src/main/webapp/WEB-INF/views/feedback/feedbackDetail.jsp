@@ -139,6 +139,11 @@
                                     </div>
                                 </td>
                             </c:if>
+                                    <c:if test="${empty mem_nickname}">
+                                        <td>
+                                            <div class="an_heart"></div>
+                                        </td>
+                                    </c:if>
                                 <%-- 좋아요 숫자 표시 --%>
                             <td>
                                     ${answer.fd_answer_likecount}
