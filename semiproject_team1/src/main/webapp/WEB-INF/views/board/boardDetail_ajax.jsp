@@ -6,57 +6,42 @@
 
 <%-- 댓글 삽입부 시작--%>
 <section id="listForm">
-    <table>
+    <table class="listForm_table">
         <c:forEach var="reply" items="${reList }">
             <tr>
-                <td>
-                    <div class="ddd">${reply.b_reply_num}</div>
-                </td>
-                <td>
+                <td class="list_nick">
                     <c:choose>
                         <c:when test="${reply.b_reply_lev!=0}">
                             <c:forEach var="i" begin="0" end="${reply.b_reply_lev*3}">
                                 &nbsp;
                             </c:forEach>
-                            ▶
+                            ㄴ
                         </c:when>
-                        <c:otherwise>▶</c:otherwise>
+                        <c:otherwise>&nbsp;■</c:otherwise>
                     </c:choose>
-                        ${reply.b_reply_content}
+                        ${reply.b_reply_nickname }
                 </td>
-                <td>${reply.b_reply_nickname }</td>
-                <td><fmt:formatDate value="${reply.b_reply_date }" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
+                <td class="list_conta">${reply.b_reply_content}</td>
+                <td><fmt:formatDate value="${reply.b_reply_date }" pattern="M월 d일 H시"/></td>
 
 
                     <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
                 <c:if test="${!empty mem_nickname}">
                     <%-- 대댓글 까지만 답글이 가능하도록 제한한다 --%>
-                    <c:if test="${reply.b_reply_lev == '0'}">
-                        <td>
-                            <button onclick="reply_show(${reply.b_reply_num})">답글 쓰기</button>
-                                <%-- 누르면 아래에 --%>
-                        </td>
-                    </c:if>
+                    <td class="rerebox">
+                        <c:if test="${reply.b_reply_lev == '0'}">
+                            <button onclick="reply_show(${reply.b_reply_num})">답글</button>
+                            <%-- 누르면 아래에 --%>
+                        </c:if>
+                    </td>
                     <c:if test="${reply.b_reply_nickname == mem_nickname}">
                         <td>
                             <button onclick="removeCheck(${reply.b_reply_num})">삭제</button>
                         </td>
                     </c:if>
-                    <td>
-                            <%-- 오류 발생 이유 : form tag를 사용했더니 onclick시 boarddetail?로 이동, div로 변경하니까 정상작동.. --%>
-                            <%-- 해결 : form tag 내부에 button을 넣어둔게 문제의 원인이었다 --%>
-                        <div id="re_comment_write${reply.b_reply_num}" class="re_comment_write">
-                                    <textarea class="re_comment_write_content" id="re${reply.b_reply_num}"
-                                              maxlength="1000"
-                                              placeholder="대댓글을 적어주세요:)"></textarea>
-                            <button type="submit"
-                                    onclick="re_reply_submit(${reply.b_reply_num},(document.getElementById('re${reply.b_reply_num}').value))">
-                                작성
-                            </button>
-                        </div>
-                    </td>
 
-                    <%-- 대댓글 좋아요 시작 --%>
+
+                    <%-- 댓글 좋아요 시작 --%>
                     <%-- 대댓글은 좋아요 못누르게 처리 --%>
                     <c:if test="${reply.b_reply_lev == '0'}">
                         <td>
@@ -82,15 +67,29 @@
                                 </c:choose>
                             </div>
                         </td>
-                    </c:if>
-                </c:if>
                         <%-- 좋아요 숫자 표시 --%>
                         <td>
                                 ${reply.b_reply_likecount}
                         </td>
-                    <%-- 대댓글 좋아요 끝--%>
+                    </c:if>
+                </c:if>
+                    <%-- 댓글 좋아요 끝--%>
                     <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
             </tr>
+            <td colspan="8" class="">
+                <div class="reply_reply_write"><br></div>
+                    <%-- 오류 발생 이유 : form tag를 사용했더니 onclick시 boarddetail?로 이동, div로 변경하니까 정상작동.. --%>
+                    <%-- 해결 : form tag 내부에 button을 넣어둔게 문제의 원인이었다 --%>
+                <div id="re_comment_write${reply.b_reply_num}" class="re_comment_write">
+                                    <textarea class="re_comment_write_content" id="re${reply.b_reply_num}"
+                                              maxlength="1000"
+                                              placeholder="대댓글을 적어주세요:)"></textarea>
+                    <button type="submit"
+                            onclick="re_reply_submit(${reply.b_reply_num},(document.getElementById('re${reply.b_reply_num}').value))" class="btn_re_comment_write_content">
+                        작성
+                    </button>
+                </div>
+            </td>
         </c:forEach>
     </table>
 </section>
