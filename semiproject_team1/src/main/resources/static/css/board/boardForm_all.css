@@ -191,9 +191,33 @@ body {
 	color: white;
 }
 
-.container .nav ul li a:hover {
+.container .info_nav ul li a:hover {
 	color: #4169E1;
 }
+
+.container .info_nav{
+	margin-top:3vh;
+	text-align: center;
+}
+.container .info_nav ul li {
+	display: inline-block;
+	margin: 0 10px;
+}
+
+.container .info_nav ul li a {
+	text-decoration: none;
+	color: white;
+}
+
+.container .info_nav ul li a:hover {
+	color: #06e4f5;
+}
+
+
+
+
+
+
 
 /* 바디 영역 */
 .body_board {
@@ -236,6 +260,16 @@ body {
 	background-color: black;
 	height: 15vh;
 }
+
+.user_welcome{
+	background-color: rgba(65, 105, 225, 0.65);
+	text-align: center;
+	width:278px;
+	height: 8vh;
+	padding: 14px 0;
+}
+
+
 
 .card {
 	padding: 20px 0 5px 10px;
