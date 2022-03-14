@@ -136,7 +136,7 @@
                         <ul class="fd_hd_list">
                             <li class="fd_hd_item">
                                 <a href="/feedback">
-                                    <img src="https://talk.op.gg/images/icon-new@2x.png" width="24"
+                                    <img src="https://talk.op.gg/images/icon-new-on@2x.png" width="24"
                                          alt=""><span>최신</span>
                                 </a>
                             </li>
@@ -148,13 +148,13 @@
                             </li>
                             <li class="fd_hd_item">
                                 <a href="/feedback_replysort">
-                                    <img src="https://talk.op.gg/images/icon-top@2x.png" width="24"
+                                    <img src="https://talk.op.gg/images/icon-top-on@2x.png" width="24"
                                          alt=""><span>댓글</span>
                                 </a>
                             </li>
                             <li class="fd_hd_item">
                                 <a href="feedback_likesort">
-                                    <img src="https://talk.op.gg/images/icon-boost@2x.png" width="24"
+                                    <img src="https://talk.op.gg/images/icon-boost-on@2x.png" width="24"
                                          alt=""><span>좋아요</span>
                                 </a>
                             </li>

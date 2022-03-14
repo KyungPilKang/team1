@@ -158,35 +158,31 @@
                 <%-- main 컨테이너의 위쪽 --%>
                 <div class="board_header" style="z-index: 2;">
                     <div class="hd-link"><h3 class="">전체</h3>
-                    <c:choose>
-                        <c:when test="${not empty mem_mno}">
-                            <div class="pencil"><a href="/boardwriteform"><i class="fa-solid fa-pencil"></i></a></div>
-                        </c:when>
-                        <c:otherwise>
-                            <div class="pencil"><a href="void(0)" onclick='pencilClick()'><i class="fa-solid fa-pencil"></i></a></div>
-                        </c:otherwise>
-                    </c:choose>
                     </div>
                     <div class="sub-link" id="sub-menu">
                         <ul class="sub-link__list">
                             <li class="sub-link__item ">
                                 <a href="/boardlist">
-                                    <i class="fa-brands fa-free-code-camp"></i> <span>최신</span>
+                                    <img src="https://talk.op.gg/images/icon-new-on@2x.png" width="24"
+                                         alt=""> <span>최신</span>
                                 </a>
                             </li>
                             <li class="sub-link__item sub-link__item--active">
                                 <a href="/board_all_viewssort">
-                                    <i class="fa-brands fa-free-code-camp"></i> <span>조회수</span>
+                                    <img src="https://talk.op.gg/images/icon-hot-on@2x.png" width="24"
+                                         alt=""> <span>조회수</span>
                                 </a>
                             </li>
                             <li class="sub-link__item ">
                                 <a href="/board_all_replysort">
-                                    <i class="fa-brands fa-free-code-camp"></i> <span>댓글</span>
+                                    <img src="https://talk.op.gg/images/icon-top-on@2x.png" width="24"
+                                         alt=""> <span>댓글</span>
                                 </a>
                             </li>
                             <li class="sub-link__item ">
                                 <a href="board_all_likesort">
-                                    <i class="fa-brands fa-free-code-camp"></i> <span>좋아요</span>
+                                    <img src="https://talk.op.gg/images/icon-boost-on@2x.png" width="24"
+                                         alt=""> <span>좋아요</span>
                                 </a>
                             </li>
                             <%-- 검색 --%>
