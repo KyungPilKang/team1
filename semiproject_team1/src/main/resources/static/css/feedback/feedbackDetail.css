@@ -117,7 +117,7 @@ body {
 }
 
 .btn_feedback_container_answer_write{
-	background-color: #1deec4;
+	background-color: #cecdcd;
 }
 
 .an_listForm_table{
@@ -143,6 +143,17 @@ body {
 	font-weight: bold;
 }
 
+.answer_submits {
+	border: 3px solid #4169E1;
+	border-radius: 7px;
+}
+.answer_write_title {
+	border: 3px solid #4169E1;
+	border-radius: 7px;
+}
+.feedback_container_answer_write_flex textarea {
+	background-color: white;
+}
 .each_answer_content_inner{
 	width: 7vw;
 	overflow: hidden;
@@ -185,9 +196,16 @@ body {
 
 /* 피드백 답변 작성폼 */
 .feedback_container_answer_write{
-	background-color: #b6fc9c;
+	border: 3px solid #4169E1;
+	border-radius: 7px;
 	display: none;
 }
+.btn_feedback_container_answer_write button {
+	border: 3px solid #4169E1;
+	border-radius: 7px;
+	cursor: pointer;
+}
+
 
 .feedback_container_answer_write_flex{
 	display: flex;
@@ -207,7 +225,7 @@ body {
 
 .re_listForm_table{
 	/* 댓글 가로사이즈*/
-	width: 50vw;
+	width: 52.5vw;
 }
 
 
