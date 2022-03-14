@@ -23,7 +23,6 @@ public class Feedback {
     int feedback_replycount;
     int feedback_answercount;
     String feedback_thumbnail;
-    String feedback_vote_member; //투표한 회원의 고유번호 관리
 
 
     public Feedback() {
@@ -131,14 +130,6 @@ public class Feedback {
 
     public void setFeedback_likecount(int feedback_likecount) {
         this.feedback_likecount = feedback_likecount;
-    }
-
-    public String getFeedback_vote_member() {
-        return feedback_vote_member;
-    }
-
-    public void setFeedback_vote_member(String feedback_vote_member) {
-        this.feedback_vote_member = feedback_vote_member;
     }
 
     public int getFeedback_replycount() {
