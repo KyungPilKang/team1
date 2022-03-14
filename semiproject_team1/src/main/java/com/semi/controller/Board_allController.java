@@ -482,7 +482,7 @@ public class Board_allController {
 
     /* 게시판 ajax 페이지 */
     @RequestMapping(value = "boardForm_all_ajax", method = {RequestMethod.GET, RequestMethod.POST})
-    public String ajax_boardForm_all(@RequestParam(value = "page", defaultValue = "1") int page,
+    public String boardForm_all_ajax(@RequestParam(value = "page", defaultValue = "1") int page,
                                      @RequestParam(value = "sort") String sort,
                                      HttpServletRequest request, HttpSession session) {
         PageInfo pageInfo = new PageInfo();
