@@ -261,7 +261,7 @@
     </div>
 
 
-    <div class="modal">
+    <%-- <div class="modal">
         <div class="modal_content"
              title="클릭하면 창이 닫힙니다.">
             게시물을 삭제하시겠습니까?<br>
@@ -269,7 +269,7 @@
             </button>
             <button class="modal_cancel">취소</button>
         </div>
-    </div>
+    </div> --%>
 
 </div>
 
@@ -277,17 +277,27 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <%-- 모달 --%>
 <script>
-    $(function () {
-        $(".btn_del").click(function () {
-            $(".modal").fadeIn();
-            // 모달시 스크롤을 막는다
-            $("body").css("overflow", "hidden");
-        });
-        $(".modal_cancel").click(function () {
-            $(".modal").fadeOut();
-            $("body").css("overflow", "auto");
-        });
+$(function () {
+    $(".btn_del").click(function () {
+    	Swal.fire({
+			title: "게시글 삭제",
+			text: "확인을 누르면 게시글이 삭제됩니다",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonText: "확인",
+			cancelButtonText : "취소",
+			cancelButtonColor: '#d33'
+		}).then((result)=>{
+			if(result.isConfirmed){
+				location.href='boarddelete?board_num=${article.board_num}&page=${page}'
+			}else if(result.isDismissed){
+    			location.reload();
+			}else{
+				location.reload();
+			}
+		})
     });
+});
 </script>
 
 
