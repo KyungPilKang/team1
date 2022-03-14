@@ -296,7 +296,7 @@ $(function () {
 			cancelButtonColor: '#d33'
 		}).then((result)=>{
 			if(result.isConfirmed){
-				location.href='boarddelete?board_num=${article.board_num}&page=${page}'
+				location.href='feedbackdelete?feedback_num=${article.feedback_num}&page=${page}'
 			}else if(result.isDismissed){
     			location.reload();
 			}else{
