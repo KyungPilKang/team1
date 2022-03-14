@@ -36,7 +36,7 @@
 	                    수정
 	                </button>
 	                <button class="btn_del">삭제</button>
-	                <button class="btn_del" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
+	                <button class="btn_list" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
             	</c:when>
             	<c:otherwise>
             		<button class="btn_list" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
@@ -233,14 +233,14 @@
 
     </div>
 
-    <div class="modal">
+    <%-- <div class="modal">
         <div class="modal_content"
              title="클릭하면 창이 닫힙니다">
             게시물을 삭제하시겠습니까?<br>
             <button onclick="location.href='boarddelete?board_num=${article.board_num}&page=${page}'"> 확인</button>
             <button class="modal_cancel">취소</button>
         </div>
-    </div>
+    </div> --%>
 </div>
 <%-- 좋아요 버튼 자바스크립트 --%>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -377,7 +377,28 @@
 
 <%-- 모달 --%>
 <script>
-    $(function () {
+	$(function () {
+        $(".btn_del").click(function () {
+        	Swal.fire({
+    			title: "게시글 삭제",
+    			text: "확인을 누르면 게시글이 삭제됩니다",
+    			icon: "warning",
+    			showCancelButton: true,
+    			confirmButtonText: "확인",
+    			cancelButtonText : "취소",
+    			cancelButtonColor: '#d33'
+    		}).then((result)=>{
+    			if(result.isConfirmed){
+    				location.href='boarddelete?board_num=${article.board_num}&page=${page}'
+    			}else if(result.isDismissed){
+	    			location.reload();
+    			}else{
+    				location.reload();
+    			}
+			})
+        });
+    });
+    /* $(function () {
         $(".btn_del").click(function () {
             $(".modal").fadeIn();
             // 모달시 스크롤을 막는다
@@ -387,7 +408,7 @@
             $(".modal").fadeOut();
             $("body").css("overflow", "auto");
         });
-    });
+    }); */
 </script>
 
 

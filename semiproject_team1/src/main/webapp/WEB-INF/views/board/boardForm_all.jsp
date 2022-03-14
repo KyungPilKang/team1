@@ -266,7 +266,7 @@
 
                         </c:when>
                         <c:otherwise>
-                            <section id="emptyArea">등록된 글이 없습니다.</section>
+                            <section id="emptyArea" style="color:white; margin-left:350px; margin-top:100px;"><h3>등록된 글이 없습니다.</h3></section>
                         </c:otherwise>
                     </c:choose>
                 </div>
