@@ -157,7 +157,7 @@
 
             <div class="append_replyList"></div>
                 <c:choose>
-                <c:when test="${reList!=[]}">
+                <c:when test="${not empty reList}">
             <%-- 댓글 삽입부 시작--%>
             <section id="listForm">
                 <table class="listForm_table">
