@@ -186,6 +186,17 @@ body {
 	cursor: pointer;
 }
 
+.btn_list {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	width: 120px;
+	height: 48px;
+	font-size: 15px;
+	cursor: pointer;
+}
+
 .reply_container {
 	border: 5px solid #708090;
 	border-radius: 8px;

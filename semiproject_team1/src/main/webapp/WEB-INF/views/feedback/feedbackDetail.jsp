@@ -543,7 +543,7 @@
     	Swal.fire({
 			title: "답변 삭제",
 			text: "확인을 누르면 삭제됩니다",
-			icon: "waring",
+			icon: "warning",
 			confirmButtonText: "확인"
 		}).then((result)=>{
 			$.ajax({

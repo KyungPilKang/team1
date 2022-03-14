@@ -39,7 +39,7 @@
 	                <button class="btn_del" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
             	</c:when>
             	<c:otherwise>
-            		<button class="btn_del" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
+            		<button class="btn_list" onclick="location.href='./boardlist?page=${page}'"> 목록</button>
             	</c:otherwise>
             </c:choose>
             <%-- <c:if test="${mem_nickname == article.board_nickname}">
