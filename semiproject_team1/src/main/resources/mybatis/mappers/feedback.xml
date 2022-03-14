@@ -10,8 +10,7 @@
         values (#{feedback_num}, #{feedback_nickname}, #{feedback_subject}, #{feedback_content},
                 #{feedback_replay_fileName},
                 #{feedback_video_fileName}, now(), #{feedback_readcount}, #{feedback_likecount},
-                #{feedback_vote_member}, #{feedback_vote_top},
-                #{feedback_vote_jungle}, #{feedback_vote_mid}, #{feedback_vote_ad}, #{feedback_vote_support}, #{feedback_thumbnail}, #{feedback_replycount}, #{feedback_answercount})
+                #{feedback_vote_member}, #{feedback_thumbnail}, #{feedback_replycount}, #{feedback_answercount})
         ]]>
 	</insert>
 
