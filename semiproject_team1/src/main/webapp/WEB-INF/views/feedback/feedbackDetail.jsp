@@ -342,7 +342,7 @@ $(function () {
             	Swal.fire({
 					title: "입력 오류",
 					text: "댓글 내용을 입력하세요",
-					icon: "waring",
+					icon: "warning",
 					confirmButtonText: "확인"
 				}).then((result)=>{
 					 $(".comment_write_content").focus();
@@ -511,7 +511,25 @@ $(function () {
 <script>
     $(function () {
         $(".answer_submits").click(function () {
+        	if($(".answer_write_title").val()==""){
+            	Swal.fire({
+                    title: "입력 오류",
+                    text: "피드백 제목을 작성하세요",
+                    icon: "error",
+                    confirmButtonText: "확인"
+               })
+               return false
+            }
             if ($(".answer_write_content").val() !== "") {
+            	if($(".answer_write_title").val().length>10){
+                	Swal.fire({
+                        title: "입력 오류",
+                        text: "10자 이내로 제목을 작성하세요",
+                        icon: "error",
+                        confirmButtonText: "확인"
+                   })
+                   return false
+                }
                 $.ajax({
                     async: true,
                     type: 'POST',
