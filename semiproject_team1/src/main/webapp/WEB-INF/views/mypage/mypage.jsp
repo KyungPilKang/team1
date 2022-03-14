@@ -31,7 +31,7 @@
         <div class="nav">
             <div class="nav">
                 <ul>
-					<li><a href="#">피드백</a></li>
+					<li><a href="/feedback">피드백</a></li>
 					<li><a href="/boardlist">자유게시판</a></li>
 					<c:choose>
 						<c:when test="${not empty mem_mno }">

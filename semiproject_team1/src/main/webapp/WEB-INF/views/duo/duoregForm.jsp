@@ -8,8 +8,7 @@
 <link rel="shortcut icon" sizes="16x16 32x32 64x64"
 	href="/resources/asset/image/login/dog1.png" />
 <title>듀오매칭</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/duo/duoForm2.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/duo/duoForm2.css">
 </head>
 
 <body>
