@@ -180,11 +180,19 @@
                                 <input type="submit" id="search_submit"/>
                             </form>
                         </div>
-                        <c:if test="${not empty mem_mno }">
-                        <button type="button" class="request_btn" onclick="location.href='/feedbackwriteform' ">
-                            REQUEST
-                        </button>
-                        </c:if>
+                        <c:choose>
+                            <c:when test="${not empty mem_mno }">
+                                <button type="button" class="request_btn" onclick="location.href='/feedbackwriteform' ">
+                                    REQUEST
+                                </button>
+                            </c:when>
+                            <c:otherwise>
+                                <button type="button" class="request_btn" onclick="alert('로그인이 필요합니다:)')">
+                                    REQUEST
+                                </button>
+                            </c:otherwise>
+                        </c:choose>
+
                     </div>
                 </div>
                 <%-- main 컨테이너의 아래쪽 (게시판이 들어갈 공간) --%>
