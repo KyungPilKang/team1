@@ -526,21 +526,60 @@ td button {
 	display: none;
 }
 
+
 .re_heart {
-	height: 15px;
-	width: 15px;
-	border-radius: 10px;
-	background: red;
-	cursor: pointer;
+	width: 10px;
+	height: 10px;
+	background: #ea2027;
+	position: relative;
+	transform: rotate(45deg);
+}
+.re_heart::before,
+.re_heart::after {
+	content: "";
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	border-radius: 50%;
+	background: #ea2027;
+}
+.re_heart::before {
+	left: -50%;
+}
+.re_heart::after {
+	top: -50%;
 }
 
+
 .re_heart_off {
-	height: 15px;
-	width: 15px;
-	border-radius: 10px;
-	border: 1px solid black;
-	cursor: pointer;
+	width: 10px;
+	height: 10px;
+	background: #afafaf;
+	position: relative;
+	transform: rotate(45deg);
 }
+.re_heart_off::before,
+.re_heart_off::after {
+	content: "";
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	border-radius: 50%;
+	background: #afafaf;
+}
+.re_heart_off::before {
+	left: -50%;
+}
+.re_heart_off::after {
+	top: -50%;
+}
+
+
+
+
+
+
+
 
 /* 댓글 좋아요 기능구현에 필수 css*/
 .rh_off_hide, .rh_hide {

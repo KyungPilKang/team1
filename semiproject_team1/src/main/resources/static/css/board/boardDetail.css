@@ -9,10 +9,11 @@ body {
 
 
 .board_container{
+	margin-top:20px;
 	display: flex;
 	flex-direction: column;
 	background-color: whitesmoke;
-	border: 5px solid #4169E1;
+	/*border: 5px solid #4169E1;*/
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
@@ -24,22 +25,21 @@ body {
 
 
 .board_subject_container {
+	margin-top: 15px;
 	/*background-color: #a3abf6;*/
 	padding-left: 20px;
 	font-weight: bold;
 	font-size: 40px;
-	/*width: 980px;*/
 	height: 55px;
 	color: black;
-	border: 6px solid #708090;
 	border-radius: 30px;
-	margin-bottom: 15px;
+	margin-bottom: 25px;
 }
 
 .board_container_bo {
 	display: flex;
 	/*background-color: #0dcaf0;*/
-	margin-bottom: 15px;
+	margin-bottom: 25px;
 	/*margin-top: 20px;*/
 	/*text-align: center;*/
 	/*font-weight: bold;*/
@@ -105,7 +105,7 @@ body {
 	margin-top: 20px;
 	width: 950px;
 	height: 580px;
-	border: 3px solid #708090;
+	border: 3px solid #4169E1;
 	border-radius: 7px;
 	overflow: scroll;
 	overflow-x: hidden;
@@ -176,6 +176,7 @@ body {
 .listForm_table{
 	/* 댓글 세로사이즈*/
 	width: 50vw;
+	margin-bottom: 50px;
 	/*background-color: #7b9dab;*/
 }
 #commandList {
@@ -385,6 +386,7 @@ div > b {
 	font-size: 15px;
 	cursor: pointer;
 	margin-left: 10px;
+	margin-bottom: 10px;
 }
 
 /* 대댓글 작성창 숨김처리 css */
