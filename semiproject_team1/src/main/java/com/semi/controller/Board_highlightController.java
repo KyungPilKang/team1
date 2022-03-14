@@ -66,7 +66,7 @@ public class Board_highlightController {
 
 
 
-
+    /* 게시판 리스트 (최신순 정렬) */
     @RequestMapping(value = "/boardlist_highlight", method = {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView boardlist_highlight(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
@@ -75,24 +75,26 @@ public class Board_highlightController {
             List<Board> articleList = board_highlightService.getBoardList(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
+            mv.addObject("sort_name", "boardlist");
             mv.setViewName("board/boardForm_highlight");
         } catch (Exception e) {
             e.printStackTrace();
             mv.addObject("err", e.getMessage());
-//            mv.setViewName("/err");
         }
         return mv;
     }
 
-    /* 조회수순*/
-    @GetMapping(value="board_highlight_viewssort")
-    public ModelAndView board_highlight_viewssort(@RequestParam(value = "page", defaultValue = "1") int page){
+
+    /* 조회수순 정렬 */
+    @GetMapping(value = "board_highlight_viewssort")
+    public ModelAndView board_all_viewssort(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
         PageInfo pageInfo = new PageInfo();
         try {
             List<Board> articleList = board_highlightService.getBoardList_viewsSort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
+            mv.addObject("sort_name", "viewssort");
             mv.setViewName("board/boardForm_highlight");
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,15 +103,17 @@ public class Board_highlightController {
         return mv;
     }
 
-    /* 댓글순*/
-    @GetMapping(value="board_highlight_replysort")
-    public ModelAndView board_highlight_replysort(@RequestParam(value = "page", defaultValue = "1") int page){
+
+    /* 댓글순 정렬 */
+    @GetMapping(value = "board_highlight_replysort")
+    public ModelAndView board_highlight_replysort(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
         PageInfo pageInfo = new PageInfo();
         try {
             List<Board> articleList = board_highlightService.getBoardList_replySort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
+            mv.addObject("sort_name", "replysort");
             mv.setViewName("board/boardForm_highlight");
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,15 +122,19 @@ public class Board_highlightController {
         return mv;
     }
 
-    /* 좋아요순 */
-    @GetMapping(value="board_highlight_likesort")
-    public ModelAndView board_highlight_likesort(@RequestParam(value = "page", defaultValue = "1") int page){
+
+
+
+    /* 좋아요순 정렬 */
+    @GetMapping(value = "board_highlight_likesort")
+    public ModelAndView board_highlight_likesort(@RequestParam(value = "page", defaultValue = "1") int page) {
         ModelAndView mv = new ModelAndView();
         PageInfo pageInfo = new PageInfo();
         try {
             List<Board> articleList = board_highlightService.getBoardList_likeSort(page, pageInfo);
             mv.addObject("pageInfo", pageInfo);
             mv.addObject("articleList", articleList);
+            mv.addObject("sort_name", "likesort");
             mv.setViewName("board/boardForm_highlight");
         } catch (Exception e) {
             e.printStackTrace();
@@ -134,6 +142,7 @@ public class Board_highlightController {
         }
         return mv;
     }
+
 
 
 }

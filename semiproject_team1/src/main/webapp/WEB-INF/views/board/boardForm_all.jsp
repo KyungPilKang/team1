@@ -133,20 +133,20 @@
                         <ul class="list">
                             <li><h6>HOME</h6>
                                 <ul class="list">
-                                    <li><a href="/boardlist">전체</a></li>
+                                    <li><a href="/boardlist" style="color:#06e4f5">전체</a></li>
                                 </ul>
                                 <hr>
                             </li>
                             <li><h6>LOL</h6>
                                 <ul class="list">
                                     <li><a href="/boardlist_highlight">하이라이트</a></li>
-                                    <li><a href="#">팁&노하우</a></li>
+                                    <li><a href="/boardlist_tip">팁&노하우</a></li>
                                 </ul>
                             </li>
                             <hr>
                             <li><h6>COMMUNITY</h6>
                                 <ul class="list">
-                                    <li><a href="#">자유</a></li>
+                                    <li><a href="/boardlist_normal">자유</a></li>
                                 </ul>
                             </li>
                         </ul>
