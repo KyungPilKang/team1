@@ -13,16 +13,7 @@ public class Board_highlightServiceImpl implements Board_highlightService {
 
     @Autowired
     BoardDAO boardDAO;
-    
 
-    @Override
-    public void regBoard(Board board) throws Exception {
-        board.setBoard_nickname("mno");
-        board.setBoard_readcount(0);
-        board.setBoard_likecount(0);
-        board.setBoard_replycount(0);
-        boardDAO.insertBoard(board);
-    }
 
     @Override
     public List<Board> getBoardList(int page, PageInfo pageInfo) throws Exception {
