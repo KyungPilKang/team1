@@ -157,7 +157,8 @@ public class FeedbackController {
     /* 게시판에서 게시물 검색 */
     @GetMapping(value = "feedback_search")
     public ModelAndView feedback_search(@ModelAttribute Feedback feedback, @RequestParam(value = "page", defaultValue = "1") int page) {
-
+    	System.out.println(feedback.getFeedback_keyword());
+    	System.out.println(feedback.getFeedback_type());
         ModelAndView mv = new ModelAndView();
         PageInfo pageInfo = new PageInfo();
         try {

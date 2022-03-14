@@ -203,7 +203,7 @@
 
 
     <!-- ================================= 시작 : selectFeedbackList 검색 관련 ================================= -->
-    <select id="selectFeedbackList_search_subject" resultType="feedback">
+    <select id="selectFeedbackList_search_subject" resultType="feedback" parameterType="Map">
 		<![CDATA[
         select *
         from (select @rownum:=@rownum+1 rnum, tot.*
@@ -213,7 +213,7 @@
         ]]>
 	</select>
 
-    <select id="selectFeedbackList_search_nickname" resultType="feedback">
+    <select id="selectFeedbackList_search_nickname" resultType="feedback" parameterType="Map">
 		<![CDATA[
         select *
         from (select @rownum:=@rownum+1 rnum, tot.*
@@ -223,7 +223,7 @@
         ]]>
 	</select>
 
-    <select id="selectFeedbackList_search_content" resultType="feedback">
+    <select id="selectFeedbackList_search_content" resultType="feedback" parameterType="Map">
 		<![CDATA[
         select *
         from (select @rownum:=@rownum+1 rnum, tot.*

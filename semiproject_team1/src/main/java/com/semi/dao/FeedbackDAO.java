@@ -1,6 +1,7 @@
 package com.semi.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.data.repository.query.Param;
@@ -26,9 +27,9 @@ public interface FeedbackDAO {
 	List<Feedback> selectFeedbackList_replySort(int startrow) throws Exception;
 	List<Feedback> selectFeedbackList_viewsSort(int startrow) throws Exception;
 	List<Feedback> selectFeedbackList_likeSort(int startrow) throws Exception;
-	List<Feedback> selectFeedbackList_search_subject(@Param("startrow")int startrow,@Param("feedback_keyword")String feedback_keyword) throws Exception;
-	List<Feedback> selectFeedbackList_search_nickname(@Param("startrow")int startrow,@Param("feedback_keyword")String feedback_keyword) throws Exception;
-	List<Feedback> selectFeedbackList_search_content(@Param("startrow")int startrow,@Param("feedback_keyword")String feedback_keyword) throws Exception;
+	List<Feedback> selectFeedbackList_search_subject(Map<String, Object> paramList) throws Exception;
+	List<Feedback> selectFeedbackList_search_nickname(Map<String, Object> paramList) throws Exception;
+	List<Feedback> selectFeedbackList_search_content(Map<String, Object> paramList) throws Exception;
 	
 	Feedback selectFeedback(int feedbackNum) throws Exception;
 	void updateReadCount(int feedbackNum) throws Exception;
