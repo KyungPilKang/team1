@@ -109,7 +109,6 @@ body {
 }
 
 .feedback_container_answer div{
-	font-size: 20px;
 	margin-left: 10px;
 }
 
@@ -134,6 +133,7 @@ body {
 
 .each_answer_content{
 	display: flex;
+	margin-top:24px;
 }
 
 .each_answer button {
@@ -144,15 +144,16 @@ body {
 }
 
 .each_answer_content_inner{
-	width: 5vw;
+	width: 7vw;
 	overflow: hidden;
-	height: 5vh;
+	height: 3vh;
 	margin: 10px;
 	cursor: pointer;
+	text-overflow: ellipsis;
 }
 
 .each_answer_content:hover{
- 	color: #06e4f5;
+ 	color: #4169E1;
 }
 
 .each_answer_content_detail{

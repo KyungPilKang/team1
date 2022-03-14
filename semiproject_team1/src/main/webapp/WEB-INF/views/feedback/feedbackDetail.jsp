@@ -98,10 +98,10 @@
                                 </td>
                             </c:if>
 
-                            <td>닉네임:${answer.fd_answer_nickname}</td>
-                            <td class="each_answer_subject">제목:${answer.fd_answer_title}</td>
+                            <td>${answer.fd_answer_nickname}</td>
+                            <td class="each_answer_subject">${answer.fd_answer_title}</td>
                             <td class="each_answer_content"  onclick="content_pop(${answer.fd_answer_num})">
-                             내용:<div class="each_answer_content_inner">${answer.fd_answer_content}</div>
+                             <div class="each_answer_content_inner">피드백 내용 보기</div>
                             </td>
                             <td><fmt:formatDate value="${answer.fd_answer_date}" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
 
@@ -160,7 +160,7 @@
             <%-- 답변리스트 삽입부 끝--%>
             <c:if test="${article.feedback_nickname != mem_nickname && not empty mem_nickname }">
             <div class="btn_feedback_container_answer_write">
-                <button onclick="answer_show()"> 피드백 답변 작성 ( 이거 누르면 아래 연두색 작성폼 나옴 )</button>
+                <button onclick="answer_show()"> 피드백 답변 작성 </button>
             </div>
             </c:if>
             <%-- 시작 : 작성폼 --%>
@@ -541,7 +541,7 @@ $(function () {
             	Swal.fire({
         			title: "입력 오류",
         			text: "피드백 답변 내용을 입력하세요",
-        			icon: "waring",
+        			icon: "warning",
         			confirmButtonText: "확인"
         		}).then((result)=>{
         			 $(".comment_write_content").focus();
