@@ -90,6 +90,12 @@ body {
 	font-weight: bold;
 }
 
+.Attachments {
+	margin-top: 15px;
+	margin-left: 15px;
+	font-weight: bold;
+}
+
 .board_content_container img {
 	width: 880px;
 	/*height: 400px;*/
