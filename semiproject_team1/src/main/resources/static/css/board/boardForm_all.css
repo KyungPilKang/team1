@@ -268,10 +268,21 @@ body {
 	padding: 14px 0;
 }
 
+.info_nav ul li a {
+	border: 2px solid skyblue;
+	border-radius: 5px;	
+}
 
+.info_nav ul li a:hover {
+	color: skyblue;
+}
 
 .card {
 	padding: 20px 0 5px 10px;
+}
+
+.list > li > a:hover {
+	color: #4169E1;
 }
 
 .main_container {

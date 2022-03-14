@@ -6,6 +6,8 @@
 <html>
 <head>
     <meta charset="UTF-8">
+        <link rel="shortcut icon" sizes="16x16 32x32 64x64"
+          href="/resources/asset/image/login/dog1.png"/>
     <title>피드백 보기- 롤판.DOG</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedback/feedbackDetail.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -23,14 +25,14 @@
             <div class="feedback_container_bo">
 
                 <div class="feedback_container_bo_left">
-                    <div class="feedback_date_container">${feedback_date}</div>
+                    <div class="feedback_date_container">${feedback_date}</div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     <div class=feedback_name_container"> 닉네임 : ${article.feedback_nickname}</div>
                 </div>
 
                 <div class="feedback_container_bo_right">
-                    <div class=feedback_readcount_container"> 조회수 : ${article.feedback_readcount}</div>
-                    <div class=feedback_readcount_container"> 댓글 : ${article.feedback_replycount}</div>
-                    <div class=feedback_readcount_container"> 추천 : ${article.feedback_likecount}</div>
+                    <div class="feedback_readcount_container"> 조회수 : ${article.feedback_readcount}</div>
+                    <div class="feedback_readcount_container"> 댓글수 : ${article.feedback_replycount}</div>
+                    <div class="feedback_readcount_container"> 좋아요수 : ${article.feedback_likecount}</div>
                 </div>
             </div>
         </div>
@@ -53,7 +55,6 @@
             <button class="btn_mok" onclick="location.href='./feedback?page=${page}'"> 목록(임시)</button>
         </div>
 
-
         <div class="feedback_container_video">
             <%-- 영상 출력은 컨트롤러 이식 후 주석해제 --%>
             <c:if test="${article.feedback_video_fileName != null }">
@@ -62,13 +63,12 @@
                     <source src="/fd_video_view/${article.feedback_video_fileName}" type="video/mp4">
                 </video>
             </c:if>
-        </div>
 
 
         <div class="feedback_container_content">
             ${article.feedback_content }
         </div>
-
+		</div>
 
         <%-- 피드백 답변 삽입 컨테이너 --%>
         <div class="feedback_container_answer ">
