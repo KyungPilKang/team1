@@ -9,6 +9,7 @@
     <title>롤판.DOG</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/board/boardDetail.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body>

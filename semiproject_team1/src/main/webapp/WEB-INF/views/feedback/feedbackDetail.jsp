@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <title>롤판.DOG</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedback/feedbackDetail.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 
 <body>
@@ -600,11 +601,12 @@
         $(".ah_off_" + replyNum).show()
         Swal.fire({
 			title: "취소 완료",
-			text: replyNum + "번 댓글에 좋아요를 취소하셨습니다",
+			text: replyNum + "번 피드백에 좋아요를 취소하셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
-		});
-        location.reload();
+		}).then((result)=>{
+			location.reload();
+		})
     }
 
     function an_like_on(replyNum) {
@@ -632,11 +634,12 @@
         $(".ah_" + replyNum).show()
         Swal.fire({
 			title: "등록 완료",
-			text: replyNum + "번 댓글에 좋아요를 누르셨습니다",
+			text: replyNum + "번 피드백에 좋아요를 누르셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
+		}).then((result)=>{
+			location.reload();
 		});
-        location.reload();
     }
 </script>
 

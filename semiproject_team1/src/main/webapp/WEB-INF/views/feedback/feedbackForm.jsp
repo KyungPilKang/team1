@@ -18,6 +18,7 @@
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedback/feedbackForm.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
 <div class="container">
@@ -282,7 +283,7 @@
 		Swal.fire({
 			title: "권한 없음",
 			text: "로그인이 필요합니다.",
-			icon: "waring",
+			icon: "error",
 			confirmButtonText: "확인"
 		})
 		
