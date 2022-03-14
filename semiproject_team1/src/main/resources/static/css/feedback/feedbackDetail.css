@@ -4,7 +4,16 @@ body {
 	background-size: cover; 
 }
 
-
+.btn_list {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	width: 120px;
+	height: 48px;
+	font-size: 15px;
+	cursor: pointer;
+}
 
 .feedback_container{
 	display: flex;
@@ -418,16 +427,7 @@ td button {
 	font-size: 15px;
 	cursor: pointer;
 }
-.btn_list {
-	margin-top: 100px;
-	border: none;
-	border-radius: 4px;
-	width: 120px;
-	height: 48px;
-	background: darkgray;
-	font-size: 15px;
-	cursor: pointer;
-}
+
 
 
 .reply_container {
