@@ -449,10 +449,20 @@
                                                 <div class="each_board_sub">
                                                     <a href="./boarddetail?board_num=${article.board_num}">
                                                             ${article.board_subject}&nbsp;[${article.board_replycount}]
+                                                            <c:choose>
+	                                                        	<c:when test="${article.board_cat eq 'highlight'}">
+	                                                        		<div style="float:right; color:#4169E1;;">하이라이트</div>
+	                                                        	</c:when>
+	                                                        	<c:when test="${article.board_cat eq 'tip'}">
+	                                                        		<div style="float:right; color:#4169E1;;">팁</div>
+	                                                        	</c:when>
+	                                                        	<c:otherwise>
+	                                                        		<div style="float:right; color:#4169E1;;">자유</div>
+	                                                        	</c:otherwise>
+                                                        	</c:choose>
                                                     </a>
                                                 </div>
                                                 <div class="each_board_sub_bottom">
-                                                    <div class="each_board_cat"><br>카테고리 : ${article.board_cat } §</div>
                                                     <div class="each_board_date"><br><fmt:formatDate
                                                             value="${article.board_date }"
                                                             pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
@@ -513,10 +523,20 @@
                                                 <div class="each_board_sub">
                                                     <a href="./boarddetail?board_num=${article_ward.board_num}">
                                                             ${article_ward.board_subject}&nbsp;[${article_ward.board_replycount}]
+                                                            <c:choose>
+	                                                        	<c:when test="${article_ward.board_cat eq 'highlight'}">
+	                                                        		<div style="float:right; color:#4169E1;;">하이라이트</div>
+	                                                        	</c:when>
+	                                                        	<c:when test="${article_ward.board_cat eq 'tip'}">
+	                                                        		<div style="float:right; color:#4169E1;;">팁</div>
+	                                                        	</c:when>
+	                                                        	<c:otherwise>
+	                                                        		<div style="float:right; color:#4169E1;;">자유</div>
+	                                                        	</c:otherwise>
+	                                                        </c:choose>
                                                     </a>
                                                 </div>
                                                 <div class="each_board_sub_bottom">
-                                                    <div class="each_board_cat"><br>카테고리 : ${article_ward.board_cat } §</div>
                                                     <div class="each_board_date"><br><fmt:formatDate
                                                             value="${article_ward.board_date }"
                                                             pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
