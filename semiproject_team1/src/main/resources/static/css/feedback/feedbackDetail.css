@@ -99,7 +99,7 @@ body {
 
 
 .feedback_container_answer{
-	background-color: white;
+	background-color: #cecdcd;
 	/*display: flex;*/
 	/*flex-direction: column;*/
 	margin-top:50px;
@@ -129,19 +129,32 @@ body {
 .each_answer{
 	/* 답글 세로사이즈*/
 	height:10vh;
-	background-color: #7b9dab;
-	border: 5px solid skyblue;
+	
 }
 
 .each_answer_content{
 	display: flex;
 }
 
+.each_answer button {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
 .each_answer_content_inner{
 	width: 5vw;
 	overflow: hidden;
-	height:5vh;
+	height: 5vh;
+	margin: 10px;
+	cursor: pointer;
 }
+
+.each_answer_content:hover{
+ 	color: #06e4f5;
+}
+
 .each_answer_content_detail{
 	display: none;
 }
@@ -155,7 +168,9 @@ body {
 
 /* 내용 누르면 나타나는 상세보기 박스*/
 .each_answer_content_detail_content{
-	background-color: #8786ec;
+	border-radius: 7px;
+	border: 3px solid skyblue;
+	background-color: white;
 	height: 20vh;
 	width: 50vw;
 	word-break:break-all;
@@ -179,6 +194,8 @@ body {
 }
 
 .replyfeedback_container_reply{
+	border: 3px solid #708090;
+	border-radius: 7px;
 	background-color: #cecdcd;
 	margin-top: 50px;
 }
@@ -200,22 +217,37 @@ body {
 	border: 2px solid black;
 }
 
+.replyfeedback_container_reply div button {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	font-weight: bold;
+}
 
+td button {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	font-weight: bold;
+}
 
 .re_listForm_date{
 	width: 100px;
 }
-
-/*.board_subject_container {*/
-/*	padding-left: 20px;*/
-/*	font-weight: bold;*/
-/*	font-size: 40px;*/
-/*	width: 980px;*/
-/*	height: 55px;*/
-/*	color: black;*/
-/*	border: 6px solid #708090;*/
-/*	border-radius: 30px;*/
-/*}*/
+ .comment_submits{
+    margin-left: 925px;
+ 	border: 5px solid skyblue;
+	border-radius: 30px;
+	font-weight: bold;
+ }
+/* .board_subject_container {
+	padding-left: 20px;
+	font-weight: bold;
+	font-size: 40px;
+	width: 980px;
+	height: 55px;
+	color: black;
+	border: 6px solid #708090;
+	border-radius: 30px;
+} */
 
 /*.board_container_bo {*/
 /*	margin-top: 20px;*/
@@ -298,7 +330,10 @@ body {
 
 
 
-
+.rrrr {
+	font-size: 20px;
+	font-weight: bold;
+}
 
 
 
@@ -450,7 +485,7 @@ body {
 	border: 2px solid #4169E1;
 	background-color: rgba(0, 0, 0, 0);
 	height: 100px;
-	width: 800px;
+	width: 1000px;
 	font-weight: bold;
 }
 
