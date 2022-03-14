@@ -56,7 +56,7 @@
             <div id="editor" class="editor"></div><br>
 
             <button class="btn_cc" onclick={history.back()}>돌아가기</button>
-            <button onclick="fd_submit()" class="btn_ok">요청제출</button>
+            <button onclick="fd_submit()" class="btn_ok">요청하기</button>
         </div>
     </div>
 </div>
