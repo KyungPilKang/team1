@@ -12,7 +12,7 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Hugo 0.88.1">
-<title>로그인</title>
+<title>로그인 - 롤판.DOG</title>
 
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/5.1/examples/sign-in/">

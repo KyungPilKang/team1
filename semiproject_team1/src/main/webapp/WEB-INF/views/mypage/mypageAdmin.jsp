@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" sizes="16x16 32x32 64x64"
           href="/resources/asset/image/login/dog1.png"/>
-    <title>피드백 게시판 - 롤판.DOG</title>
+    <title>관리자 페이지 - 롤판.DOG</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="

@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" sizes="16x16 32x32 64x64"
           href="/resources/asset/image/login/dog1.png"/>
-    <title>롤판.DOG</title>
+    <title>게시글 작성 - 롤판.DOG</title>
     <style>
 
     </style>

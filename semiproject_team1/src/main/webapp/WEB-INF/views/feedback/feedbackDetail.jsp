@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>롤판.DOG</title>
+    <title>피드백 보기- 롤판.DOG</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedback/feedbackDetail.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>

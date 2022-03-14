@@ -12,7 +12,7 @@
     <link rel="shortcut icon" sizes="16x16 32x32 64x64"
 	href="/resources/asset/image/login/dog1.png" />
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <title>이용약관</title>
+    <title>회원가입 - 롤판.DOG</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
 

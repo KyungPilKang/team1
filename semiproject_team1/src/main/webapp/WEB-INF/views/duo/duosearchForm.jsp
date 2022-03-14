@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" sizes="16x16 32x32 64x64"
 	href="/resources/asset/image/login/dog1.png" />
-<title>듀오매칭</title>
+<title>듀오 조회 - 롤판.DOG</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/duo/duoForm1.css">
 </head>
