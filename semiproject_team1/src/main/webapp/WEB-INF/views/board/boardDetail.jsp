@@ -643,9 +643,10 @@
             text: "댓글에 좋아요를 누르셨습니다",
             icon: "success",
             confirmButtonText: "확인"
+        }).then((result) => {
+            location.reload();
         });
         //alert(replyNum + "번 댓글에 좋아요를 누르셨습니다")
-        location.reload();
     }
 </script>
 
