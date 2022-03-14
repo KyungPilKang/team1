@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.semi.dto.Member;
 import com.semi.service.MemberServiceImpl;
+import com.semi.service.MypageService;
 
 @Controller
 public class MemberController {
@@ -45,14 +46,19 @@ public class MemberController {
 	@Autowired
     private ServletContext servletContext;
 	
+	@Autowired
+	MypageService mypageService;
+	
 	@ResponseBody
 	@PostMapping(value="/login")
 	public ResponseEntity<?> login(@RequestBody Member mem) {
 		Map<String, Object> map=new HashMap<>();
+		Map<String, String> tier_map=new HashMap<>();
 		try {
 			if(memberService.accessMember(mem.getMem_email_id(), mem.getMem_pw())) {
 				Member result=memberService.selectMemeber(mem.getMem_email_id());
 				if(result.getMem_type().equals("admin")) {
+					System.out.println("여기로 왔음");
 					session.setAttribute("mem_mno", result.getMem_mno());
 					session.setAttribute("mem_nickname", result.getMem_nickname());
 					result.setPage("admin");
@@ -61,6 +67,12 @@ public class MemberController {
 					if(result.getMem_code_confirm().equals("yes")) {
 						session.setAttribute("mem_mno", result.getMem_mno());
 						session.setAttribute("mem_nickname", result.getMem_nickname());
+						if(result.getMem_link_confirm().equals("yes")) {
+							tier_map=mypageService.selectTier((Integer)session.getAttribute("mem_mno"));
+							session.setAttribute("my_tier", tier_map.get("lol_tier"));
+						} else {
+							session.setAttribute("my_tier", "none");
+						}
 					}
 					result.setPage(mem.getPage());
 					map.put("mem", result);
@@ -74,6 +86,7 @@ public class MemberController {
 	@GetMapping(value="/kakao_login")
 	public String kakao_login(@RequestParam("mem_email_id")String mem_email_id,
 			@RequestParam("page")String page, Model model) {
+		Map<String, String> tier_map=new HashMap<>();
 		Member mem=null;
 		Member result=null;
 		try {
@@ -92,6 +105,12 @@ public class MemberController {
 						session.setAttribute("mem_nickname", result.getMem_nickname());
 						result.setPage(mem.getPage());
 						model.addAttribute("mem", result);
+						if(result.getMem_link_confirm().equals("yes")) {
+							tier_map=mypageService.selectTier(result.getMem_mno());
+							session.setAttribute("my_tier", tier_map.get("lol_tier"));
+						} else {
+							session.setAttribute("my_tier", "none");
+						}
 					}
 				}
 			}

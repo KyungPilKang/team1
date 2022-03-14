@@ -18,12 +18,12 @@
 </head>
 <body>
 	<div class="container">
-		<div class="header">
+		<div class="header" style="z-index: 2;">
 			<h1>
-				<a href="/main"> <img 
-					src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
-					alt="" width="60" height="60"> LOLPAN.DOG
-				</a>
+				<a href="/main"> <img class="mb-4"
+                              src="${pageContext.request.contextPath}/resources/asset/image/login/dog1.png"
+                              alt="" width="60" height="60"> LOLPAN.DOG
+           		</a>	
 			</h1>
 			<div class="nav">
 				<ul>
@@ -35,9 +35,66 @@
 							<li><a href="/mypage">마이페이지</a></li>
 							<li><a href="/log_out?page=main">로그아웃</a></li>
 							<li style="color:white;">
-								<img class="mb-4"
-								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
-								alt="" width="30" height="30">${mem_nickname }님 환영합니다
+								<c:choose>
+									<c:when test="${my_tier eq 'none' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+										
+									</c:when>
+									<c:when test="${my_tier eq null }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/ul.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+										
+									</c:when>
+									<c:when test="${my_tier eq 'IRON' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/i.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+										
+									</c:when>
+									<c:when test="${my_tier eq 'BRONZE' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'SILVER' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/s.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'GOLD' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/g.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'PLATINUM' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/p.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'DIAMOND' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/d.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'MASTER' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/m.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:when test="${my_tier eq 'GRANDMASTER' }">
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/gm.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:when>
+									<c:otherwise>
+										<img 
+											src="${pageContext.request.contextPath}/resources/asset/image/duo/c.png"
+											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+									</c:otherwise>
+								</c:choose>
 							</li>
 						</c:when>
 						<c:otherwise>
@@ -47,10 +104,17 @@
 				</ul>
 			</div>
 		</div>
-		<div class="hero" style="margin-top:100px;">
+		<div class="hero">
 			<h2>PAN DOG <span class="material-icons-outlined" style="font-size:1em;">thumb_up</span></h2>
-			<p>Lorem Ipsum</p><br><br>
-			<button type="button" onclick="location.href='#' ">상세보기</button>
+		</div>
+		<div class="hero2" style="margin-top:300px;">
+			<div>
+				<video controls="controls" poster="" width="900" height="600">
+	            	<source src="/fd_video_view/${article.feedback_video_fileName}" type="video/mp4">
+	            </video>
+			</div>
+			<br>
+			<button type="button" onclick="location.href='/feedbackdetail?feedback_num=${article.feedback_num}&page=${pageInfo.page}' ">상세보기</button>
 		</div>
 		<!-- <div class="card">
 			<ul class="list">

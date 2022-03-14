@@ -245,8 +245,12 @@
 	<!-- ================================= 끝 : selectFeedbackList 검색 관련 ================================= -->
 
 
-
-
+	<!-- 메인 화면에 출력할 피드백 -->
+	<select id="selectFeedback_bestlike" resultType="feedback">
+		<![CDATA[
+			select * from feedback order by feedback_likecount desc limit 1
+		]]>
+	</select>
 
 
 </mapper>
