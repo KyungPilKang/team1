@@ -6,8 +6,6 @@
 	<mappers>
 		<mapper resource="mybatis/mappers/member.xml"/>
 		
-		<mapper resource="mybatis/mappers/message.xml"/>
-		
 		<mapper resource="mybatis/mappers/board.xml"/>
 		
 		<mapper resource="mybatis/mappers/article_ward.xml"/>
@@ -172,6 +170,7 @@ CREATE TABLE `member` (
   PRIMARY KEY (`mem_mno`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+메세지 테이블은 디벨롭 사항
 CREATE TABLE `message` (
   `no` int NOT NULL AUTO_INCREMENT,
   `to_id` varchar(1000) NOT NULL,

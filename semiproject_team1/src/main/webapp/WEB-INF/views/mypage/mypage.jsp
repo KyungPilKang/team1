@@ -43,60 +43,60 @@
 									<c:when test="${my_tier eq 'none' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 										
 									</c:when>
 									<c:when test="${my_tier eq null }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/ul.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 										
 									</c:when>
 									<c:when test="${my_tier eq 'IRON' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/i.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 										
 									</c:when>
 									<c:when test="${my_tier eq 'BRONZE' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:when>
 									<c:when test="${my_tier eq 'SILVER' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/s.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:when>
 									<c:when test="${my_tier eq 'GOLD' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/g.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:when>
 									<c:when test="${my_tier eq 'PLATINUM' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/p.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:when>
 									<c:when test="${my_tier eq 'DIAMOND' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/d.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:when>
 									<c:when test="${my_tier eq 'MASTER' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/m.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:when>
 									<c:when test="${my_tier eq 'GRANDMASTER' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/gm.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:when>
 									<c:otherwise>
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/c.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:otherwise>
 								</c:choose>
 							</li>
@@ -449,10 +449,20 @@
                                                 <div class="each_board_sub">
                                                     <a href="./boarddetail?board_num=${article.board_num}">
                                                             ${article.board_subject}&nbsp;[${article.board_replycount}]
+                                                            <c:choose>
+	                                                        	<c:when test="${article.board_cat eq 'highlight'}">
+	                                                        		<div style="float:right; color:#4169E1;;">하이라이트</div>
+	                                                        	</c:when>
+	                                                        	<c:when test="${article.board_cat eq 'tip'}">
+	                                                        		<div style="float:right; color:#4169E1;;">팁</div>
+	                                                        	</c:when>
+	                                                        	<c:otherwise>
+	                                                        		<div style="float:right; color:#4169E1;;">자유</div>
+	                                                        	</c:otherwise>
+                                                        	</c:choose>
                                                     </a>
                                                 </div>
                                                 <div class="each_board_sub_bottom">
-                                                    <div class="each_board_cat"><br>카테고리 : ${article.board_cat } §</div>
                                                     <div class="each_board_date"><br><fmt:formatDate
                                                             value="${article.board_date }"
                                                             pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
@@ -513,10 +523,20 @@
                                                 <div class="each_board_sub">
                                                     <a href="./boarddetail?board_num=${article_ward.board_num}">
                                                             ${article_ward.board_subject}&nbsp;[${article_ward.board_replycount}]
+                                                            <c:choose>
+	                                                        	<c:when test="${article_ward.board_cat eq 'highlight'}">
+	                                                        		<div style="float:right; color:#4169E1;;">하이라이트</div>
+	                                                        	</c:when>
+	                                                        	<c:when test="${article_ward.board_cat eq 'tip'}">
+	                                                        		<div style="float:right; color:#4169E1;;">팁</div>
+	                                                        	</c:when>
+	                                                        	<c:otherwise>
+	                                                        		<div style="float:right; color:#4169E1;;">자유</div>
+	                                                        	</c:otherwise>
+	                                                        </c:choose>
                                                     </a>
                                                 </div>
                                                 <div class="each_board_sub_bottom">
-                                                    <div class="each_board_cat"><br>카테고리 : ${article_ward.board_cat } §</div>
                                                     <div class="each_board_date"><br><fmt:formatDate
                                                             value="${article_ward.board_date }"
                                                             pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>

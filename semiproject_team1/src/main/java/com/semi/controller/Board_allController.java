@@ -172,10 +172,8 @@ public class Board_allController {
                 if (mno != null) {
                     if (reLikeMem_arr.contains(mno)) {
                         reply.setB_reply_like_ok("true");
-                        System.out.println("있어요");
                     } else {
                         reply.setB_reply_like_ok("false");
-                        System.out.println("없어요");
                     }
                 }
             }

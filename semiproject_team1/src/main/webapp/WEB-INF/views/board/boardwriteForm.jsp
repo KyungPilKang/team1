@@ -34,7 +34,7 @@
             <%--웹에디터를 통해 입력하는 텍스트 해당 값은 textarea를 hidden 속성을 추가하여 입력된 값을 복사하여 서버로 전송--%>
             <form id="boardform" action="" method="post" enctype="multipart/form-data">
 
-                <%-- form이 submit시 selected된 value값을 갖고 넘어간다. --%>
+                <%-- form이 submit시 selected된 value값을 갖고 넘어간다 --%>
                 <select name="board_cat" id="board_cat" class="board_cat">
                     <option value="none">== 카테고리 ==</option>
                     <option value="highlight">하이라이트</option>
@@ -46,7 +46,7 @@
 
                 <input type="hidden" id="board_content" name="board_content" value=""/>
 
-                <%-- 글쓴이는 EL언어 표기법 value = "${session.board_name}" 이런식으로 가져오면 된다. hidden --%>
+                <%-- 글쓴이는 EL언어 표기법 value = "${session.board_name}" 이런식으로 가져오면 된다 hidden --%>
                 <%--                    <label for="board_nickname">글쓴이</label>--%>
                 <%--        <input type="hidden" name="board_nickname" id="board_nickname" value="mno"/><br>--%>
                 <div class="board_subject_cont">
@@ -110,7 +110,7 @@
     });
 </script>
 
-<%-- 유효성 체크를 글쓰기, 수정 모두 적용해줘야 한다. 추후 적용 --%>
+<%-- 유효성 체크를 글쓰기, 수정 모두 적용해줘야 한다 추후 적용 --%>
 <script>
     board_cat.onblur = function () {
         if (board_cat.value.includes("none")) {

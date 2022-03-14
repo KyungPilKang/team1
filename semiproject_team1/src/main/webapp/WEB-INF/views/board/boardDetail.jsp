@@ -566,7 +566,7 @@
         $(".rh_off_" + replyNum).show()
         Swal.fire({
 			title: "취소 완료",
-			text: replyNum + "번 댓글에 좋아요를 취소하셨습니다",
+			text: "댓글에 좋아요를 취소하셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		}).then((result)=>{
@@ -602,7 +602,7 @@
         $(".rh_" + replyNum).show()
         Swal.fire({
 			title: "등록 완료",
-			text: replyNum + "번 댓글에 좋아요를 누르셨습니다",
+			text: "댓글에 좋아요를 누르셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		});

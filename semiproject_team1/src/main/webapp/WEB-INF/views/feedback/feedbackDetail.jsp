@@ -158,7 +158,7 @@
             </section>
 
             <%-- 답변리스트 삽입부 끝--%>
-            <c:if test="${!empty mem_nickname}">
+            <c:if test="${article.feedback_nickname != mem_nickname && not empty mem_nickname }">
             <div class="btn_feedback_container_answer_write">
                 <button onclick="answer_show()"> 피드백 답변 작성 ( 이거 누르면 아래 연두색 작성폼 나옴 )</button>
             </div>
@@ -187,7 +187,7 @@
             <c:if test="${!empty mem_nickname}">
                 <form>
             <textarea class="comment_write_content" maxlength="1000"
-                      placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."></textarea>
+                      placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다"></textarea>
                     <button class="comment_submits" type="button">댓글 달기</button>
                 </form>
             </c:if>
@@ -270,7 +270,7 @@
 
     <%-- <div class="modal">
         <div class="modal_content"
-             title="클릭하면 창이 닫힙니다.">
+             title="클릭하면 창이 닫힙니다">
             게시물을 삭제하시겠습니까?<br>
             <button onclick="location.href='feedbackdelete?feedback_num=${article.feedback_num}&page=${page}'"> 확인
             </button>
@@ -324,7 +324,7 @@ $(function () {
                     success: function (data) {
                     	Swal.fire({
     						title: "등록 완료",
-    						text: "댓글이 등록되었습니다.",
+    						text: "댓글이 등록되었습니다",
     						icon: "success",
     						confirmButtonText: "확인"
     					}).then((result)=>{
@@ -341,7 +341,7 @@ $(function () {
             } else {
             	Swal.fire({
 					title: "입력 오류",
-					text: "댓글 내용을 입력하세요.",
+					text: "댓글 내용을 입력하세요",
 					icon: "waring",
 					confirmButtonText: "확인"
 				}).then((result)=>{
@@ -416,7 +416,7 @@ $(function () {
         $(".rh_off_" + replyNum).show()
         Swal.fire({
 			title: "취소 완료",
-			text: replyNum + "번 댓글에 좋아요를 취소하셨습니다",
+			text: "댓글에 좋아요를 취소하셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		}).then((result)=>{
@@ -451,7 +451,7 @@ $(function () {
         $(".rh_" + replyNum).show()
            Swal.fire({
 			title: "등록 완료",
-			text: replyNum + "번 댓글에 좋아요를 누르셨습니다",
+			text: "댓글에 좋아요를 누르셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		}).then((result)=>{
@@ -493,7 +493,7 @@ $(function () {
 <%--        $.ajax({--%>
 <%--            type: "post",--%>
 <%--            async: false,--%>
-<%--            // ajax 페이지를 피드백 답글을 내려주는 바꿔줘야한다.--%>
+<%--            // ajax 페이지를 피드백 답글을 내려주는 바꿔줘야한다--%>
 <%--            url: "http://localhost:8090/feedbackDetail_ajax_answer",--%>
 <%--            data: {--%>
 <%--                feedback_num: ${article.feedback_num},--%>
@@ -524,7 +524,7 @@ $(function () {
                     success: function (data) {
                     	Swal.fire({
                 			title: "등록 완료",
-                			text: "피드백 답변이 등록되었습니다.",
+                			text: "피드백 답변이 등록되었습니다",
                 			icon: "success",
                 			confirmButtonText: "확인"
                 		}).then((result)=>{
@@ -540,7 +540,7 @@ $(function () {
             } else {
             	Swal.fire({
         			title: "입력 오류",
-        			text: "피드백 답변 내용을 입력하세요.",
+        			text: "피드백 답변 내용을 입력하세요",
         			icon: "waring",
         			confirmButtonText: "확인"
         		}).then((result)=>{
@@ -616,7 +616,7 @@ $(function () {
         $(".ah_off_" + replyNum).show()
         Swal.fire({
 			title: "취소 완료",
-			text: replyNum + "번 피드백에 좋아요를 취소하셨습니다",
+			text: "피드백에 좋아요를 취소하셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		}).then((result)=>{
@@ -649,7 +649,7 @@ $(function () {
         $(".ah_" + replyNum).show()
         Swal.fire({
 			title: "등록 완료",
-			text: replyNum + "번 피드백에 좋아요를 누르셨습니다",
+			text: "피드백에 좋아요를 누르셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		}).then((result)=>{
@@ -677,8 +677,8 @@ $(function () {
             }
         });
         Swal.fire({
-			title: "고정 완료",
-			text: answerNum + "번 피드백 답변을 고정하였습니다.",
+			title: "피드백 수락",
+			text: "피드백 답변을 고정합니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		}).then((result)=>{
@@ -703,8 +703,8 @@ $(function () {
             }
         });
         Swal.fire({
-			title: "취소 완료",
-			text: answerNum + "번 피드백 답변 고정을 취소하셨습니다.",
+			title: "피드백 취소",
+			text: "피드백 답변 고정이 해제됩니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		}).then((result)=>{

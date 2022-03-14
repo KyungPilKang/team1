@@ -34,7 +34,7 @@
 							<li style="color:white;">
 								<img class="mb-4"
 								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
-								alt="" width="30" height="30">${mem_nickname }님 환영합니다
+								alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 							</li>
 						</c:when>
 						<c:otherwise>
