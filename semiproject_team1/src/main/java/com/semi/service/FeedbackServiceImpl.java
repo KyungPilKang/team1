@@ -38,8 +38,6 @@ public class FeedbackServiceImpl implements FeedbackService {
 		feedback.setFeedback_likecount(0);
 		feedback.setFeedback_replycount(0);
         feedback.setFeedback_answercount(0);
-        // not null이라 0 넣어준다
-        feedback.setFeedback_vote_member("0");
 		feedbackDAO.insertFeedback(feedback);
 	}
 	

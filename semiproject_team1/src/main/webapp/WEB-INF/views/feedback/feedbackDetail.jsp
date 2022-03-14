@@ -366,9 +366,7 @@
                     alert(textStatus);
                 }
             });
-        } else {
-            return false;
-        }
+        })
     }
 </script>
 
