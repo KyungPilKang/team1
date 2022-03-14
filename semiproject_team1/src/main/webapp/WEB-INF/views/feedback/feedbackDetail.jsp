@@ -101,7 +101,7 @@
                             <td>닉네임:${answer.fd_answer_nickname}</td>
                             <td class="each_answer_subject">제목:${answer.fd_answer_title}</td>
                             <td class="each_answer_content"  onclick="content_pop(${answer.fd_answer_num})">
-                             <br><br>내용:<div class="each_answer_content_inner"><br>${answer.fd_answer_content}</div>
+                             내용:<div class="each_answer_content_inner">${answer.fd_answer_content}</div>
                             </td>
                             <td><fmt:formatDate value="${answer.fd_answer_date}" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
 
