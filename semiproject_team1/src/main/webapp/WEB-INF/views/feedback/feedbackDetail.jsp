@@ -153,11 +153,11 @@
             </section>
 
             <%-- 답변리스트 삽입부 끝--%>
-
+            <c:if test="${!empty mem_nickname}">
             <div class="btn_feedback_container_answer_write">
                 <button onclick="answer_show()"> 피드백 답변 작성 ( 이거 누르면 아래 연두색 작성폼 나옴 )</button>
             </div>
-
+            </c:if>
             <%-- 시작 : 작성폼 --%>
             <div class="feedback_container_answer_write">
                 <c:if test="${!empty mem_nickname}">
