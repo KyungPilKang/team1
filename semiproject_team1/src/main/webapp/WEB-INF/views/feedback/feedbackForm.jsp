@@ -225,7 +225,7 @@
                                         <div class="each_board_content">
                                             <div class="each_board_sub">
                                                 <a href="./feedbackdetail?feedback_num=${article.feedback_num}&page=${pageInfo.page}">
-                                                        ${article.feedback_subject}&nbsp;댓글:[${article.feedback_replycount}]/답변수:[${article.feedback_answercount}]/좋아요수:[${article.feedback_likecount}]
+                                                        ${article.feedback_subject}&nbsp;[${article.feedback_answercount}]
                                                 </a>
                                             </div>
                                             <div class="each_board_sub_bottom">
@@ -233,7 +233,7 @@
                                                         value="${article.feedback_date }"
                                                         pattern="yyyy년 M월 d일 E요일 a H:mm"/></div>
                                                 <div class="each_board_nickname"><br><br><br>
-                                                    닉네임${article.feedback_nickname }</div>
+                                                    닉네임 : ${article.feedback_nickname }</div>
                                             </div>
                                         </div>
 
