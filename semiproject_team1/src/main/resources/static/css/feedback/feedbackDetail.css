@@ -19,7 +19,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	background: white;
-	/*width: 1000px;*/
+	width: 1000px;
 	/*height: 2500px;*/
 	border: 5px solid #4169E1;
 	position: absolute;
@@ -102,6 +102,15 @@ body {
 .feedback_container_content{
 	background-color: white;
 	font-weight: bold;
+	overflow-x: hidden;
+	width: 950px;
+	height: 580px;
+}
+
+.feedback_container_content img {
+	width: 880px;
+	/*height: 400px;*/
+	object-fit: cover;
 }
 
 
