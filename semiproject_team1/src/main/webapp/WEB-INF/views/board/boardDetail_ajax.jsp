@@ -34,11 +34,11 @@
                             <%-- 누르면 아래에 --%>
                         </c:if>
                     </td>
-                    <c:if test="${reply.b_reply_nickname == mem_nickname}">
-                        <td>
+                    <td class="rorobox">
+                        <c:if test="${reply.b_reply_nickname == mem_nickname}">
                             <button onclick="removeCheck(${reply.b_reply_num})">삭제</button>
-                        </td>
-                    </c:if>
+                        </c:if>
+                    </td>
 
 
                     <%-- 댓글 좋아요 시작 --%>
@@ -71,16 +71,16 @@
                     </c:if>
                 </c:if>
                     <%-- 좋아요 숫자 표시 --%>
-                <c:if test="${reply.b_reply_lev == '0'}">
-                    <c:if test="${empty mem_nickname}">
-                        <td>
-                            <div class="re_heart"></div>
-                        </td>
-                    </c:if>
+                <c:if test="${empty mem_nickname && reply.b_reply_lev == '0'}">
                     <td>
-                            ${reply.b_reply_likecount}
+                        <div class="re_heart"></div>
                     </td>
                 </c:if>
+                <td>
+                    <c:if test="${reply.b_reply_lev == '0'}">
+                        ${reply.b_reply_likecount}
+                    </c:if>
+                </td>
                     <%-- 댓글 좋아요 끝--%>
                     <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
             </tr>
