@@ -166,10 +166,10 @@ public class MypageController {
 		try {
 			result=memberService.selectMemeber_bymno(mem.getMem_mno());
 			if(mypageService.codeConfirm(mem)) {
-			} else new Exception();
+			} 
 		} catch(Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<String>("에러 발생", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<String>(result.getMem_link_id(), HttpStatus.OK);
 	}

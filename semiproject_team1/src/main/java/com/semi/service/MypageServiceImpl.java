@@ -114,7 +114,7 @@ public class MypageServiceImpl implements MypageService {
 			memberDAO.updateMem_link_confirm(mem);
 			return true;
 		} else {
-			return false;
+			throw new Exception("인증 오류");
 		}
 	}
 
