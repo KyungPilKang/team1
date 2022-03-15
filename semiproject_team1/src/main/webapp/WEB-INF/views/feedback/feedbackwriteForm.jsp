@@ -40,7 +40,7 @@
                 </div>
                 <div class="board_file_cont">
                     <label for="fd_replay" class="btn_file"> 파일 첨부 </label>
-                    <input name="replay_file" type="file" id="fd_replay"
+                    <input name="replay_file" type="file" id="fd_replay" accept=".rofl"
                            placeholder=" 파일첨부" class="board_file"/>
                     <input class="upload-name1" value="첨부파일" placeholder="첨부파일" disabled>
                 </div><br>
