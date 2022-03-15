@@ -226,12 +226,10 @@
                                         </c:if>
                                     </c:if>
                                         <%-- 좋아요 숫자 표시 --%>
-                                    <c:if test="${reply.b_reply_lev == '0'}">
                                     <c:if test="${empty mem_nickname}">
                                         <td>
                                             <div class="re_heart"></div>
                                         </td>
-                                    </c:if>
                                         <td>
                                                 ${reply.b_reply_likecount}
                                         </td>
@@ -260,7 +258,7 @@
                     <%-- 댓글 삽입부 끝--%>
                 </c:when>
                 <c:otherwise>
-                    <section class="emptyReply">등록된 댓글이 없습니다.</section>
+                    <section class="emptyReply" style="font-weight:bold">등록된 댓글이 없습니다.</section>
                 </c:otherwise>
             </c:choose>
 

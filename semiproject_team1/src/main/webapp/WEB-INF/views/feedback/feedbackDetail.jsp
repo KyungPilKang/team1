@@ -212,6 +212,8 @@
             </div>
 
             <div class="append_replyList"></div>
+            <c:choose>
+            <c:when test="${not empty reList}">
             <%-- 댓글 삽입부 시작--%>
             <section id="re_listForm">
                 <table class="re_listForm_table">
@@ -279,6 +281,11 @@
                 </table>
             </section>
             <%-- 댓글 삽입부 끝--%>
+            </c:when>
+                <c:otherwise>
+                    <section class="emptyReply" style="font-weight:bold; font-size:1.3em; margin-top:30px; margin-bottom:70px;"><center>등록된 댓글이 없습니다.</center></section>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
 
