@@ -13,13 +13,12 @@ body {
 	display: flex;
 	flex-direction: column;
 	background-color: whitesmoke;
-	/*border: 5px solid #4169E1;*/
+	border: 5px solid #4169E1;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
 	padding: 15px 20px;
 	border-radius: 30px;
-	margin-bottom: 20px;
 	outline: none;
 }
 

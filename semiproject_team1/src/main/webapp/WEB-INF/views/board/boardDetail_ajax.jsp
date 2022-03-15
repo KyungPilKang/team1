@@ -67,11 +67,19 @@
                                 </c:choose>
                             </div>
                         </td>
-                        <%-- 좋아요 숫자 표시 --%>
+
+                    </c:if>
+                </c:if>
+                    <%-- 좋아요 숫자 표시 --%>
+                <c:if test="${reply.b_reply_lev == '0'}">
+                    <c:if test="${empty mem_nickname}">
                         <td>
-                                ${reply.b_reply_likecount}
+                            <div class="re_heart"></div>
                         </td>
                     </c:if>
+                    <td>
+                            ${reply.b_reply_likecount}
+                    </td>
                 </c:if>
                     <%-- 댓글 좋아요 끝--%>
                     <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
@@ -85,7 +93,8 @@
                                               maxlength="1000"
                                               placeholder="대댓글을 적어주세요:)"></textarea>
                     <button type="submit"
-                            onclick="re_reply_submit(${reply.b_reply_num},(document.getElementById('re${reply.b_reply_num}').value))" class="btn_re_comment_write_content">
+                            onclick="re_reply_submit(${reply.b_reply_num},(document.getElementById('re${reply.b_reply_num}').value))"
+                            class="btn_re_comment_write_content">
                         작성
                     </button>
                 </div>
