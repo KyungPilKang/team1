@@ -156,7 +156,7 @@
             <div class="main_container">
                 <%-- main 컨테이너의 위쪽 --%>
                 <div class="board_header" style="z-index: 2;">
-                    <div class="hd-link"><h3 class="">전체</h3>
+                    <div class="hd-link"><h3 class="">하이라이트</h3>
                     </div>
                     <div class="sub-link" id="sub-menu">
                         <ul class="sub-link__list">
