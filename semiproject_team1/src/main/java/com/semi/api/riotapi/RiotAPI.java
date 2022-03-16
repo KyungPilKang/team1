@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RiotAPI {
 	private static String APIKEY = "RGAPI-f07d32e0-99f0-4d62-a323-53d475aadab7";
-	private static String APIURL = "https://na1.api.riotgames.com/lol/";
+	private static String APIURL = "https://kr.api.riotgames.com/lol/";
 	
 	public String getIdCode(String mem_link_id) {
 		String idCode=null;

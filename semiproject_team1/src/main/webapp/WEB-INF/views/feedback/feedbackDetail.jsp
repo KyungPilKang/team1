@@ -382,29 +382,38 @@ $(function () {
 			title: "댓글 삭제",
 			text: "확인을 누르면 삭제됩니다",
 			icon: "warning",
-			confirmButtonText: "확인"
+			showCancelButton: true,
+			confirmButtonText: "확인",
+			cancelButtonText : "취소",
+			cancelButtonColor: '#d33'
 		}).then((result)=>{
-            $.ajax({
-                async: true,
-                type: 'GET',
-                data: {
-                    fd_reply_num: replyNum,
-                },
-                url: "http://localhost:8090/fd_replydelete",
-                success: function (data) {
-                	Swal.fire({
-            			title: "삭제 완료",
-            			text: "댓글이 삭제되었습니다",
-            			icon: "success",
-            			confirmButtonText: "확인"
-            		}).then((result)=>{
-            			location.reload();
-					})
-                },
-                error: function (textStatus) {
-                    alert(textStatus);
-                }
-            });
+			if(result.isConfirmed){
+	            $.ajax({
+	                async: true,
+	                type: 'GET',
+	                data: {
+	                    fd_reply_num: replyNum,
+	                },
+	                url: "http://localhost:8090/fd_replydelete",
+	                success: function (data) {
+	                	Swal.fire({
+	            			title: "삭제 완료",
+	            			text: "댓글이 삭제되었습니다",
+	            			icon: "success",
+	            			confirmButtonText: "확인"
+	            		}).then((result)=>{
+	            			location.reload();
+						})
+	                },
+	                error: function (textStatus) {
+	                    alert(textStatus);
+	                }
+	            });
+			}else if(result.isDismissed){
+    			return false;
+			}else{
+				return false;
+			}
         })
     }
 </script>
@@ -599,31 +608,40 @@ $(function () {
 			title: "답변 삭제",
 			text: "확인을 누르면 삭제됩니다",
 			icon: "warning",
-			confirmButtonText: "확인"
+			showCancelButton: true,
+			confirmButtonText: "확인",
+			cancelButtonText : "취소",
+			cancelButtonColor: '#d33'
 		}).then((result)=>{
-			$.ajax({
-                async: true,
-                type: 'GET',
-                data: {
-                    fd_answer_num: replyNum,
-                },
-                // url 컨트롤러 만들어야함
-                url: "http://localhost:8090/fd_answerdelete",
-                success: function (data) {
-                	Swal.fire({
-            			title: "삭제 완료",
-            			text: "피드백 답변이 삭제되었습니다",
-            			icon: "success",
-            			confirmButtonText: "확인"
-            		}).then((result)=>{
-            			location.reload();
-					})
-                	
-                },
-                error: function (textStatus) {
-                    alert(textStatus);
-		}
-			});
+			if(result.isConfirmed){
+				$.ajax({
+	                async: true,
+	                type: 'GET',
+	                data: {
+	                    fd_answer_num: replyNum,
+	                },
+	                // url 컨트롤러 만들어야함
+	                url: "http://localhost:8090/fd_answerdelete",
+	                success: function (data) {
+	                	Swal.fire({
+	            			title: "삭제 완료",
+	            			text: "피드백 답변이 삭제되었습니다",
+	            			icon: "success",
+	            			confirmButtonText: "확인"
+	            		}).then((result)=>{
+	            			location.reload();
+						})
+	                	
+	                },
+	                error: function (textStatus) {
+	                    alert(textStatus);
+					}
+				});
+			}else if(result.isDismissed){
+    			return false;
+			}else{
+				return false;
+			}
         })
     }
 </script>
