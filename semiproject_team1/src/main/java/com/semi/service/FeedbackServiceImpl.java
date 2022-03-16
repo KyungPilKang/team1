@@ -1,15 +1,20 @@
 package com.semi.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import com.semi.dao.Fd_answerDAO;
-import com.semi.dao.Fd_replyDAO;
-import com.semi.dao.MemberDAO;
-import com.semi.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.semi.dao.Fd_answerDAO;
+import com.semi.dao.Fd_replyDAO;
 import com.semi.dao.FeedbackDAO;
+import com.semi.dao.MemberDAO;
+import com.semi.dto.Fd_answer;
+import com.semi.dto.Fd_reply;
+import com.semi.dto.Feedback;
+import com.semi.dto.PageInfo;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
@@ -120,7 +125,12 @@ public class FeedbackServiceImpl implements FeedbackService {
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
         System.out.println("1번 listCount : " + listCount);
-        return feedbackDAO.selectFeedbackList_search_subject(startrow, feedback.getFeedback_keyword());
+        
+        Map<String, Object> paramList = new HashMap<String,Object>();
+        paramList.put("startrow", startrow);
+        paramList.put("feedback_keyword", feedback.getFeedback_keyword());
+        
+        return feedbackDAO.selectFeedbackList_search_subject(paramList);
 	}
 	
     @Override
@@ -138,7 +148,12 @@ public class FeedbackServiceImpl implements FeedbackService {
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
         System.out.println("2번 listCount : " + listCount);
-        return feedbackDAO.selectFeedbackList_search_nickname(startrow, feedback.getFeedback_keyword());
+        
+        Map<String, Object> paramList = new HashMap<String,Object>();
+        paramList.put("startrow", startrow);
+        paramList.put("feedback_keyword", feedback.getFeedback_keyword());
+        
+        return feedbackDAO.selectFeedbackList_search_nickname(paramList);
     }
     
     @Override
@@ -156,7 +171,12 @@ public class FeedbackServiceImpl implements FeedbackService {
         pageInfo.setListCount(listCount);
         int startrow = (page - 1) * 10 + 1;
         System.out.println("3번 listCount : " + listCount);
-        return feedbackDAO.selectFeedbackList_search_content(startrow, feedback.getFeedback_keyword());
+        
+        Map<String, Object> paramList = new HashMap<String,Object>();
+        paramList.put("startrow", startrow);
+        paramList.put("feedback_keyword", feedback.getFeedback_keyword());
+        
+        return feedbackDAO.selectFeedbackList_search_content(paramList);
     }
     
     @Override

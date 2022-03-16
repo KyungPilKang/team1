@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" sizes="16x16 32x32 64x64"
 	href="/resources/asset/image/login/dog1.png" />
-<title>메인 페이지</title>
+<title>메인 - 롤판.DOG</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/main.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main/bootstrap.min.css"> --%>
@@ -34,7 +34,7 @@
 							<li style="color:white;">
 								<img class="mb-4"
 								src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
-								alt="" width="30" height="30">${mem_nickname }님 환영합니다
+								alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 							</li>
 						</c:when>
 						<c:otherwise>

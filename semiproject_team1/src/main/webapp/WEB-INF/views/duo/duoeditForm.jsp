@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <link rel="shortcut icon" sizes="16x16 32x32 64x64"
 	href="/resources/asset/image/login/dog1.png" />
-<title>듀오매칭</title>
+<title>듀오 수정 - 롤판.DOG</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/duo/duoForm2.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -37,60 +37,60 @@
 									<c:when test="${my_tier eq 'none' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/every/test.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 										
 									</c:when>
 									<c:when test="${my_tier eq null }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/ul.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 										
 									</c:when>
 									<c:when test="${my_tier eq 'IRON' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/i.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 										
 									</c:when>
 									<c:when test="${my_tier eq 'BRONZE' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/b.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:when>
 									<c:when test="${my_tier eq 'SILVER' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/s.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:when>
 									<c:when test="${my_tier eq 'GOLD' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/g.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:when>
 									<c:when test="${my_tier eq 'PLATINUM' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/p.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:when>
 									<c:when test="${my_tier eq 'DIAMOND' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/d.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:when>
 									<c:when test="${my_tier eq 'MASTER' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/m.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:when>
 									<c:when test="${my_tier eq 'GRANDMASTER' }">
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/gm.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:when>
 									<c:otherwise>
 										<img 
 											src="${pageContext.request.contextPath}/resources/asset/image/duo/c.png"
-											alt="" width="30" height="30">${mem_nickname }님 환영합니다
+											alt="" width="30" height="30"><span style="color:#06e4f5">${mem_nickname }</span>님 환영합니다
 									</c:otherwise>
 								</c:choose>
 							</li>

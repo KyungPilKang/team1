@@ -1,16 +1,25 @@
 body {
-	/*background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),*/
-	/*	url(../../asset/image/board/lol4.jpg);*/
-	/*background-size: cover;*/
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+		url(../../asset/image/board/lol4.jpg);
+	background-size: cover; 
 }
 
-
+.btn_list {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	width: 120px;
+	height: 48px;
+	font-size: 15px;
+	cursor: pointer;
+}
 
 .feedback_container{
 	display: flex;
 	flex-direction: column;
 	background: white;
-	/*width: 1000px;*/
+	width: 1000px;
 	/*height: 2500px;*/
 	border: 5px solid #4169E1;
 	position: absolute;
@@ -26,66 +35,103 @@ body {
 .feedback_container_header{
 	display: flex;
 	flex-direction: column;
-	background-color: red;
+	background-color: white;
 }
 
 .feedback_subject_container{
-	background-color: #a3abf6;
+    padding-left: 20px;
+	font-weight: bold;
+	font-size: 40px;
+	width: 980px;
+	height: 55px;
+	color: black;
 }
 
 /* 날짜 닉네임 조회수 댓글 추천 컨테이너*/
 .feedback_container_bo{
 	display: flex;
-	background-color: #0dcaf0;
+	background-color: white;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 20px;
+	margin: 10px;
 }
 
 /* 왼쪽 : 날짜 닉네임 */
 .feedback_container_bo_left{
+	margin: 10px;
+	width: 650px;
+	height: 10px;
 	display: flex;
-	background-color: #88a5d0;
+	background-color: white;
 }
 /* 우측 : 조회수 댓글 추천*/
 .feedback_container_bo_right{
 	display: flex;
-	background-color: #7cc7a4;
+	background-color: white;
+	margin: 10px;
+}
+
+.feedback_readcount_container{
+    margin: 5px;
 }
 
 /*리플레이*/
 .feedback_container_replay{
-	background-color: #867f7f;
+	background-color: white;
+	font-weight: bold;
+	margin-bottom: 15px;
+	margin-left: 15px;
 }
 
 /* 목록 수정 삭제 버튼*/
 .feedback_container_modDel{
- background-color: #97a0a1;
+	background-color: white;
+ 	font-weight: bold;
+ 	margin-bottom: 15px;
 }
 
 /* 동영상 */
-.feedback_container_video{
 
+.feedback_container_video{
+	border: 3px solid #708090;
+	border-radius: 7px;
 }
 
 /* 내용 */
 .feedback_container_content{
-	background-color: #adeeea;
+	background-color: white;
+	font-weight: bold;
+	overflow-x: hidden;
+	width: 950px;
+	height: 580px;
+}
+
+.feedback_container_content img {
+	width: 880px;
+	/*height: 400px;*/
+	object-fit: cover;
 }
 
 
 .feedback_container_answer{
-	background-color: #ccd4fa;
+	background-color: rgba(135, 135, 135, 0.2);
 	/*display: flex;*/
 	/*flex-direction: column;*/
 	margin-top:50px;
+	border: 3px solid #708090;
+	border-radius: 7px;
+	font-weight: bold;
 }
 
+.feedback_container_answer div{
+	margin-left: 10px;
+}
 
 .btn_an_listForm_fixed{
 	background-color: #1fbeff;
 }
 
-.btn_feedback_container_answer_write{
-	background-color: #1deec4;
-}
 
 .an_listForm_table{
 	/* 답글 세로사이즈*/
@@ -95,22 +141,51 @@ body {
 .each_answer{
 	/* 답글 세로사이즈*/
 	height:10vh;
-	background-color: #7b9dab;
+	
 }
 
 .each_answer_content{
 	display: flex;
+	margin-top:24px;
 }
 
-.each_answer_content_inner{
-	width: 5vw;
-	overflow: hidden;
-	height:5vh;
+.each_answer button {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	cursor: pointer;
+	font-weight: bold;
 }
+
+.answer_submits {
+	border: 3px solid #4169E1;
+	border-radius: 7px;
+	margin-bottom: 10px;
+}
+.answer_write_title {
+	border: 3px solid #4169E1;
+	border-radius: 7px;
+	margin-top: 10px;
+}
+.feedback_container_answer_write_flex textarea {
+	margin: 10px;
+	background-color: white;
+}
+.each_answer_content_inner{
+	width: 7vw;
+	overflow: hidden;
+	height: 3vh;
+	margin: 10px;
+	cursor: pointer;
+	text-overflow: ellipsis;
+}
+
+.each_answer_content:hover{
+ 	color: #4169E1;
+}
+
 .each_answer_content_detail{
 	display: none;
 }
-
 
 .each_answer_subject{
 	height:5vh;
@@ -121,7 +196,9 @@ body {
 
 /* 내용 누르면 나타나는 상세보기 박스*/
 .each_answer_content_detail_content{
-	background-color: #8786ec;
+	border-radius: 7px;
+	border: 3px solid skyblue;
+	background-color: white;
 	height: 20vh;
 	width: 50vw;
 	word-break:break-all;
@@ -135,9 +212,18 @@ body {
 
 /* 피드백 답변 작성폼 */
 .feedback_container_answer_write{
-	background-color: #b6fc9c;
+	border: 3px solid #4169E1;
+	border-radius: 7px;
 	display: none;
+	margin: 10px;
 }
+.btn_feedback_container_answer_write button {
+	border: 3px solid #4169E1;
+	border-radius: 7px;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
+
 
 .feedback_container_answer_write_flex{
 	display: flex;
@@ -145,7 +231,9 @@ body {
 }
 
 .replyfeedback_container_reply{
-	background-color: #cecdcd;
+	border: 3px solid #708090;
+	border-radius: 7px;
+	background-color: rgba(135, 135, 135, 0.2);
 	margin-top: 50px;
 }
 
@@ -155,7 +243,7 @@ body {
 
 .re_listForm_table{
 	/* 댓글 가로사이즈*/
-	width: 50vw;
+	width: 51.7vw;
 }
 
 
@@ -166,22 +254,38 @@ body {
 	border: 2px solid black;
 }
 
+.replyfeedback_container_reply div button {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	font-weight: bold;
+}
 
+td button {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	font-weight: bold;
+}
 
 .re_listForm_date{
 	width: 100px;
 }
-
-/*.board_subject_container {*/
-/*	padding-left: 20px;*/
-/*	font-weight: bold;*/
-/*	font-size: 40px;*/
-/*	width: 980px;*/
-/*	height: 55px;*/
-/*	color: black;*/
-/*	border: 6px solid #708090;*/
-/*	border-radius: 30px;*/
-/*}*/
+ .comment_submits{
+ 	width:100px;	
+    margin-left: 885px;
+ 	border: 5px solid skyblue;
+	border-radius: 30px;
+	font-weight: bold;
+ }
+/* .board_subject_container {
+	padding-left: 20px;
+	font-weight: bold;
+	font-size: 40px;
+	width: 980px;
+	height: 55px;
+	color: black;
+	border: 6px solid #708090;
+	border-radius: 30px;
+} */
 
 /*.board_container_bo {*/
 /*	margin-top: 20px;*/
@@ -264,7 +368,10 @@ body {
 
 
 
-
+.rrrr {
+	font-size: 20px;
+	font-weight: bold;
+}
 
 
 
@@ -329,16 +436,7 @@ body {
 	font-size: 15px;
 	cursor: pointer;
 }
-.btn_list {
-	margin-top: 100px;
-	border: none;
-	border-radius: 4px;
-	width: 120px;
-	height: 48px;
-	background: darkgray;
-	font-size: 15px;
-	cursor: pointer;
-}
+
 
 
 .reply_container {
@@ -416,7 +514,9 @@ body {
 	border: 2px solid #4169E1;
 	background-color: rgba(0, 0, 0, 0);
 	height: 100px;
-	width: 800px;
+	width: 960px;
+	margin-left:10px;
+	margin-top:10px;
 	font-weight: bold;
 }
 
@@ -434,42 +534,120 @@ body {
 	display: none;
 }
 
+
 .re_heart {
-	height: 15px;
-	width: 15px;
-	border-radius: 10px;
-	background: red;
-	cursor: pointer;
+	width: 10px;
+	height: 10px;
+	background: #ea2027;
+	position: relative;
+	transform: rotate(45deg);
+}
+.re_heart::before,
+.re_heart::after {
+	content: "";
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	border-radius: 50%;
+	background: #ea2027;
+}
+.re_heart::before {
+	left: -50%;
+}
+.re_heart::after {
+	top: -50%;
 }
 
+
 .re_heart_off {
-	height: 15px;
-	width: 15px;
-	border-radius: 10px;
-	border: 1px solid black;
-	cursor: pointer;
+	width: 10px;
+	height: 10px;
+	background: #afafaf;
+	position: relative;
+	transform: rotate(45deg);
 }
+.re_heart_off::before,
+.re_heart_off::after {
+	content: "";
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	border-radius: 50%;
+	background: #afafaf;
+}
+.re_heart_off::before {
+	left: -50%;
+}
+.re_heart_off::after {
+	top: -50%;
+}
+
+
+
+
+
+
+
 
 /* 댓글 좋아요 기능구현에 필수 css*/
 .rh_off_hide, .rh_hide {
 	display: none;
 }
 
+
 .an_heart {
-	height: 15px;
-	width: 15px;
-	border-radius: 10px;
-	background: red;
-	cursor: pointer;
+	width: 10px;
+	height: 10px;
+	background: #ea2027;
+	position: relative;
+	transform: rotate(45deg);
+}
+.an_heart::before,
+.an_heart::after {
+	content: "";
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	border-radius: 50%;
+	background: #ea2027;
+}
+.an_heart::before {
+	left: -50%;
+}
+.an_heart::after {
+	top: -50%;
 }
 
+
+
 .an_heart_off {
-	height: 15px;
-	width: 15px;
-	border-radius: 10px;
-	border: 1px solid black;
-	cursor: pointer;
+	width: 10px;
+	height: 10px;
+	background: #afafaf;
+	position: relative;
+	transform: rotate(45deg);
 }
+.an_heart_off::before,
+.an_heart_off::after {
+	content: "";
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	border-radius: 50%;
+	background: #afafaf;
+}
+.an_heart_off::before {
+	left: -50%;
+}
+.an_heart_off::after {
+	top: -50%;
+}
+
+.re_list_font{
+	font-weight: bold;
+}
+
+
 
 /* 댓글 좋아요 기능구현에 필수 css*/
 .ah_off_hide, .ah_hide {

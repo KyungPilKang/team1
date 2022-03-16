@@ -32,15 +32,15 @@
 
                 <input type="hidden" id="board_content" name="board_content" value=""/>
 
-                <%-- 글쓴이는 EL언어 표기법 value = "${session.board_name}" 이런식으로 가져오면 된다. hidden --%>
+                <%-- 글쓴이는 EL언어 표기법 value = "${session.board_name}" 이런식으로 가져오면 된다 hidden --%>
                 <%--                    <label for="board_nickname">글쓴이</label>--%>
                 <%--        <input type="hidden" name="board_nickname" id="board_nickname" value="mno"/><br>--%>
                 <div class="board_subject_cont">
-                    <input name="feedback_subject" type="text" id="board_subject" placeholder=" 제목"/><br>
+                    <input name="feedback_subject" type="text" id="feedback_subject" placeholder=" 제목"/><br>
                 </div>
                 <div class="board_file_cont">
                     <label for="fd_replay" class="btn_file"> 파일 첨부 </label>
-                    <input name="replay_file" type="file" id="fd_replay"
+                    <input name="replay_file" type="file" id="fd_replay" accept=".rofl"
                            placeholder=" 파일첨부" class="board_file"/>
                     <input class="upload-name1" value="첨부파일" placeholder="첨부파일" disabled>
                 </div><br>
@@ -56,7 +56,7 @@
             <div id="editor" class="editor"></div><br>
 
             <button class="btn_cc" onclick={history.back()}>돌아가기</button>
-            <button onclick="fd_submit()" class="btn_ok">요청제출</button>
+            <button onclick="fd_submit()" class="btn_ok">요청하기</button>
         </div>
     </div>
 </div>
@@ -73,14 +73,44 @@
         	Swal.fire({
     			title: "입력 오류",
     			text: "제목을 입력하세요",
-    			icon: "success",
+    			icon: "error",
     			confirmButtonText: "확인"
     		}).then((result)=>{
     			$('#feedback_subject').focus()
+    			console.log($("#fd_file").val());
 			})
-        	
             return false;
-        }
+        } 
+       	if($("#fd_replay").val()==""){
+       		Swal.fire({
+    			title: "업로드 오류",
+    			text: "리플레이를 첨부하세요",
+    			icon: "error",
+    			confirmButtonText: "확인"
+    		}).then((result)=>{
+			})
+            return false;
+       	}
+       	if($("#fd_file").val()==""){
+       		Swal.fire({
+    			title: "업로드 오류",
+    			text: "영상을 첨부하세요",
+    			icon: "error",
+    			confirmButtonText: "확인"
+    		}).then((result)=>{
+			})
+            return false;
+       	}
+       	if(content=="<p><br></p>"){
+       		Swal.fire({
+    			title: "입력 오류",
+    			text: "내용을 입력하세요",
+    			icon: "error",
+    			confirmButtonText: "확인"
+    		}).then((result)=>{
+			})
+            return false;
+       	}
     $("#feedbackform").attr("action","./regfeedback").submit();
     }
 </script>

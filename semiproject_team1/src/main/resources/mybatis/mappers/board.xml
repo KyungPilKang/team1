@@ -95,21 +95,70 @@
 	</select>
 	<!-- ================================= 끝 : selectBoardCount_highlight 관련 ================================= -->
 
-    <select id="selectBoardCount_tip" resultType="int">
+	<!-- ================================= 시작 : selectBoardCount_tip 관련 ================================= -->
+	<select id="selectBoardCount_tip" resultType="int">
 		<![CDATA[
-        select count(*)
-        from board
-        where board_cat = 'tip'
-        ]]>
+		select count(*)
+		from board
+		where board_cat = 'tip'
+		]]>
 	</select>
 
-    <select id="selectBoardCount_normal" resultType="int">
+	<select id="selectBoardCount_tip_subject" resultType="int" parameterType="string">
 		<![CDATA[
-        select count(*)
-        from board
-        where board_cat = 'normal'
-        ]]>
+		select count(*)
+		from board where board_cat = 'tip' and board_subject like CONCAT('%',#{board_keyword},'%')
+		]]>
 	</select>
+
+	<select id="selectBoardCount_tip_nickname" resultType="int" parameterType="string">
+		<![CDATA[
+		select count(*)
+		from board where board_cat = 'tip' and board_nickname like CONCAT('%',#{board_keyword},'%')
+		]]>
+	</select>
+
+	<select id="selectBoardCount_tip_content" resultType="int" parameterType="string">
+		<![CDATA[
+		select count(*)
+		from board where board_cat = 'tip' and board_content like CONCAT('%',#{board_keyword},'%')
+		]]>
+	</select>
+	<!-- ================================= 끝 : selectBoardCount_tip 관련 ================================= -->
+
+	<!-- ================================= 시작 : selectBoardCount_normal 관련 ================================= -->
+	<select id="selectBoardCount_normal" resultType="int">
+		<![CDATA[
+		select count(*)
+		from board
+		where board_cat = 'normal'
+		]]>
+	</select>
+
+	<select id="selectBoardCount_normal_subject" resultType="int" parameterType="string">
+		<![CDATA[
+		select count(*)
+		from board where board_cat = 'normal' and board_subject like CONCAT('%',#{board_keyword},'%')
+		]]>
+	</select>
+
+	<select id="selectBoardCount_normal_nickname" resultType="int" parameterType="string">
+		<![CDATA[
+		select count(*)
+		from board where board_cat = 'normal' and board_nickname like CONCAT('%',#{board_keyword},'%')
+		]]>
+	</select>
+
+	<select id="selectBoardCount_normal_content" resultType="int" parameterType="string">
+		<![CDATA[
+		select count(*)
+		from board where board_cat = 'normal' and board_content like CONCAT('%',#{board_keyword},'%')
+		]]>
+	</select>
+	<!-- ================================= 끝 : selectBoardCount_normal 관련 ================================= -->
+
+
+
 
 	<!-- ================================= 시작 : selectBoardList_all 정렬 관련 ================================= -->
 	<!-- 최신 -->
@@ -221,7 +270,76 @@
 		where rnum between #{startrow} and #{startrow} + 9
 		]]>
 	</select>
-	<!-- ================================= 끝 : board_all 검색 관련 ================================= -->
+	<!-- ================================= 끝 : selectBoardList_highlight 검색 관련 ================================= -->
+
+
+	<!-- ================================= 시작 : selectBoardList_tip 검색 관련 ================================= -->
+	<select id="selectBoardList_tip_search_subject" resultType="board">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat = 'tip' and board_subject like CONCAT('%',#{board_keyword},'%') order by board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+
+	<select id="selectBoardList_tip_search_nickname" resultType="board">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat = 'tip' and board_nickname like CONCAT('%',#{board_keyword},'%') order by board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+
+	<select id="selectBoardList_tip_search_content" resultType="board">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat = 'tip' and board_content like CONCAT('%',#{board_keyword},'%') order by board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- ================================= 끝 : selectBoardList_tip 검색 관련 ================================= -->
+
+	<!-- ================================= 시작 : selectBoardList_normal 검색 관련 ================================= -->
+	<select id="selectBoardList_normal_search_subject" resultType="board">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat = 'normal' and board_subject like CONCAT('%',#{board_keyword},'%') order by board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+
+	<select id="selectBoardList_normal_search_nickname" resultType="board">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat = 'normal' and board_nickname like CONCAT('%',#{board_keyword},'%') order by board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+
+	<select id="selectBoardList_normal_search_content" resultType="board">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat = 'normal' and board_content like CONCAT('%',#{board_keyword},'%') order by board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- ================================= 끝 : selectBoardList_normal 검색 관련 ================================= -->
+
+
+
+
 
 
 
@@ -274,29 +392,109 @@
     <!-- ================================= 끝 : selectBoardList_highlight 정렬 관련 ================================= -->
 
 
-    <select id="selectBoardList_tip" resultType="board"
-            parameterType="int">
+	<!-- ================================= 시작 : selectBoardList_tip 정렬 관련 ================================= -->
+	<!-- 최신 -->
+	<select id="selectBoardList_tip" resultType="board"
+			parameterType="int">
 		<![CDATA[
-        select *
-        from (select @rownum:=@rownum+1 rnum, tot.*
-              from (select * from board where board_cat='tip' order by board_date desc) tot,
-                  (select @rownum := 0) temp) sub
-        where rnum between #{startrow} and #{startrow} + 9
-        ]]>
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat='tip' order by board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
 	</select>
-
-    <select id="selectBoardList_normal" resultType="board"
-            parameterType="int">
+	<!-- 조회수 -->
+	<select id="selectBoardList_tip_viewsSort" resultType="board"
+			parameterType="int">
 		<![CDATA[
-        select *
-        from (select @rownum:=@rownum+1 rnum, tot.*
-              from (select * from board where board_cat='normal' order by board_date desc) tot,
-                  (select @rownum := 0) temp) sub
-        where rnum between #{startrow} and #{startrow} + 9
-        ]]>
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat='tip' order by board_readcount desc, board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
 	</select>
+	<!-- 댓글수 -->
+	<select id="selectBoardList_tip_replySort" resultType="board"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat='tip' order by board_replycount desc, board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- 좋아요수 -->
+	<select id="selectBoardList_tip_likeSort" resultType="board"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat='tip' order by board_likecount desc, board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- ================================= 끝 : selectBoardList_tip 정렬 관련 ================================= -->
 
 
+	<!-- ================================= 시작 : selectBoardList_normal 정렬 관련 ================================= -->
+	<!-- 최신 -->
+	<select id="selectBoardList_normal" resultType="board"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat='normal' order by board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- 조회수 -->
+	<select id="selectBoardList_normal_viewsSort" resultType="board"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat='normal' order by board_readcount desc, board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- 댓글수 -->
+	<select id="selectBoardList_normal_replySort" resultType="board"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat='normal' order by board_replycount desc, board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- 좋아요수 -->
+	<select id="selectBoardList_normal_likeSort" resultType="board"
+			parameterType="int">
+		<![CDATA[
+		select *
+		from (select @rownum:=@rownum+1 rnum, tot.*
+			  from (select * from board where board_cat='normal' order by board_likecount desc, board_date desc) tot,
+				  (select @rownum := 0) temp) sub
+		where rnum between #{startrow} and #{startrow} + 9
+		]]>
+	</select>
+	<!-- ================================= 끝 : selectBoardList_normal 정렬 관련 ================================= -->
+
+
+
+
+
+
+
+
+	<!-- BoardDAO 하단부 -->
     <select id="selectBoard" resultType="board" parameterType="int">
 		<![CDATA[
         select *

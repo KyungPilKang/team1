@@ -11,7 +11,7 @@
     <meta name="generator" content="Hugo 0.88.1">
     <link rel="shortcut icon" sizes="16x16 32x32 64x64"
 	href="/resources/asset/image/login/dog1.png" />
-    <title>이메일 인증</title>
+    <title>회원가입 인증 - 롤판.DOG</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/sign-in/">
 

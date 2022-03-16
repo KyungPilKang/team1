@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class Board_highlightController {
@@ -142,6 +144,39 @@ public class Board_highlightController {
         }
         return mv;
     }
+
+
+
+    /* 게시판 ajax 페이지 */
+    @RequestMapping(value = "boardForm_highlight_ajax", method = {RequestMethod.GET, RequestMethod.POST})
+    public String boardForm_highlight_ajax(@RequestParam(value = "page", defaultValue = "1") int page,
+                                     @RequestParam(value = "sort") String sort,
+                                     HttpServletRequest request, HttpSession session) {
+        PageInfo pageInfo = new PageInfo();
+        try {
+            if (Objects.equals(sort, "boardlist")) {
+                List<Board> articleList = board_highlightService.getBoardList(page, pageInfo);
+                request.setAttribute("articleList", articleList);
+            } else if (Objects.equals(sort, "viewssort")) {
+                List<Board> articleList = board_highlightService.getBoardList_viewsSort(page, pageInfo);
+                request.setAttribute("articleList", articleList);
+            } else if (Objects.equals(sort, "replysort")) {
+                List<Board> articleList = board_highlightService.getBoardList_replySort(page, pageInfo);
+                request.setAttribute("articleList", articleList);
+            } else if (Objects.equals(sort, "likesort")) {
+                List<Board> articleList = board_highlightService.getBoardList_likeSort(page, pageInfo);
+                request.setAttribute("articleList", articleList);
+            }
+            request.setAttribute("pageInfo", pageInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("err", e.getMessage());
+        }
+        return "board/boardForm_all_ajax";
+    }
+
+
+
 
 
 

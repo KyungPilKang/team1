@@ -1,93 +1,119 @@
+
+
 body {
 	background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
 		url(../../asset/image/board/lol4.jpg);
 	background-size: cover;
 }
 
-.board_container {
-	background: white;
-	width: 1000px;
-	height: 1400px;
+
+
+.board_container{
+	margin-top:20px;
+	display: flex;
+	flex-direction: column;
+	background-color: whitesmoke;
 	border: 5px solid #4169E1;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
 	padding: 15px 20px;
 	border-radius: 30px;
-	margin-bottom: 20px;
 	outline: none;
 }
 
+
 .board_subject_container {
+	margin-top: 15px;
+	/*background-color: #a3abf6;*/
 	padding-left: 20px;
 	font-weight: bold;
 	font-size: 40px;
-	width: 980px;
 	height: 55px;
 	color: black;
-	border: 6px solid #708090;
 	border-radius: 30px;
+	margin-bottom: 25px;
 }
 
 .board_container_bo {
-	margin-top: 20px;
-	text-align: center;
+	display: flex;
+	/*background-color: #0dcaf0;*/
+	margin-bottom: 25px;
+	/*margin-top: 20px;*/
+	/*text-align: center;*/
+	/*font-weight: bold;*/
+}
+
+.board_container_bo_left{
+	display: flex;
+	margin-left:1vw;
+	width: 30vw;
+	font-weight: bold;
+	/*background-color: #88a5d0;*/
+}
+
+.board_container_bo_right{
+	display: flex;
+	/*background-color: #7cc7a4;*/
+	margin-left: 5vw;
 	font-weight: bold;
 }
 
 .board_category_container {
-	width: 100px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: left;
+	/*width: 100px;*/
+	/*height: 40px;*/
+	/*!*border: 1px solid black;*!*/
+	/*float: left;*/
 }
 
 .board_date_container {
-	width: 300px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: left;
+	/*width: 300px;*/
+	/*height: 40px;*/
+	/*!*border: 1px solid black;*!*/
+	/*float: left;*/
 }
 
 .board_name_container {
-	width: 100px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: left;
+	/*height: 40px;*/
+	/*!*border: 1px solid black;*!*/
+	/*float: left;*/
 }
 
 .board_readcount_container {
-	width: 100px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: right;
+	/*width: 100px;*/
+	/*height: 40px;*/
+	/*!*border: 1px solid black;*!*/
+	/*float: right;*/
 }
 
 .board_reply_container {
-	width: 100px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: right;
+	/*width: 100px;*/
+	/*height: 40px;*/
+	/*!*border: 1px solid black;*!*/
+	/*float: right;*/
 }
 
 .board_like_container {
-	width: 100px;
-	height: 40px;
-	/*border: 1px solid black;*/
-	float: right;
+	/*width: 100px;*/
+	/*height: 40px;*/
+	/*!*border: 1px solid black;*!*/
+	/*float: right;*/
 }
 
 .board_content_container {
 	margin-top: 20px;
 	width: 950px;
 	height: 580px;
-	border: 3px solid #708090;
+	border: 3px solid #4169E1;
 	border-radius: 7px;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
 	overflow: scroll;
 	overflow-x: hidden;
+}
+
+.Attachments {
+	/*background-color : red;*/
+	margin-top: 15px;
+	/*margin-left: 15px;*/
 	font-weight: bold;
 }
 
@@ -96,44 +122,105 @@ body {
 	/*height: 400px;*/
 	object-fit: cover;
 }
-
+.board_middle{
+	margin-top:3vh;
+	height: 100px;
+	/*background-color: #2e383e;*/
+}
 #board_middle {
-	margin-top: 620px;
-	width: 900px;
-	height: 70px;
-	/*border:1px solid black;*/
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+	/*margin-top: 620px;*/
+	/*width: 900px;*/
+	/*height: 70px;*/
+	/*!*border:1px solid black;*!*/
+	/*position: absolute;*/
+	/*left: 50%;*/
+	/*transform: translateX(-50%);*/
 }
 
+
+
+.re_comment_write_content{
+	margin-top:5px;
+	border :2px solid;
+	width: 50vw;
+	height: 7vh;
+	margin-bottom: 10px;
+}
+.reply_reply_write{
+	background-color: #4169E1;
+	height: 1px;
+}
+
+.reddd{
+}
+
+.btn_re_comment_write_content{
+	float:right;
+	margin-right:20px;
+	background-color: white;
+	border: 5px solid skyblue;
+	border-radius: 10px;
+	width: 50px;
+	height: 40px;
+	font-weight: bold;
+	margin-bottom:10px;
+}
+
+
+.rerebox{
+	width: 4vw;
+	height:5vh;
+}
+
+.rorobox{
+	width: 4vw;
+	height:5vh;
+	/*background-color: #1f6a66;*/
+}
+
+.listForm_table{
+	/* 댓글 세로사이즈*/
+	width: 50vw;
+	margin-bottom: 50px;
+	/*background-color: #7b9dab;*/
+}
 #commandList {
-	margin-top: 100px;
-	margin-left: 20px;
+	margin-left:1vw;
 }
 
-#commandList button a {
-	text-decoration: none;
-	color: black;
-}
+/*#commandList button {*/
+/*	margin-top: 0px;*/
+/*}*/
+
+/*#commandList button a {*/
+/*	text-decoration: none;*/
+/*	color: black;*/
+/*}*/
 
 .like_and_ward {
 	display: flex;
 	position: absolute;
 	left: 50%;
 	transform: translateX(-50%);
+
 }
 
 .btn_reply {
-	border: 5px solid skyblue;
-	border-radius: 30px;
-	background-color: rgba(0, 0, 0, 0);
-	font-weight: bold;
-	width: 120px;
-	height: 48px;
-	float: left;
-	font-size: 15px;
-	cursor: pointer;
+	/*border: 5px solid skyblue;*/
+	/*border-radius: 30px;*/
+	/*background-color: rgba(0, 0, 0, 0);*/
+	/*font-weight: bold;*/
+	/*width: 120px;*/
+	/*height: 48px;*/
+	/*float: left;*/
+	/*font-size: 15px;*/
+	/*cursor: pointer;*/
+	/*font-weight: bold;*/
+}
+
+.btn_text{
+	margin-left:19vw;
+	margin-bottom: -10px;
 	font-weight: bold;
 }
 
@@ -165,14 +252,14 @@ body {
 }
 
 .btn_list {
-	margin-top: 100px;
-	border: none;
-	border-radius: 4px;
-	width: 120px;
-	height: 48px;
-	background: darkgray;
-	font-size: 15px;
-	cursor: pointer;
+	/*margin-top: 100px;*/
+	/*border: none;*/
+	/*border-radius: 4px;*/
+	/*width: 120px;*/
+	/*height: 48px;*/
+	/*background: darkgray;*/
+	/*font-size: 15px;*/
+	/*cursor: pointer;*/
 }
 
 .btn_del {
@@ -198,15 +285,15 @@ body {
 }
 
 .reply_container {
-	border: 5px solid #708090;
-	border-radius: 8px;
-	background-color: rgba(0, 0, 0, 0);
-	width: 50vw;
-	font-weight: bold;
-	margin-top: 750px;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+	/*border: 5px solid #708090;*/
+	/*border-radius: 8px;*/
+	/*background-color: rgba(0, 0, 0, 0);*/
+	/*width: 50vw;*/
+	/*font-weight: bold;*/
+	/*margin-top: 750px;*/
+	/*position: absolute;*/
+	/*left: 50%;*/
+	/*transform: translateX(-50%);*/
 }
 
 .heart {
@@ -249,38 +336,62 @@ body {
 }
 
 .modal_content {
-	width: 400px;
-	height: 200px;
-	background: #fff;
-	border-radius: 10px;
-	position: relative;
-	top: 50%;
-	left: 50%;
-	margin-top: -100px;
-	margin-left: -200px;
-	text-align: center;
-	box-sizing: border-box;
-	padding: 74px 0;
-	line-height: 23px;
-	cursor: pointer;
+	/*width: 400px;*/
+	/*height: 200px;*/
+	/*background: #fff;*/
+	/*border-radius: 10px;*/
+	/*position: relative;*/
+	/*top: 50%;*/
+	/*left: 50%;*/
+	/*margin-top: -100px;*/
+	/*margin-left: -200px;*/
+	/*text-align: center;*/
+	/*box-sizing: border-box;*/
+	/*padding: 74px 0;*/
+	/*line-height: 23px;*/
+	/*cursor: pointer;*/
 }
 
-/* 댓글 css 테스트용 */
-.ddd {
-	border: 5px solid skyblue;
-	border-radius: 8px;
-	background-color: rgba(0, 0, 0, 0);
-	font-weight: bold;
-	height: 20px;
-}
 
 /* 댓글 작성 박스*/
 .comment_write_content {
 	border: 2px solid #4169E1;
 	background-color: rgba(0, 0, 0, 0);
 	height: 100px;
-	width: 800px;
+	width: 932px;
 	font-weight: bold;
+	margin: 10px;
+}
+
+.comment_submits {
+	float: right;
+	margin-right: 10px;
+    border: 5px solid #4169E1;
+	border-radius: 30px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	width: 90px;
+	height: 40px;
+	font-size: 15px;
+	cursor: pointer;	
+}
+
+div > b {
+	margin-left: 29px;
+	font-size: 20px;
+}
+
+.sort_button button {
+    border: 5px solid #4169E1;
+	border-radius: 30px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	width: 90px;
+	height: 40px;
+	font-size: 15px;
+	cursor: pointer;
+	margin-left: 10px;
+	margin-bottom: 10px;
 }
 
 /* 대댓글 작성창 숨김처리 css */
@@ -288,23 +399,128 @@ body {
 	display: none;
 }
 
+/*.re_heart {*/
+/*	height: 15px;*/
+/*	width: 15px;*/
+/*	border-radius: 10px;*/
+/*	background: red;*/
+/*	cursor: pointer;*/
+/*}*/
+
+/**/
+
 .re_heart {
-	height: 15px;
-	width: 15px;
-	border-radius: 10px;
-	background: red;
-	cursor: pointer;
+	width: 10px;
+	height: 10px;
+	background: #ea2027;
+	position: relative;
+	transform: rotate(45deg);
+}
+.re_heart::before,
+.re_heart::after {
+	content: "";
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	border-radius: 50%;
+	background: #ea2027;
+}
+.re_heart::before {
+	left: -50%;
+}
+.re_heart::after {
+	top: -50%;
 }
 
+
+/**/
+
+
+
+
+/*.re_heart_off {*/
+/*	height: 15px;*/
+/*	width: 15px;*/
+/*	border-radius: 10px;*/
+/*	border: 1px solid black;*/
+/*	cursor: pointer;*/
+/*}*/
+
+
+/**/
 .re_heart_off {
-	height: 15px;
-	width: 15px;
-	border-radius: 10px;
-	border: 1px solid black;
-	cursor: pointer;
+	width: 10px;
+	height: 10px;
+	background: #afafaf;
+	position: relative;
+	transform: rotate(45deg);
 }
+.re_heart_off::before,
+.re_heart_off::after {
+	content: "";
+	width: 10px;
+	height: 10px;
+	position: absolute;
+	border-radius: 50%;
+	background: #afafaf;
+}
+.re_heart_off::before {
+	left: -50%;
+}
+.re_heart_off::after {
+	top: -50%;
+}
+
+
+
+/**/
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* 댓글 좋아요 기능구현에 필수 css*/
 .rh_off_hide, .rh_hide {
 	display: none;
+}
+
+td > button {
+	border: 5px solid skyblue;
+	border-radius: 30px;
+	background-color: rgba(0, 0, 0, 0);
+	font-weight: bold;
+	width: 60px;
+	height: 35px;
+	font-size: 15px;
+	cursor: pointer;
+	margin-left: 5px;
+	text-align: center;
+}
+
+.emptyReply{
+	font-size:20px;
+	height:10vh;
+	padding:20px;
+	margin-top:3vh;
+	text-align: center;
+}
+
+
+.list_nick{
+	width: 8vw;
+	border-radius: 10px;
+	background-color: rgba(211, 209, 209, 0.39);
+}
+
+.list_conta{
+	width: 24vw;
+	height: 5vh;
 }

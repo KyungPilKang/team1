@@ -6,7 +6,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>롤판.DOG</title>
+        <link rel="shortcut icon" sizes="16x16 32x32 64x64"
+          href="/resources/asset/image/login/dog1.png"/>
+    <title>피드백 보기- 롤판.DOG</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/feedback/feedbackDetail.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
@@ -23,14 +25,14 @@
             <div class="feedback_container_bo">
 
                 <div class="feedback_container_bo_left">
-                    <div class="feedback_date_container">${feedback_date}</div>
+                    <div class="feedback_date_container">${feedback_date}</div>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     <div class=feedback_name_container"> 닉네임 : ${article.feedback_nickname}</div>
                 </div>
 
                 <div class="feedback_container_bo_right">
-                    <div class=feedback_readcount_container"> 조회수 : ${article.feedback_readcount}</div>
-                    <div class=feedback_readcount_container"> 댓글 : ${article.feedback_replycount}</div>
-                    <div class=feedback_readcount_container"> 추천 : ${article.feedback_likecount}</div>
+                    <div class="feedback_readcount_container"> 조회수 : ${article.feedback_readcount}</div>
+                    <div class="feedback_readcount_container"> 댓글수 : ${article.feedback_replycount}</div>
+                    <div class="feedback_readcount_container"> 좋아요수 : ${article.feedback_likecount}</div>
                 </div>
             </div>
         </div>
@@ -43,16 +45,20 @@
         </div>
         <div class="feedback_container_modDel" id="commandList">
             <%-- 세션과 게시물 작성자가 동일하면 수정, 삭제를 출력--%>
-            <c:if test="${mem_nickname eq article.feedback_nickname}">
-                <button class="btn_modify"
+            <c:choose>
+                <c:when test="${mem_nickname eq article.feedback_nickname}">
+                    <button class="btn_modify"
                         onclick="location.href='fdmodifyform?feedback_num=${article.feedback_num}&page=${page}'">
                     수정
-                </button>
-                <button class="btn_del">삭제</button>
-            </c:if>
-            <button class="btn_mok" onclick="location.href='./feedback?page=${page}'"> 목록(임시)</button>
+               		</button>
+                    <button class="btn_del">삭제</button>
+                    <button class="btn_list" onclick="location.href='./feedback?page=${page}'"> 목록</button>
+                </c:when>
+                <c:otherwise>
+                    <button class="btn_list" onclick="location.href='./feedback?page=${page}'"> 목록</button>
+                </c:otherwise>
+            </c:choose>
         </div>
-
 
         <div class="feedback_container_video">
             <%-- 영상 출력은 컨트롤러 이식 후 주석해제 --%>
@@ -62,18 +68,17 @@
                     <source src="/fd_video_view/${article.feedback_video_fileName}" type="video/mp4">
                 </video>
             </c:if>
-        </div>
 
 
         <div class="feedback_container_content">
             ${article.feedback_content }
         </div>
-
+		</div>
 
         <%-- 피드백 답변 삽입 컨테이너 --%>
         <div class="feedback_container_answer ">
 
-            <div><b>피드백 답변</b> 총 ${article.feedback_answercount}개</div>
+            <div class="rrrr"><b>피드백 답변</b> 총 ${article.feedback_answercount}개</div>
 
             <div class="append_answerList"></div>
             <%-- 답변리스트 삽입부 시작--%>
@@ -98,10 +103,10 @@
                                 </td>
                             </c:if>
 
-                            <td>닉네임:${answer.fd_answer_nickname}</td>
-                            <td class="each_answer_subject">제목:${answer.fd_answer_title}</td>
+                            <td>${answer.fd_answer_nickname}</td>
+                            <td class="each_answer_subject">제목 : ${answer.fd_answer_title}</td>
                             <td class="each_answer_content"  onclick="content_pop(${answer.fd_answer_num})">
-                               내용<div class="each_answer_content_inner">${answer.fd_answer_content}</div>
+                             <div class="each_answer_content_inner">피드백 내용 보기</div>
                             </td>
                             <td><fmt:formatDate value="${answer.fd_answer_date}" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
 
@@ -134,6 +139,11 @@
                                     </div>
                                 </td>
                             </c:if>
+                                    <c:if test="${empty mem_nickname}">
+                                        <td>
+                                            <div class="an_heart"></div>
+                                        </td>
+                                    </c:if>
                                 <%-- 좋아요 숫자 표시 --%>
                             <td>
                                     ${answer.fd_answer_likecount}
@@ -158,9 +168,9 @@
             </section>
 
             <%-- 답변리스트 삽입부 끝--%>
-            <c:if test="${!empty mem_nickname}">
+            <c:if test="${article.feedback_nickname != mem_nickname && not empty mem_nickname }">
             <div class="btn_feedback_container_answer_write">
-                <button onclick="answer_show()"> 피드백 답변 작성 ( 이거 누르면 아래 연두색 작성폼 나옴 )</button>
+                <button onclick="answer_show()"> 피드백 답변 작성 </button>
             </div>
             </c:if>
             <%-- 시작 : 작성폼 --%>
@@ -170,7 +180,7 @@
                         <form>
                             <div><input type="text" class="answer_write_title" placeholder="제목"></div>
                             <div><textarea class="answer_write_content" maxlength="1000"
-                                           placeholder="피드백 답변을 적는 공간"></textarea></div>
+                                           placeholder="주제와 무관한 댓글, 타인의 권리를 침해하거나 명예를 훼손하는 게시물은 별도의 통보 없이 제재를 받을 수 있습니다."></textarea></div>
                             <div>
                                 <button class="answer_submits" type="button">피드백 답변달기</button>
                             </div>
@@ -193,7 +203,7 @@
             </c:if>
 
 
-            <div><b>댓글</b> 총 ${article.feedback_replycount}개</div>
+            <div class="rrrr"><b>&nbsp;&nbsp;댓글</b> 총 ${article.feedback_replycount}개</div>
             <div>
                 <%-- 최신순은 페이지 새로고침 해주면 된다 --%>
                 <button onclick="location.reload()">최신순</button>
@@ -202,6 +212,8 @@
             </div>
 
             <div class="append_replyList"></div>
+            <c:choose>
+            <c:when test="${not empty reList}">
             <%-- 댓글 삽입부 시작--%>
             <section id="re_listForm">
                 <table class="re_listForm_table">
@@ -212,12 +224,12 @@
                                     ${reply.fd_reply_content}
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="re_list_font">
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                             <td>${reply.fd_reply_nickname }</td>
-                            <td><fmt:formatDate value="${reply.fd_reply_date }" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
+                            <td><fmt:formatDate value="${reply.fd_reply_date }" pattern="M월 d일 E요일 H시"/></td>
 
 
                                 <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
@@ -249,6 +261,11 @@
                                 </td>
                             </c:if>
                                 <%-- 좋아요 숫자 표시 --%>
+                            <c:if test="${empty mem_nickname}">
+                                <td>
+                                <div class="an_heart"></div>
+                                </td>
+                            </c:if>
                             <td>
                                     ${reply.fd_reply_likecount}
                             </td>
@@ -264,13 +281,18 @@
                 </table>
             </section>
             <%-- 댓글 삽입부 끝--%>
+            </c:when>
+                <c:otherwise>
+                    <section class="emptyReply" style="font-weight:bold; font-size:1.3em; margin-top:30px; margin-bottom:70px;"><center>등록된 댓글이 없습니다.</center></section>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
 
 
     <%-- <div class="modal">
         <div class="modal_content"
-             title="클릭하면 창이 닫힙니다.">
+             title="클릭하면 창이 닫힙니다">
             게시물을 삭제하시겠습니까?<br>
             <button onclick="location.href='feedbackdelete?feedback_num=${article.feedback_num}&page=${page}'"> 확인
             </button>
@@ -324,7 +346,7 @@ $(function () {
                     success: function (data) {
                     	Swal.fire({
     						title: "등록 완료",
-    						text: "댓글이 등록되었습니다.",
+    						text: "댓글이 등록되었습니다",
     						icon: "success",
     						confirmButtonText: "확인"
     					}).then((result)=>{
@@ -341,8 +363,8 @@ $(function () {
             } else {
             	Swal.fire({
 					title: "입력 오류",
-					text: "댓글 내용을 입력하세요.",
-					icon: "waring",
+					text: "댓글 내용을 입력하세요",
+					icon: "warning",
 					confirmButtonText: "확인"
 				}).then((result)=>{
 					 $(".comment_write_content").focus();
@@ -416,7 +438,7 @@ $(function () {
         $(".rh_off_" + replyNum).show()
         Swal.fire({
 			title: "취소 완료",
-			text: replyNum + "번 댓글에 좋아요를 취소하셨습니다",
+			text: "댓글에 좋아요를 취소하셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		}).then((result)=>{
@@ -451,7 +473,7 @@ $(function () {
         $(".rh_" + replyNum).show()
            Swal.fire({
 			title: "등록 완료",
-			text: replyNum + "번 댓글에 좋아요를 누르셨습니다",
+			text: "댓글에 좋아요를 누르셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		}).then((result)=>{
@@ -493,7 +515,7 @@ $(function () {
 <%--        $.ajax({--%>
 <%--            type: "post",--%>
 <%--            async: false,--%>
-<%--            // ajax 페이지를 피드백 답글을 내려주는 바꿔줘야한다.--%>
+<%--            // ajax 페이지를 피드백 답글을 내려주는 바꿔줘야한다--%>
 <%--            url: "http://localhost:8090/feedbackDetail_ajax_answer",--%>
 <%--            data: {--%>
 <%--                feedback_num: ${article.feedback_num},--%>
@@ -511,7 +533,25 @@ $(function () {
 <script>
     $(function () {
         $(".answer_submits").click(function () {
+        	if($(".answer_write_title").val()==""){
+            	Swal.fire({
+                    title: "입력 오류",
+                    text: "피드백 제목을 작성하세요",
+                    icon: "error",
+                    confirmButtonText: "확인"
+               })
+               return false
+            }
             if ($(".answer_write_content").val() !== "") {
+            	if($(".answer_write_title").val().length>10){
+                	Swal.fire({
+                        title: "입력 오류",
+                        text: "10자 이내로 제목을 작성하세요",
+                        icon: "error",
+                        confirmButtonText: "확인"
+                   })
+                   return false
+                }
                 $.ajax({
                     async: true,
                     type: 'POST',
@@ -524,7 +564,7 @@ $(function () {
                     success: function (data) {
                     	Swal.fire({
                 			title: "등록 완료",
-                			text: "피드백 답변이 등록되었습니다.",
+                			text: "피드백 답변이 등록되었습니다",
                 			icon: "success",
                 			confirmButtonText: "확인"
                 		}).then((result)=>{
@@ -540,8 +580,8 @@ $(function () {
             } else {
             	Swal.fire({
         			title: "입력 오류",
-        			text: "피드백 답변 내용을 입력하세요.",
-        			icon: "waring",
+        			text: "피드백 답변 내용을 입력하세요",
+        			icon: "warning",
         			confirmButtonText: "확인"
         		}).then((result)=>{
         			 $(".comment_write_content").focus();
@@ -616,7 +656,7 @@ $(function () {
         $(".ah_off_" + replyNum).show()
         Swal.fire({
 			title: "취소 완료",
-			text: replyNum + "번 피드백에 좋아요를 취소하셨습니다",
+			text: "피드백에 좋아요를 취소하셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		}).then((result)=>{
@@ -649,7 +689,7 @@ $(function () {
         $(".ah_" + replyNum).show()
         Swal.fire({
 			title: "등록 완료",
-			text: replyNum + "번 피드백에 좋아요를 누르셨습니다",
+			text: "피드백에 좋아요를 누르셨습니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		}).then((result)=>{
@@ -677,8 +717,8 @@ $(function () {
             }
         });
         Swal.fire({
-			title: "고정 완료",
-			text: answerNum + "번 피드백 답변을 고정하였습니다.",
+			title: "피드백 수락",
+			text: "피드백 답변을 고정합니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		}).then((result)=>{
@@ -703,8 +743,8 @@ $(function () {
             }
         });
         Swal.fire({
-			title: "취소 완료",
-			text: answerNum + "번 피드백 답변 고정을 취소하셨습니다.",
+			title: "피드백 취소",
+			text: "피드백 답변 고정이 해제됩니다",
 			icon: "success",
 			confirmButtonText: "확인"
 		}).then((result)=>{

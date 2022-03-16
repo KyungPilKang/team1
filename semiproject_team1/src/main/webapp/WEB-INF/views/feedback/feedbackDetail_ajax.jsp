@@ -2,28 +2,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<section id="listForm">
-    <table>
+<%-- 댓글 삽입부 시작--%>
+<section id="re_listForm">
+    <table class="re_listForm_table">
         <c:forEach var="reply" items="${reList }">
-            <tr>
-                <td>
-                    <div class="ddd">${reply.fd_reply_num}</div>
-                </td>
-                <td>
+            <tr class="each_reply">
+
+                <td colspan="8">
                         ${reply.fd_reply_content}
                 </td>
+            </tr>
+            <tr class="re_list_font">
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 <td>${reply.fd_reply_nickname }</td>
-                <td><fmt:formatDate value="${reply.fd_reply_date }" pattern="yyyy년 M월 d일 E요일 a H:mm"/></td>
+                <td><fmt:formatDate value="${reply.fd_reply_date }" pattern="M월 d일 E요일 H시"/></td>
 
 
                     <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
                 <c:if test="${!empty mem_nickname}">
-                    <c:if test="${reply.fd_reply_nickname == mem_nickname}">
-                        <td>
-                            <button onclick="removeCheck(${reply.fd_reply_num})">삭제</button>
-                        </td>
-                    </c:if>
-                    <%-- 대댓글 좋아요 시작 --%>
+
+                    <%-- 댓글 좋아요 시작 --%>
                     <td>
                         <div class="re_btn_like">
                             <c:choose>
@@ -49,10 +49,20 @@
                     </td>
                 </c:if>
                     <%-- 좋아요 숫자 표시 --%>
+                <c:if test="${empty mem_nickname}">
+                    <td>
+                        <div class="an_heart"></div>
+                    </td>
+                </c:if>
                 <td>
                         ${reply.fd_reply_likecount}
                 </td>
-                    <%-- 대댓글 좋아요 끝--%>
+                <c:if test="${reply.fd_reply_nickname == mem_nickname}">
+                    <td>
+                        <button onclick="re_removeCheck(${reply.fd_reply_num})">삭제</button>
+                    </td>
+                </c:if>
+                    <%-- 댓글 좋아요 끝--%>
                     <%-------------------------------------- 세션이 있을경우 시작 --------------------------------------%>
             </tr>
         </c:forEach>
