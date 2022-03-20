@@ -61,28 +61,28 @@
 
 <details><summary> <b>메인페이지, 멤버</b> </summary>
 
-<img src="images/image7.png" width="100%" height="100%"/>
+<img src="images/image7-1.png" width="100%" height="100%"/>
 
 </details>
 <br>
 
 <details><summary> <b>자유게시판, 피드백</b> </summary>
 
-<img src="images/image8.png" width="100%" height="100%"/>
+<img src="images/image8-1.png" width="100%" height="100%"/>
 
 </details>
 <br>
 
 <details><summary> <b>마이페이지, 듀오매칭</b> </summary>
 
-<img src="images/image9.png" width="100%" height="100%"/>
+<img src="images/image9-1.png" width="100%" height="100%"/>
 
 </details>
 <br>
 
 <details><summary> <b>화면구조</b> </summary>
 
-<img src="images/image9-1.png" width="100%" height="100%"/>
+<img src="images/image9-2.png" width="100%" height="100%"/>
 
 </details>
 <br>
