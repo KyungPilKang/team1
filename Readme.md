@@ -26,7 +26,7 @@
 <br>
 
 # Demo
-[![LOLPAN.DOG Demo](images/image16.jpg)](https://www.youtube.com/watch?v=aholtN0kiyw) 
+[![LOLPAN.DOG Demo](images/image16.png)](https://www.youtube.com/watch?v=aholtN0kiyw) 
 
 <br>
 <br>
