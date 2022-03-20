@@ -79,6 +79,13 @@
 
 </details>
 <br>
+
+<details><summary> <b>화면구조</b> </summary>
+
+![test](images/image9-1.png)
+
+</details>
+<br>
 <br>
 
 # Database Schema
