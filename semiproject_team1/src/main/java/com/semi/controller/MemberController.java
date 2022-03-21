@@ -194,7 +194,8 @@ public class MemberController {
 	
 	@GetMapping(value = "/join/{filename}")
     public void video_view(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response) {
-        String path = servletContext.getRealPath("/smtp_image/");
+//        String path = servletContext.getRealPath("/smtp_image/");
+        String path="/smtp_image/";
         /* 즉, file은 semiproject_team1/src/main/webapp/board_upload/video/filename */
         File file = new File(path + filename);
         String sfilename = null;

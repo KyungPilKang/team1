@@ -342,7 +342,7 @@ $(function () {
                         feedback_num: ${article.feedback_num},
                         fd_reply_content: $(".comment_write_content").val()
                     },
-                    url: "http://localhost:8090/fd_regreply",
+                    url: "${pageContext.request.contextPath}/fd_regreply",
                     success: function (data) {
                     	Swal.fire({
     						title: "등록 완료",
@@ -394,7 +394,7 @@ $(function () {
 	                data: {
 	                    fd_reply_num: replyNum,
 	                },
-	                url: "http://localhost:8090/fd_replydelete",
+	                url: "${pageContext.request.contextPath}/fd_replydelete",
 	                success: function (data) {
 	                	Swal.fire({
 	            			title: "삭제 완료",
@@ -436,7 +436,7 @@ $(function () {
                 fd_reply_num: replyNum,
                 mno:${mem_mno}
             },
-            url: "http://localhost:8090/fd_re_like_off",
+            url: "${pageContext.request.contextPath}/fd_re_like_off",
             success: function (data) {
             },
             error: function (textStatus) {
@@ -471,7 +471,7 @@ $(function () {
                 fd_reply_num: replyNum,
                 mno:${mem_mno}
             },
-            url: "http://localhost:8090/fd_re_like_on",
+            url: "${pageContext.request.contextPath}/fd_re_like_on",
             success: function (data) {
             },
             error: function (textStatus) {
@@ -500,7 +500,7 @@ $(function () {
         $.ajax({
             type: "post",
             async: false,
-            url: "http://localhost:8090/feedbackDetail_ajax",
+            url: "${pageContext.request.contextPath}/feedbackDetail_ajax",
             data: {
                 feedback_num: ${article.feedback_num},
             },
@@ -525,7 +525,7 @@ $(function () {
 <%--            type: "post",--%>
 <%--            async: false,--%>
 <%--            // ajax 페이지를 피드백 답글을 내려주는 바꿔줘야한다--%>
-<%--            url: "http://localhost:8090/feedbackDetail_ajax_answer",--%>
+<%--            url: "${pageContext.request.contextPath}/feedbackDetail_ajax_answer",--%>
 <%--            data: {--%>
 <%--                feedback_num: ${article.feedback_num},--%>
 <%--                &lt;%&ndash;fd_answer_nickname : ${article.feedback_nickname}&ndash;%&gt;--%>
@@ -569,7 +569,7 @@ $(function () {
                         fd_answer_content: $(".answer_write_content").val(),
                         fd_answer_title: $(".answer_write_title").val()
                     },
-                    url: "http://localhost:8090/fd_reganswer",
+                    url: "${pageContext.request.contextPath}/fd_reganswer",
                     success: function (data) {
                     	Swal.fire({
                 			title: "등록 완료",
@@ -621,7 +621,7 @@ $(function () {
 	                    fd_answer_num: replyNum,
 	                },
 	                // url 컨트롤러 만들어야함
-	                url: "http://localhost:8090/fd_answerdelete",
+	                url: "${pageContext.request.contextPath}/fd_answerdelete",
 	                success: function (data) {
 	                	Swal.fire({
 	            			title: "삭제 완료",
@@ -663,7 +663,7 @@ $(function () {
                 fd_answer_num: replyNum,
                 mno:${mem_mno}
             },
-            url: "http://localhost:8090/fd_an_like_off",
+            url: "${pageContext.request.contextPath}/fd_an_like_off",
             success: function (data) {
             },
             error: function (textStatus) {
@@ -696,7 +696,7 @@ $(function () {
                 fd_answer_num: replyNum,
                 mno:${mem_mno}
             },
-            url: "http://localhost:8090/fd_an_like_on",
+            url: "${pageContext.request.contextPath}/fd_an_like_on",
             success: function (data) {
             },
             error: function (textStatus) {
@@ -727,7 +727,7 @@ $(function () {
                 feedback_num: ${article.feedback_num},
                 fd_answer_num: answerNum
             },
-            url: "http://localhost:8090/fd_an_fixed",
+            url: "${pageContext.request.contextPath}/fd_an_fixed",
             success: function (data) {
             },
             error: function (textStatus) {
@@ -753,7 +753,7 @@ $(function () {
                 feedback_num: ${article.feedback_num},
                 fd_answer_num: answerNum
             },
-            url: "http://localhost:8090/fd_an_fixed_cancel",
+            url: "${pageContext.request.contextPath}/fd_an_fixed_cancel",
             success: function (data) {
             },
             error: function (textStatus) {

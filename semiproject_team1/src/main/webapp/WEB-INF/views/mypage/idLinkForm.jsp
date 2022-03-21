@@ -100,7 +100,7 @@
 	    $.ajax({
 			type:"POST",
 			async:true,
-			url:"http://localhost:8090/idlink",
+			url:"${pageContext.request.contextPath}/idlink",
 			contentType:"application/json; charset=utf-8",
 			data:JSON.stringify(formdata),
 			success: function(data, textStatus){
@@ -129,7 +129,7 @@
 	    $.ajax({
 			type:"POST",
 			async:true,
-			url:"http://localhost:8090/codeconfirm",
+			url:"${pageContext.request.contextPath}/codeconfirm",
 			contentType:"application/json; charset=utf-8",
 			data:JSON.stringify(formdata),
 			success: function(data, textStatus){

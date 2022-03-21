@@ -48,7 +48,8 @@ public class Board_allController {
         ModelAndView mv = new ModelAndView();
         try {
             if (!board.getFile().isEmpty()) {
-                String path = servletContext.getRealPath("/board_upload/video/");
+//                String path = servletContext.getRealPath("/board_upload/video/");
+            	String path="/board_upload/video/";
                 File destFile = new File(path + board.getFile().getOriginalFilename());
                 board.setBoard_fileName(board.getFile().getOriginalFilename());
                 board.getFile().transferTo(destFile);
@@ -57,7 +58,8 @@ public class Board_allController {
             /* 썸네일 시작 */
             String thumbnail_base64 = Jsoup.parse(board.getBoard_content()).select("img").attr("src");
             if (!thumbnail_base64.isEmpty()) {
-                String path = servletContext.getRealPath("/board_upload/image/");
+//                String path = servletContext.getRealPath("/board_upload/image/");
+                String path="/board_upload/image";
                 // 위에서 파싱한 b64 데이터에서 split("base64,")로 한 후 0,1 중 1번째 값만 가져와서 디코딩 해줘야한다.
                 List<String> thumbnail_ok = List.of(thumbnail_base64.split("base64,"));
                 // 위에서 파싱한 b64 데이터에서 image 타입을 추출하기 위해 스플릿
@@ -360,7 +362,8 @@ public class Board_allController {
     @GetMapping(value = "/file_down")
     public void filedownload(@RequestParam(value = "downFile") String filename, HttpServletRequest request,
                              HttpServletResponse response) {
-        String path = servletContext.getRealPath("/board_upload/video/");
+//        String path = servletContext.getRealPath("/board_upload/video/");
+        String path="/board_upload/video/";
         File file = new File(path + filename);
         String sfilename = null;
         FileInputStream fis = null;
@@ -393,7 +396,8 @@ public class Board_allController {
     /* 동영상 출력 */
     @GetMapping(value = "/video_view/{filename}")
     public void video_view(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response) {
-        String path = servletContext.getRealPath("/board_upload/video/");
+//        String path = servletContext.getRealPath("/board_upload/video/");
+    	String path="/board_upload/video/";
         /* 즉, file은 semiproject_team1/src/main/webapp/board_upload/video/filename */
         File file = new File(path + filename);
         String sfilename = null;
@@ -431,7 +435,8 @@ public class Board_allController {
     /* 썸네일 출력 */
     @GetMapping(value = "/thumbnail_view/{filename}")
     public void thumbnail_view(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response) {
-        String path = servletContext.getRealPath("/board_upload/image/");
+//        String path = servletContext.getRealPath("/board_upload/image/");
+    	String path="/board_upload/image/";
         /* 즉, file은 semiproject_team1/src/main/webapp/board_upload/video/filename */
         File file = new File(path + filename);
         String sfilename = null;

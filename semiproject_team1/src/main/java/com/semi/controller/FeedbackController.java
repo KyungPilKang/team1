@@ -64,7 +64,8 @@ public class FeedbackController {
     /* 썸네일 출력 */
     @GetMapping(value = "/fd_thumbnail_view/{filename}")
     public void thumbnail_view(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response) {
-        String path = servletContext.getRealPath("/feedback_upload/image/");
+//        String path = servletContext.getRealPath("/feedback_upload/image/");
+        String path="/feedback_upload/image/";
         /* 즉, file은 semiproject_team1/src/main/webapp/feedback_upload/image/filename */
         File file = new File(path + filename);
         String sfilename = null;
@@ -247,7 +248,8 @@ public class FeedbackController {
             /* 동영상 시작 */
             /* 동영상 여부, 피드백 게시판은 필수이므로 if문 제거 예정  */
             if (!feedback.getVideo_file().isEmpty()) {
-                String path_mov = servletContext.getRealPath("/feedback_upload/video/");
+//                String path_mov = servletContext.getRealPath("/feedback_upload/video/");
+                String path_mov="/feedback_upload/video/";
                 File destFile_mov = new File(path_mov + feedback.getVideo_file().getOriginalFilename());
                 feedback.setFeedback_video_fileName(feedback.getVideo_file().getOriginalFilename());
                 feedback.getVideo_file().transferTo(destFile_mov);
@@ -257,7 +259,8 @@ public class FeedbackController {
             /* 썸네일 시작 */
             String thumbnail_base64 = Jsoup.parse(feedback.getFeedback_content()).select("img").attr("src");
             if (!thumbnail_base64.isEmpty()) {
-                String path = servletContext.getRealPath("/feedback_upload/image/");
+//                String path = servletContext.getRealPath("/feedback_upload/image/");
+                String path="/feedback_upload/image/";
                 List<String> thumbnail_ok = List.of(thumbnail_base64.split("base64,"));
                 List<String> image_format = List.of(thumbnail_base64.split(";"));
                 List<String> image_format_result = List.of(image_format.get(0).split("/"));
@@ -280,7 +283,8 @@ public class FeedbackController {
             /* 리플레이 시작 */
             /* 리플레이 여부, 피드백 게시판은 필수이므로 if문 제거 예정  */
             if (!feedback.getReplay_file().isEmpty()) {
-                String path_replay = servletContext.getRealPath("/feedback_upload/replay/");
+//                String path_replay = servletContext.getRealPath("/feedback_upload/replay/");
+            	String path_replay="/feedback_upload/replay/";
                 File destFile_reply = new File(path_replay + feedback.getReplay_file().getOriginalFilename());
                 feedback.setFeedback_replay_fileName(feedback.getReplay_file().getOriginalFilename());
                 feedback.getReplay_file().transferTo(destFile_reply);
@@ -421,7 +425,8 @@ public class FeedbackController {
     /* 상세보기시 동영상 출력 */
     @GetMapping(value = "/fd_video_view/{filename}")
     public void fd_video_view(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response) {
-        String path = servletContext.getRealPath("/feedback_upload/video/");
+//        String path = servletContext.getRealPath("/feedback_upload/video/");
+        String path="/feedback_upload/video/";
         /* 즉, file은 semiproject_team1/src/main/webapp/board_upload/video/filename */
         File file = new File(path + filename);
         String sfilename = null;

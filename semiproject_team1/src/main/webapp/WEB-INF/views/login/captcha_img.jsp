@@ -27,7 +27,7 @@
 				type:"post",
 				dataType:"text",
 				async:false,
-				url:"http://localhost:8090/captchacheck",
+				url:"${pageContext.request.contextPath}/captchacheck",
 				data:{id:$('#userin').val()},
 				success: function(data, textStatus){
 					if(result=="true"){

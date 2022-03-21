@@ -340,7 +340,7 @@
         $.ajax({
             type: "post",
             async: false,
-            url: "http://localhost:8090/feedbackForm_ajax",
+            url: "${pageContext.request.contextPath}/feedbackForm_ajax",
             data: {
                 page: currentPage,
                 sort: sortType

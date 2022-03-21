@@ -138,7 +138,7 @@
         $.ajax({
 			type:"POST",
 			async:true,
-			url:"http://localhost:8090/login",
+			url:"${pageContext.request.contextPath}/login",
 			contentType:"application/json; charset=utf-8",
 			data:JSON.stringify(formdata),
 			success: function(data, textStatus){
@@ -202,19 +202,17 @@ function kakaoLogin(){
 				url:'/v2/user/me',
 			success:res =>{
 				let kakao_account = res.kakao_account;
-				console.log("성공");
-				console.log(kakao_account.email);
-				console.log(typeof kakao_account.email);
+				console.log(res);
 				let jsonData={
 						"mem_email_id":kakao_account.email,
 						"page":data_page
 				};
-				console.log(jsonData);
+				return false;
 				window.location.href="/kakao_login?mem_email_id="+kakao_account.email+"&page="+data_page;
 				/*  $.ajax({
 						type:"POST",
 						async:true,
-						url:"http://localhost:8090/kakao_login",
+						url:"${pageContext.request.contextPath}/kakao_login",
 						contentType:"application/json; charset=utf-8",
 						data:{"key":JSON.stringify(jsonData)}, //테스트 해보기
 						success: function(data, textStatus){

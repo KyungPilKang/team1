@@ -352,7 +352,7 @@
         $.ajax({
             type: "post",
             async: false,
-            url: "http://localhost:8090/boardForm_highlight_ajax",
+            url: "${pageContext.request.contextPath}/boardForm_highlight_ajax",
             data: {
                 page: currentPage,
                 sort: sortType

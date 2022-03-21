@@ -91,7 +91,7 @@
 	    $.ajax({
 			type:"POST",
 			async:true,
-			url:"http://localhost:8090/recover",
+			url:"${pageContext.request.contextPath}/recover",
 			contentType:"application/json; charset=utf-8",
 			data:JSON.stringify(formdata),
 			success: function(data, textStatus){

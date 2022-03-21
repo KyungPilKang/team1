@@ -290,7 +290,7 @@
                 board_num:${article.board_num},
                 mno:${mem_mno}
             },
-            url: "http://localhost:8090/like_off",
+            url: "${pageContext.request.contextPath}/like_off",
             success: function (data) {
             },
             error: function (textStatus) {
@@ -320,7 +320,7 @@
                 board_num:${article.board_num},
                 mno:${mem_mno}
             },
-            url: "http://localhost:8090/like_on",
+            url: "${pageContext.request.contextPath}/like_on",
             success: function (data) {
             },
             error: function (textStatus) {
@@ -363,7 +363,7 @@
                 board_num:${article.board_num},
                 mno:${mem_mno}
             },
-            url: "http://localhost:8090/ward_off",
+            url: "${pageContext.request.contextPath}/ward_off",
             success: function (data) {
             },
             error: function (textStatus) {
@@ -390,7 +390,7 @@
                 board_num:${article.board_num},
                 mno:${mem_mno}
             },
-            url: "http://localhost:8090/ward_on",
+            url: "${pageContext.request.contextPath}/ward_on",
             success: function (data) {
             },
             error: function (textStatus) {
@@ -468,7 +468,7 @@
                         b_board_num: ${article.board_num},
                         b_reply_content: $(".comment_write_content").val()
                     },
-                    url: "http://localhost:8090/regreply",
+                    url: "${pageContext.request.contextPath}/regreply",
                     success: function (data) {
                         Swal.fire({
                             title: "등록 완료",
@@ -519,7 +519,7 @@
 	                data: {
 	                    b_reply_num: replyNum,
 	                },
-	                url: "http://localhost:8090/replydelete",
+	                url: "${pageContext.request.contextPath}/replydelete",
 	                success: function (data) {
 	                    Swal.fire({
 	                        title: "삭제 완료",
@@ -569,7 +569,7 @@
                     b_board_num: ${article.board_num},
                     b_reply_content: re_value
                 },
-                url: "http://localhost:8090/re_regreply",
+                url: "${pageContext.request.contextPath}/re_regreply",
                 success: function (data) {
                     console.log(data);
                     Swal.fire({
@@ -612,7 +612,7 @@
                 b_reply_num: replyNum,
                 mno:${mem_mno}
             },
-            url: "http://localhost:8090/re_like_off",
+            url: "${pageContext.request.contextPath}/re_like_off",
             success: function (data) {
             },
             error: function (textStatus) {
@@ -648,7 +648,7 @@
                 b_reply_num: replyNum,
                 mno:${mem_mno}
             },
-            url: "http://localhost:8090/re_like_on",
+            url: "${pageContext.request.contextPath}/re_like_on",
             success: function (data) {
             },
             error: function (textStatus) {
@@ -678,7 +678,7 @@
         $.ajax({
             type: "post",
             async: false,
-            url: "http://localhost:8090/boardDetail_ajax",
+            url: "${pageContext.request.contextPath}/boardDetail_ajax",
             data: {
                 board_num: ${article.board_num},
             },

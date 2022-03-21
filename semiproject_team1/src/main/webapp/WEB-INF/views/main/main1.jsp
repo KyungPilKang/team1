@@ -18,7 +18,7 @@
 		<div class="txt1">LOLPAN.DOG</div>
 		<div class="move">
 			<!-- <button type="button" style="width: 150pt; height: 45pt;"
-				onclick="location.href='http://localhost:8090/' ">START</button> -->
+				onclick="location.href='${pageContext.request.contextPath}/' ">START</button> -->
 		</div>
 		<img
 			src="${pageContext.request.contextPath}/resources/asset/image/board/lol4.jpg"
@@ -26,7 +26,7 @@
 	</div>
 	<script>
 		setTimeout(function() {
-			location.href='http://localhost:8090/main'
+			location.href='${pageContext.request.contextPath}/main'
 		}, 5200);
 	</script>
 </body>

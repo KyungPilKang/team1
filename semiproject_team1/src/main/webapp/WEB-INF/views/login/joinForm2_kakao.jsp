@@ -128,7 +128,7 @@ $('#captchavalid').click(function () {
 		type:"post",
 		dataType:"text",
 		async:false,
-		url:"http://localhost:8090/captchacheck",
+		url:"${pageContext.request.contextPath}/captchacheck",
 		data:{userin:$('#userin').val()},
 		success: function(data, textStatus){
 			if(data=="false"){
@@ -180,7 +180,7 @@ $('#captchavalid').click(function () {
         	nickname_ok=false;
      	}else{
      		 $.ajax({
-                 url:"http://localhost:8090/nickCheck", //Controller에서 인식할 주소
+                 url:"${pageContext.request.contextPath}/nickCheck", //Controller에서 인식할 주소
                  type:'post', //POST 방식으로 전달
                  
                  data:{mem_nickname:mem_nickname},

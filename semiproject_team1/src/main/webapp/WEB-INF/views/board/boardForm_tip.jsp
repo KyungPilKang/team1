@@ -355,7 +355,7 @@
     $.ajax({
       type: "post",
       async: false,
-      url: "http://localhost:8090/boardForm_tip_ajax",
+      url: "${pageContext.request.contextPath}/boardForm_tip_ajax",
       data: {
         page: currentPage,
         sort: sortType
