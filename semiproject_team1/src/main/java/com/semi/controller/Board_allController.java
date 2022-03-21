@@ -59,7 +59,7 @@ public class Board_allController {
             String thumbnail_base64 = Jsoup.parse(board.getBoard_content()).select("img").attr("src");
             if (!thumbnail_base64.isEmpty()) {
 //                String path = servletContext.getRealPath("/board_upload/image/");
-                String path="/board_upload/image";
+                String path="/board_upload/image/";
                 // 위에서 파싱한 b64 데이터에서 split("base64,")로 한 후 0,1 중 1번째 값만 가져와서 디코딩 해줘야한다.
                 List<String> thumbnail_ok = List.of(thumbnail_base64.split("base64,"));
                 // 위에서 파싱한 b64 데이터에서 image 타입을 추출하기 위해 스플릿

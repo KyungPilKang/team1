@@ -29,7 +29,7 @@ public class MailServiceImpl implements MailService {
 			mailHandler.setTo(mem.getMem_email_id());
 			mailHandler.setFrom("lolpan.dog@gmail.com");
 			mailHandler.setSubject(mail.getTitle());
-			String htmlContent = "<div style='width: 80%; height: 80vh; background: url(${pageContext.request.contextPath}/join/joinCode.jpg); background-size: cover;'>"
+			String htmlContent = "<div style='width: 80%; height: 80vh; background-image: url(http://101.101.218.164:8090/join/joinCode.jpg); background-size: cover;'>"
 					+"<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>"
 					+"<h1 style='font-size:3em; text-align:center; color:white;'>"+mem.getMem_code()+"</h1>"+"</div>";
 //			String htmlContent = "<img src='http://localhost:8090/video_view/wo2.jpg'>";

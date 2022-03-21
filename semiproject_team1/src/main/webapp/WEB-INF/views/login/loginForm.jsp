@@ -207,7 +207,6 @@ function kakaoLogin(){
 						"mem_email_id":kakao_account.email,
 						"page":data_page
 				};
-				return false;
 				window.location.href="/kakao_login?mem_email_id="+kakao_account.email+"&page="+data_page;
 				/*  $.ajax({
 						type:"POST",
