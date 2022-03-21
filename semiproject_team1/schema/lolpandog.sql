@@ -124,3 +124,13 @@ CREATE TABLE `member` (
   `mem_kakao_id` varchar(1000) DEFAULT NULL,
   PRIMARY KEY (`mem_mno`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+ALTER TABLE article_like auto_increment=1;
+ALTER TABLE article_ward auto_increment=1;
+ALTER TABLE b_reply auto_increment=1;
+ALTER TABLE board auto_increment=1;
+ALTER TABLE duo auto_increment=1;
+ALTER TABLE fd_answer auto_increment=1;
+ALTER TABLE fd_reply auto_increment=1;
+ALTER TABLE feedback auto_increment=1;
+ALTER TABLE member auto_increment=1;

@@ -41,3 +41,8 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+bootWar{
+	archiveName("semi.war")
+}
+
