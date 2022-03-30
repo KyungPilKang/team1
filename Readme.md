@@ -211,11 +211,11 @@
 
 <details><summary> <b>API & Library</b> </summary>
 
-* NAVER API - CAPTCHA
-* KAKAO API - Login
-* RIOT API - Summoner-V4
-* RIOT API - Champion-Mastery-V4
-* RIOT API - League-V4
+* Naver API - CAPTCHA
+* Kakao API - Login
+* Riot API - Summoner-V4
+* Riot API - Champion-Mastery-V4
+* Riot API - League-V4
 * Google SMTP
 * Toast UI Editor  
   
