@@ -209,13 +209,15 @@
 </details>
 <br>
 
-<details><summary> <b>API</b> </summary>
+<details><summary> <b>API & Library</b> </summary>
 
 * NAVER API - CAPTCHA
 * KAKAO API - Login
 * RIOT API - Summoner-V4
 * RIOT API - Champion-Mastery-V4
 * RIOT API - League-V4
+* Google SMTP
+* Toast UI Editor  
   
 </details>
 
