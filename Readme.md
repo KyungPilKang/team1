@@ -167,6 +167,54 @@
 * 피드백게시판, 자유게시판 – 입력 유효성 검사(보조, F)
 
 </details>
+<br>
+<br>
 
+# Skill & Tools
 
+<details><summary> <b>Back-end</b> </summary>
+
+* JAVA SE-11
+* Spring Boot
+* Spring MVC
+* Spring Security
+* Tomcat
+
+</details>
+<br>
+
+<details><summary> <b>Front-end</b> </summary>
+
+* HTML5
+* CSS
+* JavaScript
+* jQuery
+* BootStrap5
+
+</details>
+<br>
+
+<details><summary> <b>DBMS</b> </summary>
+
+* MySQL
+
+</details>
+<br>
+
+<details><summary> <b>DevOps</b> </summary>
+
+* Git/GitHub
+* Naver Works
+
+</details>
+
+<details><summary> <b>API</b> </summary>
+
+* NAVER API - CAPTCHA
+* KAKAO API - Login
+* RIOT API - Summoner-V4
+* RIOT API - Champion-Mastery-V4
+* RIOT API - League-V4
+  
+</details>
 
